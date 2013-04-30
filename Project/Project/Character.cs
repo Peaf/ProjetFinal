@@ -19,7 +19,7 @@ namespace Project
         int vitesse = 2; //test git hub
         public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext;
         public string Direction;
-        int timer = 0, i = 0;
+        int timer = 0,timerRun = 0, i = 0;
         public bool fight = false, lvlup;
         public Map map, map4, map5;
 
@@ -66,10 +66,10 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift))
                     {
                         ligne = 6;
-                        timer++;
-                        if (timer == 20)
+                        timerRun++;
+                        if (timerRun == 20)
                         {
-                            timer = 0;
+                            timerRun = 0;
                             if (colonne == 5)
                             {
                                 colonne = 1;
@@ -130,10 +130,10 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift))
                     {
                         ligne = 5;
-                        timer++;
-                        if (timer == 20)
+                        timerRun++;
+                        if (timerRun == 20)
                         {
-                            timer = 0;
+                            timerRun = 0;
                             if (colonne == 5)
                             {
                                 colonne = 1;
@@ -189,11 +189,11 @@ namespace Project
                 {
                     if (KState.IsKeyDown(Keys.LeftShift))
                     {
-                        timer++;
+                        timerRun++;
                         ligne = 4;
-                        if (timer == 20)
+                        if (timerRun == 20)
                         {
-                            timer = 0;
+                            timerRun = 0;
                             if (colonne == 5)
                             {
                                 colonne = 1;
@@ -220,7 +220,7 @@ namespace Project
                     {
                         timer++;
                         ligne = 0;
-                        if (timer == 15)
+                        if (timerRun == 15)
                         {
                             timer = 0;
                             if (colonne == 5)
@@ -249,12 +249,12 @@ namespace Project
                 {
                     if (KState.IsKeyDown(Keys.LeftShift))
                     {
-                        timer++;
+                        timerRun++;
                         ligne = 7;
 
-                        if (timer == 20)
+                        if (timerRun == 20)
                         {
-                            timer = 0;
+                            timerRun = 0;
 
                             if (colonne == 5)
                             {
