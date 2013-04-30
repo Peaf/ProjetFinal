@@ -7,20 +7,23 @@ namespace Project
 {
     public class Inventaire
     {
-        public Item[] tablObjects;
+        public Item[] tablObjects, tablEquiped;
         public int place_object;
-        public static bool added = false;
+        public bool added = false;
 
         public Inventaire()
         {
             this.tablObjects = new Item[60];
+            this.tablEquiped = new Item[60];
         }
         public void Initialize()
         {
             for (int i = 0; i < tablObjects.Length; i++)
             {
-                tablObjects[i] = new Item("","rien","",0, 1,"");
+                tablObjects[i] = new Item("","rien","",0, 1);
+                tablEquiped[i] = new Item("", "rien", "", 0, 1);
                 tablObjects[i].place = i;
+                tablEquiped[i].place = i;
             }
         }
 
@@ -49,6 +52,22 @@ namespace Project
             {
                 toAdd.place = i;
                 tablObjects[i] = toAdd;
+            }
+
+        }
+
+        public void addItemtoequip(Item toAdd)
+        {
+            int i = 0;
+            while (i < tablEquiped.Length && tablEquiped[i].name != "rien" && tablEquiped[i].name != toAdd.name)
+            {
+                i++;
+            }
+
+            if (i < tablEquiped.Length)
+            {
+                toAdd.place = i;
+                tablEquiped[i].name = toAdd.name;
                 added = true;
             }
 
@@ -68,11 +87,11 @@ namespace Project
 
                 case "Weapon":
                     Game1.player.Degat += item.stat;
-                    item.isEquiped = "equiped";
+                    addItemtoequip(item);
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
-                    item.isEquiped = "equiped";
+                    addItemtoequip(item);
                     break;
             }
             if (item.total > 1)

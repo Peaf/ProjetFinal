@@ -135,7 +135,7 @@ namespace Project
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
             //Item
-            Item book = new Item("QuestItem", "Book", "", 0, 1,"");
+            Item book = new Item("QuestItem", "Book", "", 0, 1);
 
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
@@ -503,35 +503,48 @@ namespace Project
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {
-                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" +  item.isEquiped, new Vector2(605, 400), Color.White);
+                    
                     switch (item.name)
                     {
                             
                         case "healthPotion":
                             spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
+                            
                         case "Sword":
-                            if (item.isEquiped == "notequiped")
+                            
                                 spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
-                            else
-                                spriteBatch.Draw(swordTexture, new Rectangle(400, 400, potionTexture.Width, potionTexture.Height), Color.White);
-
+                           
                             break;
+
                         case "Armor":
-                            if (item.isEquiped == "equiped")
                             spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
 
-                            else       
-                                spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
-                            
-                         
+                               
                             break;
+
                         case "Book":
                             spriteBatch.Draw(bookTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
 
                     }
                 }
+                foreach (Item item in Game1.invent.tablEquiped)
+                {
+                    switch (item.name)
+                    {
+                        case "Sword":
+                                spriteBatch.Draw(swordTexture, new Rectangle(30, 50, swordTexture.Width/7, swordTexture.Height/7), Color.White);
+                            break;
+
+                        case "Armor":
+                                spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
+                            break;
+
+
+                    }
+                }
+
               
             }
 
