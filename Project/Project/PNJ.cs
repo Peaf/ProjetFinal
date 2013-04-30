@@ -12,19 +12,21 @@ namespace Project
     {
         public Vector2 pnjPosition, origine;
         public Texture2D pnjTexture;
-        public Rectangle pnjRectangle;
+        public Rectangle pnjRectangle, taille;
         int ligne = 0, colonne = 0, timerAnimation = 0;
 
-        public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine)
+        public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine, Rectangle newtaille)
         {
             pnjTexture = newTexture;
             pnjPosition = newPosition;
             pnjRectangle = newRectangle;
+            taille = newtaille;
+
         }
 
-        public bool Collision(Vector2 position)
+        public bool Collision()
         {
-            return (pnjRectangle.Intersects(Game1.player.persoRectangle));
+            return (taille.Intersects(Game1.player.persoRectangle));
         }
 
 

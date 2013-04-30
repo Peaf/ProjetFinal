@@ -15,7 +15,7 @@ namespace Project
     static class Playing
     {
         static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture,armorTexture;
-        static int j = 0;
+        static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
@@ -158,12 +158,12 @@ namespace Project
             if (map == map5)
             {
                 //Pnj
-                if (!Game1.healer.Collision(Game1.player.persoPosition))
+                if (!Game1.healer.Collision())
                 {
                     Game1.healer.Update(gameTime, 0, "map5");
                 }
 
-                if (Game1.healer.Collision(Game1.player.persoPosition))
+                if (Game1.healer.Collision())
                 {
                     Game1.healer.Update(gameTime, 1, "map5");
                     Game1.player.health = Game1.player.healthMax;
@@ -177,7 +177,7 @@ namespace Project
 
                 
 
-                if (Game1.enemy1.Collision(Game1.player.persoPosition))
+                if (Game1.enemy1.Collision())
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
@@ -188,7 +188,7 @@ namespace Project
                     Game1.enemy = Game1.enemy1;
                     attackChoisi = "";
                 }
-                else if (Game1.enemy2.Collision(Game1.player.persoPosition))
+                else if (Game1.enemy2.Collision())
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
@@ -221,7 +221,7 @@ namespace Project
                     Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
                 if (Game1.bookState == 0)
 
-                    if (Game1.enemy3.Collision(Game1.player.persoPosition))
+                    if (Game1.enemy3.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
@@ -232,7 +232,7 @@ namespace Project
                         Game1.enemy = Game1.enemy3;
                         attackChoisi = "";
                     }
-                    else if (Game1.enemy4.Collision(Game1.player.persoPosition))
+                    else if (Game1.enemy4.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
@@ -243,9 +243,9 @@ namespace Project
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
-                {
+                
                     Game1.pnj1.Update(gameTime, 0, "map8");
-                }
+                
                 //Moteur à particules
                 Game1.snow.update(gameTime, graphics.GraphicsDevice);
                 foreach (CollisionTiles tile in map8.CollisionTiles)
@@ -261,18 +261,69 @@ namespace Project
             }
             if (Game1.player.persoPosition.Y <= 0)
             {
-                map = map8;
-                Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                if (mapNumber == 5)
+                {
+                    map = map8;
+                    mapNumber = 8;
+                    Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                }
+                else
+                {
+                    Game1.player.persoPosition.Y = 2;
+                }
+
             }
             else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
             {
-                map = map5;
-                Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
+                if (mapNumber == 8)
+                {
+                    map = map5;
+                    mapNumber = 5;
+                    Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
+                }
+                /*if (mapnumber == 5)
+                {
+                    map = map2;
+                    mapNumber = 2;
+                    Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
+                }*/
+                else
+                {
+                    Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
+                }
             }
-            else if (Game1.player.persoPosition.X <= 0) 
+            else if (Game1.player.persoPosition.X <= 0)
             {
-                map = map4;
-                Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                if (mapNumber == 5)
+                {
+                    map = map4;
+                    mapNumber = 4;
+                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                }
+                else
+                {
+                    Game1.player.persoPosition.X = 2;
+                }
+
+            }
+            else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
+            {
+                if (mapNumber == 4)
+                {
+                    map = map5;
+                    mapNumber = 5;
+                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                }
+                /*if (mapnumber == 5)
+                {
+                    map = map6;
+                    mapNumber = 6:
+                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                }*/
+                else
+                {
+                    Game1.player.persoPosition.X = Game1.player.persoTexture.Width / 4 - 1;
+                }
             }
             if (Isfighting)
             {
@@ -291,7 +342,7 @@ namespace Project
                 Game1.player.Update(gameTime);
 
                 //PNJ
-                if (Game1.pnj1.Collision(Game1.player.persoPosition))
+                if (Game1.pnj1.Collision())
                 {
                     talking = true;
                 }
@@ -314,7 +365,7 @@ namespace Project
                         Game1.pnj1.Update(gameTime, 2, "map8");
                     }
 
-                    if (!Game1.pnj1.Collision(Game1.player.persoPosition))
+                    if (!Game1.pnj1.Collision())
                         talking = false;
                 }
 

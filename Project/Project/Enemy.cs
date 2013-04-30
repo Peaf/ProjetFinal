@@ -284,7 +284,7 @@ namespace Project
             }
         }
 
-        public bool Collision(Vector2 position)
+        public bool Collision()
         {
             return (enemyRectangle.Intersects(Game1.player.persoRectangle));
         }

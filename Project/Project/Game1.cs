@@ -124,8 +124,8 @@ namespace Project
             enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(450, 400), new Rectangle(465, 400, 50, 62), new Rectangle(0, 0, 78, 105), 500);
 
             //PNJ
-            pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290));
-            healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1220, 495), new Rectangle(1220, 495, 658, 696), new Vector2(1220, 495));
+            pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1110, 290, 69, 95));
+            healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1220, 495), new Rectangle(1220, 495, 658, 696), new Vector2(1220, 495),  new Rectangle(1220, 495, 85, 80));
             //Pause
             Pause.LoadContent(Content, screenWidth, screenHeight);
 
