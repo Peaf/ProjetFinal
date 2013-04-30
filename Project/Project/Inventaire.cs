@@ -20,8 +20,8 @@ namespace Project
         {
             for (int i = 0; i < tablObjects.Length; i++)
             {
-                tablObjects[i] = new Item("","rien","",0, 1);
-                tablEquiped[i] = new Item("", "rien", "", 0, 1);
+                tablObjects[i] = new Item("", "rien", "", 0, 1, "notequiped");
+                tablEquiped[i] = new Item("", "rien", "", 0, 1, "equiped");
                 tablObjects[i].place = i;
                 tablEquiped[i].place = i;
             }
@@ -45,13 +45,15 @@ namespace Project
             {
                 i++;
             }
-            if(tablObjects[i].name == toAdd.name)
-            tablObjects[i].total += toAdd.total;
+            if (tablObjects[i].name == toAdd.name)
+                tablObjects[i].total += toAdd.total;
 
             else if (i < tablObjects.Length)
             {
                 toAdd.place = i;
+                toAdd.isEquiped = "equiped";
                 tablObjects[i] = toAdd;
+                
             }
 
         }
@@ -68,6 +70,7 @@ namespace Project
             {
                 toAdd.place = i;
                 tablEquiped[i].name = toAdd.name;
+                tablEquiped[i].isEquiped = "notequiped";
                 added = true;
             }
 
@@ -81,17 +84,23 @@ namespace Project
                 case "Potion":
                     if (item.effect == "health" && Game1.player.health < Game1.player.healthMax)
                         Game1.player.health += item.stat;
-                    if (item.effect == "mana" && Game1.player.mana< Game1.player.manaMax)
+                    if (item.effect == "mana" && Game1.player.mana < Game1.player.manaMax)
                         Game1.player.mana += item.stat;
                     break;
 
                 case "Weapon":
                     Game1.player.Degat += item.stat;
-                    addItemtoequip(item);
+                    if (item.isEquiped == "notequiped")
+                        addItemtoequip(item);
+                    if (item.isEquiped == "equiped")
+                        addItem(item);
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
-                    addItemtoequip(item);
+                    if (item.isEquiped == "notequiped")
+                        addItemtoequip(item);
+                    if (item.isEquiped == "equiped")
+                        addItem(item);
                     break;
             }
             if (item.total > 1)

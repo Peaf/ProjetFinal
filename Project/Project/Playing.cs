@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture;
+        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture,QuestBookTexture;
         static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -26,7 +26,7 @@ namespace Project
         static StreamReader streamMap5 = new StreamReader("map5.txt");
         static StreamReader streamMap4 = new StreamReader("map4.txt");
 
-        static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false;
+        static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false, talkOnce = false;
         static int turn = -1, timerInventaire = 0, lvlBefore = 1;
         static Song song3;
         static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
@@ -67,7 +67,8 @@ namespace Project
             //Armor
             armorTexture = Content.Load<Texture2D>("Armor");
 
-
+            //QuestBook
+            QuestBookTexture = Content.Load<Texture2D>("QuestBook");
 
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
@@ -135,7 +136,7 @@ namespace Project
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
             //Item
-            Item book = new Item("QuestItem", "Book", "", 0, 1);
+            Item book = new Item("QuestItem", "Book", "", 0, 1,"");
 
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
@@ -405,6 +406,14 @@ namespace Project
 
                     }
                 }
+                foreach (Item item in Game1.invent.tablEquiped)
+                {
+                    if (mouseRectangle.Intersects(new Rectangle(30, 50, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    {
+                        Game1.invent.useItem(item);
+
+                    }
+                }
             }
             Game1.pastMouse = mouse;
 
@@ -464,6 +473,7 @@ namespace Project
                     Game1.pnj1.Draw(spriteBatch, 0, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: I'm Arha can you help me? I'm freezing and I've lost my spell book can you find it for me? I can't leave this place without it", new Vector2(10, 675), Color.Blue);
+                    talkOnce = true;
                 }
                 if (talking && Game1.bookState == 1)
                 {
@@ -484,6 +494,32 @@ namespace Project
                     Game1.enemy4.Draw(spriteBatch);
             }
 
+            if (presentKey.IsKeyDown(Keys.L))
+            {
+                spriteBatch.Draw(QuestBookTexture, new Rectangle(0, 0, QuestBookTexture.Width, QuestBookTexture.Height), Color.White);
+                if (Game1.bookState == 0 && talkOnce)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Red);
+                }
+                if (Game1.bookState == 1)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Red);
+                }
+                if (Game1.bookState == 2)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Red);
+                }
+                if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                }
+
+            }
             if (inventaire)
             {
                 spriteBatch.Draw(inventaireTexture, inventaireRectangle, Color.White);
