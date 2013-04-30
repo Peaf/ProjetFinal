@@ -159,12 +159,12 @@ namespace Project
             if (map == map5)
             {
                 //Pnj
-                if (!Game1.healer.Collision())
+                if (!Game1.healer.Collision(Game1.healer))
                 {
                     Game1.healer.Update(gameTime, 0, "map5");
                 }
 
-                if (Game1.healer.Collision())
+                if (Game1.healer.Collision(Game1.healer))
                 {
                     Game1.healer.Update(gameTime, 1, "map5");
                     Game1.player.health = Game1.player.healthMax;
@@ -342,7 +342,11 @@ namespace Project
                 Game1.player.Update(gameTime);
 
                 //PNJ
-                if (Game1.pnj1.Collision())
+
+                Game1.player.Collision(Game1.healer.taille);
+                Game1.player.Collision(Game1.pnj1.taille);
+
+                if (Game1.pnj1.Collision(Game1.pnj1))
                 {
                     talking = true;
                 }
@@ -369,7 +373,7 @@ namespace Project
                         Game1.pnj1.Update(gameTime, 2, "map8");
                     }
 
-                    if (!Game1.pnj1.Collision())
+                    if (!Game1.pnj1.Collision(Game1.pnj1))
                         talking = false;
                 }
 

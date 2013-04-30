@@ -24,9 +24,9 @@ namespace Project
 
         }
 
-        public bool Collision()
+        public bool Collision(PNJ pnj)
         {
-            return (taille.Intersects(Game1.player.persoRectangle));
+            return (Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50);//&& Game1.player.persoPosition.Y  + Game1.player.persoRectangle.Height< pnj.pnjPosition.Y);
         }
 
 
