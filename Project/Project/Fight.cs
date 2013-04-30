@@ -13,17 +13,17 @@ namespace Project
     static class Fight
     {
         static cButton btnAttack1, btnSpell, btnObjects;
-        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture,  healthTexture, persoFight;
+        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, FireTexture;
         static Rectangle speechBoxRectangle;
-        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, nbreAnimation = 0, i = 0;
-        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle;
+        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, nbreAnimation = 0, i = 0, colonneFire = 0;
+        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, FireRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
         static Random rand = new Random();
         static KeyboardState presentKey, pastKey;
         static Song songGameOver, songVictory, song2;
         static bool Isfighting = false;
-        static Vector2 persoFightPosition;
+        static Vector2 persoFightPosition, FirePosition;
         static Vector2 origin;
 
 
@@ -34,7 +34,7 @@ namespace Project
 
             fightBackTexture = Content.Load<Texture2D>("Menu/FightBack");
             fightBackRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
-            
+
             Game1.btnStartFight = new cButton(Content.Load<Texture2D>("Button/StartFight"), 150, 70);
             Game1.btnStartFight.setPosition(new Vector2(screenWidth / 2 - 100, screenHeight / 2));
 
@@ -62,6 +62,11 @@ namespace Project
             persoFightRectangle = new Rectangle(200, screenHeight / 2 + 100, 320, 847);
             persoFightPosition = new Vector2(200, screenHeight / 2 + 300);
             origin = new Vector2(100, (screenHeight / 2 + 100) / 2);
+
+            FireTexture = Content.Load<Texture2D>("Fire");
+            FireRectangle = new Rectangle(1030, screenHeight / 2 + 100, 200, 64);
+            FirePosition = new Vector2(1030, screenHeight / 2 + 150);
+
 
 
         }
@@ -96,7 +101,7 @@ namespace Project
             healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
             enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 100), Game1.enemy.health, enemyHealthTexture.Height);
-            
+
 
             if (turn == -1 && Game1.btnStartFight.isClicked)
             {
@@ -150,23 +155,36 @@ namespace Project
                 }
                 if (Game1.player.Lvl >= 2)
                 {
-                    if (attackChoisi == "Fire Ball" && nbreAnimation < 2)
+                    if (attackChoisi == "Fire Ball")
                     {
                         ligne = 8;
-                        if (timerAnimation % 30 == 0)
+                        if (timerAnimation % 30 == 0 && nbreAnimation < 3)
                         {
-                            if (colonne == 3)
+                            if (nbreAnimation < 2)
                             {
-                                colonne = 0;
+                                if (colonne == 3)
+                                {
+                                    colonne = 0;
+                                    nbreAnimation++;
+                                }
+                                else
+                                {
+                                    colonne++;
+                                    nbreAnimation++;
+                                }
+                                persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
+                            }
+                            if (colonneFire == 4)
+                            {
+                                colonneFire = 0;
                                 nbreAnimation++;
                             }
                             else
                             {
-                                colonne++;
-                                nbreAnimation++;
+                                colonneFire++;
                             }
+                            FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                         }
-                        persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                     }
                 }
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && (attackChoisi == "Basic attack" || attackChoisi == "Fire Ball"))
@@ -235,6 +253,7 @@ namespace Project
             spriteBatch.DrawString(Game1.spriteFont, Game1.enemy.health + "/" + Game1.enemy.healthMax, new Vector2(1000, screenHeight / 2 + 89), Color.Black);
             spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
             spriteBatch.Draw(persoFight, persoFightPosition, persoFightRectangle, Color.White, 0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 0);
+            spriteBatch.Draw(FireTexture, FirePosition, FireRectangle, Color.White);
             if (turn == -1)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "You're attacked !!!", new Vector2(10, 675), Color.Black);
@@ -257,7 +276,7 @@ namespace Project
             if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 675), Color.Black);
-               btnAttack1.Draw(spriteBatch);
+                btnAttack1.Draw(spriteBatch);
                 if (Game1.player.Lvl >= 2)
                 {
                     btnSpell.Draw(spriteBatch);
@@ -267,11 +286,11 @@ namespace Project
             }
             if (turn % 2 == 0 && (attackChoisi != ""))
             {
-               
+
                 spriteBatch.DrawString(Game1.spriteFont, "Do you want to use the attack: " + attackChoisi + "?", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
             }
-            
+
             else if (Game1.enemy.health <= 0)
             {
                 i++;

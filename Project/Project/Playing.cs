@@ -582,12 +582,8 @@ namespace Project
                         case "Armor":
                                 spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
                             break;
-
-
                     }
                 }
-
-              
             }
 
         }
