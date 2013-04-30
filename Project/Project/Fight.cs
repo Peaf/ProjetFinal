@@ -47,9 +47,7 @@ namespace Project
             btnObjects = new cButton(Content.Load<Texture2D>("Button/ObjectsButton"), 120, 45);
             btnObjects.setPosition(new Vector2(100, screenHeight / 2 + 250));
 
-            btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
-            btnEndFight.setPosition(new Vector2(1200, 650));
-
+           
             songVictory = Content.Load<Song>("Song/Victory");
             songGameOver = Content.Load<Song>("Song/songGameOver");
             song2 = Content.Load<Song>("Song/Song2");
@@ -198,7 +196,7 @@ namespace Project
             if (Game1.enemy.health <= 0)
             {
                 Game1.enemy.health = 0;
-                if (btnEndFight.isClicked)
+                if (Game1.btnEndFight.isClicked)
                 {
                     Game1.player.Experience += Game1.enemy.healthMax;
                     Game1.player.persoPosition.X = Game1.previousPosX;
@@ -218,7 +216,7 @@ namespace Project
             btnAttack1.Update(mouse, gameTime);
             btnObjects.Update(mouse, gameTime);
             btnSpell.Update(mouse, gameTime);
-            btnEndFight.Update(mouse, gameTime);
+            Game1.btnEndFight.Update(mouse, gameTime);
             pastKey = presentKey;
             pastMouse = mouse;
             return (CurrentGameState);

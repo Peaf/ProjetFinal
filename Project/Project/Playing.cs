@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture,armorTexture;
+        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture;
         static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -27,7 +27,7 @@ namespace Project
         static StreamReader streamMap4 = new StreamReader("map4.txt");
 
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false;
-        static int turn = -1, timerInventaire = 0,lvlBefore =1;
+        static int turn = -1, timerInventaire = 0, lvlBefore = 1;
         static Song song3;
         static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
@@ -48,7 +48,7 @@ namespace Project
             maison = Content.Load<Texture2D>("Tile/Maison");
             //inventaire
             inventaireTexture = Content.Load<Texture2D>("Menu/inventaire");
-            inventaireRectangle = new Rectangle(0, 0, inventaireTexture.Width, inventaireTexture.Height);
+            inventaireRectangle = new Rectangle(0, 0, inventaireTexture.Width, Game1.screenHeight);
 
             //speech 
             speechBoxTexture = Content.Load<Texture2D>("SpeechBox");
@@ -60,15 +60,15 @@ namespace Project
 
             //Potion
             potionTexture = Content.Load<Texture2D>("Potion");
-            
+
             //Sword
             swordTexture = Content.Load<Texture2D>("Sword");
-           
+
             //Armor
             armorTexture = Content.Load<Texture2D>("Armor");
 
-            
-           
+
+
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
 
@@ -125,8 +125,8 @@ namespace Project
 
             map4.Generate(tab_map4, 32);
             streamMap4.Close();
-            
-            
+
+
             map = map5;
 
 
@@ -146,7 +146,7 @@ namespace Project
             {
                 foreach (CollisionTiles tile in map4.CollisionTiles)
                 {
-                    if ((tile.num >= 7 && tile.num<20)|| tile.num>=100)
+                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
                     {
                         Game1.player.Collision(tile.Rectangle);
                         /*Game1.enemy2.Collision(tile.Rectangle);
@@ -175,7 +175,7 @@ namespace Project
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
 
-                
+
 
                 if (Game1.enemy1.Collision())
                 {
@@ -199,7 +199,7 @@ namespace Project
                     Game1.enemy = Game1.enemy2;
                     attackChoisi = "";
                 }
-                
+
                 foreach (CollisionTiles tile in map5.CollisionTiles)
                 {
                     if (tile.num >= 7)
@@ -244,7 +244,7 @@ namespace Project
                         attackChoisi = "";
                     }
 
-               
+
                 //Moteur à particules
                 Game1.snow.update(gameTime, graphics.GraphicsDevice);
                 foreach (CollisionTiles tile in map8.CollisionTiles)
@@ -402,7 +402,7 @@ namespace Project
                     if (mouseRectangle.Intersects(new Rectangle((item.place % 8) * 20 + 30, 40 + 30 * (item.place / 8), bookTexture.Width, bookTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
                         Game1.invent.useItem(item);
-                        
+
                     }
                 }
             }
@@ -415,7 +415,7 @@ namespace Project
         {
             presentKey = Keyboard.GetState();
             map.Draw(spriteBatch);
-            
+
             if (lvlUp)
             {
                 spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
@@ -430,17 +430,7 @@ namespace Project
                 }
                 pastKey = presentKey;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.H))
-            {
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(300, 200), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(300, 225), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Mana : " + Game1.player.Intelligence + "/" + Game1.player.manaMax, new Vector2(300, 250), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience : " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(300, 275), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Strength : " + Game1.player.Strenght, new Vector2(300, 300), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Degat : " + Game1.player.Degat, new Vector2(300, 325), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Armor : " + Game1.player.Armor, new Vector2(300, 350), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Intelligence : " + Game1.player.Intelligence, new Vector2(300, 375), Color.Red);
-            }
+
             if (map == map5)
             {
                 Game1.healer.Draw(spriteBatch, 0, "map5");
@@ -448,7 +438,7 @@ namespace Project
                 if (Game1.enemy1.health > 0)
                     Game1.enemy1.Draw(spriteBatch);
                 if (Game1.enemy2.health > 0)
-                    Game1.enemy2.Draw(spriteBatch);  
+                    Game1.enemy2.Draw(spriteBatch);
             }
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -459,7 +449,7 @@ namespace Project
                 Game1.snow.Draw(spriteBatch);
                 if (Game1.bookState != 2 && !talking)
                 {
-                  Game1.pnj1.Draw(spriteBatch, 0, "map8");
+                    Game1.pnj1.Draw(spriteBatch, 0, "map8");
                 }
                 if (Game1.bookState == 2)
                 {
@@ -502,27 +492,36 @@ namespace Project
                     spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
                 }*/
 
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
+                // Game1.spriteBatch.DrawString(Game1.spriteFont, "Strength : " + Game1.player.Strenght, new Vector2(535, 300), Color.Red);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 288), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 305), Color.Black);
+
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {
                     switch (item.name)
                     {
                         case "healthPotion":
-                            spriteBatch.Draw(potionTexture, new Rectangle((item.place% 8) * 20 + 30, 40 + 30 * (item.place/8), bookTexture.Width, bookTexture.Height), Color.White);
+                            spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
                         case "Sword":
-                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 8) * 20 + 30, 40 + 30 * (item.place/8), bookTexture.Width, bookTexture.Height), Color.White);
+                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
                         case "Armor":
-                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 8) * 20 + 30, 40 + 30 * (item.place / 8), bookTexture.Width, bookTexture.Height), Color.White);
+                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
                         case "Book":
-                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 8) * 20 + 30, 40 + 30 * (item.place / 8), bookTexture.Width, bookTexture.Height), Color.White);
+                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
 
                     }
                 }
-               // if(Inventaire.
+                // if(Inventaire.
 
             }
 

@@ -40,7 +40,7 @@ namespace Project
         public static SpriteFont spriteFont;
 
         bool Isfighting = false, inventaire = false, talking = false, playOnce = true;
-        int screenWidth, screenHeight; //taille de l'ecran
+        public static int screenWidth, screenHeight; //taille de l'ecran
         public static float previousPosX, previousPosY;
         public static int bookState = 0;
 
