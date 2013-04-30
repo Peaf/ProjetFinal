@@ -131,7 +131,7 @@ namespace Project
                     if (timer == 15)
                     {
                         timer = 0;
-                        if (colonne == 3)
+                        if (colonne == 5)
                         {
                             colonne = 1;
                         }

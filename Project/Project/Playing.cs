@@ -274,7 +274,6 @@ namespace Project
                 map = map4;
                 Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
             }
-
             if (Isfighting)
             {
                 CurrentGameState = Game1.GameState.Fight;
