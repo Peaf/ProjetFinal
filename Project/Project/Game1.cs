@@ -35,8 +35,8 @@ namespace Project
         KeyboardState presentKey;
         KeyboardState pastKey;
 
-        StreamReader streamMap8 = new StreamReader("map8.txt");
-        StreamReader streamMap5 = new StreamReader("map5.txt");
+       
+
         public static SpriteFont spriteFont;
 
         bool Isfighting = false, inventaire = false, talking = false, playOnce = true;
@@ -46,6 +46,8 @@ namespace Project
 
         int[,] tab_map8 = new int[26, 44];
         int[,] tab_map5 = new int[26, 44];
+        int[,] tab_map4 = new int[26, 44];
+        
 
         public static Inventaire invent = new Inventaire();
 

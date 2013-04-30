@@ -19,10 +19,13 @@ namespace Project
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
+        static int[,] tab_map4 = new int[26, 44];
         static Map map = new Map();
-        static Map map5 = new Map(), map8 = new Map();
+        static Map map5 = new Map(), map8 = new Map(), map4 = new Map();
         static StreamReader streamMap8 = new StreamReader("map8.txt");
         static StreamReader streamMap5 = new StreamReader("map5.txt");
+        static StreamReader streamMap4 = new StreamReader("map4.txt");
+
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false;
         static int turn = -1, timerInventaire = 0,lvlBefore =1;
         static Song song3;
@@ -104,6 +107,26 @@ namespace Project
 
             map5.Generate(tab_map5, 32);
             streamMap5.Close();
+
+            j = 0;
+            while ((line = streamMap4.ReadLine()) != null)
+            {
+                char[] splitchar = { ',' };
+                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < tab_map4.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
+                {
+
+                    tab_map4[j, i] = int.Parse(tiles[i]);
+                }
+                j++;
+            }
+
+            map4.Generate(tab_map4, 32);
+            streamMap4.Close();
+            
+            
             map = map5;
 
 
@@ -118,6 +141,20 @@ namespace Project
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             Game1.GameState CurrentGameState = Game1.GameState.Playing;
+
+            if (map == map4)
+            {
+                foreach (CollisionTiles tile in map4.CollisionTiles)
+                {
+                    if ((tile.num >= 7 && tile.num<20)|| tile.num>=100)
+                    {
+                        Game1.player.Collision(tile.Rectangle);
+                        /*Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);*/
+                    }
+                }
+            }
+
             if (map == map5)
             {
                 //Pnj
@@ -225,13 +262,19 @@ namespace Project
             if (Game1.player.persoPosition.Y <= 0)
             {
                 map = map8;
-                Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 4);
+                Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
             }
-            else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 4)
+            else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
             {
                 map = map5;
-                Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 4 - 40;
+                Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
             }
+            else if (Game1.player.persoPosition.X <= 0) 
+            {
+                map = map4;
+                Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+            }
+
             if (Isfighting)
             {
                 CurrentGameState = Game1.GameState.Fight;
