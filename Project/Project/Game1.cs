@@ -28,7 +28,7 @@ namespace Project
         VideoPlayer playerVideo;
 
         //Pause
-        public static cButton btnNext, btnEndFight;
+        public static cButton btnNext, btnEndFight, btnStartFight;
         public static ParticleGenerator snow;
 
         public static MouseState pastMouse;

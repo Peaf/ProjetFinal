@@ -12,11 +12,11 @@ namespace Project
 {
     static class Fight
     {
-        static cButton btnStartFight, btnAttack1, btnSpell, btnObjects, btnEndFight;
-        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, enemyFightTexture, healthTexture, persoFight;
+        static cButton btnAttack1, btnSpell, btnObjects;
+        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture,  healthTexture, persoFight;
         static Rectangle speechBoxRectangle;
-        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, nbreAnimation = 0, lvlBefore;
-        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, enemyFightRectangle, persoFightRectangle;
+        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, nbreAnimation = 0, i = 0;
+        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
         static Random rand = new Random();
@@ -30,13 +30,13 @@ namespace Project
         public static void LoadContent(ContentManager Content, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
             speechBoxTexture = Content.Load<Texture2D>("SpeechBox");
-            speechBoxRectangle = new Rectangle(0, 650, speechBoxTexture.Width, speechBoxTexture.Height);
+            speechBoxRectangle = new Rectangle(0, 670, speechBoxTexture.Width, speechBoxTexture.Height);
 
             fightBackTexture = Content.Load<Texture2D>("Menu/FightBack");
             fightBackRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
             
-            btnStartFight = new cButton(Content.Load<Texture2D>("Button/StartFight"), 150, 70);
-            btnStartFight.setPosition(new Vector2(screenWidth / 2 - 100, screenHeight / 2));
+            Game1.btnStartFight = new cButton(Content.Load<Texture2D>("Button/StartFight"), 150, 70);
+            Game1.btnStartFight.setPosition(new Vector2(screenWidth / 2 - 100, screenHeight / 2));
 
             btnAttack1 = new cButton(Content.Load<Texture2D>("Button/AttackButton"), 120, 45);
             btnAttack1.setPosition(new Vector2(50, screenHeight / 2 + 200));
@@ -47,7 +47,6 @@ namespace Project
             btnObjects = new cButton(Content.Load<Texture2D>("Button/ObjectsButton"), 120, 45);
             btnObjects.setPosition(new Vector2(100, screenHeight / 2 + 250));
 
-           
             songVictory = Content.Load<Song>("Song/Victory");
             songGameOver = Content.Load<Song>("Song/songGameOver");
             song2 = Content.Load<Song>("Song/Song2");
@@ -99,7 +98,7 @@ namespace Project
             enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 100), Game1.enemy.health, enemyHealthTexture.Height);
             
 
-            if (turn == -1 && btnStartFight.isClicked)
+            if (turn == -1 && Game1.btnStartFight.isClicked)
             {
                 turn = 0;
                 Game1.enemy.healthMax = Game1.enemy.health;
@@ -202,17 +201,17 @@ namespace Project
                     Game1.player.persoPosition.X = Game1.previousPosX;
                     Game1.player.persoPosition.Y = Game1.previousPosY;
                     Game1.player.fight = false;
-                    btnStartFight.isClicked = false;
                     CurrentGameState = Game1.GameState.Playing;
                     Isfighting = false;
                     Game1.enemy.enemyPosition.X = -100;
                     Game1.enemy.enemyPosition.Y = -100;
+                    turn = -1;
                     Game1.enemy.enemyRectangle = new Rectangle(0, 0, 0, 0);
                     MediaPlayer.Play(song2);
                 }
             }
 
-            btnStartFight.Update(mouse, gameTime);
+            Game1.btnStartFight.Update(mouse, gameTime);
             btnAttack1.Update(mouse, gameTime);
             btnObjects.Update(mouse, gameTime);
             btnSpell.Update(mouse, gameTime);
@@ -239,31 +238,43 @@ namespace Project
             if (turn == -1)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "You're attacked !!!", new Vector2(10, 675), Color.Black);
-                btnStartFight.Draw(spriteBatch);
+                Game1.btnStartFight.Draw(spriteBatch);
             }
             if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you                                                                                                                              (Press ENTER to continue)", new Vector2(10, 675), Color.Black);
+
+                i++;
+                if (i <= 20)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 350), Color.Black);
+                }
+                if (i >= 20 && i < 40)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
+                }
             }
             if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 675), Color.Black);
-                btnAttack1.Draw(spriteBatch);
+               btnAttack1.Draw(spriteBatch);
                 if (Game1.player.Lvl >= 2)
                 {
                     btnSpell.Draw(spriteBatch);
                 }
                 btnObjects.Draw(spriteBatch);
+                i = 0;
             }
             if (turn % 2 == 0 && (attackChoisi != ""))
             {
+               
                 spriteBatch.DrawString(Game1.spriteFont, "Do you want to use the attack: " + attackChoisi + "?                                                                                                                        (press ENTER to continue)", new Vector2(10, 675), Color.Black);
-
+                
             }
             
             else if (Game1.enemy.health <= 0)
             {
-                btnEndFight.Draw(spriteBatch);
+                Game1.btnEndFight.Draw(spriteBatch);
                 spriteBatch.DrawString(Game1.spriteFont, "You win !!!                                                                                                 click the ARROW to continue", new Vector2(10, 675), Color.Black);
             }
 

@@ -27,7 +27,7 @@ namespace Project
         static StreamReader streamMap4 = new StreamReader("map4.txt");
 
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false;
-        static int turn = -1, timerInventaire = 0, lvlBefore = 1;
+        static int  timerInventaire = 0, lvlBefore = 1;
         static Song song3;
         static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
@@ -181,8 +181,8 @@ namespace Project
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
-                    turn = -1;
                     Game1.btnEndFight.isClicked = false;
+                    Game1.btnStartFight.isClicked = false;
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.enemy = Game1.enemy1;
@@ -192,10 +192,10 @@ namespace Project
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
-                    turn = -1;
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.btnEndFight.isClicked = false;
+                    Game1.btnStartFight.isClicked = false;
                     Game1.enemy = Game1.enemy2;
                     attackChoisi = "";
                 }
@@ -225,8 +225,8 @@ namespace Project
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
-                        turn = -1;
                         Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.enemy = Game1.enemy3;
@@ -236,10 +236,10 @@ namespace Project
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
-                        turn = -1;
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
