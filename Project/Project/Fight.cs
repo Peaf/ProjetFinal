@@ -119,17 +119,19 @@ namespace Project
                     nbreAnimation = 0;
                     colonne = 0;
                 }
-
-                if (btnSpell.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                if (Game1.player.Lvl >= 2)
                 {
-                    btnSpell.isClicked = false;
-                    attackChoisi = "Fire Ball";
-                    btnSpell.Update(mouse, gameTime);
-                    degat = rand.Next(150, 170) + Game1.player.Intelligence + Game1.player.Degat;
-                    manaPerdu = 20;
-                    nbreAnimation = 0;
-                    colonne = 0;
+                    if (btnSpell.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                    {
+                        btnSpell.isClicked = false;
+                        attackChoisi = "Fire Ball";
+                        btnSpell.Update(mouse, gameTime);
+                        degat = rand.Next(150, 170) + Game1.player.Intelligence + Game1.player.Degat;
+                        manaPerdu = 20;
+                        nbreAnimation = 0;
+                        colonne = 0;
 
+                    }
                 }
                 if (attackChoisi == "Basic attack" && nbreAnimation < 2)
                 {
@@ -149,23 +151,26 @@ namespace Project
                     }
                     persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                 }
-                if (attackChoisi == "Fire Ball" && nbreAnimation < 2)
+                if (Game1.player.Lvl >= 2)
                 {
-                    ligne = 8;
-                    if (timerAnimation % 30 == 0)
+                    if (attackChoisi == "Fire Ball" && nbreAnimation < 2)
                     {
-                        if (colonne == 3)
+                        ligne = 8;
+                        if (timerAnimation % 30 == 0)
                         {
-                            colonne = 0;
-                            nbreAnimation++;
+                            if (colonne == 3)
+                            {
+                                colonne = 0;
+                                nbreAnimation++;
+                            }
+                            else
+                            {
+                                colonne++;
+                                nbreAnimation++;
+                            }
                         }
-                        else
-                        {
-                            colonne++;
-                            nbreAnimation++;
-                        }
+                        persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                     }
-                    persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                 }
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && (attackChoisi == "Basic attack" || attackChoisi == "Fire Ball"))
                 {
@@ -246,7 +251,10 @@ namespace Project
             {
                 spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 675), Color.Black);
                 btnAttack1.Draw(spriteBatch);
-                btnSpell.Draw(spriteBatch);
+                if (Game1.player.Lvl >= 2)
+                {
+                    btnSpell.Draw(spriteBatch);
+                }
                 btnObjects.Draw(spriteBatch);
             }
             if (turn % 2 == 0 && (attackChoisi != ""))
