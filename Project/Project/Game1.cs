@@ -82,8 +82,8 @@ namespace Project
             screenHeight = 768;
             invent.Initialize();
             invent.addItem(new Item("Potion","healthPotion","health",50 , 1,""));
-            invent.addItem(new Item("Weapon","Sword","dmg", 30, 1,"notequiped"));
-            invent.addItem(new Item("Armor","Armor","",100,1,"notequiped"));
+            invent.addItem(new Item("Weapon","Sword","dmg", 30, 1,"equiped"));
+            invent.addItem(new Item("Armor","Armor","",100,1,"equiped"));
 
             base.Initialize();
         }

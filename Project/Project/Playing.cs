@@ -566,9 +566,11 @@ namespace Project
                     }
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
-                {
+                { Game1.spriteBatch.DrawString(Game1.spriteFont, "" +Game1.invent.tablEquiped[0].isEquiped, new Vector2(600, 325), Color.White);
+
                     switch (item.name)
                     {
+                           
                         case "Sword":
                                 spriteBatch.Draw(swordTexture, new Rectangle(30, 50, swordTexture.Width/7, swordTexture.Height/7), Color.White);
                             break;

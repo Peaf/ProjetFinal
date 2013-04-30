@@ -20,8 +20,8 @@ namespace Project
         {
             for (int i = 0; i < tablObjects.Length; i++)
             {
-                tablObjects[i] = new Item("", "rien", "", 0, 1, "notequiped");
-                tablEquiped[i] = new Item("", "rien", "", 0, 1, "equiped");
+                tablObjects[i] = new Item("", "rien", "", 0, 1, "");
+                tablEquiped[i] = new Item("", "rien", "", 0, 1, "notequiped");
                 tablObjects[i].place = i;
                 tablEquiped[i].place = i;
             }
@@ -37,10 +37,49 @@ namespace Project
             return tablObjects[i];
         }
 
-
         public void addItem(Item toAdd)
         {
             int i = 0;
+            if (toAdd.isEquiped == "equiped") 
+            {
+                while (i < tablObjects.Length && tablObjects[i].name != "rien" && tablObjects[i].name != toAdd.name)
+                {
+                    i++;
+                }
+                if (tablObjects[i].name == toAdd.name)
+                    tablObjects[i].total += toAdd.total;
+
+                else if (i < tablObjects.Length)
+                {
+                    toAdd.place = i;
+                    toAdd.isEquiped = "notequiped";
+                    tablObjects[i] = toAdd;
+
+                }
+            }
+            if (toAdd.isEquiped == "notequiped")
+            {
+                int j = 0;
+                while (j < tablEquiped.Length && tablEquiped[i].name != "rien" && tablEquiped[j].name != toAdd.name)
+                {
+                    j++;
+                }
+
+                if (j < tablEquiped.Length)
+                {
+                    toAdd.place = j;
+                    toAdd.isEquiped = "equiped";
+                    tablEquiped[j].name = toAdd.name;
+                    
+                    added = true;
+                }
+            }
+
+        }
+       /* public void addItem(Item toAdd)
+        {
+            int i = 0;
+            
             while (i < tablObjects.Length && tablObjects[i].name != "rien" && tablObjects[i].name != toAdd.name)
             {
                 i++;
@@ -51,7 +90,7 @@ namespace Project
             else if (i < tablObjects.Length)
             {
                 toAdd.place = i;
-                toAdd.isEquiped = "equiped";
+                tablObjects[i].isEquiped = "notequiped";
                 tablObjects[i] = toAdd;
                 
             }
@@ -70,11 +109,11 @@ namespace Project
             {
                 toAdd.place = i;
                 tablEquiped[i].name = toAdd.name;
-                tablEquiped[i].isEquiped = "notequiped";
+                tablEquiped[i].isEquiped = "equiped";
                 added = true;
             }
 
-        }
+        }*/
 
 
         public void useItem(Item item)
@@ -91,14 +130,16 @@ namespace Project
                 case "Weapon":
                     Game1.player.Degat += item.stat;
                     if (item.isEquiped == "notequiped")
-                        addItemtoequip(item);
+                        addItem(item);
+                        // addItemtoequip(item);
                     if (item.isEquiped == "equiped")
                         addItem(item);
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
                     if (item.isEquiped == "notequiped")
-                        addItemtoequip(item);
+                        addItem(item);
+                        // addItemtoequip(item);
                     if (item.isEquiped == "equiped")
                         addItem(item);
                     break;
