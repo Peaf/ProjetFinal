@@ -27,7 +27,7 @@ namespace Project
         static StreamReader streamMap4 = new StreamReader("map4.txt");
 
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false;
-        static int  timerInventaire = 0, lvlBefore = 1;
+        static int turn = -1, timerInventaire = 0, lvlBefore = 1;
         static Song song3;
         static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
@@ -42,7 +42,7 @@ namespace Project
             Game1.btnNext.setPosition(new Vector2(1200, 650));
 
             Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
-            Game1.btnEndFight.setPosition(new Vector2(1200, 690));
+            Game1.btnEndFight.setPosition(new Vector2(1200, 710));
 
             song3 = Content.Load<Song>("Song/SongFight");
             maison = Content.Load<Texture2D>("Tile/Maison");
@@ -181,8 +181,8 @@ namespace Project
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
+                    turn = -1;
                     Game1.btnEndFight.isClicked = false;
-                    Game1.btnStartFight.isClicked = false;
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.enemy = Game1.enemy1;
@@ -192,10 +192,10 @@ namespace Project
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
                     Game1.previousPosY = Game1.player.persoPosition.Y;
+                    turn = -1;
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.btnEndFight.isClicked = false;
-                    Game1.btnStartFight.isClicked = false;
                     Game1.enemy = Game1.enemy2;
                     attackChoisi = "";
                 }
@@ -225,8 +225,8 @@ namespace Project
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
+                        turn = -1;
                         Game1.btnEndFight.isClicked = false;
-                        Game1.btnStartFight.isClicked = false;
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.enemy = Game1.enemy3;
@@ -236,10 +236,10 @@ namespace Project
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
+                        turn = -1;
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.btnEndFight.isClicked = false;
-                        Game1.btnStartFight.isClicked = false;
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
@@ -419,11 +419,10 @@ namespace Project
             if (lvlUp)
             {
                 spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100) , new Vector2(10, 745), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100) + "                                                                                                                                                  Press Enter to continue", new Vector2(10, 745), Color.Black);
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
                 {
                     lvlUp = false;
@@ -505,32 +504,30 @@ namespace Project
                 foreach (Item item in Game1.invent.tablObjects)
                 {
                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" +  item.isEquiped, new Vector2(605, 400), Color.White);
-                    Rectangle itemRectangle = new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2);
                     switch (item.name)
                     {
                             
                         case "healthPotion":
-                            spriteBatch.Draw(potionTexture, itemRectangle, Color.White);
+                            spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
                         case "Sword":
-                            if (item.isEquiped == "equiped")
-                                itemRectangle = new Rectangle(400, 400, potionTexture.Width, potionTexture.Height);
-                                spriteBatch.Draw(swordTexture, itemRectangle, Color.White);
-                            
-                               
+                            if (item.isEquiped == "notequiped")
+                                spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            else
+                                spriteBatch.Draw(swordTexture, new Rectangle(400, 400, potionTexture.Width, potionTexture.Height), Color.White);
 
                             break;
                         case "Armor":
                             if (item.isEquiped == "equiped")
-                                itemRectangle = new Rectangle(400, 400, potionTexture.Width, potionTexture.Height);
-                                spriteBatch.Draw(armorTexture, itemRectangle, Color.White);
+                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
 
-                            
+                            else       
+                                spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
                             
                          
                             break;
                         case "Book":
-                            spriteBatch.Draw(bookTexture, itemRectangle, Color.White);
+                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
 
                     }
