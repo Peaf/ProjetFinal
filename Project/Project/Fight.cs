@@ -274,6 +274,15 @@ namespace Project
             
             else if (Game1.enemy.health <= 0)
             {
+                i++;
+                if (i <= 20)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 350), Color.Black);
+                }
+                if (i >= 20 && i < 40)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
+                }
                 Game1.btnEndFight.Draw(spriteBatch);
                 spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Clik the arrow to continue", new Vector2(1100, 730), Color.Black);
