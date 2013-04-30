@@ -135,7 +135,7 @@ namespace Project
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
             //Item
-            Item book = new Item("QuestItem", "Book", "", 0, 1);
+            Item book = new Item("QuestItem", "Book", "", 0, 1,"");
 
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
@@ -399,7 +399,7 @@ namespace Project
                 }
                 foreach (Item item in Game1.invent.tablObjects)
                 {
-                    if (mouseRectangle.Intersects(new Rectangle((item.place % 8) * 20 + 30, 40 + 30 * (item.place / 8), bookTexture.Width, bookTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    if (mouseRectangle.Intersects(new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
                         Game1.invent.useItem(item);
 
@@ -498,32 +498,44 @@ namespace Project
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
-                // Game1.spriteBatch.DrawString(Game1.spriteFont, "Strength : " + Game1.player.Strenght, new Vector2(535, 300), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 288), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 305), Color.Black);
-
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor , new Vector2(515, 290), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" +  item.isEquiped, new Vector2(605, 400), Color.White);
+                    Rectangle itemRectangle = new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2);
                     switch (item.name)
                     {
+                            
                         case "healthPotion":
-                            spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(potionTexture, itemRectangle, Color.White);
                             break;
                         case "Sword":
-                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            if (item.isEquiped == "equiped")
+                                itemRectangle = new Rectangle(400, 400, potionTexture.Width, potionTexture.Height);
+                                spriteBatch.Draw(swordTexture, itemRectangle, Color.White);
+                            
+                               
+
                             break;
                         case "Armor":
-                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            if (item.isEquiped == "equiped")
+                                itemRectangle = new Rectangle(400, 400, potionTexture.Width, potionTexture.Height);
+                                spriteBatch.Draw(armorTexture, itemRectangle, Color.White);
+
+                            
+                            
+                         
                             break;
                         case "Book":
-                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(bookTexture, itemRectangle, Color.White);
                             break;
 
                     }
                 }
-                // if(Inventaire.
-
+              
             }
 
         }

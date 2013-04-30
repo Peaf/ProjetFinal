@@ -9,7 +9,7 @@ namespace Project
     {
         public Item[] tablObjects;
         public int place_object;
-        public bool added = false;
+        public static bool added = false;
 
         public Inventaire()
         {
@@ -19,7 +19,7 @@ namespace Project
         {
             for (int i = 0; i < tablObjects.Length; i++)
             {
-                tablObjects[i] = new Item("","rien","",0, 1);
+                tablObjects[i] = new Item("","rien","",0, 1,"");
                 tablObjects[i].place = i;
             }
         }
@@ -68,9 +68,11 @@ namespace Project
 
                 case "Weapon":
                     Game1.player.Degat += item.stat;
+                    item.isEquiped = "equiped";
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
+                    item.isEquiped = "equiped";
                     break;
             }
             if (item.total > 1)
