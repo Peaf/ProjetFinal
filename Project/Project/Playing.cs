@@ -42,7 +42,7 @@ namespace Project
             Game1.btnNext.setPosition(new Vector2(1200, 650));
 
             Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
-            Game1.btnEndFight.setPosition(new Vector2(1200, 710));
+            Game1.btnEndFight.setPosition(new Vector2(1200, 690));
 
             song3 = Content.Load<Song>("Song/SongFight");
             maison = Content.Load<Texture2D>("Tile/Maison");
@@ -419,10 +419,11 @@ namespace Project
             if (lvlUp)
             {
                 spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100) + "                                                                                                                                                  Press Enter to continue", new Vector2(10, 745), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100) , new Vector2(10, 745), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
                 {
                     lvlUp = false;

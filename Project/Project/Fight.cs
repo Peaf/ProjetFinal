@@ -30,7 +30,7 @@ namespace Project
         public static void LoadContent(ContentManager Content, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
             speechBoxTexture = Content.Load<Texture2D>("SpeechBox");
-            speechBoxRectangle = new Rectangle(0, 670, speechBoxTexture.Width, speechBoxTexture.Height);
+            speechBoxRectangle = new Rectangle(0, 675, speechBoxTexture.Width, speechBoxTexture.Height);
 
             fightBackTexture = Content.Load<Texture2D>("Menu/FightBack");
             fightBackRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
@@ -242,8 +242,8 @@ namespace Project
             }
             if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you                                                                                                                              (Press ENTER to continue)", new Vector2(10, 675), Color.Black);
-
+                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you", new Vector2(10, 675), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
                 i++;
                 if (i <= 20)
                 {
@@ -268,14 +268,15 @@ namespace Project
             if (turn % 2 == 0 && (attackChoisi != ""))
             {
                
-                spriteBatch.DrawString(Game1.spriteFont, "Do you want to use the attack: " + attackChoisi + "?                                                                                                                        (press ENTER to continue)", new Vector2(10, 675), Color.Black);
-                
+                spriteBatch.DrawString(Game1.spriteFont, "Do you want to use the attack: " + attackChoisi + "?", new Vector2(10, 675), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
             }
             
             else if (Game1.enemy.health <= 0)
             {
                 Game1.btnEndFight.Draw(spriteBatch);
-                spriteBatch.DrawString(Game1.spriteFont, "You win !!!                                                                                                 click the ARROW to continue", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 675), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Clik the arrow to continue", new Vector2(1100, 730), Color.Black);
             }
 
         }
