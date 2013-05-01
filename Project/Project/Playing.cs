@@ -394,9 +394,11 @@ namespace Project
                     {
                         Game1.pnj1.Update(gameTime, 1, "map8");
                     }
-                    if (Game1.btnNext.isClicked)
+                     if (Game1.btnNext.isClicked)
                     {
                         Game1.bookState = 2;
+                        Game1.player.Experience += 50;
+                        Game1.btnNext.isClicked = false;
                         Game1.btnNext.Update(mouse, gameTime);
                     }
                     if (Game1.bookState == 2)
@@ -408,6 +410,7 @@ namespace Project
                     if (!Game1.pnj1.Collision(Game1.pnj1))
                         talking = false;
                 }
+
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -522,6 +525,7 @@ namespace Project
                     Game1.btnNext.Draw(spriteBatch);
                     Game1.pnj1.Draw(spriteBatch, 1, "map8");
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks. Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 675), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 50 Xp", new Vector2(1100, 725), Color.Red);
                 }
                 if (talking && Game1.bookState == 2)
                 {
