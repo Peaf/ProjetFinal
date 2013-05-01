@@ -69,6 +69,7 @@ Content\Tile\Tile20.xnb
 Content\Menu\inventaire.xnb
 Content\QuestBook.xnb
 Content\Fire.xnb
+Content\sand.xnb
 Content\Song\Song1.xnb
 Content\Song\Song2.xnb
 Content\Song\song3.xnb
@@ -77,7 +78,6 @@ Content\Song\SongFight.xnb
 Content\Song\Victory.xnb
 Content\Intro.xnb
 Content\SpriteFont1.xnb
-Content\sand.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma

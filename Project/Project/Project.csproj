@@ -131,6 +131,7 @@
     <Compile Include="Tiles.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Fire.png" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
