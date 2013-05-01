@@ -368,7 +368,7 @@ namespace Project
                     mapNumber = 4;
                     Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                 }
-                if (mapNumber == 6)
+                else if (mapNumber == 6)
                 {
                     map = map5;
                     mapNumber = 5;
