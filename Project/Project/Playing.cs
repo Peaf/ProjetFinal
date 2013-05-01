@@ -42,7 +42,7 @@ namespace Project
             Game1.btnNext.setPosition(new Vector2(1200, 650));
 
             Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
-            Game1.btnEndFight.setPosition(new Vector2(1200, 710));
+            Game1.btnEndFight.setPosition(new Vector2(1190, 685));
 
             song3 = Content.Load<Song>("Song/SongFight");
             maison = Content.Load<Texture2D>("Tile/Maison");
@@ -72,7 +72,6 @@ namespace Project
 
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
-            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 79); // verifier le 2 nd arg
 
             while ((line = streamMap8.ReadLine()) != null)
             {
@@ -146,7 +145,6 @@ namespace Project
 
             if (map == map4)
             {
-                Game1.sand.update(gameTime, graphics.GraphicsDevice);
                 foreach (CollisionTiles tile in map4.CollisionTiles)
                 {
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
@@ -437,7 +435,9 @@ namespace Project
                 spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100) + "                                                                                                                                                  Press Enter to continue", new Vector2(10, 745), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 745), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont,  "Press Enter to continue", new Vector2(1100, 725), Color.Black);
+               
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
                 {
                     lvlUp = false;
@@ -458,9 +458,6 @@ namespace Project
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch);
-
-            if (map == map4)
-                Game1.sand.Draw(spriteBatch);
 
             if (map == map8)
             {
@@ -557,15 +554,12 @@ namespace Project
                             break;
                             
                         case "Sword":
-                            
                                 spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
-                           
                             break;
 
                         case "Armor":
                             spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
 
-                               
                             break;
 
                         case "Book":
@@ -581,7 +575,7 @@ namespace Project
                     {
                            
                         case "Sword":
-                                spriteBatch.Draw(swordTexture, new Rectangle(30, 50, swordTexture.Width/7, swordTexture.Height/7), Color.White);
+                                spriteBatch.Draw(swordTexture, new Rectangle(30, 320, swordTexture.Width/7, swordTexture.Height/7), Color.White);
                             break;
 
                         case "Armor":

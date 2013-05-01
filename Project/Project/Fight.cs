@@ -15,14 +15,14 @@ namespace Project
         static cButton btnAttack1, btnSpell, btnObjects;
         static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, FireTexture;
         static Rectangle speechBoxRectangle;
-        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, nbreAnimation = 0, i = 0, colonneFire = 0;
+        static int turn = -1, degat, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, i = 0, colonneFire = 0, nbreAnimationFire = 0;
         static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, FireRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
         static Random rand = new Random();
         static KeyboardState presentKey, pastKey;
         static Song songGameOver, songVictory, song2;
-        static bool Isfighting = false;
+        static bool Isfighting = false, stop = false;
         static Vector2 persoFightPosition, FirePosition;
         static Vector2 origin;
 
@@ -64,7 +64,7 @@ namespace Project
 
             FireTexture = Content.Load<Texture2D>("Fire");
             FireRectangle = new Rectangle(1030, screenHeight / 2 + 100, 200, 64);
-            FirePosition = new Vector2(1020, screenHeight / 2 + 150);
+            FirePosition = new Vector2(1015, screenHeight / 2 + 150);
         }
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight)
@@ -117,7 +117,7 @@ namespace Project
                     timerAnimation = 0;
                     degat = Game1.player.Degat + rand.Next(0, 30) + Game1.player.Strenght / 2;
                     manaPerdu = 0;
-                    nbreAnimation = 0;
+                    stop = false;
                     colonne = 0;
                 }
                 if (Game1.player.Lvl >= 2)
@@ -128,13 +128,15 @@ namespace Project
                         attackChoisi = "Fire Ball";
                         btnSpell.Update(mouse, gameTime);
                         timerAnimation = 0;
-                        degat = rand.Next(150, 170) + Game1.player.Intelligence + Game1.player.Degat;
+                        degat = rand.Next(80, 120) + Game1.player.Intelligence + Game1.player.Degat;
                         manaPerdu = 20;
-                        nbreAnimation = 0;
+                        stop = false;
                         colonne = 0;
+                        colonneFire = 0;
+                        nbreAnimationFire = 0;
                     }
                 }
-                if (attackChoisi == "Basic attack" && nbreAnimation <= 3)
+                if (attackChoisi == "Basic attack" && !stop)
                 {
                     ligne = 7;
                     if (timerAnimation % 12 == 0)
@@ -143,12 +145,11 @@ namespace Project
                         {
                             colonne = 0;
                             ligne = 0;
-                            nbreAnimation++;
+                            stop = true;
                         }
                         else
                         {
                             colonne++;
-                            nbreAnimation++;
                         }
                     }
                     persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
@@ -156,40 +157,38 @@ namespace Project
                 if (Game1.player.Lvl >= 2)
                 {
                     if (attackChoisi == "Fire Ball")
-                    {
-                        ligne = 8;
-                        
-                        if (timerAnimation % 20 == 0 && nbreAnimation <= 6)
+                    { 
+                        if (timerAnimation %12 == 0)
                         {
-                            if (nbreAnimation <= 3)
+                            if (!stop)
                             {
+                                ligne = 8;
                                 if (colonne == 3)
                                 {
                                     colonne = 0;
                                     ligne = 0;
-                                    nbreAnimation++;
+                                    stop = true;
                                 }
                                 else
                                 {
                                     colonne++;
-                                    nbreAnimation++;
                                 }
-
                                 persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                             }
-
-
-                            if (colonneFire == 4)
+                            if (nbreAnimationFire <= 4)
                             {
-                                colonneFire = 0;
-                               nbreAnimation++;
+                                if (colonneFire == 4)
+                                {
+                                    colonneFire = 0;
+                                    nbreAnimationFire++;
+                                }
+                                else
+                                {
+                                    colonneFire++;
+                                    nbreAnimationFire++;
+                                }
+                                FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                             }
-                            else
-                            {
-                                colonneFire++; 
-                                nbreAnimation++;
-                            }
-                            FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                         }
                     }
                 }
