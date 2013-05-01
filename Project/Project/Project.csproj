@@ -119,6 +119,7 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Particlegenerator.cs" />
+    <Compile Include="ParticleGenerator1.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="Playing.cs" />
     <Compile Include="PNJ.cs" />

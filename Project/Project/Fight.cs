@@ -159,9 +159,9 @@ namespace Project
                     {
                         ligne = 8;
                         
-                        if (timerAnimation % 20 == 0 && nbreAnimation <= 4)
+                        if (timerAnimation % 20 == 0 && nbreAnimation <= 6)
                         {
-                            if (nbreAnimation <= 2)
+                            if (nbreAnimation <= 3)
                             {
                                 if (colonne == 3)
                                 {
@@ -186,7 +186,8 @@ namespace Project
                             }
                             else
                             {
-                                colonneFire++;
+                                colonneFire++; 
+                                nbreAnimation++;
                             }
                             FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                         }

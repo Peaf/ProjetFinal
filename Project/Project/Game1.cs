@@ -30,6 +30,7 @@ namespace Project
         //Pause
         public static cButton btnNext, btnEndFight, btnStartFight;
         public static ParticleGenerator snow;
+        public static ParticleGenerator1 sand;
 
         public static MouseState pastMouse;
         KeyboardState presentKey;
