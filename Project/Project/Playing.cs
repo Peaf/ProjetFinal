@@ -72,6 +72,7 @@ namespace Project
 
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
+            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 55); // verifier le 2 nd arg
 
             while ((line = streamMap8.ReadLine()) != null)
             {
@@ -145,6 +146,8 @@ namespace Project
 
             if (map == map4)
             {
+                Game1.sand.update(gameTime, graphics.GraphicsDevice);
+
                 foreach (CollisionTiles tile in map4.CollisionTiles)
                 {
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
@@ -458,6 +461,9 @@ namespace Project
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch);
+
+            if (map == map4)
+                Game1.sand.Draw(spriteBatch);
 
             if (map == map8)
             {
