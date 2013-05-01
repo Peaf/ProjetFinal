@@ -22,12 +22,14 @@ namespace Project
         static int[,] tab_map5 = new int[26, 44];
         static int[,] tab_map4 = new int[26, 44];
         static int[,] tab_map2 = new int[26, 44];
+        static int[,] tab_map6 = new int[26, 44];
         static Map map = new Map();
-        static Map map5 = new Map(), map8 = new Map(), map4 = new Map(), map2 = new Map();
+        static Map map5 = new Map(), map8 = new Map(), map4 = new Map(), map2 = new Map(), map6 = new Map();
         static StreamReader streamMap8 = new StreamReader("map8.txt");
         static StreamReader streamMap5 = new StreamReader("map5.txt");
         static StreamReader streamMap4 = new StreamReader("map4.txt");
         static StreamReader streamMap2 = new StreamReader("map2.txt");
+        static StreamReader streamMap6 = new StreamReader("map6.txt");
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false, talkOnce = false;
         static int turn = -1, timerInventaire = 0, lvlBefore = 1;
         static Song song3;
@@ -150,6 +152,24 @@ namespace Project
             map2.Generate(tab_map2, 32);
             streamMap2.Close();
 
+            j = 0;
+            while ((line = streamMap6.ReadLine()) != null)
+            {
+                char[] splitchar = { ',' };
+                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < tab_map6.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
+                {
+
+                    tab_map6[j, i] = int.Parse(tiles[i]);
+                }
+                j++;
+            }
+
+            map6.Generate(tab_map6, 32);
+            streamMap6.Close();
+
             map = map5;
         }
 
@@ -244,6 +264,18 @@ namespace Project
                 }
             }
 
+            if (map == map6)
+            {
+                foreach (CollisionTiles tile in map6.CollisionTiles)
+                {
+                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    {
+                        Game1.player.Collision(tile.Rectangle);
+                        /*Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);*/
+                    }
+                }
+            }
             if (map == map8)
             {
                 if (Game1.enemy3.health > 0)
@@ -336,6 +368,12 @@ namespace Project
                     mapNumber = 4;
                     Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                 }
+                if (mapNumber == 6)
+                {
+                    map = map5;
+                    mapNumber = 5;
+                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                }
                 else
                 {
                     Game1.player.persoPosition.X = 2;
@@ -350,12 +388,12 @@ namespace Project
                     mapNumber = 5;
                     Game1.player.persoPosition.X = 0;
                 }
-                /*else if (mapnumber == 5)
+                else if (mapNumber == 5)
                 {
                     map = map6;
-                    mapNumber = 6:
-                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                }*/
+                    mapNumber = 6;
+                    Game1.player.persoPosition.X = 0;
+                }
                 else
                 {
                     Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
