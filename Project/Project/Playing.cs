@@ -209,8 +209,8 @@ namespace Project
                     if (tile.num >= 7)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                        /*Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);*/
+                        Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);
                     }
                 }
 

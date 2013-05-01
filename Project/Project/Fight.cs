@@ -223,6 +223,7 @@ namespace Project
                     Game1.player.Experience += Game1.enemy.healthMax;
                     Game1.player.persoPosition.X = Game1.previousPosX;
                     Game1.player.persoPosition.Y = Game1.previousPosY;
+                    Game1.player.persoRectangle = new Rectangle((int)Game1.previousPosX,(int) Game1.previousPosY, Game1.player.persoRectangle.Width, Game1.player.persoRectangle.Height);
                     Game1.player.fight = false;
                     CurrentGameState = Game1.GameState.Playing;
                     Isfighting = false;

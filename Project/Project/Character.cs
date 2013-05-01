@@ -38,7 +38,7 @@ namespace Project
             Intelligence = newIntelligence;
             Degat = newDegat;
             Armor = newArmor;
-            Lvl = 1;
+            Lvl = 3;
 
         }
 
