@@ -313,7 +313,7 @@ namespace Project
                     mapNumber = 5;
                     Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
                 }
-                if (mapNumber == 5)
+                else if (mapNumber == 5)
                 {
                     map = map2;
                     mapNumber = 2;
@@ -346,7 +346,7 @@ namespace Project
                     mapNumber = 5;
                     Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                 }
-                /*if (mapnumber == 5)
+                /*else if (mapnumber == 5)
                 {
                     map = map6;
                     mapNumber = 6:
@@ -354,7 +354,7 @@ namespace Project
                 }*/
                 else
                 {
-                    Game1.player.persoPosition.X = Game1.player.persoTexture.Width / 4 - 1;
+                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                 }
             }
             if (Isfighting)
