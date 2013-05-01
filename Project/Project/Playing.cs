@@ -15,7 +15,8 @@ namespace Project
     static class Playing
     {
         static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
-        static int j = 0, mapNumber = 5;
+        static int j = 0;
+        static public int mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
@@ -213,6 +214,7 @@ namespace Project
                     Game1.previousPosY = Game1.player.persoPosition.Y;
                     turn = -1;
                     Game1.btnEndFight.isClicked = false;
+                    Game1.btnStartFight.isClicked = false;
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.enemy = Game1.enemy1;
@@ -226,6 +228,7 @@ namespace Project
                     Isfighting = true;
                     MediaPlayer.Play(song3);
                     Game1.btnEndFight.isClicked = false;
+                    Game1.btnStartFight.isClicked = false;
                     Game1.enemy = Game1.enemy2;
                     attackChoisi = "";
                 }
@@ -248,7 +251,6 @@ namespace Project
 
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
-                if (Game1.bookState == 0)
 
                     if (Game1.enemy3.Collision())
                     {
@@ -256,6 +258,7 @@ namespace Project
                         Game1.previousPosY = Game1.player.persoPosition.Y;
                         turn = -1;
                         Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.enemy = Game1.enemy3;
@@ -269,6 +272,7 @@ namespace Project
                         Isfighting = true;
                         MediaPlayer.Play(song3);
                         Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
@@ -374,7 +378,6 @@ namespace Project
                 Game1.player.Update(gameTime);
 
                 //PNJ
-
                 Game1.player.Collision(Game1.healer.taille);
                 Game1.player.Collision(Game1.pnj1.taille);
 
