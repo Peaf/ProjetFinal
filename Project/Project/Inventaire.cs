@@ -112,7 +112,6 @@ namespace Project
             {
                 case "Weapon":
                     Game1.player.Degat -= item.stat;
-                    
                         addItem(item);
                     break;
                 case "Armor":

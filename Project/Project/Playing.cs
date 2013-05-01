@@ -449,17 +449,23 @@ namespace Project
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
                 {
-                    if (mouseRectangle.Intersects(new Rectangle(30, 320, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    if (item.type == "Weapon")
                     {
-                       /* Game1.invent.removeItemE(item);
-                        Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
+                        if (mouseRectangle.Intersects(new Rectangle(30, 320, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        {
+                            /* Game1.invent.removeItemE(item);
+                             Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
 
-                        Game1.invent.deUseItem(item);
+                            Game1.invent.deUseItem(item);
+                        }
                     }
-                    else if (mouseRectangle.Intersects(new Rectangle(120, 125, armorTexture.Width, armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    else
                     {
-                        
-                        Game1.invent.deUseItem(item);
+                        if (mouseRectangle.Intersects(new Rectangle(120, 125, armorTexture.Width, armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        {
+
+                            Game1.invent.deUseItem(item);
+                        }
                     }
                 }
             }
