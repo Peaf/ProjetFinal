@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture,manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
+        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
         static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -389,20 +389,19 @@ namespace Project
                 if (talking)
                 {
                     Game1.btnNext.Update(mouse, gameTime);
-
                     if (Game1.bookState == 1)
                     {
                         Game1.pnj1.Update(gameTime, 1, "map8");
                     }
-                     if (Game1.btnNext.isClicked)
+                    if (Game1.btnNext.isClicked && Game1.bookState == 1)
                     {
                         Game1.bookState = 2;
                         Game1.player.Experience += 50;
                         Game1.btnNext.isClicked = false;
-                        Game1.btnNext.Update(mouse, gameTime);
                     }
                     if (Game1.bookState == 2)
                     {
+                        Game1.btnNext.isClicked = false;
                         Game1.invent.removeItem(book);
                         Game1.pnj1.Update(gameTime, 2, "map8");
                     }
@@ -450,7 +449,6 @@ namespace Project
                     if (mouseRectangle.Intersects(new Rectangle(30, 50, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
                         Game1.invent.useItem(item);
-
                     }
                 }
             }
@@ -572,7 +570,6 @@ namespace Project
                 {
                     spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
                 }*/
-
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
@@ -587,9 +584,8 @@ namespace Project
 
                     switch (item.name)
                     {
-
                         case "healthPotion":
-                            spriteBatch.Draw(healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25 , 482 + 68 * (item.place / 6), 39 , 64), Color.White);
+                            spriteBatch.Draw(healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                             break;
 
                         case "manaPotion":
@@ -613,10 +609,8 @@ namespace Project
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
                 {
-                    
                     switch (item.name)
                     {
-
                         case "Sword":
                             spriteBatch.Draw(swordTexture, new Rectangle(30, 320, swordTexture.Width / 7, swordTexture.Height / 7), Color.White);
                             break;
@@ -627,8 +621,6 @@ namespace Project
                     }
                 }
             }
-
         }
-
     }
 }
