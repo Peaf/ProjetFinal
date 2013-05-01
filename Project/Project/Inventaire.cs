@@ -93,8 +93,7 @@ namespace Project
                     Game1.player.Degat += item.stat;
                     if (item.isEquiped == "notequiped")
                         addItemtoequip(item);
-                    if (item.isEquiped == "equiped")
-                        addItem(item);
+                    
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
@@ -106,7 +105,13 @@ namespace Project
             }
             if (item.total > 1)
                 item.total--;
-            else removeItem(item);
+            else
+            {
+                if (item.isEquiped == "notequiped") 
+                    removeItem(item);
+                else
+            removeItemE(item);
+            }
 
         }
 
@@ -123,6 +128,19 @@ namespace Project
             {
                 tablObjects[i].type = "";
                 tablObjects[i].name = "rien";
+            }
+        }
+        public void removeItemE(Item toRemove)
+        {
+            int i = 0;
+            while (i < tablEquiped.Length && tablEquiped[i].name != toRemove.name)
+            {
+                i++;
+            }
+            if (i < tablEquiped.Length)
+            {
+                tablEquiped[i].type = "";
+                tablEquiped[i].name = "rien";
             }
         }
     }

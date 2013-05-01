@@ -449,9 +449,12 @@ namespace Project
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
                 {
-                    if (mouseRectangle.Intersects(new Rectangle(30, 50, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    if (mouseRectangle.Intersects(new Rectangle(30, 320, swordTexture.Width / 7, swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
-                        Game1.invent.useItem(item);
+                        Game1.invent.removeItemE(item);
+                        Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
+
+                        //Game1.invent.useItem(item);
                     }
                 }
             }
