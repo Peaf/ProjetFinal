@@ -443,8 +443,8 @@ namespace Project
                 {
                     if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
-                        Game1.invent.useItem(item);
-
+                        Game1.invent.removeItem(item);
+                        Game1.invent.addItemtoequip(item);
                     }
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
