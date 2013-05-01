@@ -93,7 +93,8 @@ namespace Project
                     Game1.player.Degat += item.stat;
                     if (item.isEquiped == "notequiped")
                         addItemtoequip(item);
-                    
+                    if (item.isEquiped == "equiped")
+                        addItem(item);
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
