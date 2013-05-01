@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture, QuestBookTexture;
+        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture,manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
         static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -60,7 +60,8 @@ namespace Project
             bookRectangle = new Rectangle(200, 330, bookTexture.Width, bookTexture.Height);
 
             //Potion
-            potionTexture = Content.Load<Texture2D>("Potion");
+            healthPotionTexture = Content.Load<Texture2D>("healthPotion");
+            manaPotionTexture = Content.Load<Texture2D>("manaPotion");
 
             //Sword
             swordTexture = Content.Load<Texture2D>("Sword");
@@ -73,7 +74,7 @@ namespace Project
 
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
-            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 55); // verifier le 2 nd arg
+            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 40); // verifier le 2 nd arg
 
 
             while ((line = streamMap8.ReadLine()) != null)
@@ -435,7 +436,7 @@ namespace Project
                 }
                 foreach (Item item in Game1.invent.tablObjects)
                 {
-                    if (mouseRectangle.Intersects(new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
                         Game1.invent.useItem(item);
 
@@ -584,28 +585,31 @@ namespace Project
                     {
 
                         case "healthPotion":
-                            spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25 , 482 + 68 * (item.place / 6), 39 , 64), Color.White);
+                            break;
+
+                        case "manaPotion":
+                            spriteBatch.Draw(manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                             break;
 
                         case "Sword":
-                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                             break;
 
                         case "Armor":
-                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
 
                             break;
 
                         case "Book":
-                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                             break;
 
                     }
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
                 {
-                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.invent.tablEquiped[0].isEquiped, new Vector2(600, 325), Color.White);
-
+                    
                     switch (item.name)
                     {
 
