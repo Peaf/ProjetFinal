@@ -75,7 +75,7 @@ namespace Project
 
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
-            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 40); // verifier le 2 nd arg
+            Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 50); // verifier le 2 nd arg
 
 
             while ((line = streamMap8.ReadLine()) != null)

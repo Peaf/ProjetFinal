@@ -33,7 +33,7 @@ namespace Project
         {
             double succ1 = rand1.Next();
 
-            snowdrops.Add(new SnowDrops(texture, new Vector2(-1000 + (float)rand1.NextDouble() * spawnWidth, 10), new Vector2(8, rand2.Next(1, 5))));
+            snowdrops.Add(new SnowDrops(texture, new Vector2(-1000 + (float)rand1.NextDouble() * spawnWidth, 10), new Vector2(5, rand2.Next(1, 5))));
         }
 
         public void update(GameTime gameTime, GraphicsDevice graphics)

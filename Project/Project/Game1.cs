@@ -26,7 +26,7 @@ namespace Project
         Random rand = new Random();
         Video video;
         VideoPlayer playerVideo;
-
+        Texture2D videoTexture;
         //Pause
         public static cButton btnNext, btnEndFight, btnStartFight;
         public static ParticleGenerator snow;
@@ -63,7 +63,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Playing;
+        public GameState CurrentGameState = GameState.Title;
 
         public Game1()
         {
