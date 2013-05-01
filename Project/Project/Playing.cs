@@ -344,7 +344,7 @@ namespace Project
                 {
                     map = map5;
                     mapNumber = 5;
-                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                    Game1.player.persoPosition.X = 0;
                 }
                 /*else if (mapnumber == 5)
                 {
