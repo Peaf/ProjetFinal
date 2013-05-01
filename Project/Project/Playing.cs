@@ -175,114 +175,116 @@ namespace Project
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
+
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             Game1.GameState CurrentGameState = Game1.GameState.Playing;
-
-            if (map == map2)
+            if (!inventaire)
             {
-                foreach (CollisionTiles tile in map2.CollisionTiles)
+                if (map == map2)
                 {
-                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    foreach (CollisionTiles tile in map2.CollisionTiles)
                     {
-                        Game1.player.Collision(tile.Rectangle);
-                        /*Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);*/
+                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                        {
+                            Game1.player.Collision(tile.Rectangle);
+                            /*Game1.enemy2.Collision(tile.Rectangle);
+                            Game1.enemy1.Collision(tile.Rectangle);*/
+                        }
                     }
                 }
-            }
-            if (map == map4)
-            {
-                Game1.sand.update(gameTime, graphics.GraphicsDevice);
-                foreach (CollisionTiles tile in map4.CollisionTiles)
+                if (map == map4)
                 {
-                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    Game1.sand.update(gameTime, graphics.GraphicsDevice);
+                    foreach (CollisionTiles tile in map4.CollisionTiles)
                     {
-                        Game1.player.Collision(tile.Rectangle);
-                        /*Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);*/
+                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                        {
+                            Game1.player.Collision(tile.Rectangle);
+                            /*Game1.enemy2.Collision(tile.Rectangle);
+                            Game1.enemy1.Collision(tile.Rectangle);*/
+                        }
                     }
                 }
-            }
 
-            if (map == map5)
-            {
-                //Pnj
-                if (!Game1.healer.Collision(Game1.healer))
+                if (map == map5)
                 {
-                    Game1.healer.Update(gameTime, 0, "map5");
-                }
-
-                if (Game1.healer.Collision(Game1.healer))
-                {
-                    Game1.healer.Update(gameTime, 1, "map5");
-                    Game1.player.health = Game1.player.healthMax;
-                }
-                //Enemy
-                if (Game1.enemy1.health > 0)
-                    Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
-
-                if (Game1.enemy2.health > 0)
-                    Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
-
-                if (Game1.enemy1.Collision())
-                {
-                    Game1.previousPosX = Game1.player.persoPosition.X;
-                    Game1.previousPosY = Game1.player.persoPosition.Y;
-                    turn = -1;
-                    Game1.btnEndFight.isClicked = false;
-                    Game1.btnStartFight.isClicked = false;
-                    Isfighting = true;
-                    MediaPlayer.Play(song3);
-                    Game1.enemy = Game1.enemy1;
-                    attackChoisi = "";
-                }
-                else if (Game1.enemy2.Collision())
-                {
-                    Game1.previousPosX = Game1.player.persoPosition.X;
-                    Game1.previousPosY = Game1.player.persoPosition.Y;
-                    turn = -1;
-                    Isfighting = true;
-                    MediaPlayer.Play(song3);
-                    Game1.btnEndFight.isClicked = false;
-                    Game1.btnStartFight.isClicked = false;
-                    Game1.enemy = Game1.enemy2;
-                    attackChoisi = "";
-                }
-
-                foreach (CollisionTiles tile in map5.CollisionTiles)
-                {
-                    if (tile.num >= 7)
+                    //Pnj
+                    if (!Game1.healer.Collision(Game1.healer))
                     {
-                        Game1.player.Collision(tile.Rectangle);
-                        /*Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);*/
+                        Game1.healer.Update(gameTime, 0, "map5");
+                    }
+
+                    if (Game1.healer.Collision(Game1.healer))
+                    {
+                        Game1.healer.Update(gameTime, 1, "map5");
+                        Game1.player.health = Game1.player.healthMax;
+                    }
+                    //Enemy
+                    if (Game1.enemy1.health > 0)
+                        Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
+
+                    if (Game1.enemy2.health > 0)
+                        Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
+
+                    if (Game1.enemy1.Collision())
+                    {
+                        Game1.previousPosX = Game1.player.persoPosition.X;
+                        Game1.previousPosY = Game1.player.persoPosition.Y;
+                        turn = -1;
+                        Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
+                        Isfighting = true;
+                        MediaPlayer.Play(song3);
+                        Game1.enemy = Game1.enemy1;
+                        attackChoisi = "";
+                    }
+                    else if (Game1.enemy2.Collision())
+                    {
+                        Game1.previousPosX = Game1.player.persoPosition.X;
+                        Game1.previousPosY = Game1.player.persoPosition.Y;
+                        turn = -1;
+                        Isfighting = true;
+                        MediaPlayer.Play(song3);
+                        Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
+                        Game1.enemy = Game1.enemy2;
+                        attackChoisi = "";
+                    }
+
+                    foreach (CollisionTiles tile in map5.CollisionTiles)
+                    {
+                        if (tile.num >= 7)
+                        {
+                            Game1.player.Collision(tile.Rectangle);
+                            /*Game1.enemy2.Collision(tile.Rectangle);
+                            Game1.enemy1.Collision(tile.Rectangle);*/
+                        }
                     }
                 }
-            }
 
-            if (map == map6)
-            {
-                foreach (CollisionTiles tile in map6.CollisionTiles)
+                if (map == map6)
                 {
-                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    foreach (CollisionTiles tile in map6.CollisionTiles)
                     {
-                        Game1.player.Collision(tile.Rectangle);
-                        /*Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);*/
+                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                        {
+                            Game1.player.Collision(tile.Rectangle);
+                            /*Game1.enemy2.Collision(tile.Rectangle);
+                            Game1.enemy1.Collision(tile.Rectangle);*/
+                        }
                     }
                 }
-            }
-            if (map == map8)
-            {
-                if (Game1.enemy3.health > 0)
-                    Game1.enemy3.Update(gameTime, Game1.player.persoPosition);
+                if (map == map8)
+                {
+                    if (Game1.enemy3.health > 0)
+                        Game1.enemy3.Update(gameTime, Game1.player.persoPosition);
 
-                if (Game1.enemy4.health > 0)
-                    Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
+                    if (Game1.enemy4.health > 0)
+                        Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
 
                     if (Game1.enemy3.Collision())
                     {
@@ -308,108 +310,107 @@ namespace Project
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
-                //Moteur à particules
-                Game1.snow.update(gameTime, graphics.GraphicsDevice);
-                foreach (CollisionTiles tile in map8.CollisionTiles)
-                {
-                    if (tile.num >= 7)
-                        Game1.player.Collision(tile.Rectangle);
+                    //Moteur à particules
+                    Game1.snow.update(gameTime, graphics.GraphicsDevice);
+                    foreach (CollisionTiles tile in map8.CollisionTiles)
+                    {
+                        if (tile.num >= 7)
+                            Game1.player.Collision(tile.Rectangle);
+                    }
+                    if (Game1.player.persoRectangle.Intersects(bookRectangle))
+                    {
+                        Game1.bookState = 1;
+                        Game1.invent.addItem(book);
+                    }
                 }
-                if (Game1.player.persoRectangle.Intersects(bookRectangle))
+                if (Game1.player.persoPosition.Y <= 0)
                 {
-                    Game1.bookState = 1;
-                    Game1.invent.addItem(book);
+                    if (mapNumber == 5)
+                    {
+                        map = map8;
+                        mapNumber = 8;
+                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                    }
+                    else if (mapNumber == 2)
+                    {
+                        map = map5;
+                        mapNumber = 5;
+                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                    }
+                    else
+                    {
+                        Game1.player.persoPosition.Y = 2;
+                    }
+
                 }
-            }
-            if (Game1.player.persoPosition.Y <= 0)
-            {
-                if (mapNumber == 5)
+                else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
                 {
-                    map = map8;
-                    mapNumber = 8;
-                    Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                    if (mapNumber == 8)
+                    {
+                        map = map5;
+                        mapNumber = 5;
+                        Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
+                    }
+                    else if (mapNumber == 5)
+                    {
+                        map = map2;
+                        mapNumber = 2;
+                        Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
+                    }
+                    else
+                    {
+                        Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
+                    }
                 }
-                else if (mapNumber == 2)
+                else if (Game1.player.persoPosition.X <= 0)
                 {
-                    map = map5;
-                    mapNumber = 5;
-                    Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                    if (mapNumber == 5)
+                    {
+                        map = map4;
+                        mapNumber = 4;
+                        Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                    }
+                    else if (mapNumber == 6)
+                    {
+                        map = map5;
+                        mapNumber = 5;
+                        Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                    }
+                    else
+                    {
+                        Game1.player.persoPosition.X = 2;
+                    }
+
                 }
-                else
+                else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
                 {
-                    Game1.player.persoPosition.Y = 2;
+                    if (mapNumber == 4)
+                    {
+                        map = map5;
+                        mapNumber = 5;
+                        Game1.player.persoPosition.X = 0;
+                    }
+                    else if (mapNumber == 5)
+                    {
+                        map = map6;
+                        mapNumber = 6;
+                        Game1.player.persoPosition.X = 0;
+                    }
+                    else
+                    {
+                        Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                    }
+                }
+                if (Isfighting)
+                {
+                    CurrentGameState = Game1.GameState.Fight;
+                }
+                if (lvlBefore != Game1.player.Lvl)
+                {
+                    lvlUp = true;
                 }
 
-            }
-            else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
-            {
-                if (mapNumber == 8)
-                {
-                    map = map5;
-                    mapNumber = 5;
-                    Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
-                }
-                else if (mapNumber == 5)
-                {
-                    map = map2;
-                    mapNumber = 2;
-                    Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
-                }
-                else
-                {
-                    Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
-                }
-            }
-            else if (Game1.player.persoPosition.X <= 0)
-            {
-                if (mapNumber == 5)
-                {
-                    map = map4;
-                    mapNumber = 4;
-                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                }
-                else if (mapNumber == 6)
-                {
-                    map = map5;
-                    mapNumber = 5;
-                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                }
-                else
-                {
-                    Game1.player.persoPosition.X = 2;
-                }
 
-            }
-            else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
-            {
-                if (mapNumber == 4)
-                {
-                    map = map5;
-                    mapNumber = 5;
-                    Game1.player.persoPosition.X = 0;
-                }
-                else if (mapNumber == 5)
-                {
-                    map = map6;
-                    mapNumber = 6;
-                    Game1.player.persoPosition.X = 0;
-                }
-                else
-                {
-                    Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                }
-            }
-            if (Isfighting)
-            {
-                CurrentGameState = Game1.GameState.Fight;
-            }
-            if (lvlBefore != Game1.player.Lvl)
-            {
-                lvlUp = true;
-            }
-
-            if (!inventaire)
-            {
                 timerInventaire++;
 
                 //Perso        
