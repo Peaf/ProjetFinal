@@ -56,7 +56,6 @@ namespace Project
             healthBoxTexture = Content.Load<Texture2D>("Barres/HealthBox");
             enemyHealthTexture = Content.Load<Texture2D>("Barres/HealthEnemy");
 
-
             //animation 
             persoFight = Content.Load<Texture2D>("AnimationFight");
             persoFightRectangle = new Rectangle(200, screenHeight / 2 + 100, 320, 847);
@@ -65,28 +64,29 @@ namespace Project
 
             FireTexture = Content.Load<Texture2D>("Fire");
             FireRectangle = new Rectangle(1030, screenHeight / 2 + 100, 200, 64);
-            FirePosition = new Vector2(1030, screenHeight / 2 + 150);
-
-
-
+            FirePosition = new Vector2(1020, screenHeight / 2 + 150);
         }
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight)
         {
             timerAnimation++;
-            ligne = 0;
-            if (timerAnimation == 15)
+            if (attackChoisi == "")
             {
-                timerAnimation = 0;
-                if (colonne == 3)
+                ligne = 0;
+                if (timerAnimation == 15)
                 {
-                    colonne = 0;
-                }
-                else
-                {
-                    colonne++;
+                    timerAnimation = 0;
+                    if (colonne == 3)
+                    {
+                        colonne = 0;
+                    }
+                    else
+                    {
+                        colonne++;
+                    }
                 }
             }
+
             persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
             presentKey = Keyboard.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.Fight;
@@ -101,7 +101,6 @@ namespace Project
             healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
             enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 100), Game1.enemy.health, enemyHealthTexture.Height);
-
 
             if (turn == -1 && Game1.btnStartFight.isClicked)
             {
@@ -128,21 +127,22 @@ namespace Project
                         btnSpell.isClicked = false;
                         attackChoisi = "Fire Ball";
                         btnSpell.Update(mouse, gameTime);
+                        timerAnimation = 0;
                         degat = rand.Next(150, 170) + Game1.player.Intelligence + Game1.player.Degat;
                         manaPerdu = 20;
                         nbreAnimation = 0;
                         colonne = 0;
-
                     }
                 }
-                if (attackChoisi == "Basic attack" && nbreAnimation < 2)
+                if (attackChoisi == "Basic attack" && nbreAnimation <= 3)
                 {
                     ligne = 7;
-                    if (timerAnimation % 30 == 0)
+                    if (timerAnimation % 12 == 0)
                     {
                         if (colonne == 3)
                         {
                             colonne = 0;
+                            ligne = 0;
                             nbreAnimation++;
                         }
                         else
@@ -158,13 +158,15 @@ namespace Project
                     if (attackChoisi == "Fire Ball")
                     {
                         ligne = 8;
-                        if (timerAnimation % 30 == 0 && nbreAnimation < 3)
+                        
+                        if (timerAnimation % 20 == 0 && nbreAnimation <= 4)
                         {
-                            if (nbreAnimation < 2)
+                            if (nbreAnimation <= 2)
                             {
                                 if (colonne == 3)
                                 {
                                     colonne = 0;
+                                    ligne = 0;
                                     nbreAnimation++;
                                 }
                                 else
@@ -172,12 +174,15 @@ namespace Project
                                     colonne++;
                                     nbreAnimation++;
                                 }
+
                                 persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                             }
+
+
                             if (colonneFire == 4)
                             {
                                 colonneFire = 0;
-                                nbreAnimation++;
+                               nbreAnimation++;
                             }
                             else
                             {
