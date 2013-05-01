@@ -625,6 +625,7 @@ namespace Project
                 {
                     spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
                 }*/
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
@@ -636,31 +637,33 @@ namespace Project
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {
-                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.invent.tablObjects[2].name, new Vector2(525, 325), Color.White);
-
-                    switch (item.name)
+                    if (item.name != "rien")
                     {
-                        case "healthPotion":
-                            spriteBatch.Draw(healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                            break;
+                        Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15, 525 + 68 * (item.place / 6)), Color.White);
+                        switch (item.name)
+                        {
+                            case "healthPotion":
+                                spriteBatch.Draw(healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
 
-                        case "manaPotion":
-                            spriteBatch.Draw(manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                            break;
+                            case "manaPotion":
+                                spriteBatch.Draw(manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
 
-                        case "Sword":
-                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                            break;
+                            case "Sword":
+                                spriteBatch.Draw(swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
 
-                        case "Armor":
-                            spriteBatch.Draw(armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                            case "Armor":
+                                spriteBatch.Draw(armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
 
-                            break;
+                                break;
 
-                        case "Book":
-                            spriteBatch.Draw(bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                            break;
+                            case "Book":
+                                spriteBatch.Draw(bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
 
+                        }
                     }
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
