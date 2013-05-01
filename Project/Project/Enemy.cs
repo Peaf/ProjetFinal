@@ -289,7 +289,7 @@ namespace Project
             return (enemyRectangle.Intersects(Game1.player.persoRectangle));
         }
 
-        public void Collision(Rectangle newRectangle)
+       /* public void Collision(Rectangle newRectangle)
         {
             if (enemyRectangle.TouchTopOf(newRectangle))
             {
@@ -307,7 +307,7 @@ namespace Project
             if (enemyRectangle.TouchBottomOf(newRectangle))
                 enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 ;
 
-        }
+        }*/
 
         public void Draw(SpriteBatch spritBatch)
         {

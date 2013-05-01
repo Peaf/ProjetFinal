@@ -14,18 +14,19 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture,QuestBookTexture;
+        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, potionTexture, swordTexture, armorTexture, QuestBookTexture;
         static int j = 0, mapNumber = 5;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
         static int[,] tab_map4 = new int[26, 44];
+        static int[,] tab_map2 = new int[26, 44];
         static Map map = new Map();
-        static Map map5 = new Map(), map8 = new Map(), map4 = new Map();
+        static Map map5 = new Map(), map8 = new Map(), map4 = new Map(), map2 = new Map();
         static StreamReader streamMap8 = new StreamReader("map8.txt");
         static StreamReader streamMap5 = new StreamReader("map5.txt");
         static StreamReader streamMap4 = new StreamReader("map4.txt");
-
+        static StreamReader streamMap2 = new StreamReader("map2.txt");
         static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false, talkOnce = false;
         static int turn = -1, timerInventaire = 0, lvlBefore = 1;
         static Song song3;
@@ -73,6 +74,7 @@ namespace Project
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
             Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 55); // verifier le 2 nd arg
+
 
             while ((line = streamMap8.ReadLine()) != null)
             {
@@ -128,26 +130,51 @@ namespace Project
             map4.Generate(tab_map4, 32);
             streamMap4.Close();
 
+            j = 0;
+            while ((line = streamMap2.ReadLine()) != null)
+            {
+                char[] splitchar = { ',' };
+                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < tab_map2.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
+                {
+
+                    tab_map2[j, i] = int.Parse(tiles[i]);
+                }
+                j++;
+            }
+
+            map2.Generate(tab_map2, 32);
+            streamMap2.Close();
 
             map = map5;
-
-
         }
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
             //Item
-            Item book = new Item("QuestItem", "Book", "", 0, 1,"");
-
+            Item book = new Item("QuestItem", "Book", "", 0, 1, "");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             Game1.GameState CurrentGameState = Game1.GameState.Playing;
 
+            if (map == map2)
+            {
+                foreach (CollisionTiles tile in map2.CollisionTiles)
+                {
+                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    {
+                        Game1.player.Collision(tile.Rectangle);
+                        /*Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);*/
+                    }
+                }
+            }
             if (map == map4)
             {
                 Game1.sand.update(gameTime, graphics.GraphicsDevice);
-
                 foreach (CollisionTiles tile in map4.CollisionTiles)
                 {
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
@@ -179,8 +206,6 @@ namespace Project
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
 
-
-
                 if (Game1.enemy1.Collision())
                 {
                     Game1.previousPosX = Game1.player.persoPosition.X;
@@ -209,11 +234,10 @@ namespace Project
                     if (tile.num >= 7)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                        Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);
+                        /*Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);*/
                     }
                 }
-
             }
 
             if (map == map8)
@@ -247,8 +271,6 @@ namespace Project
                         Game1.enemy = Game1.enemy4;
                         attackChoisi = "";
                     }
-
-
                 //Moteur à particules
                 Game1.snow.update(gameTime, graphics.GraphicsDevice);
                 foreach (CollisionTiles tile in map8.CollisionTiles)
@@ -270,6 +292,12 @@ namespace Project
                     mapNumber = 8;
                     Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                 }
+                else if (mapNumber == 2)
+                {
+                    map = map5;
+                    mapNumber = 5;
+                    Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                }
                 else
                 {
                     Game1.player.persoPosition.Y = 2;
@@ -284,12 +312,12 @@ namespace Project
                     mapNumber = 5;
                     Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
                 }
-                /*if (mapnumber == 5)
+                if (mapNumber == 5)
                 {
                     map = map2;
                     mapNumber = 2;
                     Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
-                }*/
+                }
                 else
                 {
                     Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
@@ -439,8 +467,8 @@ namespace Project
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 745), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont,  "Press Enter to continue", new Vector2(1100, 725), Color.Black);
-               
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
+
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
                 {
                     lvlUp = false;
@@ -545,22 +573,22 @@ namespace Project
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor , new Vector2(515, 290), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {
-                    
+
                     switch (item.name)
                     {
-                            
+
                         case "healthPotion":
                             spriteBatch.Draw(potionTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
-                            
+
                         case "Sword":
-                                spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
+                            spriteBatch.Draw(swordTexture, new Rectangle((item.place % 12) * 34 + 17, 482 + 34 * (item.place / 12), potionTexture.Width / 2, potionTexture.Height / 2), Color.White);
                             break;
 
                         case "Armor":
@@ -575,17 +603,18 @@ namespace Project
                     }
                 }
                 foreach (Item item in Game1.invent.tablEquiped)
-                { Game1.spriteBatch.DrawString(Game1.spriteFont, "" +Game1.invent.tablEquiped[0].isEquiped, new Vector2(600, 325), Color.White);
+                {
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.invent.tablEquiped[0].isEquiped, new Vector2(600, 325), Color.White);
 
                     switch (item.name)
                     {
-                           
+
                         case "Sword":
-                                spriteBatch.Draw(swordTexture, new Rectangle(30, 320, swordTexture.Width/7, swordTexture.Height/7), Color.White);
+                            spriteBatch.Draw(swordTexture, new Rectangle(30, 320, swordTexture.Width / 7, swordTexture.Height / 7), Color.White);
                             break;
 
                         case "Armor":
-                                spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
+                            spriteBatch.Draw(armorTexture, new Rectangle(120, 125, armorTexture.Width, armorTexture.Height), Color.White);
                             break;
                     }
                 }
