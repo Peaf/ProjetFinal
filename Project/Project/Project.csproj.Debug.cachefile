@@ -22,7 +22,6 @@ Content\Volume\volume25.xnb
 Content\Volume\volume50.xnb
 Content\Volume\volume75.xnb
 Content\snow.xnb
-Content\SpeechBox.xnb
 Content\Barres\HealthBox.xnb
 Content\Barres\Health.xnb
 Content\Barres\Mana.xnb
@@ -100,14 +99,15 @@ Content\Tile\Tile28.xnb
 Content\healthPotion.xnb
 Content\manaPotion.xnb
 Content\sand.xnb
+Content\SpeechBox.xnb
 Content\Song\Song1.xnb
 Content\Song\Song2.xnb
 Content\Song\song3.xnb
 Content\Song\SongGameOver.xnb
 Content\Song\SongFight.xnb
 Content\Song\Victory.xnb
-Content\Intro.xnb
 Content\SpriteFont1.xnb
+Content\Intro.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma

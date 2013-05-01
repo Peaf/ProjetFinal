@@ -70,8 +70,9 @@ namespace Project
             {
                 toAdd.place = i;
                
-                tablEquiped[i].name = toAdd.name;
+                
                 tablEquiped[i].isEquiped = "equiped";
+                tablEquiped[i] = toAdd;
                 added = true;
             }
 
@@ -91,29 +92,36 @@ namespace Project
 
                 case "Weapon":
                     Game1.player.Degat += item.stat;
-                    if (item.isEquiped == "notequiped")
                         addItemtoequip(item);
-                    else if (item.isEquiped == "equiped")
-                        addItem(item);
+                    
                     break;
                 case "Armor":
                     Game1.player.Armor += item.stat;
-                    if (item.isEquiped == "notequiped")
                         addItemtoequip(item);
-                    else if (item.isEquiped == "equiped")
-                        addItem(item);
                     break;
             }
             if (item.total > 1)
                 item.total--;
-            else
-            {
-                if (item.isEquiped == "notequiped")
-                    removeItem(item);
-                else
-                    removeItemE(item);
-            }
+            else removeItem(item);
+            
 
+        }
+        public void deUseItem(Item item)
+        {
+            switch (item.type)
+            {
+                case "Weapon":
+                    Game1.player.Degat -= item.stat;
+                    
+                        addItem(item);
+                    break;
+                case "Armor":
+                    Game1.player.Armor -= item.stat;
+                    addItem(item);
+                    break;
+
+            }
+            removeItemE(item);
         }
 
 

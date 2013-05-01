@@ -63,7 +63,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Title;
+        public GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
