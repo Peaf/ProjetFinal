@@ -474,7 +474,7 @@ namespace Project
                 timerInventaire++;
                 if (timerInventaire > 15)
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.I))
+                    if (Keyboard.GetState().IsKeyDown(Keys.I) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
                         inventaire = false;
                         timerInventaire = 0;

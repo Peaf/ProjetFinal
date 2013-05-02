@@ -109,12 +109,6 @@ namespace Project
             }
             if (turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
-                if (btnObjects.isClicked && pastMouse.LeftButton == ButtonState.Released)
-                {
-                    Playing.inventaire = true;
-                    Playing.timerInventaire = 0;
-                    btnObjects.Update(mouse, gameTime);
-                }
                 if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
                 {
                     btnAttack1.isClicked = false;
