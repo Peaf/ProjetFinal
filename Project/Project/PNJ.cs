@@ -99,7 +99,7 @@ namespace Project
             if (map == "map8")
             {
                 spritBatch.Draw(pnjTexture, pnjPosition, pnjRectangle, Color.White);
-                if (bookState == 2)
+                if (bookState == 2 || bookState == 3)
                 {
                     spritBatch.Draw(pnjTexture, pnjPosition, pnjRectangle, Color.White, 0f, origine, 1.0f, SpriteEffects.FlipHorizontally, 0);
                 }

@@ -45,11 +45,11 @@ namespace Project
         public void Update(GameTime gametime)
         {
             KeyboardState KState = Keyboard.GetState();
-            lvlup = (Experience >= 100 * Lvl);
+            lvlup = (Experience >= 150 * Lvl);
 
             if (lvlup)
             {
-                ExperienceNext = Experience - (100 * Lvl);
+                ExperienceNext = Experience - (150 * Lvl);
                 Experience = ExperienceNext;
                 healthMax += 500;
                 manaMax += 100;

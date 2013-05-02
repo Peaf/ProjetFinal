@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
         static public int mapNumber = 5,timerInventaire = 0;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -33,7 +33,7 @@ namespace Project
         static public bool inventaire = false;
         static int turn = -1,  lvlBefore = 1, j = 0;
         static Song song3;
-        public static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
+        public static Rectangle speechBoxRectangle,speechBoxRectangle2, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
         static KeyboardState presentKey, pastKey;
 
@@ -43,7 +43,7 @@ namespace Project
             Tiles.Content = Content;
 
             Game1.btnNext = new cButton(Content.Load<Texture2D>("Button/Next"), 75, 44);
-            Game1.btnNext.setPosition(new Vector2(1200, 650));
+            Game1.btnNext.setPosition(new Vector2(1200, 700));
 
             Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
             Game1.btnEndFight.setPosition(new Vector2(1190, 685));
@@ -57,6 +57,9 @@ namespace Project
             //speech 
             speechBoxTexture = Content.Load<Texture2D>("SpeechBox");
             speechBoxRectangle = new Rectangle(0, 675, speechBoxTexture.Width, speechBoxTexture.Height);
+
+            speechBoxTexture2 = Content.Load<Texture2D>("SpeechBox");
+            speechBoxRectangle2 = new Rectangle(0, 0, speechBoxTexture.Width, speechBoxTexture.Height + 30);
 
             //Book
             bookTexture = Content.Load<Texture2D>("Book");
@@ -199,6 +202,7 @@ namespace Project
                     if (!Game1.healer.Collision(Game1.healer))
                     {
                         Game1.healer.Update(gameTime, 0, "map5");
+                        Game1.bookState = 4;
                     }
 
                     if (Game1.healer.Collision(Game1.healer))
@@ -300,8 +304,7 @@ namespace Project
                     if (Game1.enemy4.health > 0)
                         Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
 
-                    
-                    else if (Game1.enemy4.Collision())
+                    if (Game1.enemy4.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
@@ -451,6 +454,11 @@ namespace Project
                         Game1.invent.removeItem(book);
                         Game1.pnj1.Update(gameTime, 2, "map8");
                     }
+                    if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
+                    {
+                        Game1.pnj1.Update(gameTime, 2, "map8");
+                        Game1.bookState = 3;
+                    }
 
                     if (!Game1.pnj1.Collision(Game1.pnj1))
                         talking = false;
@@ -521,15 +529,23 @@ namespace Project
         {
             presentKey = Keyboard.GetState();
             map.Draw(spriteBatch);
+            if (map == map5)
+            {
+                spriteBatch.Draw(maison, new Rectangle(32 * 11, 0, 96, 128), Color.White);
+                if (Game1.enemy1.health > 0)
+                    Game1.enemy1.Draw(spriteBatch);
+                if (Game1.enemy2.health > 0)
+                    Game1.enemy2.Draw(spriteBatch);
+            }
 
             if (lvlUp)
             {
-                spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                spriteBatch.DrawString(Game1.spriteFont, "You leveled up !!!", new Vector2(10, 675), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 745), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
+                spriteBatch.Draw(speechBoxTexture2, speechBoxRectangle2, Color.White);
+                spriteBatch.DrawString(Game1.spriteFont, "You leveled up !!!", new Vector2(10, 10), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10,35), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 60), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 95), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 95), Color.Black);
 
                 if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
                 {
@@ -540,15 +556,7 @@ namespace Project
             }
             if(map == map2)
                 Game1.healer.Draw(spriteBatch, 0, "map5");
-            if (map == map5)
-            {
-                spriteBatch.Draw(maison, new Rectangle(32 * 11, 0, 96, 128), Color.White);
-                if (Game1.enemy1.health > 0)
-                    Game1.enemy1.Draw(spriteBatch);
-                if (Game1.enemy2.health > 0)
-                    Game1.enemy2.Draw(spriteBatch);
-            }
-
+            
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch);
 
@@ -578,7 +586,7 @@ namespace Project
                 {
                     Game1.pnj1.Draw(spriteBatch, 0, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: I'm Arha can you help me? I'm freezing and I've lost my spell book can you find it for me? I can't leave this place without it", new Vector2(10, 675), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: I'm Arha can you help me? I'm freezing and I've lost my spell book can you find it for me? I can't leave this place without it", new Vector2(10, 700), Color.Blue);
                     talkOnce = true;
                 }
                 if (talking && Game1.bookState == 1)
@@ -586,14 +594,20 @@ namespace Project
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     Game1.btnNext.Draw(spriteBatch);
                     Game1.pnj1.Draw(spriteBatch, 1, "map8");
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks. Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 675), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks. Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 700), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "+ 50 Xp", new Vector2(1100, 725), Color.Red);
                 }
                 if (talking && Game1.bookState == 2)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 675), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 700), Color.Blue);
+                }
+                if (talking && Game1.bookState == 3)
+                {
+                    Game1.pnj1.Draw(spriteBatch, 2, "map8");
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, "oh you're hurt go south you'll find a healer", new Vector2(10, 700), Color.Blue);
                 }
                
                 if (Game1.enemy4.health > 0)
@@ -618,11 +632,25 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Red);
                 }
-                if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0)
+                if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                }
+                if (Game1.bookState == 3)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Red);
+                }
+                if (Game1.bookState == 4)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
                 }
 
             }
@@ -635,7 +663,7 @@ namespace Project
                 }*/
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 150), new Vector2(495, 65), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);

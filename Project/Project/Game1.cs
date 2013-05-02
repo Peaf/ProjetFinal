@@ -84,7 +84,7 @@ namespace Project
             invent.Initialize();
             invent.addItem(new Item("Potion","healthPotion","health",50 , 1,""));
             invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            invent.addItem(new Item("Potion", "manaPotion", "mana", 50, 1, ""));
+            invent.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
             invent.addItem(new Item("Weapon","Sword","dmg", 30, 1,"notequiped"));
             invent.addItem(new Item("Armor","Armor","",100,1,"notequiped"));
 
@@ -120,8 +120,8 @@ namespace Project
             //Enemy
             enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200);
             enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 200);
-            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(1000, 130), new Rectangle(1000, 130, 78, 105), new Rectangle(0, 0, 78, 105), 200);
-            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(850, 150), new Rectangle(850, 150, 78, 105), new Rectangle(0, 0, 78, 105), 500);
+            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(1000, 130), new Rectangle(1000, 130, 78, 105), new Rectangle(0, 0, 78, 105), 300);
+            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(850, 150), new Rectangle(850, 150, 78, 105), new Rectangle(0, 0, 78, 105), 100);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 95));

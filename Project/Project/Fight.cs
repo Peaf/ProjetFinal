@@ -59,7 +59,7 @@ namespace Project
             //animation 
             persoFight = Content.Load<Texture2D>("AnimationFight");
             persoFightRectangle = new Rectangle(200, screenHeight / 2 + 100, 320, 847);
-            persoFightPosition = new Vector2(200, screenHeight / 2 + 300);
+            persoFightPosition = new Vector2(200, screenHeight / 2 + 320);
             origin = new Vector2(100, (screenHeight / 2 + 100) / 2);
 
             FireTexture = Content.Load<Texture2D>("Fire");
@@ -85,28 +85,26 @@ namespace Project
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
             enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health, enemyHealthTexture.Height);
             int timerinventaire = 16;
-
+            if (attackChoisi == "")
+            {
+                ligne = 0;
+                if (timerAnimation == 15)
+                {
+                    timerAnimation = 0;
+                    if (colonne == 3)
+                    {
+                        colonne = 0;
+                    }
+                    else
+                    {
+                        colonne++;
+                    }
+                }
+            }
             if (!Playing.inventaire)
             {
                 timerAnimation++;
-                if (attackChoisi == "")
-                {
-                    ligne = 0;
-                    if (timerAnimation == 15)
-                    {
-                        timerAnimation = 0;
-                        if (colonne == 3)
-                        {
-                            colonne = 0;
-                        }
-                        else
-                        {
-                            colonne++;
-                        }
-                    }
-                }
-                
-
+               
                 if (turn == -1 && Game1.btnStartFight.isClicked)
                 {
                     turn = 0;
@@ -329,7 +327,7 @@ namespace Project
             spriteBatch.DrawString(Game1.spriteFont, Game1.player.health + "/" + Game1.player.healthMax, new Vector2(healthTexture.Width / 2 - 16, 21), Color.White);
             spriteBatch.DrawString(Game1.spriteFont, Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(manaTexture.Width / 2 + 88, 60), Color.White);
             spriteBatch.Draw(enemyHealthTexture, enemyHealthRectangle, Color.White);
-            spriteBatch.DrawString(Game1.spriteFont, Game1.enemy.health + "/" + Game1.enemy.healthMax, new Vector2(1000, screenHeight / 2 + 49), Color.Black);
+            spriteBatch.DrawString(Game1.spriteFont, Game1.enemy.health + "/" + Game1.enemy.healthMax, new Vector2(995, screenHeight / 2 + 49), Color.Black);
             spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
             spriteBatch.Draw(persoFight, persoFightPosition, persoFightRectangle, Color.White, 0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 0);
             spriteBatch.Draw(FireTexture, FirePosition, FireRectangle, Color.White);
