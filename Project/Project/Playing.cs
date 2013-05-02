@@ -269,24 +269,8 @@ namespace Project
 
                 if (map == map6)
                 {
-                    foreach (CollisionTiles tile in map6.CollisionTiles)
-                    {
-                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
-                        {
-                            Game1.player.Collision(tile.Rectangle);
-                            /*Game1.enemy2.Collision(tile.Rectangle);
-                            Game1.enemy1.Collision(tile.Rectangle);*/
-                        }
-                    }
-                }
-                if (map == map8)
-                {
                     if (Game1.enemy3.health > 0)
                         Game1.enemy3.Update(gameTime, Game1.player.persoPosition);
-
-                    if (Game1.enemy4.health > 0)
-                        Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
-
                     if (Game1.enemy3.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
@@ -299,6 +283,24 @@ namespace Project
                         Game1.enemy = Game1.enemy3;
                         attackChoisi = "";
                     }
+
+                    foreach (CollisionTiles tile in map6.CollisionTiles)
+                    {
+                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                        {
+                            Game1.player.Collision(tile.Rectangle);
+                            /*Game1.enemy2.Collision(tile.Rectangle);
+                            Game1.enemy1.Collision(tile.Rectangle);*/
+                        }
+                    }
+                }
+                if (map == map8)
+                {
+                   
+                    if (Game1.enemy4.health > 0)
+                        Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
+
+                    
                     else if (Game1.enemy4.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
@@ -540,7 +542,6 @@ namespace Project
                 Game1.healer.Draw(spriteBatch, 0, "map5");
             if (map == map5)
             {
-               
                 spriteBatch.Draw(maison, new Rectangle(32 * 11, 0, 96, 128), Color.White);
                 if (Game1.enemy1.health > 0)
                     Game1.enemy1.Draw(spriteBatch);
@@ -553,7 +554,11 @@ namespace Project
 
             if (map == map4)
                 Game1.sand.Draw(spriteBatch);
-
+            if (map == map6)
+            {
+                 if (Game1.enemy3.health > 0)
+                    Game1.enemy3.Draw(spriteBatch);
+            }
             if (map == map8)
             {
                 Game1.snow.Draw(spriteBatch);
@@ -590,8 +595,7 @@ namespace Project
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 675), Color.Blue);
                 }
-                if (Game1.enemy3.health > 0)
-                    Game1.enemy3.Draw(spriteBatch);
+               
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
             }
