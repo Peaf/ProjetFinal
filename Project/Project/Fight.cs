@@ -69,28 +69,11 @@ namespace Project
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight)
         {
-            timerAnimation++;
-            if (attackChoisi == "")
-            {
-                ligne = 0;
-                if (timerAnimation == 15)
-                {
-                    timerAnimation = 0;
-                    if (colonne == 3)
-                    {
-                        colonne = 0;
-                    }
-                    else
-                    {
-                        colonne++;
-                    }
-                }
-            }
-
             persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
             presentKey = Keyboard.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.Fight;
             MouseState mouse = Mouse.GetState();
+            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             Game1.player.persoPosition.X = 200;
             Game1.player.persoPosition.Y = screenHeight / 2 + 100;
             Game1.player.fight = true;
@@ -101,148 +84,226 @@ namespace Project
             healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
             enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health, enemyHealthTexture.Height);
+            int timerinventaire = 16;
 
-            if (turn == -1 && Game1.btnStartFight.isClicked)
+            if (!Playing.inventaire)
             {
-                turn = 0;
-                Game1.enemy.healthMax = Game1.enemy.health;
-            }
-            if (turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
-            {
-                if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                timerAnimation++;
+                if (attackChoisi == "")
                 {
-                    btnAttack1.isClicked = false;
-                    attackChoisi = "Basic attack";
-                    btnAttack1.Update(mouse, gameTime);
-                    timerAnimation = 0;
-                    degat = Game1.player.Degat + rand.Next(0, 30) + Game1.player.Strenght / 2;
-                    manaPerdu = 0;
-                    stop = false;
-                    colonne = 0;
-                }
-                if (Game1.player.Lvl >= 2)
-                {
-                    if (btnSpell.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                    ligne = 0;
+                    if (timerAnimation == 15)
                     {
-                        btnSpell.isClicked = false;
-                        attackChoisi = "Fire Ball";
-                        btnSpell.Update(mouse, gameTime);
                         timerAnimation = 0;
-                        degat = rand.Next(80, 120) + Game1.player.Intelligence + Game1.player.Degat;
-                        manaPerdu = 20;
-                        stop = false;
-                        colonne = 0;
-                        colonneFire = 0;
-                        nbreAnimationFire = 0;
-                    }
-                }
-                if (attackChoisi == "Basic attack" && !stop)
-                {
-                    ligne = 7;
-                    if (timerAnimation % 12 == 0)
-                    {
                         if (colonne == 3)
                         {
                             colonne = 0;
-                            ligne = 0;
-                            stop = true;
                         }
                         else
                         {
                             colonne++;
                         }
                     }
-                    persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                 }
-                if (Game1.player.Lvl >= 2)
+                
+
+                if (turn == -1 && Game1.btnStartFight.isClicked)
                 {
-                    if (attackChoisi == "Fire Ball")
-                    { 
-                        if (timerAnimation %12 == 0)
+                    turn = 0;
+                    Game1.enemy.healthMax = Game1.enemy.health;
+                }
+                if (turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
+                {
+                    if (Playing.timerInventaire > 15)
+                    {
+                        if (btnObjects.isClicked && pastMouse.LeftButton == ButtonState.Released)
                         {
-                            if (!stop)
+                            Playing.inventaire = true;
+                            timerinventaire = 0;
+                        }
+                    }
+
+                    if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                    {
+                        btnAttack1.isClicked = false;
+                        attackChoisi = "Basic attack";
+                        btnAttack1.Update(mouse, gameTime);
+                        timerAnimation = 0;
+                        degat = Game1.player.Degat + rand.Next(0, 30) + Game1.player.Strenght / 2;
+                        manaPerdu = 0;
+                        stop = false;
+                        colonne = 0;
+                    }
+                    if (Game1.player.Lvl >= 2)
+                    {
+                        if (btnSpell.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                        {
+                            btnSpell.isClicked = false;
+                            attackChoisi = "Fire Ball";
+                            btnSpell.Update(mouse, gameTime);
+                            timerAnimation = 0;
+                            degat = rand.Next(80, 120) + Game1.player.Intelligence + Game1.player.Degat;
+                            manaPerdu = 20;
+                            stop = false;
+                            colonne = 0;
+                            colonneFire = 0;
+                            nbreAnimationFire = 0;
+                        }
+                    }
+                    if (attackChoisi == "Basic attack" && !stop)
+                    {
+                        ligne = 7;
+                        if (timerAnimation % 12 == 0)
+                        {
+                            if (colonne == 3)
                             {
-                                ligne = 8;
-                                if (colonne == 3)
-                                {
-                                    colonne = 0;
-                                    ligne = 0;
-                                    stop = true;
-                                }
-                                else
-                                {
-                                    colonne++;
-                                }
-                                persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
+                                colonne = 0;
+                                ligne = 0;
+                                stop = true;
                             }
-                            if (nbreAnimationFire <= 4)
+                            else
                             {
-                                if (colonneFire == 4)
+                                colonne++;
+                            }
+                        }
+                        persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
+                    }
+                    if (Game1.player.Lvl >= 2)
+                    {
+                        if (attackChoisi == "Fire Ball")
+                        {
+                            if (timerAnimation % 12 == 0)
+                            {
+                                if (!stop)
                                 {
-                                    colonneFire = 0;
-                                    nbreAnimationFire++;
+                                    ligne = 8;
+                                    if (colonne == 3)
+                                    {
+                                        colonne = 0;
+                                        ligne = 0;
+                                        stop = true;
+                                    }
+                                    else
+                                    {
+                                        colonne++;
+                                    }
+                                    persoFightRectangle = new Rectangle(colonne * 80, ligne * 77, 80, 77);
                                 }
-                                else
+                                if (nbreAnimationFire <= 4)
                                 {
-                                    colonneFire++;
-                                    nbreAnimationFire++;
+                                    if (colonneFire == 4)
+                                    {
+                                        colonneFire = 0;
+                                        nbreAnimationFire++;
+                                    }
+                                    else
+                                    {
+                                        colonneFire++;
+                                        nbreAnimationFire++;
+                                    }
+                                    FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                                 }
-                                FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                             }
                         }
                     }
-                }
-                if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && (attackChoisi == "Basic attack" || attackChoisi == "Fire Ball"))
-                {
-                    if (degat >= Game1.enemy.health)
+                    if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && (attackChoisi == "Basic attack" || attackChoisi == "Fire Ball"))
                     {
-                        MediaPlayer.Play(songVictory);
+                        if (degat >= Game1.enemy.health)
+                        {
+                            MediaPlayer.Play(songVictory);
+                        }
+                        Game1.enemy.health -= degat;
+                        Game1.player.mana -= manaPerdu;
+                        turn++;
+                        attackChoisi = "";
                     }
-                    Game1.enemy.health -= degat;
-                    Game1.player.mana -= manaPerdu;
-                    turn++;
-                    attackChoisi = "";
                 }
-            }
 
-            else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0)
-            {
-                Game1.player.health = Game1.player.health + Game1.player.Armor - rand.Next(100, 120);
-                turn++;
-            }
-            if (Game1.player.health <= 0)
-            {
-                CurrentGameState = Game1.GameState.GameOver;
-                MediaPlayer.Play(songGameOver);
-            }
-            if (Game1.enemy.health <= 0)
-            {
-                Game1.enemy.health = 0;
-                if (Game1.btnEndFight.isClicked)
+                else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0)
                 {
-                    Game1.player.Experience += Game1.enemy.healthMax;
-                    Game1.player.persoPosition.X = Game1.previousPosX;
-                    Game1.player.persoPosition.Y = Game1.previousPosY;
-                    Game1.player.persoRectangle = new Rectangle((int)Game1.previousPosX,(int) Game1.previousPosY, Game1.player.persoRectangle.Width, Game1.player.persoRectangle.Height);
-                    Game1.player.fight = false;
-                    CurrentGameState = Game1.GameState.Playing;
-                    Isfighting = false;
-                    Game1.enemy.enemyPosition.X = -100;
-                    Game1.enemy.enemyPosition.Y = -100;
-                    turn = -1;
-                    Game1.enemy.enemyRectangle = new Rectangle(0, 0, 0, 0);
-                    MediaPlayer.Play(song2);
+                    Game1.player.health = Game1.player.health + Game1.player.Armor - rand.Next(100, 120);
+                    turn++;
+                }
+                if (Game1.player.health <= 0)
+                {
+                    CurrentGameState = Game1.GameState.GameOver;
+                    MediaPlayer.Play(songGameOver);
+                }
+                if (Game1.enemy.health <= 0)
+                {
+                    Game1.enemy.health = 0;
+                    if (Game1.btnEndFight.isClicked)
+                    {
+                        Game1.player.Experience += Game1.enemy.healthMax;
+                        Game1.player.persoPosition.X = Game1.previousPosX;
+                        Game1.player.persoPosition.Y = Game1.previousPosY;
+                        Game1.player.persoRectangle = new Rectangle((int)Game1.previousPosX, (int)Game1.previousPosY, Game1.player.persoRectangle.Width, Game1.player.persoRectangle.Height);
+                        Game1.player.fight = false;
+                        CurrentGameState = Game1.GameState.Playing;
+                        Isfighting = false;
+                        Game1.enemy.enemyPosition.X = -100;
+                        Game1.enemy.enemyPosition.Y = -100;
+                        turn = -1;
+                        Game1.enemy.enemyRectangle = new Rectangle(0, 0, 0, 0);
+                        MediaPlayer.Play(song2);
+                    }
+                }
+
+                Game1.btnStartFight.Update(mouse, gameTime);
+                btnAttack1.Update(mouse, gameTime);
+                btnObjects.Update(mouse, gameTime);
+                btnSpell.Update(mouse, gameTime);
+                Game1.btnEndFight.Update(mouse, gameTime);
+                pastKey = presentKey;
+                pastMouse = mouse;
+                return (CurrentGameState);
+            }
+            
+            else if (Playing.inventaire)
+            {
+                timerinventaire = 16;
+                if (Playing.timerInventaire > 15)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        Playing.inventaire = false;
+                        Playing.timerInventaire = 0;
+                    }
+                }
+                foreach (Item item in Game1.invent.tablObjects)
+                {
+                    if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                    {
+                        Game1.invent.useItem(item);
+
+                    }
+                }
+                foreach (Item item in Game1.invent.tablEquiped)
+                {
+                    if (item.type == "Weapon")
+                    {
+                        if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        {
+                            /* Game1.invent.removeItemE(item);
+                             Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
+
+                            Game1.invent.deUseItem(item);
+                        }
+                    }
+                    else
+                    {
+                        if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        {
+
+                            Game1.invent.deUseItem(item);
+                        }
+                    }
                 }
             }
+            Game1.pastMouse = mouse;
 
-            Game1.btnStartFight.Update(mouse, gameTime);
-            btnAttack1.Update(mouse, gameTime);
-            btnObjects.Update(mouse, gameTime);
-            btnSpell.Update(mouse, gameTime);
-            Game1.btnEndFight.Update(mouse, gameTime);
-            pastKey = presentKey;
-            pastMouse = mouse;
             return (CurrentGameState);
+
         }
 
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
@@ -287,6 +348,7 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
                 }
             }
+
             if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 700), Color.Black);
@@ -319,6 +381,69 @@ namespace Project
                 Game1.btnEndFight.Draw(spriteBatch);
                 spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Clik the arrow to continue", new Vector2(1100, 730), Color.Black);
+            }
+
+            if (Playing.inventaire)
+            {
+                spriteBatch.Draw(Playing.inventaireTexture, Playing.inventaireRectangle, Color.White);
+                /*if (Game1.bookState == 1)
+                {
+                    spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
+                }*/
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
+
+                foreach (Item item in Game1.invent.tablObjects)
+                {
+                    if (item.name != "rien")
+                    {
+                        Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15, 525 + 68 * (item.place / 6)), Color.White);
+                        switch (item.name)
+                        {
+                            case "healthPotion":
+                                spriteBatch.Draw(Playing.healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
+
+                            case "manaPotion":
+                                spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
+
+                            case "Sword":
+                                spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
+
+                            case "Armor":
+                                spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+
+                                break;
+
+                            case "Book":
+                                spriteBatch.Draw(Playing.bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
+
+                        }
+                    }
+                }
+                foreach (Item item in Game1.invent.tablEquiped)
+                {
+                    switch (item.name)
+                    {
+                        case "Sword":
+                            spriteBatch.Draw(Playing.swordTexture, new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
+                            break;
+
+                        case "Armor":
+                            spriteBatch.Draw(Playing.armorTexture, new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
+                            break;
+                    }
+                }
             }
 
         }

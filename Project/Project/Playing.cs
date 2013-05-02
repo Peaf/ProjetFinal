@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
+        public static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
         static public int mapNumber = 5,timerInventaire = 0;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
@@ -33,7 +33,7 @@ namespace Project
         static public bool inventaire = false;
         static int turn = -1,  lvlBefore = 1, j = 0;
         static Song song3;
-        static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
+        public static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
         static KeyboardState presentKey, pastKey;
 
