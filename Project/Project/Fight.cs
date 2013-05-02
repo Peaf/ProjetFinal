@@ -314,6 +314,10 @@ namespace Project
             {
                 spriteBatch.Draw(Game1.enemy.enemyTexture, new Vector2(990, screenHeight / 2 + 80), new Rectangle(2 * Game1.enemy.Rectenemy.Width, 1 * Game1.enemy.Rectenemy.Height, Game1.enemy.Rectenemy.Width, Game1.enemy.Rectenemy.Height), Color.White);
             }
+            if (Playing.mapNumber == 6)
+            {
+                spriteBatch.Draw(Game1.enemy.enemyTexture, new Vector2(990, screenHeight / 2 + 80), new Rectangle(2 * Game1.enemy.Rectenemy.Width, 1 * Game1.enemy.Rectenemy.Height, Game1.enemy.Rectenemy.Width, Game1.enemy.Rectenemy.Height), Color.White);
+            }
             if (Playing.mapNumber == 5)
             {
                 spriteBatch.Draw(Game1.enemy.enemyTexture, new Vector2(970, screenHeight / 2 + 120), new Rectangle(2 * Game1.enemy.Rectenemy.Width, 1 * Game1.enemy.Rectenemy.Height, Game1.enemy.Rectenemy.Width, Game1.enemy.Rectenemy.Height), Color.White);
