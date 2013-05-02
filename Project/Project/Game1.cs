@@ -125,7 +125,7 @@ namespace Project
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 95));
-            healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1220, 495), new Rectangle(1220, 495, 658, 696), new Vector2(1220, 495), new Rectangle(1220, 495, 85, 80));
+            healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1250, 550), new Rectangle(1250, 550, 658, 696), new Vector2(1250, 550), new Rectangle(1270, 550, 85, 80));
             //Pause
             Pause.LoadContent(Content, screenWidth, screenHeight);
 

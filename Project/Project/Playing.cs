@@ -195,6 +195,17 @@ namespace Project
                             Game1.enemy1.Collision(tile.Rectangle);*/
                         }
                     }
+                    //Pnj
+                    if (!Game1.healer.Collision(Game1.healer))
+                    {
+                        Game1.healer.Update(gameTime, 0, "map5");
+                    }
+
+                    if (Game1.healer.Collision(Game1.healer))
+                    {
+                        Game1.healer.Update(gameTime, 1, "map5");
+                        Game1.player.health = Game1.player.healthMax;
+                    }
                 }
                 if (map == map4)
                 {
@@ -212,17 +223,7 @@ namespace Project
 
                 if (map == map5)
                 {
-                    //Pnj
-                    if (!Game1.healer.Collision(Game1.healer))
-                    {
-                        Game1.healer.Update(gameTime, 0, "map5");
-                    }
-
-                    if (Game1.healer.Collision(Game1.healer))
-                    {
-                        Game1.healer.Update(gameTime, 1, "map5");
-                        Game1.player.health = Game1.player.healthMax;
-                    }
+                   
                     //Enemy
                     if (Game1.enemy1.health > 0)
                         Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
@@ -534,10 +535,11 @@ namespace Project
                 }
                 pastKey = presentKey;
             }
-
+            if(map == map2)
+                Game1.healer.Draw(spriteBatch, 0, "map5");
             if (map == map5)
             {
-                Game1.healer.Draw(spriteBatch, 0, "map5");
+               
                 spriteBatch.Draw(maison, new Rectangle(32 * 11, 0, 96, 128), Color.White);
                 if (Game1.enemy1.health > 0)
                     Game1.enemy1.Draw(spriteBatch);
