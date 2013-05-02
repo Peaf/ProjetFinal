@@ -15,8 +15,7 @@ namespace Project
     static class Playing
     {
         static Texture2D maison, speechBoxTexture, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
-        static int j = 0;
-        static public int mapNumber = 5;
+        static public int mapNumber = 5,timerInventaire = 0;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
@@ -30,8 +29,9 @@ namespace Project
         static StreamReader streamMap4 = new StreamReader("map4.txt");
         static StreamReader streamMap2 = new StreamReader("map2.txt");
         static StreamReader streamMap6 = new StreamReader("map6.txt");
-        static bool Isfighting = false, inventaire = false, talking = false, lvlUp = false, talkOnce = false;
-        static int turn = -1, timerInventaire = 0, lvlBefore = 1;
+        static bool Isfighting = false,  talking = false, lvlUp = false, talkOnce = false;
+        static public bool inventaire = false;
+        static int turn = -1,  lvlBefore = 1, j = 0;
         static Song song3;
         static Rectangle speechBoxRectangle, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";

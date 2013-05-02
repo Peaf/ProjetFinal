@@ -109,6 +109,12 @@ namespace Project
             }
             if (turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
+                if (btnObjects.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                {
+                    Playing.inventaire = true;
+                    Playing.timerInventaire = 0;
+                    btnObjects.Update(mouse, gameTime);
+                }
                 if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
                 {
                     btnAttack1.isClicked = false;
@@ -270,12 +276,12 @@ namespace Project
             spriteBatch.Draw(FireTexture, FirePosition, FireRectangle, Color.White);
             if (turn == -1)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 700), Color.Black);
                 Game1.btnStartFight.Draw(spriteBatch);
             }
             if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you", new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
                 i++;
                 if (i <= 20)
@@ -289,7 +295,7 @@ namespace Project
             }
             if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 700), Color.Black);
                 btnAttack1.Draw(spriteBatch);
                 if (Game1.player.Lvl >= 2)
                 {
@@ -301,7 +307,7 @@ namespace Project
             if (turn % 2 == 0 && (attackChoisi != ""))
             {
 
-                spriteBatch.DrawString(Game1.spriteFont, "You use the attack: " + attackChoisi , new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You use the attack: " + attackChoisi , new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
             }
 
@@ -317,7 +323,7 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
                 }
                 Game1.btnEndFight.Draw(spriteBatch);
-                spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Clik the arrow to continue", new Vector2(1100, 730), Color.Black);
             }
 

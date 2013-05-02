@@ -95,7 +95,7 @@ namespace Project
                 {
                     ligne = 6;
                     timerRun++;
-                    if (timerRun == 20)
+                    if (timerRun == 15)
                     {
                         timerRun = 0;
                         if (colonne == 5)
@@ -156,7 +156,7 @@ namespace Project
                 {
                     ligne = 5;
                     timerRun++;
-                    if (timerRun == 20)
+                    if (timerRun == 15)
                     {
                         timerRun = 0;
                         if (colonne == 5)
@@ -213,7 +213,7 @@ namespace Project
                 {
                     timerRun++;
                     ligne = 4;
-                    if (timerRun == 20)
+                    if (timerRun == 15)
                     {
                         timerRun = 0;
                         if (colonne == 5)
@@ -271,7 +271,7 @@ namespace Project
                     timerRun++;
                     ligne = 7;
 
-                    if (timerRun == 20)
+                    if (timerRun == 15)
                     {
                         timerRun = 0;
 
