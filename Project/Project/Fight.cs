@@ -270,7 +270,7 @@ namespace Project
             spriteBatch.Draw(FireTexture, FirePosition, FireRectangle, Color.White);
             if (turn == -1)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "You're attacked !!!", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 675), Color.Black);
                 Game1.btnStartFight.Draw(spriteBatch);
             }
             if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
@@ -301,7 +301,7 @@ namespace Project
             if (turn % 2 == 0 && (attackChoisi != ""))
             {
 
-                spriteBatch.DrawString(Game1.spriteFont, "Do you want to use the attack: " + attackChoisi + "?", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You use the attack: " + attackChoisi , new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
             }
 

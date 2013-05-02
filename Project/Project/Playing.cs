@@ -523,7 +523,7 @@ namespace Project
             if (lvlUp)
             {
                 spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                spriteBatch.DrawString(Game1.spriteFont, "You level up !!!", new Vector2(10, 675), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "You leveled up !!!", new Vector2(10, 675), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 695), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 720), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 745), Color.Black);
