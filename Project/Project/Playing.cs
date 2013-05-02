@@ -15,7 +15,7 @@ namespace Project
     static class Playing
     {
         public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
-        static public int mapNumber = 5,timerInventaire = 0;
+        static public int mapNumber = 5, timerInventaire = 0;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
@@ -29,11 +29,11 @@ namespace Project
         static StreamReader streamMap4 = new StreamReader("map4.txt");
         static StreamReader streamMap2 = new StreamReader("map2.txt");
         static StreamReader streamMap6 = new StreamReader("map6.txt");
-        static bool Isfighting = false,  talking = false, lvlUp = false, talkOnce = false;
+        static bool Isfighting = false, talking = false, lvlUp = false, talkOnce = false;
         static public bool inventaire = false;
-        static int turn = -1,  lvlBefore = 1, j = 0;
+        static int turn = -1, lvlBefore = 1, j = 0;
         static Song song3;
-        public static Rectangle speechBoxRectangle,speechBoxRectangle2, bookRectangle, inventaireRectangle;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle;
         static string attackChoisi = "";
         static KeyboardState presentKey, pastKey;
 
@@ -227,7 +227,7 @@ namespace Project
 
                 if (map == map5)
                 {
-                   
+
                     //Enemy
                     if (Game1.enemy1.health > 0)
                         Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
@@ -300,7 +300,7 @@ namespace Project
                 }
                 if (map == map8)
                 {
-                   
+
                     if (Game1.enemy4.health > 0)
                         Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
 
@@ -445,7 +445,7 @@ namespace Project
                     if (Game1.btnNext.isClicked && Game1.bookState == 1)
                     {
                         Game1.bookState = 2;
-                        Game1.player.Experience += 50;
+                        Game1.player.Experience += 60;
                         Game1.btnNext.isClicked = false;
                     }
                     if (Game1.bookState == 2)
@@ -542,7 +542,7 @@ namespace Project
             {
                 spriteBatch.Draw(speechBoxTexture2, speechBoxRectangle2, Color.White);
                 spriteBatch.DrawString(Game1.spriteFont, "You leveled up !!!", new Vector2(10, 10), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10,35), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : " + Game1.player.Lvl, new Vector2(10, 35), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : " + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(10, 60), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience " + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(10, 95), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 95), Color.Black);
@@ -554,9 +554,9 @@ namespace Project
                 }
                 pastKey = presentKey;
             }
-            if(map == map2)
+            if (map == map2)
                 Game1.healer.Draw(spriteBatch, 0, "map5");
-            
+
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch);
 
@@ -564,7 +564,7 @@ namespace Project
                 Game1.sand.Draw(spriteBatch);
             if (map == map6)
             {
-                 if (Game1.enemy3.health > 0)
+                if (Game1.enemy3.health > 0)
                     Game1.enemy3.Draw(spriteBatch);
             }
             if (map == map8)
@@ -595,7 +595,7 @@ namespace Project
                     Game1.btnNext.Draw(spriteBatch);
                     Game1.pnj1.Draw(spriteBatch, 1, "map8");
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks. Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 700), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "+ 50 Xp", new Vector2(1100, 725), Color.Red);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 60 Xp", new Vector2(1100, 725), Color.Red);
                 }
                 if (talking && Game1.bookState == 2)
                 {
@@ -607,9 +607,16 @@ namespace Project
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "oh you're hurt go south you'll find a healer", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Oh you're hurt go south you'll find a healer there", new Vector2(10, 700), Color.Blue);
                 }
-               
+                if (Game1.bookState == 4 && talking)
+                {
+                    Game1.pnj1.Draw(spriteBatch, 2, "map8");
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, "Good job Claudius your journey ends here you're a hero now ", new Vector2(10, 700), Color.Blue);
+
+                }
+
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
             }
@@ -661,15 +668,15 @@ namespace Project
                 {
                     spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
                 }*/
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 150), new Vector2(495, 65), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.White);
 
                 foreach (Item item in Game1.invent.tablObjects)
                 {

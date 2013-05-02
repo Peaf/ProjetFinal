@@ -244,6 +244,7 @@ namespace Project
                         turn = -1;
                         Game1.enemy.enemyRectangle = new Rectangle(0, 0, 0, 0);
                         MediaPlayer.Play(song2);
+                        attackChoisi = "";
                     }
                 }
 
@@ -338,7 +339,7 @@ namespace Project
             }
             if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
-                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attack you", new Vector2(10, 700), Color.Black);
+                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attacks you", new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
                 i++;
                 if (i <= 20)
