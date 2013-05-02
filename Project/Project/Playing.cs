@@ -322,6 +322,7 @@ namespace Project
                     {
                         Game1.bookState = 1;
                         Game1.invent.addItem(book);
+                        bookRectangle = new Rectangle(0, 0, 0, 0);
                     }
                 }
                 if (Game1.player.persoPosition.Y <= 0)
