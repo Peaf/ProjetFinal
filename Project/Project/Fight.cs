@@ -13,17 +13,16 @@ namespace Project
     static class Fight
     {
         static cButton btnAttack1, btnSpell, btnObjects;
-        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, FireTexture;
-        static Rectangle speechBoxRectangle;
+        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, fireTexture, lightTexture;
         static int turn = -1, disableEnd, degat, degatEnemy, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, timerAnimationDegat = 0, colonneFire = 0, nbreAnimationFire = 0;
-        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, FireRectangle;
+        static Rectangle healthBoxRectangle, healthRectangle, manaRectangle, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, fireRectangle, lightRectangle, speechBoxRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
         static Random rand = new Random();
         static KeyboardState presentKey, pastKey;
         static Song songGameOver, songVictory, song2;
         static bool Isfighting = false, stop = false, disable = false;
-        static Vector2 persoFightPosition, FirePosition;
+        static Vector2 persoFightPosition, firePosition, lightPosition;
         static Vector2 origin;
 
 
@@ -57,14 +56,19 @@ namespace Project
             enemyHealthTexture = Content.Load<Texture2D>("Barres/HealthEnemy");
 
             //animation 
+
             persoFight = Content.Load<Texture2D>("AnimationFight");
             persoFightRectangle = new Rectangle(200, screenHeight / 2 + 100, 320, 847);
             persoFightPosition = new Vector2(200, screenHeight / 2 + 320);
             origin = new Vector2(100, (screenHeight / 2 + 100) / 2);
 
-            FireTexture = Content.Load<Texture2D>("Fire");
-            FireRectangle = new Rectangle(1030, screenHeight / 2 + 100, 200, 64);
-            FirePosition = new Vector2(1015, screenHeight / 2 + 150);
+            lightTexture = Content.Load<Texture2D>("eclairs");
+            lightRectangle = new Rectangle(120, screenHeight / 2 + 30, 114, 65);
+            lightPosition = new Vector2(120, screenHeight / 2 + 30);
+
+            fireTexture = Content.Load<Texture2D>("Fire");
+            fireRectangle = new Rectangle(1030, screenHeight / 2 + 100, 200, 64);
+            firePosition = new Vector2(1015, screenHeight / 2 + 150);
         }
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight)
@@ -199,7 +203,7 @@ namespace Project
                                         colonneFire++;
                                         nbreAnimationFire++;
                                     }
-                                    FireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
+                                    fireRectangle = new Rectangle(colonneFire * 30, 0, 30, 64);
                                 }
                             }
                         }
@@ -223,7 +227,6 @@ namespace Project
 
                     degatEnemy = rand.Next(100, 120);
 
-
                     if (disable)
                     {
                         Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
@@ -236,11 +239,10 @@ namespace Project
                         {
                             turn += 2;
                         }
-
                     }
                     else
                     {
-                        disable = (rand.Next(1, 3) == 1); // on peut dsable que si le player ne l'est pas deja
+                        disable = (rand.Next(1, 5) == 1); // on peut dsable que si le player ne l'est pas deja
                         if (disable)
                         {
                             disableEnd = turn + 5;
@@ -249,6 +251,7 @@ namespace Project
                         else
                         {
                             Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
+
                             turn++;
                         }
 
@@ -365,7 +368,8 @@ namespace Project
             spriteBatch.DrawString(Game1.spriteFont, Game1.enemy.health + "/" + Game1.enemy.healthMax, new Vector2(995, screenHeight / 2 + 49), Color.Black);
             spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
             spriteBatch.Draw(persoFight, persoFightPosition, persoFightRectangle, Color.White, 0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 0);
-            spriteBatch.Draw(FireTexture, FirePosition, FireRectangle, Color.White);
+            spriteBatch.Draw(fireTexture, firePosition, fireRectangle, Color.White);
+
             if (turn == -1)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 700), Color.Black);
@@ -391,50 +395,62 @@ namespace Project
                     if (timerAnimationDegat <= 20)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 350), Color.Black);
+
                     }
                     if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
+
                     }
                 }
-
-                spriteBatch.DrawString(Game1.spriteFont, "The ennemy attacks you", new Vector2(10, 700), Color.Black);
+                if (disable)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attck for now", new Vector2(10, 700), Color.Black);
+                }
+                else
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "The ennemy attacks you", new Vector2(10, 700), Color.Black);
+                }
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
 
             }
 
-            if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0) //affichage des degats sur le player
+            if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
             {
                 if (turn != 0)
                 {
                     timerAnimationDegat++;
                     if (timerAnimationDegat <= 20)
                     {
-                        if (disable)
-                        {
-                            spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 390), Color.Orange);
-                        }
-                        else
-                        {
-                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
-                        }
-
+                        lightRectangle = new Rectangle(0, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                     }
                     if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
                     {
-                        if (disable)
+                        lightRectangle = new Rectangle(38, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                    }
+                    if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
+                    {
+                        if (!disable)
                         {
-                            spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 370), Color.OrangeRed);
+                            lightRectangle = new Rectangle(76, 0, 38, 65);
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);                          
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
                         }
-                        else
+                    }
+                    if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
+                    {
+                        if (!disable)
                         {
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
                         }
-
                     }
+
                 }
 
                 spriteBatch.DrawString(Game1.spriteFont, "It's your turn choose your fate", new Vector2(10, 700), Color.Black);
+
                 btnAttack1.Draw(spriteBatch);
                 if (Game1.player.Lvl >= 2)
                 {
