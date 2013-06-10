@@ -62,7 +62,7 @@ namespace Project
             if (gameState == Game1.GameState.MainMenu)
             {
                 timerMenu++;
-                if (timerMenu < 200)
+                if (timerMenu < 200 || (timerMenu >= 630 && timerMenu < 830)) //gauche
                 {
                     ligne = 1;
                     timer++;
@@ -81,7 +81,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                     Game1.playerMenu.persoPosition += (new Vector2((-vitesse), 0));
                 }
-                else if (timerMenu >= 200 && timerMenu < 300)
+                else if ((timerMenu >= 200 && timerMenu < 310) || (timerMenu >= 510 && timerMenu < 630) || (timerMenu >= 830 && timerMenu < 935)) //bas
                 {
                     timer++;
                     ligne = 0;
@@ -101,7 +101,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
                     Game1.playerMenu.persoPosition += new Vector2(0, vitesse);
                 }
-                else if (timerMenu >= 300 && timerMenu < 500)
+                else if ((timerMenu >= 310 && timerMenu < 510) || (timerMenu >= 935 && timerMenu < 1125)) //droite
                 {
                     timer++;
                     ligne = 3;
@@ -121,7 +121,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                     Game1.playerMenu.persoPosition += new Vector2(vitesse, 0);
                 }
-                else if (timerMenu >= 500 && timerMenu < 600)
+                else if (timerMenu >=1125 && timerMenu < 1455) // haut
                 {
                     ligne = 2;
                     timer++;
