@@ -422,6 +422,7 @@ namespace Project
 
                 //Perso        
                 Game1.player.Update(gameTime);
+                Game1.player2.Update(gameTime);
 
                 //PNJ
                 Game1.player.Collision(Game1.healer.taille);
@@ -559,6 +560,7 @@ namespace Project
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch);
+            Game1.player2.Draw(spriteBatch);
 
             if (map == map4)
                 Game1.sand.Draw(spriteBatch);

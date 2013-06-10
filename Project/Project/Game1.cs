@@ -17,7 +17,7 @@ namespace Project
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        public static Character player;
+        public static Character player, player2;
 
         public static PNJ pnj1,healer;
         public static Enemy enemy, enemy1, enemy2,enemy3,enemy4;
@@ -73,14 +73,15 @@ namespace Project
 
         protected override void Initialize()
         {
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50);
-
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, "player1");
+            player2 = new Character(Content.Load <Texture2D>("Sprites/Player2"), new Vector2(388, 430), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, "player2");
             /*  this.graphics.IsFullScreen = true;
               this.graphics.ApplyChanges();
            
-              this.graphics.ApplyChanges();*/
             screenWidth = 1366;
+              this.graphics.ApplyChanges();*/
             screenHeight = 768;
+            screenWidth = 1366;
             invent.Initialize();
             invent.addItem(new Item("Potion","healthPotion","health",50 , 1,""));
             invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
