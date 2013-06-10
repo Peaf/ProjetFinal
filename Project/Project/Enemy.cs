@@ -166,8 +166,6 @@ namespace Project
                             colonne++;
                         }
                     }
-
-                    
                     else
                     {
                         enemyPosition += (new Vector2((-vitesse), 0));

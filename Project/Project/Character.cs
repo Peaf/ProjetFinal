@@ -10,16 +10,16 @@ namespace Project
 {
     public class Character
     {
-        public Texture2D persoTexture, persoTexture2;
-        public Vector2 persoPosition, persoPosition2;
-        Rectangle Rectsprite, Rectsprite2;
-        public Rectangle persoRectangle, persoRectangle2;
+        public Texture2D persoTexture;
+        public Vector2 persoPosition;
+        Rectangle Rectsprite;
+        public Rectangle persoRectangle;
         public string type, type2;
 
         int vitesse = 1; //test git hub
         public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext;
         public string Direction;
-        int timer = 0, timerRun = 0, i = 0, screenWidth = 1366, screenHeight = 768;
+        int timer = 0, timerRun = 0, i = 0, timerMenu;
         public bool fight = false, lvlup;
         public Map map, map4, map5;
 
@@ -42,7 +42,7 @@ namespace Project
 
         }
 
-        public void Update(GameTime gametime)
+        public void Update(GameTime gametime, Game1.GameState gameState)
         {
             KeyboardState KState = Keyboard.GetState();
             lvlup = (Experience >= 150 * Lvl);
@@ -59,10 +59,10 @@ namespace Project
                 Intelligence += 50;
                 Lvl += 1;
             }
-            if (!fight)
+            if (gameState == Game1.GameState.MainMenu)
             {
-                //Left
-                if ((KState.IsKeyDown(Keys.Q) || KState.IsKeyDown(Keys.F)) && KState.IsKeyUp(Keys.LeftShift))
+                timerMenu++;
+                if (timerMenu < 200)
                 {
                     ligne = 1;
                     timer++;
@@ -78,119 +78,10 @@ namespace Project
                             colonne++;
                         }
                     }
-                    if (KState.IsKeyDown(Keys.Q) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        Game1.player.persoPosition += (new Vector2((-vitesse), 0));
-                    }
-
-                    if (KState.IsKeyDown(Keys.F) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63); 
-                        Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
-
-                    }
-
-
+                    Game1.playerMenu.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                    Game1.playerMenu.persoPosition += (new Vector2((-vitesse), 0));
                 }
-
-                else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q) || KState.IsKeyDown(Keys.F)))
-                {
-                    ligne = 6;
-                    timerRun++;
-                    if (timerRun == 8)
-                    {
-                        timerRun = 0;
-                        if (colonne == 5)
-                        {
-                            colonne = 1;
-                        }
-                        if (colonne == 3)
-                        {
-                            colonne = 1;
-                        }
-                        else
-                        {
-                            colonne++;
-                        }
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Q))
-                    {
-                        Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.F))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
-                    }
-                }
-
-                //Up
-                else if ((KState.IsKeyDown(Keys.Z) || KState.IsKeyDown(Keys.T)) && KState.IsKeyUp(Keys.LeftShift))
-                {
-                    ligne = 2;
-                    timer++;
-                    if (timer == 15)
-                    {
-                        timer = 0;
-                        if (colonne == 5)
-                        {
-                            colonne = 1;
-                        }
-                        else
-                        {
-                            colonne++;
-                        }
-                    }
-                    if (KState.IsKeyDown(Keys.Z) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player.persoPosition += new Vector2(0, -vitesse);
-
-                    }
-                    if (KState.IsKeyDown(Keys.T) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player2.persoPosition += new Vector2(0, -vitesse);
-
-                    }
-
-                }
-
-                else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) || KState.IsKeyDown(Keys.T)))
-                {
-                    ligne = 5;
-                    timerRun++;
-                    if (timerRun == 8)
-                    {
-                        timerRun = 0;
-                        if (colonne == 5)
-                        {
-                            colonne = 1;
-                        }
-                        else
-                        {
-                            colonne++;
-                        }
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Z))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player.persoPosition += new Vector2(0, -2 * vitesse);
-
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.T))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
-
-                    }
-
-                }
-
-                //Down
-                else if ((KState.IsKeyDown(Keys.S) || KState.IsKeyDown(Keys.G)) && KState.IsKeyUp(Keys.LeftShift))
+                else if (timerMenu >= 200 && timerMenu < 300)
                 {
                     timer++;
                     ligne = 0;
@@ -206,54 +97,11 @@ namespace Project
                             colonne++;
                         }
                     }
-                    if (KState.IsKeyDown(Keys.S) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        Game1.player.persoPosition += new Vector2(0, vitesse);
 
-                    }
-                    if (KState.IsKeyDown(Keys.G) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        Game1.player2.persoPosition += new Vector2(0, vitesse);
-
-                    }
-
+                    Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                    Game1.playerMenu.persoPosition += new Vector2(0, vitesse);
                 }
-
-                else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.S) || KState.IsKeyDown(Keys.G)))
-                {
-                    timerRun++;
-                    ligne = 4;
-                    if (timerRun == 8)
-                    {
-                        timerRun = 0;
-                        if (colonne == 5)
-                        {
-                            colonne = 1;
-                        }
-                        else
-                        {
-                            colonne++;
-                        }
-
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.S))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        Game1.player.persoPosition += new Vector2(0, 2 * vitesse);
-
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.G))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
-
-                    }
-
-                }
-                //right
-                else if ((KState.IsKeyDown(Keys.D) || KState.IsKeyDown(Keys.H)) && KState.IsKeyUp(Keys.LeftShift))
+                else if (timerMenu >= 300 && timerMenu < 500)
                 {
                     timer++;
                     ligne = 3;
@@ -269,35 +117,18 @@ namespace Project
                             colonne++;
                         }
                     }
-                    if (KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player.persoPosition += new Vector2(vitesse, 0);
 
-                    }
-                    if (KState.IsKeyDown(Keys.H) && KState.IsKeyUp(Keys.LeftShift))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player2.persoPosition += new Vector2(vitesse, 0);
-
-                    }
-
+                    Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                    Game1.playerMenu.persoPosition += new Vector2(vitesse, 0);
                 }
-
-                else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.D) || KState.IsKeyDown(Keys.H)))
+                else if (timerMenu >= 500 && timerMenu < 600)
                 {
-                    timerRun++;
-                    ligne = 7;
-
-                    if (timerRun == 8)
+                    ligne = 2;
+                    timer++;
+                    if (timer == 15)
                     {
-                        timerRun = 0;
-
+                        timer = 0;
                         if (colonne == 5)
-                        {
-                            colonne = 1;
-                        }
-                        if (colonne == 3)
                         {
                             colonne = 1;
                         }
@@ -306,33 +137,293 @@ namespace Project
                             colonne++;
                         }
                     }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.D))
-                    {
-                        Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player.persoPosition += new Vector2(2 * vitesse, 0);
 
-                    }
-                    if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.H))
-                    {
-                        Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
-
-                    }
-
+                    Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                    Game1.playerMenu.persoPosition += new Vector2(0, -vitesse);
                 }
-
+                else
+                {
+                    timerMenu = 0;
+                }
             }
+            if (gameState == Game1.GameState.Playing)
+            {
+                if (!fight)
+                {
+                    //Left
+                    if ((KState.IsKeyDown(Keys.Q) || KState.IsKeyDown(Keys.F)) && KState.IsKeyUp(Keys.LeftShift))
+                    {
+                        ligne = 1;
+                        timer++;
+                        if (timer == 15)
+                        {
+                            timer = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 2;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.Q) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                            Game1.player.persoPosition += (new Vector2((-vitesse), 0));
+                        }
 
+                        if (KState.IsKeyDown(Keys.F) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                            Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
+                        }
+                    }
 
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q) || KState.IsKeyDown(Keys.F)))
+                    {
+                        ligne = 6;
+                        timerRun++;
+                        if (timerRun == 8)
+                        {
+                            timerRun = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            if (colonne == 3)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Q))
+                        {
+                            Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                            Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.F))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                            Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
+                        }
+                    }
+
+                    //Up
+                    else if ((KState.IsKeyDown(Keys.Z) || KState.IsKeyDown(Keys.T)) && KState.IsKeyUp(Keys.LeftShift))
+                    {
+                        ligne = 2;
+                        timer++;
+                        if (timer == 15)
+                        {
+                            timer = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.Z) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player.persoPosition += new Vector2(0, -vitesse);
+
+                        }
+                        if (KState.IsKeyDown(Keys.T) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player2.persoPosition += new Vector2(0, -vitesse);
+
+                        }
+
+                    }
+
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) || KState.IsKeyDown(Keys.T)))
+                    {
+                        ligne = 5;
+                        timerRun++;
+                        if (timerRun == 8)
+                        {
+                            timerRun = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Z))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player.persoPosition += new Vector2(0, -2 * vitesse);
+
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.T))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
+
+                        }
+
+                    }
+
+                    //Down
+                    else if ((KState.IsKeyDown(Keys.S) || KState.IsKeyDown(Keys.G)) && KState.IsKeyUp(Keys.LeftShift))
+                    {
+                        timer++;
+                        ligne = 0;
+                        if (timer == 15)
+                        {
+                            timer = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.S) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                            Game1.player.persoPosition += new Vector2(0, vitesse);
+
+                        }
+                        if (KState.IsKeyDown(Keys.G) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                            Game1.player2.persoPosition += new Vector2(0, vitesse);
+
+                        }
+
+                    }
+
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.S) || KState.IsKeyDown(Keys.G)))
+                    {
+                        timerRun++;
+                        ligne = 4;
+                        if (timerRun == 8)
+                        {
+                            timerRun = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.S))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                            Game1.player.persoPosition += new Vector2(0, 2 * vitesse);
+
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.G))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                            Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
+
+                        }
+
+                    }
+                    //right
+                    else if ((KState.IsKeyDown(Keys.D) || KState.IsKeyDown(Keys.H)) && KState.IsKeyUp(Keys.LeftShift))
+                    {
+                        timer++;
+                        ligne = 3;
+                        if (timer == 15)
+                        {
+                            timer = 0;
+                            if (colonne == 5)
+                            {
+                                colonne = 2;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player.persoPosition += new Vector2(vitesse, 0);
+
+                        }
+                        if (KState.IsKeyDown(Keys.H) && KState.IsKeyUp(Keys.LeftShift))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player2.persoPosition += new Vector2(vitesse, 0);
+
+                        }
+
+                    }
+
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.D) || KState.IsKeyDown(Keys.H)))
+                    {
+                        timerRun++;
+                        ligne = 7;
+
+                        if (timerRun == 8)
+                        {
+                            timerRun = 0;
+
+                            if (colonne == 5)
+                            {
+                                colonne = 1;
+                            }
+                            if (colonne == 3)
+                            {
+                                colonne = 1;
+                            }
+                            else
+                            {
+                                colonne++;
+                            }
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.D))
+                        {
+                            Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player.persoPosition += new Vector2(2 * vitesse, 0);
+
+                        }
+                        if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.H))
+                        {
+                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                            Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
+
+                        }
+
+                    }
+                }
+            }
             Game1.player.persoRectangle = new Rectangle((int)Game1.player.persoPosition.X, (int)Game1.player.persoPosition.Y + Game1.player.persoTexture.Height / 16, Game1.player.persoTexture.Width / 12, Game1.player.persoTexture.Height / 16);
             Game1.player2.persoRectangle = new Rectangle((int)Game1.player2.persoPosition.X, (int)Game1.player2.persoPosition.Y + Game1.player2.persoTexture.Height / 16, Game1.player2.persoTexture.Width / 12, Game1.player2.persoTexture.Height / 16);
 
         }
 
-        public void Draw(SpriteBatch spritBatch)
+        public void Draw(SpriteBatch spritBatch, Game1.GameState gameState)
         {
-            spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
-            spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
+            if (gameState == Game1.GameState.MainMenu)
+            {
+                spritBatch.Draw(Game1.playerMenu.persoTexture, Game1.playerMenu.persoPosition, Game1.playerMenu.Rectsprite, Color.White);
+            }
+            else
+            {
+                spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
+                spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
+            }
         }
 
         public void Collision(Rectangle newRectangle)

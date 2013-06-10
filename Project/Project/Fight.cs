@@ -83,7 +83,7 @@ namespace Project
             Game1.player.fight = true;
             Game1.player.colonne = 2;
             Game1.player.Direction = "right";
-            Game1.player.Update(gameTime);
+            Game1.player.Update(gameTime, Game1.GameState.Playing);
             healthBoxRectangle = new Rectangle(10, 10, healthBoxTexture.Width, healthBoxTexture.Height);
             healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);

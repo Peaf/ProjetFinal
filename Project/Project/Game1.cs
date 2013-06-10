@@ -17,7 +17,7 @@ namespace Project
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        public static Character player, player2;
+        public static Character player, player2, playerMenu;
 
         public static PNJ pnj1,healer;
         public static Enemy enemy, enemy1, enemy2,enemy3,enemy4;
@@ -63,7 +63,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Playing;
+        public GameState CurrentGameState = GameState.MainMenu;
 
         public Game1()
         {
@@ -75,6 +75,7 @@ namespace Project
         {
             player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50);
             player2 = new Character(Content.Load <Texture2D>("Sprites/Player2"), new Vector2(388, 430), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20);
+            playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 220), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50);
             /*  this.graphics.IsFullScreen = true;
               this.graphics.ApplyChanges();
            

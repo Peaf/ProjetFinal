@@ -41,6 +41,7 @@ namespace Project
         {
             MouseState mouse = Mouse.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.MainMenu;
+            Game1.playerMenu.Update(gameTime, Game1.GameState.MainMenu);
             if (PlayButton.isClicked == true)
             {
                 MediaPlayer.Stop();
@@ -67,6 +68,7 @@ namespace Project
             PlayButton.Draw(spriteBatch);
             OptionsButton.Draw(spriteBatch);
             QuitButton.Draw(spriteBatch);
+            Game1.playerMenu.Draw(spriteBatch, Game1.GameState.MainMenu);
 
         }
 
