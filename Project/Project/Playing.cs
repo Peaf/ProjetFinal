@@ -310,7 +310,7 @@ namespace Project
                         map = map8;
                         mapNumber = 8;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
-                        //Game1.player2.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                        
                     }
                     else if (mapNumber == 2)
                     {
@@ -321,8 +321,9 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = 2;
-                        //Game1.player2.persoPosition.Y = 2;
+                        
                     }
+                    Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
                 else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
@@ -342,7 +343,9 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
+                        
                     }
+                    Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
                 else if (Game1.player.persoPosition.X <= 0)
                 {
@@ -351,17 +354,21 @@ namespace Project
                         map = map4;
                         mapNumber = 4;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                       
                     }
                     else if (mapNumber == 6)
                     {
                         map = map5;
                         mapNumber = 5;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                        
                     }
                     else
                     {
                         Game1.player.persoPosition.X = 2;
+                        
                     }
+                    Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
                 else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
@@ -371,18 +378,47 @@ namespace Project
                         map = map5;
                         mapNumber = 5;
                         Game1.player.persoPosition.X = 0;
+                        
                     }
                     else if (mapNumber == 5)
                     {
                         map = map6;
                         mapNumber = 6;
                         Game1.player.persoPosition.X = 0;
+                       
                     }
                     else
                     {
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+                       
                     }
+                    Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
+                //00000000000000000000000000000000000000000
+                if (Game1.player2.persoPosition.Y <= 0)
+                {
+                    
+                        Game1.player2.persoPosition.Y = 2;
+                    
+
+                }
+                else if (Game1.player2.persoPosition.Y >= screenHeight - Game1.player2.persoTexture.Height / 8)
+                {
+                    Game1.player2.persoPosition.Y = screenHeight - Game1.player2.persoTexture.Height / 8 - 1;
+                   
+                }
+                else if (Game1.player2.persoPosition.X <= 0)
+                {
+                        Game1.player2.persoPosition.X = 2;
+                   
+                }
+                else if (Game1.player2.persoPosition.X >= screenWidth - Game1.player2.persoTexture.Width / 4)
+                {
+                   
+                        Game1.player2.persoPosition.X = screenWidth - Game1.player2.persoTexture.Width / 4;
+                    
+                }
+                //0000000000000000000000000000
                 if (Isfighting)
                 {
                     CurrentGameState = Game1.GameState.Fight;
