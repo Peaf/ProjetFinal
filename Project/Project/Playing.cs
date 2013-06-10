@@ -187,17 +187,18 @@ namespace Project
             Game1.GameState CurrentGameState = Game1.GameState.Playing;
             if (!inventaire)
             {
+                foreach (CollisionTiles tile in map.CollisionTiles)
+                {
+                    if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
+                    {
+                        Game1.player.Collision(tile.Rectangle);
+                        Game1.player2.Collision(tile.Rectangle);
+                    }
+                }
+
                 if (map == map2)
                 {
-                    foreach (CollisionTiles tile in map2.CollisionTiles)
-                    {
-                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
-                        {
-                            Game1.player.Collision(tile.Rectangle);
-                            /*Game1.enemy2.Collision(tile.Rectangle);
-                            Game1.enemy1.Collision(tile.Rectangle);*/
-                        }
-                    }
+                   
                     //Pnj
                     if (!Game1.healer.Collision(Game1.healer))
                     {
@@ -214,15 +215,7 @@ namespace Project
                 if (map == map4)
                 {
                     Game1.sand.update(gameTime, graphics.GraphicsDevice);
-                    foreach (CollisionTiles tile in map4.CollisionTiles)
-                    {
-                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
-                        {
-                            Game1.player.Collision(tile.Rectangle);
-                            /*Game1.enemy2.Collision(tile.Rectangle);
-                            Game1.enemy1.Collision(tile.Rectangle);*/
-                        }
-                    }
+                   
                 }
 
                 if (map == map5)
@@ -260,15 +253,7 @@ namespace Project
                         attackChoisi = "";
                     }
 
-                    foreach (CollisionTiles tile in map5.CollisionTiles)
-                    {
-                        if (tile.num >= 7)
-                        {
-                            Game1.player.Collision(tile.Rectangle);
-                            /*Game1.enemy2.Collision(tile.Rectangle);
-                            Game1.enemy1.Collision(tile.Rectangle);*/
-                        }
-                    }
+                   
                 }
 
                 if (map == map6)
@@ -288,15 +273,7 @@ namespace Project
                         attackChoisi = "";
                     }
 
-                    foreach (CollisionTiles tile in map6.CollisionTiles)
-                    {
-                        if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
-                        {
-                            Game1.player.Collision(tile.Rectangle);
-                            /*Game1.enemy2.Collision(tile.Rectangle);
-                            Game1.enemy1.Collision(tile.Rectangle);*/
-                        }
-                    }
+                    
                 }
                 if (map == map8)
                 {
@@ -318,11 +295,7 @@ namespace Project
                     }
                     //Moteur à particules
                     Game1.snow.update(gameTime, graphics.GraphicsDevice);
-                    foreach (CollisionTiles tile in map8.CollisionTiles)
-                    {
-                        if (tile.num >= 7)
-                            Game1.player.Collision(tile.Rectangle);
-                    }
+                    
                     if (Game1.player.persoRectangle.Intersects(bookRectangle))
                     {
                         Game1.bookState = 1;
@@ -429,6 +402,9 @@ namespace Project
                 //PNJ
                 Game1.player.Collision(Game1.healer.taille);
                 Game1.player.Collision(Game1.pnj1.taille);
+
+                Game1.player2.Collision(Game1.healer.taille);
+                Game1.player2.Collision(Game1.pnj1.taille);
 
                 if (Game1.pnj1.Collision(Game1.pnj1))
                 {
