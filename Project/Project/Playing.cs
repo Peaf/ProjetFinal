@@ -337,6 +337,7 @@ namespace Project
                         map = map8;
                         mapNumber = 8;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                        //Game1.player2.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                     }
                     else if (mapNumber == 2)
                     {
@@ -347,6 +348,7 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = 2;
+                        //Game1.player2.persoPosition.Y = 2;
                     }
 
                 }

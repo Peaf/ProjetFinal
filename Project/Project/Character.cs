@@ -16,21 +16,19 @@ namespace Project
         public Rectangle persoRectangle, persoRectangle2;
         public string type, type2;
 
-        int vitesse = 2; //test git hub
+        int vitesse = 1; //test git hub
         public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext;
         public string Direction;
         int timer = 0, timerRun = 0, i = 0, screenWidth = 1366, screenHeight = 768;
         public bool fight = false, lvlup;
         public Map map, map4, map5;
 
-        public Character(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newMana, int newExperience, int newStrenght, int newIntelligence, int newDegat, int newArmor, string newtype)
+        public Character(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newMana, int newExperience, int newStrenght, int newIntelligence, int newDegat, int newArmor)
         {
             persoTexture = newTexture;
             persoPosition = newPosition;
             persoRectangle = newRectangle;
             Rectsprite = newsprite;
-            type = newtype;
-            type = newtype;
             health = newHealth;
             mana = newMana;
             manaMax = newMana;
@@ -83,28 +81,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.Q) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        if (Game1.player.persoPosition.X <= 0)
-                        {
-                            map = map4;
-                            Game1.player.persoPosition.X = (screenWidth - persoTexture.Width / 6);
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += (new Vector2((-vitesse), 0));
-                        }
+                        Game1.player.persoPosition += (new Vector2((-vitesse), 0));
                     }
+
                     if (KState.IsKeyDown(Keys.F) && KState.IsKeyUp(Keys.LeftShift))
                     {
-                        Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        if (Game1.player2.persoPosition.X <= 0)
-                        {
-                            map = map4;
-                            Game1.player2.persoPosition.X = (screenWidth - persoTexture.Width / 6);
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
-                        }
+                        Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63); 
+                        Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
+
                     }
 
 
@@ -133,31 +117,13 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Q))
                     {
                         Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        if (Game1.player.persoPosition.X <= 0)
-                        {
-                            map = map4;
-                            Game1.player.persoPosition.X = (screenWidth - persoTexture2.Width / 6);
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
-                        }
-
+                        Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
                     }
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.F))
                     {
                         Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                        if (Game1.player2.persoPosition.X <= 0)
-                        {
-                            map = map4;
-                            Game1.player2.persoPosition.X = (screenWidth - persoTexture.Width / 6);
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
-                        }
+                        Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
                     }
-
                 }
 
                 //Up
@@ -180,28 +146,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.Z) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player.persoPosition.Y <= 0)
-                        {
-                            mapnumber += 3;
-                            Game1.player.persoPosition.Y = screenHeight - persoTexture.Height / 8;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(0, -vitesse);
-                        }
+                        Game1.player.persoPosition += new Vector2(0, -vitesse);
+
                     }
                     if (KState.IsKeyDown(Keys.T) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player2.persoPosition.Y <= 0)
-                        {
-                            mapnumber += 3;
-                            Game1.player2.persoPosition.Y = screenHeight - persoTexture.Height / 8;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(0, -vitesse);
-                        }
+                        Game1.player2.persoPosition += new Vector2(0, -vitesse);
+
                     }
 
                 }
@@ -225,28 +177,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.Z))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player.persoPosition.Y <= 0)
-                        {
-                            mapnumber += 3;
-                            Game1.player.persoPosition.Y = screenHeight - persoTexture.Height / 8;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(0, -2 * vitesse);
-                        }
+                        Game1.player.persoPosition += new Vector2(0, -2 * vitesse);
+
                     }
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.T))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player2.persoPosition.Y <= 0)
-                        {
-                            mapnumber += 3;
-                            Game1.player2.persoPosition.Y = screenHeight - persoTexture.Height / 8;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
-                        }
+                        Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
+
                     }
 
                 }
@@ -271,28 +209,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.S) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        if (Game1.player.persoPosition.Y >= (screenHeight - persoTexture.Height / 8))
-                        {
-                            mapnumber -= 3;
-                            Game1.player.persoPosition.Y = 0;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(0, vitesse);
-                        }
+                        Game1.player.persoPosition += new Vector2(0, vitesse);
+
                     }
                     if (KState.IsKeyDown(Keys.G) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        if (Game1.player2.persoPosition.Y >= (screenHeight - persoTexture.Height / 8))
-                        {
-                            mapnumber -= 3;
-                            Game1.player2.persoPosition.Y = 0;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(0, vitesse);
-                        }
+                        Game1.player2.persoPosition += new Vector2(0, vitesse);
+
                     }
 
                 }
@@ -317,28 +241,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.S))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        if (Game1.player.persoPosition.Y >= (screenHeight - persoTexture.Height / 8))
-                        {
-                            mapnumber -= 3;
-                            Game1.player.persoPosition.Y = 0;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(0, 2 * vitesse);
-                        }
+                        Game1.player.persoPosition += new Vector2(0, 2 * vitesse);
+
                     }
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.G))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                        if (Game1.player2.persoPosition.Y >= (screenHeight - persoTexture.Height / 8))
-                        {
-                            mapnumber -= 3;
-                            Game1.player2.persoPosition.Y = 0;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
-                        }
+                        Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
+
                     }
 
                 }
@@ -362,28 +272,14 @@ namespace Project
                     if (KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player.persoPosition.X >= (screenWidth - persoTexture.Width / 6))
-                        {
-                            mapnumber += 1;
-                            Game1.player.persoPosition.X = 0;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(vitesse, 0);
-                        }
+                        Game1.player.persoPosition += new Vector2(vitesse, 0);
+
                     }
                     if (KState.IsKeyDown(Keys.H) && KState.IsKeyUp(Keys.LeftShift))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player2.persoPosition.X >= (screenWidth - persoTexture.Width / 6))
-                        {
-                            mapnumber += 1;
-                            Game1.player2.persoPosition.X = 0;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(vitesse, 0);
-                        }
+                        Game1.player2.persoPosition += new Vector2(vitesse, 0);
+
                     }
 
                 }
@@ -413,57 +309,30 @@ namespace Project
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.D))
                     {
                         Game1.player.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player.persoPosition.X >= (screenWidth - persoTexture.Width / 6))
-                        {
-                            mapnumber += 1;
-                            Game1.player.persoPosition.X = 0;
-                        }
-                        else
-                        {
-                            Game1.player.persoPosition += new Vector2(2 * vitesse, 0);
-                        }
+                        Game1.player.persoPosition += new Vector2(2 * vitesse, 0);
+
                     }
                     if (KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.H))
                     {
                         Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                        if (Game1.player2.persoPosition.X >= (screenWidth - persoTexture.Width / 6))
-                        {
-                            mapnumber += 1;
-                            Game1.player2.persoPosition.X = 0;
-                        }
-                        else
-                        {
-                            Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
-                        }
+                        Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
+
                     }
 
                 }
 
             }
 
-            if (Game1.player.type == "player1")
-            {
-                Game1.player.persoRectangle = new Rectangle((int)Game1.player.persoPosition.X, (int)Game1.player.persoPosition.Y + Game1.player.persoTexture.Height / 16, Game1.player.persoTexture.Width / 12, Game1.player.persoTexture.Height / 16);
-            }
-            if (Game1.player2.type == "player2")
-            {
-                Game1.player2.persoRectangle = new Rectangle((int)Game1.player2.persoPosition.X, (int)Game1.player2.persoPosition.Y + Game1.player2.persoTexture.Height / 16, Game1.player2.persoTexture.Width / 12, Game1.player2.persoTexture.Height / 16);
-            }
+
+            Game1.player.persoRectangle = new Rectangle((int)Game1.player.persoPosition.X, (int)Game1.player.persoPosition.Y + Game1.player.persoTexture.Height / 16, Game1.player.persoTexture.Width / 12, Game1.player.persoTexture.Height / 16);
+            Game1.player2.persoRectangle = new Rectangle((int)Game1.player2.persoPosition.X, (int)Game1.player2.persoPosition.Y + Game1.player2.persoTexture.Height / 16, Game1.player2.persoTexture.Width / 12, Game1.player2.persoTexture.Height / 16);
 
         }
 
         public void Draw(SpriteBatch spritBatch)
         {
-            if (Game1.player.type == "player1")
-            {
-                spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
-
-            }
-            if (Game1.player2.type == "player2")
-            {
-                spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
-            }
-
+            spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
+            spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
         }
 
         public void Collision(Rectangle newRectangle)
