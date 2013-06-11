@@ -224,9 +224,7 @@ namespace Project
 
                 else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0) //enemy 
                 {
-
                     degatEnemy = rand.Next(100, 120);
-
                     if (disable)
                     {
                         Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
@@ -242,7 +240,7 @@ namespace Project
                     }
                     else
                     {
-                        disable = (rand.Next(1, 5) == 1); // on peut dsable que si le player ne l'est pas deja
+                        disable = (rand.Next(1, 2) == 1); // on peut disable que si le player ne l'est pas deja
                         if (disable)
                         {
                             disableEnd = turn + 5;
@@ -251,7 +249,6 @@ namespace Project
                         else
                         {
                             Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
-
                             turn++;
                         }
 
@@ -376,7 +373,7 @@ namespace Project
                 spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 700), Color.Black);
                 Game1.btnStartFight.Draw(spriteBatch);
             }
-            if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0)
+            if ((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0) // on fait l'animation des degats au début tdu tour suivant
             {
                 timerAnimationDegat++;
                 if (disable)
@@ -384,34 +381,45 @@ namespace Project
                     if (timerAnimationDegat <= 20)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 390), Color.Orange);
+                        lightRectangle = new Rectangle(0, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                     }
 
                     if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
                     {
-                        spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 370), Color.OrangeRed);
+                       spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 370), Color.OrangeRed);
+                        lightRectangle = new Rectangle(38, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                     }
+                    if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
+                    {
+
+                        lightRectangle = new Rectangle(76, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                    }
+                    if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
+                    {
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
+                    }
+                    spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attack for now", new Vector2(10, 700), Color.Black);
+
                 }
-                else // affichage des degats sur l'ennemy
+                else
                 {
                     if (timerAnimationDegat <= 20)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 350), Color.Black);
-
                     }
                     if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degat + "", new Vector2(1020, 330), Color.Gray);
-
                     }
-                }
-                if (disable)
-                {
-                    spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attck for now", new Vector2(10, 700), Color.Black);
-                }
-                else
-                {
                     spriteBatch.DrawString(Game1.spriteFont, "The ennemy attacks you", new Vector2(10, 700), Color.Black);
                 }
+                
+
+                
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
 
             }
@@ -433,19 +441,14 @@ namespace Project
                     }
                     if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
                     {
-                        if (!disable)
-                        {
-                            lightRectangle = new Rectangle(76, 0, 38, 65);
-                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);                          
-                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
-                        }
+
+                        lightRectangle = new Rectangle(76, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
                     }
                     if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
                     {
-                        if (!disable)
-                        {
-                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
-                        }
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
                     }
 
                 }
