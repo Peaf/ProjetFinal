@@ -627,11 +627,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Tile\Tile200.jpg">
-      <Name>Tile200</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Tile\Tile22.png">
       <Name>Tile22</Name>
       <Importer>TextureImporter</Importer>
@@ -793,6 +788,13 @@
   <ItemGroup>
     <Compile Include="Menu\inventaire.png">
       <Name>inventaire</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tile\Tile200.jpg">
+      <Name>Tile200</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

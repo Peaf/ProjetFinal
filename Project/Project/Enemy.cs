@@ -19,14 +19,14 @@ namespace Project
         int screenWidth = 1366, screenHeight = 768;
 
         int vitesse = 1;
-        public int mapnumber = 5;
-        public int ligne = 1;
-        public int colonne = 1;
+        
+        public int ligne = 1, colonne = 1, mapnumber = 5, strength;
+       
         public string Direction;
         int timer = 0, timerEnemy = 0;
         public int health, healthMax;
 
-        public Enemy(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth)
+        public Enemy(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newStrength)
         {
             enemyTexture = newTexture;
             enemyPosition = newPosition;
@@ -34,6 +34,7 @@ namespace Project
             Rectenemy = newsprite;
             health = newHealth;
             healthMax = newHealth;
+            strength = newStrength;
         }
 
 

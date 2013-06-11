@@ -16,7 +16,7 @@ namespace Project
         public Rectangle persoRectangle;
         public string type, type2;
 
-        int vitesse = 1; //test git hub
+        int vitesse = 2; //test git hub
         public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext, Gold;
         public string Direction;
         int timer = 0, timerRun = 0, i = 0, timerMenu;
@@ -64,7 +64,7 @@ namespace Project
             if (gameState == Game1.GameState.MainMenu)
             {
                 timerMenu++;
-                if (timerMenu < 200 || (timerMenu >= 630 && timerMenu < 830)) //gauche
+                if (timerMenu < 100 || (timerMenu >= 315 && timerMenu < 415)) //gauche
                 {
                     ligne = 1;
                     timer++;
@@ -83,7 +83,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                     Game1.playerMenu.persoPosition += (new Vector2((-vitesse), 0));
                 }
-                else if ((timerMenu >= 200 && timerMenu < 310) || (timerMenu >= 510 && timerMenu < 630) || (timerMenu >= 830 && timerMenu < 935)) //bas
+                else if ((timerMenu >= 100 && timerMenu < 155) || (timerMenu >= 255 && timerMenu < 315) || (timerMenu >= 415 && timerMenu < 468)) //bas
                 {
                     timer++;
                     ligne = 0;
@@ -103,7 +103,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
                     Game1.playerMenu.persoPosition += new Vector2(0, vitesse);
                 }
-                else if ((timerMenu >= 310 && timerMenu < 510) || (timerMenu >= 935 && timerMenu < 1125)) //droite
+                else if ((timerMenu >= 155 && timerMenu < 255) || (timerMenu >= 468 && timerMenu < 563)) //droite
                 {
                     timer++;
                     ligne = 3;
@@ -123,7 +123,7 @@ namespace Project
                     Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                     Game1.playerMenu.persoPosition += new Vector2(vitesse, 0);
                 }
-                else if (timerMenu >=1125 && timerMenu < 1455) // haut
+                else if (timerMenu >=563 && timerMenu < 728) // haut
                 {
                     ligne = 2;
                     timer++;
@@ -139,13 +139,13 @@ namespace Project
                             colonne++;
                         }
                     }
-
                     Game1.playerMenu.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                     Game1.playerMenu.persoPosition += new Vector2(0, -vitesse);
                 }
                 else
                 {
                     timerMenu = 0;
+                    Game1.playerMenu.persoPosition = new Vector2(788, 230);
                 }
             }
             if (gameState == Game1.GameState.Playing1 || gameState == Game1.GameState.Playing2)

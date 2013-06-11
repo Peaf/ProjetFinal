@@ -224,7 +224,7 @@ namespace Project
 
                 else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0) //enemy 
                 {
-                    degatEnemy = rand.Next(100, 120);
+                    degatEnemy = rand.Next(100, 120) + Game1.enemy.strength/2 + 15*Game1.player.Lvl;
                     if (disable)
                     {
                         Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;

@@ -28,10 +28,15 @@ namespace Project
         {
             bool x;
             if (Playing.nbjoueurs == 2)
+            {
                 x = ((Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50) || (Game1.player2.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player2.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player2.persoPosition.Y < pnj.pnjPosition.Y + 50));
-            else x = (Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50) ;
+            }
+            else
+            {
+                x = (Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50);
+            }
             return (x);
-            return ((Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50) ||(Game1.player2.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player2.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player2.persoPosition.Y < pnj.pnjPosition.Y + 50));//&& Game1.player.persoPosition.Y  + Game1.player.persoRectangle.Height< pnj.pnjPosition.Y);
+            
         }
 
 
