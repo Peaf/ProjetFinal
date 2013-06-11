@@ -283,8 +283,11 @@ namespace Project
         }
 
         public bool Collision()
-        {
-            return ((enemyRectangle.Intersects(Game1.player.persoRectangle))|| (enemyRectangle.Intersects(Game1.player2.persoRectangle)));
+        { bool x;
+        if (Playing.nbjoueurs == 2)
+            x = (enemyRectangle.Intersects(Game1.player.persoRectangle)) || (enemyRectangle.Intersects(Game1.player2.persoRectangle));
+        else x = (enemyRectangle.Intersects(Game1.player.persoRectangle));
+            return (x);
         }
 
        /* public void Collision(Rectangle newRectangle)

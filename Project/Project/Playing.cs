@@ -15,7 +15,7 @@ namespace Project
     static class Playing
     {
         public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
-        static public int mapNumber = 5, timerInventaire = 0;
+        static public int mapNumber = 5, timerInventaire = 0, nbjoueurs;
         static string line;
         static int[,] tab_map8 = new int[26, 44];
         static int[,] tab_map5 = new int[26, 44];
@@ -176,15 +176,17 @@ namespace Project
             map = map5;
         }
 
-        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
+        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics,int newNbjoueurs)
         {
-
+            nbjoueurs = newNbjoueurs;
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-            Game1.GameState CurrentGameState = Game1.GameState.Playing;
+            
+            Game1.GameState CurrentGameState = Game1.GameState.Playing1;
+          
             if (!inventaire)
             {
                 foreach (CollisionTiles tile in map.CollisionTiles)
@@ -192,7 +194,7 @@ namespace Project
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                        Game1.player2.Collision(tile.Rectangle);
+                       if(nbjoueurs ==2) Game1.player2.Collision(tile.Rectangle);
                     }
                 }
 
@@ -328,7 +330,7 @@ namespace Project
                         Game1.player.persoPosition.Y = 2;
                         
                     }
-                    Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
                 else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
@@ -350,7 +352,7 @@ namespace Project
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
                         
                     }
-                    Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
                 else if (Game1.player.persoPosition.X <= 0)
                 {
@@ -373,7 +375,7 @@ namespace Project
                         Game1.player.persoPosition.X = 2;
                         
                     }
-                    Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
                 else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
@@ -397,31 +399,34 @@ namespace Project
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                        
                     }
-                    Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
                 //00000000000000000000000000000000000000000
-                if (Game1.player2.persoPosition.Y <= 0)
+                if (nbjoueurs == 2)
                 {
-                    
-                        Game1.player2.persoPosition.Y = 2;
-                    
+                    if (Game1.player2.persoPosition.Y <= 0)
+                    {
 
-                }
-                else if (Game1.player2.persoPosition.Y >= screenHeight - Game1.player2.persoTexture.Height / 8)
-                {
-                    Game1.player2.persoPosition.Y = screenHeight - Game1.player2.persoTexture.Height / 8 - 1;
-                   
-                }
-                else if (Game1.player2.persoPosition.X <= 0)
-                {
+                        Game1.player2.persoPosition.Y = 2;
+
+
+                    }
+                    else if (Game1.player2.persoPosition.Y >= screenHeight - Game1.player2.persoTexture.Height / 8)
+                    {
+                        Game1.player2.persoPosition.Y = screenHeight - Game1.player2.persoTexture.Height / 8 - 1;
+
+                    }
+                    else if (Game1.player2.persoPosition.X <= 0)
+                    {
                         Game1.player2.persoPosition.X = 2;
-                   
-                }
-                else if (Game1.player2.persoPosition.X >= screenWidth - Game1.player2.persoTexture.Width / 4)
-                {
-                   
+
+                    }
+                    else if (Game1.player2.persoPosition.X >= screenWidth - Game1.player2.persoTexture.Width / 4)
+                    {
+
                         Game1.player2.persoPosition.X = screenWidth - Game1.player2.persoTexture.Width / 4;
-                    
+
+                    }
                 }
                 //0000000000000000000000000000
                 if (Isfighting)
@@ -437,15 +442,15 @@ namespace Project
                 timerInventaire++;
 
                 //Perso        
-                Game1.player.Update(gameTime, Game1.GameState.Playing);
-                Game1.player2.Update(gameTime, Game1.GameState.Playing);
+                Game1.player.Update(gameTime, Game1.GameState.Playing1);
+                if (nbjoueurs == 2) Game1.player2.Update(gameTime, Game1.GameState.Playing2);
 
                 //PNJ
                 Game1.player.Collision(Game1.healer.taille);
                 Game1.player.Collision(Game1.pnj1.taille);
 
-                Game1.player2.Collision(Game1.healer.taille);
-                Game1.player2.Collision(Game1.pnj1.taille);
+                if (nbjoueurs == 2) Game1.player2.Collision(Game1.healer.taille);
+                if (nbjoueurs == 2) Game1.player2.Collision(Game1.pnj1.taille);
 
                 if (Game1.pnj1.Collision(Game1.pnj1))
                 {
@@ -547,7 +552,7 @@ namespace Project
             return (CurrentGameState);
         }
 
-        public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
+        public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight, int nbjoueur)
         {
             presentKey = Keyboard.GetState();
             map.Draw(spriteBatch);
@@ -580,8 +585,9 @@ namespace Project
                 Game1.healer.Draw(spriteBatch, 0, "map5");
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
-            Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
-            Game1.player2.Draw(spriteBatch, Game1.GameState.Playing);
+            Game1.player.Draw(spriteBatch, Game1.GameState.Playing1);
+            if (nbjoueur == 2) 
+                Game1.player2.Draw(spriteBatch, Game1.GameState.Playing2);
 
             if (map == map4)
                 Game1.sand.Draw(spriteBatch);

@@ -148,7 +148,7 @@ namespace Project
                     timerMenu = 0;
                 }
             }
-            if (gameState == Game1.GameState.Playing)
+            if (gameState == Game1.GameState.Playing1 || gameState == Game1.GameState.Playing2)
             {
                 if (!fight)
                 {
@@ -411,7 +411,7 @@ namespace Project
                 }
             }
             Game1.player.persoRectangle = new Rectangle((int)Game1.player.persoPosition.X, (int)Game1.player.persoPosition.Y + Game1.player.persoTexture.Height / 16, Game1.player.persoTexture.Width / 12, Game1.player.persoTexture.Height / 16);
-            Game1.player2.persoRectangle = new Rectangle((int)Game1.player2.persoPosition.X, (int)Game1.player2.persoPosition.Y + Game1.player2.persoTexture.Height / 16, Game1.player2.persoTexture.Width / 12, Game1.player2.persoTexture.Height / 16);
+            if (Playing.nbjoueurs == 2) Game1.player2.persoRectangle = new Rectangle((int)Game1.player2.persoPosition.X, (int)Game1.player2.persoPosition.Y + Game1.player2.persoTexture.Height / 16, Game1.player2.persoTexture.Width / 12, Game1.player2.persoTexture.Height / 16);
 
         }
 
@@ -424,7 +424,7 @@ namespace Project
             else
             {
                 spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
-                spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
+                if (Playing.nbjoueurs == 2) spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
             }
         }
 

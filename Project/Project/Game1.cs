@@ -19,8 +19,8 @@ namespace Project
         public static SpriteBatch spriteBatch;
         public static Character player, player2, playerMenu;
 
-        public static PNJ pnj1,healer;
-        public static Enemy enemy, enemy1, enemy2,enemy3,enemy4;
+        public static PNJ pnj1, healer;
+        public static Enemy enemy, enemy1, enemy2, enemy3, enemy4;
         Song song1, song2;
 
         Random rand = new Random();
@@ -36,7 +36,7 @@ namespace Project
         KeyboardState presentKey;
         KeyboardState pastKey;
 
-       
+
 
         public static SpriteFont spriteFont;
 
@@ -48,7 +48,7 @@ namespace Project
         int[,] tab_map8 = new int[26, 44];
         int[,] tab_map5 = new int[26, 44];
         int[,] tab_map4 = new int[26, 44];
-        
+
 
         public static Inventaire invent = new Inventaire();
 
@@ -58,12 +58,13 @@ namespace Project
             Title,
             MainMenu,
             Options,
-            Playing,
+            Playing1,
+            Playing2,
             Fight,
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Playing;
+        public GameState CurrentGameState = GameState.MainMenu;
 
         public Game1()
         {
@@ -73,9 +74,9 @@ namespace Project
 
         protected override void Initialize()
         {
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50,0);
-            player2 = new Character(Content.Load <Texture2D>("Sprites/Player2"), new Vector2(388, 630), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20,0);
-            playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50,0);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
+            if(Playing.nbjoueurs ==2) player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 630), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
+            playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
               this.graphics.ApplyChanges();
            
@@ -84,11 +85,11 @@ namespace Project
             screenHeight = 768;
             screenWidth = 1366;
             invent.Initialize();
-            invent.addItem(new Item("Potion","healthPotion","health",50 , 1,""));
+            invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
             invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
             invent.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
-            invent.addItem(new Item("Weapon","Sword","dmg", 30, 1,"notequiped"));
-            invent.addItem(new Item("Armor","Armor","",30,1,"notequiped"));
+            invent.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
+            invent.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
 
             base.Initialize();
         }
@@ -191,9 +192,14 @@ namespace Project
 
                     break;
 
-                case GameState.Playing:
+                case GameState.Playing1:
 
-                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics);
+                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics, 1);
+
+                    break;
+                case GameState.Playing2:
+
+                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics, 2);
 
                     break;
 
@@ -254,15 +260,21 @@ namespace Project
 
                     break;
 
-                case GameState.Playing:
+                case GameState.Playing1:
 
-                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
+                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, 1);
+
+                    break;
+                case GameState.Playing2:
+
+                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, 2);
 
                     break;
 
                 case GameState.Pause:
 
-                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
+                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, Playing.nbjoueurs);
+
                     Pause.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
 
                     break;

@@ -45,7 +45,9 @@ namespace Project
 
             if (btnPlay2.isClicked)
             {
-                CurrentGameState = Game1.GameState.Playing;
+                if (Playing.nbjoueurs == 1)
+                    CurrentGameState = Game1.GameState.Playing1; 
+                else CurrentGameState = Game1.GameState.Playing2;
                 MediaPlayer.Resume();
             }
             else if (btnOptions2.isClicked)
