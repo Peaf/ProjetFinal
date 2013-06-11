@@ -503,13 +503,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu\inventaire.png">
-      <Name>inventaire</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="QuestBook.png">
       <Name>QuestBook</Name>
       <Importer>TextureImporter</Importer>
@@ -793,6 +786,13 @@
   <ItemGroup>
     <Compile Include="Sprites\Player2.png">
       <Name>Player2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Menu\inventaire.png">
+      <Name>inventaire</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

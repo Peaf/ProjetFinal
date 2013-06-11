@@ -685,8 +685,11 @@ namespace Project
                     spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
                 }*/
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 150), new Vector2(495, 65), Color.White);
+
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : ", new Vector2(445, 45), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(515, 45), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience : " , new Vector2(445, 70), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 150), new Vector2(570, 70), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.White);
