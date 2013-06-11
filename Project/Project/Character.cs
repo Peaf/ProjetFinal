@@ -17,13 +17,13 @@ namespace Project
         public string type, type2;
 
         int vitesse = 1; //test git hub
-        public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext;
+        public int mapnumber = 5, health, ligne = 1, colonne = 1, mana, healthMax, manaMax, Experience, Strenght, Intelligence, Degat, Armor, Lvl, ExperienceNext, Gold;
         public string Direction;
         int timer = 0, timerRun = 0, i = 0, timerMenu;
         public bool fight = false, lvlup;
         public Map map, map4, map5;
 
-        public Character(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newMana, int newExperience, int newStrenght, int newIntelligence, int newDegat, int newArmor)
+        public Character(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newMana, int newExperience, int newStrenght, int newIntelligence, int newDegat, int newArmor, int newGold)
         {
             persoTexture = newTexture;
             persoPosition = newPosition;
@@ -38,6 +38,7 @@ namespace Project
             Intelligence = newIntelligence;
             Degat = newDegat;
             Armor = newArmor;
+            Gold = newGold;
             Lvl = 1;
 
         }
