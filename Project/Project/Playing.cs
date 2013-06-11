@@ -209,7 +209,12 @@ namespace Project
                     if (Game1.healer.Collision(Game1.healer))
                     {
                         Game1.healer.Update(gameTime, 1, "map5");
+                        if (Game1.player.health < Game1.player.healthMax)
+                        {
+                            Game1.player.Gold -= 5;
+                        }
                         Game1.player.health = Game1.player.healthMax;
+                       
                     }
                 }
                 if (map == map4)
@@ -461,6 +466,7 @@ namespace Project
                     {
                         Game1.bookState = 2;
                         Game1.player.Experience += 60;
+                        Game1.player.Gold += 20;
                         Game1.btnNext.isClicked = false;
                     }
                     if (Game1.bookState == 2)
@@ -472,6 +478,7 @@ namespace Project
                     if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
                     {
                         Game1.pnj1.Update(gameTime, 2, "map8");
+                        Game1.player.Gold += 25;
                         Game1.bookState = 3;
                     }
 
@@ -610,20 +617,25 @@ namespace Project
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     Game1.btnNext.Draw(spriteBatch);
                     Game1.pnj1.Draw(spriteBatch, 1, "map8");
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks. Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 700), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "+ 60 Xp", new Vector2(1100, 725), Color.Red);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks a lot. Here take this gold as a reward.", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you do something else for me? I've seen some ennemies in the south can you kill them I want to go home?", new Vector2(10, 725), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 20 Gold", new Vector2(1100, 695), Color.Gold);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 60 Xp", new Vector2(1110, 725), Color.Red);
                 }
                 if (talking && Game1.bookState == 2)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Claudius: You underestimate my power", new Vector2(10, 725), Color.Black);
                 }
                 if (talking && Game1.bookState == 3)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Oh you're hurt go south you'll find a healer there", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Thanks a lot , but ... but ... you're hurt! Go south you'll find a healer there", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Oh and you will need that. He is really greedy he wont heal you for free", new Vector2(10, 725), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 25 Gold", new Vector2(1100, 725), Color.Gold);
                 }
                 if (Game1.bookState == 4 && talking)
                 {

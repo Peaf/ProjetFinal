@@ -274,6 +274,7 @@ namespace Project
                         Game1.player.persoPosition.Y = Game1.previousPosY;
                         Game1.player.persoRectangle = new Rectangle((int)Game1.previousPosX, (int)Game1.previousPosY, Game1.player.persoRectangle.Width, Game1.player.persoRectangle.Height);
                         Game1.player.fight = false;
+                        Game1.player.Gold += Game1.enemy.healthMax / 10;
                         CurrentGameState = Game1.GameState.Playing;
                         Isfighting = false;
                         Game1.enemy.enemyPosition.X = -100;
