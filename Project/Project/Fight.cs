@@ -240,7 +240,7 @@ namespace Project
                     }
                     else
                     {
-                        disable = (rand.Next(1, 2) == 1); // on peut disable que si le player ne l'est pas deja
+                        disable = (rand.Next(1, 5) == 1); // on peut disable que si le player ne l'est pas deja
                         if (disable)
                         {
                             disableEnd = turn + 5;
