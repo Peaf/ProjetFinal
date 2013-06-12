@@ -25,6 +25,7 @@ namespace Project
             {
                 stream = new FileStream("save.txt",FileMode.Create);
                 sw = new StreamWriter(stream);
+                sw.WriteLine(Game1.questState);
                 sw.WriteLine(Game1.player.persoPosition.X);
                 sw.WriteLine(Game1.player.persoPosition.Y);
                 sw.WriteLine(Game1.player.persoRectangle.X);

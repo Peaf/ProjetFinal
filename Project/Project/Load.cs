@@ -21,6 +21,7 @@ namespace Project
             try
             {
                 sr = File.OpenText("save.txt");
+                Game1.questState = int.Parse(sr.ReadLine());
                 Game1.player.persoPosition.X = int.Parse(sr.ReadLine());
                 Game1.player.persoPosition.Y = int.Parse(sr.ReadLine());
                 Game1.player.persoRectangle.X = int.Parse(sr.ReadLine());
