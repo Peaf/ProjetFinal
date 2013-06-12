@@ -22,7 +22,6 @@ namespace Project
 
         public static void LoadContent(ContentManager Content, int screenWidth, int screenHeight)
         {
-
             ImageMenu = Content.Load<Texture2D>("Menu/MainMenu");
 
             PlayButton = new cButton(Content.Load<Texture2D>("Button/PlayButton"), 100, 75);
@@ -33,7 +32,6 @@ namespace Project
 
             QuitButton = new cButton(Content.Load<Texture2D>("Button/QuitButton"), 100, 75);
             QuitButton.setPosition(new Vector2(screenWidth / 2 - QuitButton.size.X / 2, screenHeight / 2 + 125));
-
             song2 = Content.Load<Song>("Song/Song2");
         }
 

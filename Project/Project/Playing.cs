@@ -99,7 +99,7 @@ namespace Project
             bookRectangle = new Rectangle(200, 330, bookTexture.Width, bookTexture.Height);
 
             //cactus
-            cactusTexture = Content.Load<Texture2D>("Tile/Tile102");
+            cactusTexture = Content.Load<Texture2D>("Tile/cactus");
             cactusRectangle = new Rectangle(200, 315, cactusTexture.Width, cactusTexture.Height);
             cactusRectangle2 = new Rectangle(370, 460, cactusTexture.Width, cactusTexture.Height);
             cactusRectangle3 = new Rectangle(430, 130, cactusTexture.Width, cactusTexture.Height);
@@ -223,6 +223,7 @@ namespace Project
             nbjoueurs = newNbjoueurs;
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "");
+            Item cactusItem = new Item("QuestItem", "cactusItem","", 0, 1, "");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
@@ -279,31 +280,31 @@ namespace Project
                         if (Game1.player.persoRectangle.Intersects(cactusRectangle) && KState.IsKeyDown(Keys.F))
                         {
                             cactusRectangle = new Rectangle(0, 0, 0, 0);
-                            Game1.invent.addItem(book);
+                            Game1.invent.addItem(cactusItem);
                             cactus++;
                         }
                         if (Game1.player.persoRectangle.Intersects(cactusRectangle2) && KState.IsKeyDown(Keys.F))
                         {
                             cactusRectangle2 = new Rectangle(0, 0, 0, 0);
-                            Game1.invent.addItem(book);
+                            Game1.invent.addItem(cactusItem);
                             cactus++;
                         }
                         if (Game1.player.persoRectangle.Intersects(cactusRectangle3) && KState.IsKeyDown(Keys.F))
                         {
                             cactusRectangle3 = new Rectangle(0, 0, 0, 0);
-                            Game1.invent.addItem(book);
+                            Game1.invent.addItem(cactusItem);
                             cactus++;
                         }
                         if (Game1.player.persoRectangle.Intersects(cactusRectangle4) && KState.IsKeyDown(Keys.F))
                         {
                             cactusRectangle4 = new Rectangle(0, 0, 0, 0);
-                            Game1.invent.addItem(book);
+                            Game1.invent.addItem(cactusItem);
                             cactus++;
                         }
                         if (Game1.player.persoRectangle.Intersects(cactusRectangle5) && KState.IsKeyDown(Keys.F))
                         {
                             cactusRectangle5 = new Rectangle(0, 0, 0, 0);
-                            Game1.invent.addItem(book);
+                            Game1.invent.addItem(cactusItem);
                             cactus++;
                         }
                         if (cactus == 5)
@@ -684,11 +685,11 @@ namespace Project
             if (map == map4)
             {
                 Game1.sand.Draw(spriteBatch);
-                spriteBatch.Draw(cactusTexture, cactusRectangle, Color.Blue);
-                spriteBatch.Draw(cactusTexture, cactusRectangle2, Color.Blue);
-                spriteBatch.Draw(cactusTexture, cactusRectangle3, Color.Blue);
-                spriteBatch.Draw(cactusTexture, cactusRectangle4, Color.Blue);
-                spriteBatch.Draw(cactusTexture, cactusRectangle5, Color.Blue);
+                spriteBatch.Draw(cactusTexture, cactusRectangle, Color.White);
+                spriteBatch.Draw(cactusTexture, cactusRectangle2, Color.White);
+                spriteBatch.Draw(cactusTexture, cactusRectangle3, Color.White);
+                spriteBatch.Draw(cactusTexture, cactusRectangle4, Color.White);
+                spriteBatch.Draw(cactusTexture, cactusRectangle5, Color.White);
             }
 
             if (map == map6)
@@ -766,6 +767,7 @@ namespace Project
                 if (Game1.questState == 0 && talkOnce)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Red);
+                    spriteBatch.Draw(bookTexture, new Rectangle(520, 55, bookTexture.Width, bookTexture.Width), Color.White);
                 }
                 if (Game1.questState == 1)
                 {
@@ -797,7 +799,8 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
-                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Red);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus and bring them back to Zuras", new Vector2(95, 170), Color.Red);
+                    spriteBatch.Draw(cactusTexture, new Rectangle(510, 165, cactusTexture.Width, cactusTexture.Height), Color.White);
                 }
                 if (Game1.questState == 5)
                 {
@@ -874,6 +877,10 @@ namespace Project
 
                             case "Book":
                                 spriteBatch.Draw(bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                break;
+
+                            case "cactusItem":
+                                spriteBatch.Draw(cactusTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) +10, cactusTexture.Width, cactusTexture.Height), Color.White);
                                 break;
 
                         }
