@@ -402,17 +402,15 @@ namespace Project
                 }
                 if (Game1.player.persoPosition.Y <= 0)
                 {
-                    if (mapNumber == 5)
+                    if (map == map5)
                     {
                         map = map8;
-                        mapNumber = 8;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
 
                     }
-                    else if (mapNumber == 2)
+                    else if (map == map2)
                     {
                         map = map5;
-                        mapNumber = 5;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                     }
                     else
@@ -425,16 +423,14 @@ namespace Project
                 }
                 else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
                 {
-                    if (mapNumber == 8)
+                    if (map == map8)
                     {
                         map = map5;
-                        mapNumber = 5;
                         Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
                     }
-                    else if (mapNumber == 5)
+                    else if (map == map5)
                     {
                         map = map2;
-                        mapNumber = 2;
                         Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
                     }
                     else
@@ -446,43 +442,36 @@ namespace Project
                 }
                 else if (Game1.player.persoPosition.X <= 0)
                 {
-                    if (mapNumber == 5)
+                    if (map == map5)
                     {
                         map = map4;
-                        mapNumber = 4;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
 
                     }
-                    else if (mapNumber == 6)
+                    else if (map == map6)
                     {
-                        map = map5;
-                        mapNumber = 5;
+                        map = map5;;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-
                     }
                     else
                     {
                         Game1.player.persoPosition.X = 2;
-
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
                 else if (Game1.player.persoPosition.X >= screenWidth - Game1.player.persoTexture.Width / 4)
                 {
-                    if (mapNumber == 4)
+                    if (map == map4)
                     {
                         map = map5;
-                        mapNumber = 5;
                         Game1.player.persoPosition.X = 0;
 
                     }
-                    else if (mapNumber == 5)
+                    else if (map == map5)
                     {
                         map = map6;
-                        mapNumber = 6;
                         Game1.player.persoPosition.X = 0;
-
                     }
                     else
                     {
@@ -496,10 +485,7 @@ namespace Project
                 {
                     if (Game1.player2.persoPosition.Y <= 0)
                     {
-
                         Game1.player2.persoPosition.Y = 2;
-
-
                     }
                     else if (Game1.player2.persoPosition.Y >= screenHeight - Game1.player2.persoTexture.Height / 8)
                     {

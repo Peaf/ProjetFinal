@@ -58,7 +58,8 @@ namespace Project
             }
             if (btnQuit2.isClicked)
             {
-                Save.Update();
+                //Save.Update();
+                Environment.Exit(0);
             }
 
             btnPlay2.Update(mouse, gameTime);

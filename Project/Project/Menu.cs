@@ -45,10 +45,10 @@ namespace Project
             if (PlayButton.isClicked == true)
             {
                 
-               MediaPlayer.Stop();
+              MediaPlayer.Stop();
               CurrentGameState = Game1.GameState.Playing1;
-              Load.Update();
-               MediaPlayer.Play(song2);
+              //Load.Update();
+              MediaPlayer.Play(song2);
             }
 
             if (OptionsButton.isClicked == true)
