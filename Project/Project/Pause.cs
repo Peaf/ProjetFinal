@@ -52,9 +52,9 @@ namespace Project
             }
             else if (btnOptions2.isClicked)
             {
-                Load.Update();
-                //CurrentGameState = Game1.GameState.Options;
-                //MediaPlayer.Resume();
+   
+                CurrentGameState = Game1.GameState.Options;
+                MediaPlayer.Resume();
             }
             if (btnQuit2.isClicked)
             {

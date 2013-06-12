@@ -20,8 +20,27 @@ namespace Project
 
             try
             {
-                sr = File.OpenText("save.txt");
+                sr = File.OpenText("save2.txt");
                 Game1.questState = int.Parse(sr.ReadLine());
+                switch (int.Parse(sr.ReadLine()))
+                {
+                    case 2 :
+                        Playing.map = Playing.map2;
+                        break;
+                    case 4 :
+                        Playing.map = Playing.map4;
+                        break;
+                    case 5 :
+                        Playing.map = Playing.map5;
+                        break;
+                    case 6 :
+                        Playing.map = Playing.map6;
+                        break;
+                    case 8 :
+                        Playing.map = Playing.map8;
+                        break;
+                }
+                sr.ReadLine();
                 Game1.player.persoPosition.X = int.Parse(sr.ReadLine());
                 Game1.player.persoPosition.Y = int.Parse(sr.ReadLine());
                 Game1.player.persoRectangle.X = int.Parse(sr.ReadLine());

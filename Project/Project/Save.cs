@@ -23,9 +23,20 @@ namespace Project
 
             try
             {
-                stream = new FileStream("save.txt",FileMode.Create);
+                stream = new FileStream("save2.txt",FileMode.Create);
                 sw = new StreamWriter(stream);
                 sw.WriteLine(Game1.questState);
+                if (Playing.map == Playing.map2)
+                    sw.WriteLine(2);
+                else if (Playing.map == Playing.map4)
+                    sw.WriteLine(4);
+                else if (Playing.map == Playing.map5)
+                    sw.WriteLine(5);
+                else if (Playing.map == Playing.map6)
+                    sw.WriteLine(6);
+                else if (Playing.map == Playing.map8)
+                    sw.WriteLine(8);
+                sw.WriteLine(Playing.map);
                 sw.WriteLine(Game1.player.persoPosition.X);
                 sw.WriteLine(Game1.player.persoPosition.Y);
                 sw.WriteLine(Game1.player.persoRectangle.X);

@@ -22,8 +22,8 @@ namespace Project
         static int[,] tab_map4;
         static int[,] tab_map2;
         static int[,] tab_map6;
-        static Map map;
-        static Map map5, map8, map4, map2, map6;
+        public static Map map;
+        public static Map map5, map8, map4, map2, map6;
         static StreamReader streamMap8;
         static StreamReader streamMap5;
         static StreamReader streamMap4;
