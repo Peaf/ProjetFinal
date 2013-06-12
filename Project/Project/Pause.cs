@@ -52,12 +52,13 @@ namespace Project
             }
             else if (btnOptions2.isClicked)
             {
-                CurrentGameState = Game1.GameState.Options;
-                MediaPlayer.Resume();
+                Load.Update();
+                //CurrentGameState = Game1.GameState.Options;
+                //MediaPlayer.Resume();
             }
             if (btnQuit2.isClicked)
             {
-                //Save.Update();
+                Save.Update();
             }
 
             btnPlay2.Update(mouse, gameTime);
