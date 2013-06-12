@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture, cactusTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
         static int[,] tab_map8;
@@ -31,9 +31,9 @@ namespace Project
         static StreamReader streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce;
         static public bool inventaire;
-        static int turn, lvlBefore, j;
+        static int turn, lvlBefore, j,cactus;
         static Song song3;
-        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
         static string attackChoisi;
         static KeyboardState presentKey, pastKey;
 
@@ -97,6 +97,15 @@ namespace Project
             //Book
             bookTexture = Content.Load<Texture2D>("Book");
             bookRectangle = new Rectangle(200, 330, bookTexture.Width, bookTexture.Height);
+
+            //cactus
+            cactusTexture = Content.Load<Texture2D>("Tile/Tile102");
+            cactusRectangle = new Rectangle(200, 315, cactusTexture.Width, cactusTexture.Height);
+            cactusRectangle2 = new Rectangle(370, 460, cactusTexture.Width, cactusTexture.Height);
+            cactusRectangle3 = new Rectangle(430, 130, cactusTexture.Width, cactusTexture.Height);
+            cactusRectangle4 = new Rectangle(950, 370, cactusTexture.Width, cactusTexture.Height);
+            cactusRectangle5 = new Rectangle(820, 615, cactusTexture.Width, cactusTexture.Height);
+
 
             //Potion
             healthPotionTexture = Content.Load<Texture2D>("healthPotion");
@@ -217,7 +226,7 @@ namespace Project
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-
+            KeyboardState KState = Keyboard.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.Playing1;
 
             if (!inventaire)
@@ -237,16 +246,26 @@ namespace Project
                     //Pnj
                     if (!Game1.healer.Collision(Game1.healer))
                     {
-                        Game1.healer.Update(gameTime, 0, "map5");
-                        Game1.bookState = 4;
+                        Game1.healer.Update(gameTime, 0, "map2");
                     }
 
                     if (Game1.healer.Collision(Game1.healer))
                     {
-                        Game1.healer.Update(gameTime, 1, "map5");
+                        Game1.healer.Update(gameTime, 1, "map2");
                         if (Game1.player.health < Game1.player.healthMax)
                         {
+
                             Game1.player.Gold -= 5;
+                        }
+                        if (Game1.player.health == Game1.player.healthMax && Game1.questState == 3)
+                        {
+                            Game1.questState = 4;
+                        }
+                        if (Game1.questState == 5)
+                        {
+                            Game1.player.Gold += 30;
+                            Game1.player.Experience += 70;
+                            Game1.questState++;
                         }
                         Game1.player.health = Game1.player.healthMax;
 
@@ -255,6 +274,44 @@ namespace Project
                 if (map == map4)
                 {
                     Game1.sand.update(gameTime, graphics.GraphicsDevice);
+                    if (Game1.questState == 4)
+                    {
+                        if (Game1.player.persoRectangle.Intersects(cactusRectangle) && KState.IsKeyDown(Keys.F))
+                        {
+                            cactusRectangle = new Rectangle(0, 0, 0, 0);
+                            Game1.invent.addItem(book);
+                            cactus++;
+                        }
+                        if (Game1.player.persoRectangle.Intersects(cactusRectangle2) && KState.IsKeyDown(Keys.F))
+                        {
+                            cactusRectangle2 = new Rectangle(0, 0, 0, 0);
+                            Game1.invent.addItem(book);
+                            cactus++;
+                        }
+                        if (Game1.player.persoRectangle.Intersects(cactusRectangle3) && KState.IsKeyDown(Keys.F))
+                        {
+                            cactusRectangle3 = new Rectangle(0, 0, 0, 0);
+                            Game1.invent.addItem(book);
+                            cactus++;
+                        }
+                        if (Game1.player.persoRectangle.Intersects(cactusRectangle4) && KState.IsKeyDown(Keys.F))
+                        {
+                            cactusRectangle4 = new Rectangle(0, 0, 0, 0);
+                            Game1.invent.addItem(book);
+                            cactus++;
+                        }
+                        if (Game1.player.persoRectangle.Intersects(cactusRectangle5) && KState.IsKeyDown(Keys.F))
+                        {
+                            cactusRectangle5 = new Rectangle(0, 0, 0, 0);
+                            Game1.invent.addItem(book);
+                            cactus++;
+                        }
+                        if (cactus == 5)
+                        {
+                            Game1.questState = 5;
+                        }
+
+                    }
 
                 }
 
@@ -336,9 +393,9 @@ namespace Project
                     //Moteur à particules
                     Game1.snow.update(gameTime, graphics.GraphicsDevice);
 
-                    if (Game1.player.persoRectangle.Intersects(bookRectangle))
+                    if (Game1.player.persoRectangle.Intersects(bookRectangle) && KState.IsKeyDown(Keys.F))
                     {
-                        Game1.bookState = 1;
+                        Game1.questState = 1;
                         Game1.invent.addItem(book);
                         bookRectangle = new Rectangle(0, 0, 0, 0);
                     }
@@ -434,7 +491,7 @@ namespace Project
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
-                //00000000000000000000000000000000000000000
+
                 if (nbjoueurs == 2)
                 {
                     if (Game1.player2.persoPosition.Y <= 0)
@@ -461,7 +518,7 @@ namespace Project
 
                     }
                 }
-                //0000000000000000000000000000
+
                 if (Isfighting)
                 {
                     CurrentGameState = Game1.GameState.Fight;
@@ -470,8 +527,6 @@ namespace Project
                 {
                     lvlUp = true;
                 }
-
-
                 timerInventaire++;
 
                 //Perso        
@@ -489,35 +544,35 @@ namespace Project
                 {
                     talking = true;
                 }
-                if (Game1.bookState == 0)
+                if (Game1.questState == 0)
                 {
                     Game1.pnj1.Update(gameTime, 0, "map8");
                 }
                 if (talking)
                 {
                     Game1.btnNext.Update(mouse, gameTime);
-                    if (Game1.bookState == 1)
+                    if (Game1.questState == 1)
                     {
                         Game1.pnj1.Update(gameTime, 1, "map8");
                     }
-                    if (Game1.btnNext.isClicked && Game1.bookState == 1)
+                    if (Game1.btnNext.isClicked && Game1.questState == 1)
                     {
-                        Game1.bookState = 2;
+                        Game1.questState = 2;
                         Game1.player.Experience += 60;
                         Game1.player.Gold += 20;
                         Game1.btnNext.isClicked = false;
                     }
-                    if (Game1.bookState == 2)
+                    if (Game1.questState == 2)
                     {
                         Game1.btnNext.isClicked = false;
                         Game1.invent.removeItem(book);
                         Game1.pnj1.Update(gameTime, 2, "map8");
                     }
-                    if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
+                    if (Game1.questState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
                     {
                         Game1.pnj1.Update(gameTime, 2, "map8");
                         Game1.player.Gold += 25;
-                        Game1.bookState = 3;
+                        Game1.questState = 3;
                     }
 
                     if (!Game1.pnj1.Collision(Game1.pnj1))
@@ -615,7 +670,25 @@ namespace Project
                 pastKey = presentKey;
             }
             if (map == map2)
-                Game1.healer.Draw(spriteBatch, 0, "map5");
+            {
+                Game1.healer.Draw(spriteBatch, 0, "map2");
+                if (Game1.questState == 4 && Game1.healer.Collision(Game1.healer))
+                {
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, "Zuras: Here you go little warrior. Can I Ask you something? I need plants to heal people.", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Zuras : But now I'm old and it's so far away. Can you go in the desert and pick 5 cactus for me? ", new Vector2(10, 725), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Claudius : Sure. I'm on my way ", new Vector2(10, 750), Color.Black);
+                }
+                if (Game1.questState == 5 && Game1.healer.Collision(Game1.healer))
+                {
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, "Zuras: Thank you little human. Here's you reward", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 30 Gold", new Vector2(1100, 695), Color.Gold);
+                    spriteBatch.DrawString(Game1.spriteFont, "+ 70 Xp", new Vector2(1110, 725), Color.Red);
+                }
+
+            }
+
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch, Game1.GameState.Playing1);
@@ -623,7 +696,15 @@ namespace Project
                 Game1.player2.Draw(spriteBatch, Game1.GameState.Playing2);
 
             if (map == map4)
+            {
                 Game1.sand.Draw(spriteBatch);
+                spriteBatch.Draw(cactusTexture, cactusRectangle, Color.Blue);
+                spriteBatch.Draw(cactusTexture, cactusRectangle2, Color.Blue);
+                spriteBatch.Draw(cactusTexture, cactusRectangle3, Color.Blue);
+                spriteBatch.Draw(cactusTexture, cactusRectangle4, Color.Blue);
+                spriteBatch.Draw(cactusTexture, cactusRectangle5, Color.Blue);
+            }
+
             if (map == map6)
             {
                 if (Game1.enemy3.health > 0)
@@ -632,26 +713,31 @@ namespace Project
             if (map == map8)
             {
                 Game1.snow.Draw(spriteBatch);
-                if (Game1.bookState != 2 && !talking)
+                if (Game1.questState != 2 && !talking)
                 {
                     Game1.pnj1.Draw(spriteBatch, 0, "map8");
                 }
-                if (Game1.bookState == 2)
+                if (Game1.questState == 2)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                 }
-                if (Game1.bookState == 0)
+                if (Game1.questState == 0)
                 {
                     spriteBatch.Draw(bookTexture, bookRectangle, Color.White);
+                    if (Game1.player.persoRectangle.Intersects(bookRectangle))
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Press F to pick up the book", new Vector2(10, 700), Color.Blue);
+                    }
                 }
-                if (talking && Game1.bookState == 0)
+                if (talking && Game1.questState == 0)
                 {
                     Game1.pnj1.Draw(spriteBatch, 0, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: I'm Arha can you help me? I'm freezing and I've lost my spell book can you find it for me? I can't leave this place without it", new Vector2(10, 700), Color.Blue);
                     talkOnce = true;
                 }
-                if (talking && Game1.bookState == 1)
+                if (talking && Game1.questState == 1)
                 {
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     Game1.btnNext.Draw(spriteBatch);
@@ -661,27 +747,27 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "+ 20 Gold", new Vector2(1100, 695), Color.Gold);
                     spriteBatch.DrawString(Game1.spriteFont, "+ 60 Xp", new Vector2(1110, 725), Color.Red);
                 }
-                if (talking && Game1.bookState == 2)
+                if (talking && Game1.questState == 2)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 700), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "Claudius: You underestimate my power", new Vector2(10, 725), Color.Black);
                 }
-                if (talking && Game1.bookState == 3)
+                if (talking && Game1.questState == 3)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Thanks a lot , but ... but ... you're hurt! Go south you'll find a healer there", new Vector2(10, 700), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "Oh and you will need that. He is really greedy he wont heal you for free", new Vector2(10, 725), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Thanks a lot , but ... but ... you're hurt! Go south you'll find a healer there", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Oh and you will need that. He is really greedy he wont heal you for free", new Vector2(10, 725), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "+ 25 Gold", new Vector2(1100, 725), Color.Gold);
                 }
-                if (Game1.bookState == 4 && talking)
+
+                if (Game1.questState == 6 && talking)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Good job Claudius your journey ends here you're a hero now ", new Vector2(10, 700), Color.Blue);
-
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Good job Claudius your journey ends here you're a hero now ", new Vector2(10, 700), Color.Blue);
                 }
 
                 if (Game1.enemy4.health > 0)
@@ -691,40 +777,58 @@ namespace Project
             if (presentKey.IsKeyDown(Keys.L))
             {
                 spriteBatch.Draw(QuestBookTexture, new Rectangle(0, 0, QuestBookTexture.Width, QuestBookTexture.Height), Color.White);
-                if (Game1.bookState == 0 && talkOnce)
+                if (Game1.questState == 0 && talkOnce)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Red);
                 }
-                if (Game1.bookState == 1)
+                if (Game1.questState == 1)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Red);
                 }
-                if (Game1.bookState == 2)
+                if (Game1.questState == 2)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Red);
                 }
-                if (Game1.bookState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
+                if (Game1.questState == 2 && Game1.enemy1.health == 0 && Game1.enemy2.health == 0 && Game1.enemy3.health == 0)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
                 }
-                if (Game1.bookState == 3)
+                if (Game1.questState == 3)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Red);
                 }
-                if (Game1.bookState == 4)
+                if (Game1.questState == 4)
                 {
                     spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Red);
+                }
+                if (Game1.questState == 5)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Green);
+                }
+                if (Game1.questState == 6)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Go back to Ahra", new Vector2(95, 200), Color.Red);
                 }
 
             }

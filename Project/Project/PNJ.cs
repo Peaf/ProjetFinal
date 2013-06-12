@@ -76,7 +76,7 @@ namespace Project
                     pnjRectangle = new Rectangle(colonne * 48, ligne * 94, 48, 94);
                 }
             }
-            if (map == "map5")
+            if (map == "map2")
             {
                 if (state == 0)
                 {
@@ -114,7 +114,7 @@ namespace Project
                     spritBatch.Draw(pnjTexture, pnjPosition, pnjRectangle, Color.White, 0f, origine, 1.0f, SpriteEffects.FlipHorizontally, 0);
                 }
             }
-            if (map == "map5")
+            if (map == "map2")
             {
                 spritBatch.Draw(pnjTexture, pnjPosition, pnjRectangle, Color.White, 0f, origine, 1.0f, SpriteEffects.FlipHorizontally, 0);
             }
