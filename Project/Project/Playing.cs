@@ -15,28 +15,61 @@ namespace Project
     static class Playing
     {
         public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture;
-        static public int mapNumber = 5, timerInventaire = 0, nbjoueurs;
+        public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
-        static int[,] tab_map8 = new int[26, 44];
-        static int[,] tab_map5 = new int[26, 44];
-        static int[,] tab_map4 = new int[26, 44];
-        static int[,] tab_map2 = new int[26, 44];
-        static int[,] tab_map6 = new int[26, 44];
-        static Map map = new Map();
-        static Map map5 = new Map(), map8 = new Map(), map4 = new Map(), map2 = new Map(), map6 = new Map();
-        static StreamReader streamMap8 = new StreamReader("map8.txt");
-        static StreamReader streamMap5 = new StreamReader("map5.txt");
-        static StreamReader streamMap4 = new StreamReader("map4.txt");
-        static StreamReader streamMap2 = new StreamReader("map2.txt");
-        static StreamReader streamMap6 = new StreamReader("map6.txt");
-        static bool Isfighting = false, talking = false, lvlUp = false, talkOnce = false;
-        static public bool inventaire = false;
-        static int turn = -1, lvlBefore = 1, j = 0;
+        static int[,] tab_map8;
+        static int[,] tab_map5;
+        static int[,] tab_map4;
+        static int[,] tab_map2;
+        static int[,] tab_map6;
+        static Map map;
+        static Map map5, map8, map4, map2, map6;
+        static StreamReader streamMap8;
+        static StreamReader streamMap5;
+        static StreamReader streamMap4;
+        static StreamReader streamMap2;
+        static StreamReader streamMap6;
+        static bool Isfighting, talking, lvlUp, talkOnce;
+        static public bool inventaire;
+        static int turn, lvlBefore, j;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle;
-        static string attackChoisi = "";
+        static string attackChoisi;
         static KeyboardState presentKey, pastKey;
 
+        public static void Initialize()
+        {
+            mapNumber = 5;
+            timerInventaire = 0;
+
+            tab_map8 = new int[26, 44];
+            tab_map5 = new int[26, 44];
+            tab_map4 = new int[26, 44];
+            tab_map2 = new int[26, 44];
+            tab_map6 = new int[26, 44];
+            map = new Map();
+            map5 = new Map();
+            map8 = new Map();
+            map4 = new Map();
+            map2 = new Map();
+            map6 = new Map();
+            streamMap8 = new StreamReader("map8.txt");
+            streamMap5 = new StreamReader("map5.txt");
+            streamMap4 = new StreamReader("map4.txt");
+            streamMap2 = new StreamReader("map2.txt");
+            streamMap6 = new StreamReader("map6.txt");
+            Isfighting = false;
+            talking = false;
+            lvlUp = false;
+            talkOnce = false;
+            inventaire = false;
+            turn = -1;
+            lvlBefore = 1;
+            j = 0;
+
+            attackChoisi = "";
+
+        }
         public static void LoadContent(ContentManager Content, int screenWidth, int screenHeight)
         {
 
@@ -176,7 +209,7 @@ namespace Project
             map = map5;
         }
 
-        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics,int newNbjoueurs)
+        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics, int newNbjoueurs)
         {
             nbjoueurs = newNbjoueurs;
             //Item
@@ -184,9 +217,9 @@ namespace Project
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-            
+
             Game1.GameState CurrentGameState = Game1.GameState.Playing1;
-          
+
             if (!inventaire)
             {
                 foreach (CollisionTiles tile in map.CollisionTiles)
@@ -194,13 +227,13 @@ namespace Project
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                       if(nbjoueurs ==2) Game1.player2.Collision(tile.Rectangle);
+                        if (nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
                     }
                 }
 
                 if (map == map2)
                 {
-                   
+
                     //Pnj
                     if (!Game1.healer.Collision(Game1.healer))
                     {
@@ -216,13 +249,13 @@ namespace Project
                             Game1.player.Gold -= 5;
                         }
                         Game1.player.health = Game1.player.healthMax;
-                       
+
                     }
                 }
                 if (map == map4)
                 {
                     Game1.sand.update(gameTime, graphics.GraphicsDevice);
-                   
+
                 }
 
                 if (map == map5)
@@ -260,7 +293,7 @@ namespace Project
                         attackChoisi = "";
                     }
 
-                   
+
                 }
 
                 if (map == map6)
@@ -280,7 +313,7 @@ namespace Project
                         attackChoisi = "";
                     }
 
-                    
+
                 }
                 if (map == map8)
                 {
@@ -302,7 +335,7 @@ namespace Project
                     }
                     //Moteur à particules
                     Game1.snow.update(gameTime, graphics.GraphicsDevice);
-                    
+
                     if (Game1.player.persoRectangle.Intersects(bookRectangle))
                     {
                         Game1.bookState = 1;
@@ -317,7 +350,7 @@ namespace Project
                         map = map8;
                         mapNumber = 8;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
-                        
+
                     }
                     else if (mapNumber == 2)
                     {
@@ -328,7 +361,7 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = 2;
-                        
+
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
@@ -350,7 +383,7 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
-                        
+
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
@@ -361,19 +394,19 @@ namespace Project
                         map = map4;
                         mapNumber = 4;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                       
+
                     }
                     else if (mapNumber == 6)
                     {
                         map = map5;
                         mapNumber = 5;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                        
+
                     }
                     else
                     {
                         Game1.player.persoPosition.X = 2;
-                        
+
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
@@ -385,19 +418,19 @@ namespace Project
                         map = map5;
                         mapNumber = 5;
                         Game1.player.persoPosition.X = 0;
-                        
+
                     }
                     else if (mapNumber == 5)
                     {
                         map = map6;
                         mapNumber = 6;
                         Game1.player.persoPosition.X = 0;
-                       
+
                     }
                     else
                     {
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
-                       
+
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
@@ -586,7 +619,7 @@ namespace Project
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch, Game1.GameState.Playing1);
-            if (nbjoueur == 2) 
+            if (nbjoueur == 2)
                 Game1.player2.Draw(spriteBatch, Game1.GameState.Playing2);
 
             if (map == map4)
@@ -706,7 +739,7 @@ namespace Project
 
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : ", new Vector2(445, 45), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(515, 45), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience : " , new Vector2(445, 70), Color.White);
+                Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience : ", new Vector2(445, 70), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 150), new Vector2(570, 70), Color.White);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Health : ", new Vector2(445, 225), Color.Red);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(530, 225), Color.Red);
