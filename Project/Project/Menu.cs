@@ -44,6 +44,7 @@ namespace Project
             Game1.playerMenu.Update(gameTime, Game1.GameState.MainMenu);
             if (PlayButton.isClicked == true)
             {
+                //Load.Update();
                 MediaPlayer.Stop();
                 CurrentGameState = Game1.GameState.Playing1;
                 MediaPlayer.Play(song2);
