@@ -16,20 +16,26 @@ namespace Project
     static class Pause
     {
         static Texture2D pausedTexture;
-        static cButton btnPlay2, btnOptions2, btnQuit2;
+        static cButton btnPlay2, btnOptions2, btnQuit2, btnSave,btnLoad;
 
         public static void LoadContent(ContentManager Content, int screenWidth, int screenHeight)
         {
             pausedTexture = Content.Load<Texture2D>("Menu/Paused");
 
             btnPlay2 = new cButton(Content.Load<Texture2D>("Button/PlayButton2"), 100, 75);
-            btnPlay2.setPosition(new Vector2(screenWidth / 2 - btnPlay2.size.X / 2, screenHeight / 2 - 100));
+            btnPlay2.setPosition(new Vector2(screenWidth / 2 - btnPlay2.size.X / 2, screenHeight / 2));
 
             btnOptions2 = new cButton(Content.Load<Texture2D>("Button/OptionsButton2"), 250, 100);
-            btnOptions2.setPosition(new Vector2(screenWidth / 2 - btnOptions2.size.X / 2, screenHeight / 2));
+            btnOptions2.setPosition(new Vector2(screenWidth / 2 - btnOptions2.size.X / 2, screenHeight / 2 +125));
 
             btnQuit2 = new cButton(Content.Load<Texture2D>("Button/QuitButton2"), 100, 75);
-            btnQuit2.setPosition(new Vector2(screenWidth / 2 - btnQuit2.size.X / 2, screenHeight / 2 + 125));
+            btnQuit2.setPosition(new Vector2(screenWidth / 2 - btnQuit2.size.X / 2, screenHeight / 2 + 250));
+
+            btnSave = new cButton(Content.Load<Texture2D>("Button/SaveButton"), 250, 100);
+            btnSave.setPosition(new Vector2(screenWidth / 2 - btnSave.size.X / 2, screenHeight / 2 -250));
+
+            btnLoad = new cButton(Content.Load<Texture2D>("Button/LoadButton"), 250, 100);
+            btnSave.setPosition(new Vector2(screenWidth / 2 - btnSave.size.X / 2, screenHeight / 2 - 125));
         }
 
         public static Game1.GameState Update(GameTime gameTime)
@@ -57,13 +63,23 @@ namespace Project
             }
             if (btnQuit2.isClicked)
             {
-                //Save.Update();
+                
                 Environment.Exit(0);
+            }
+            if(btnSave.isClicked)
+            {
+                Save.Update();
+            }
+            if (btnLoad.isClicked)
+            {
+                Load.Update();
             }
 
             btnPlay2.Update(mouse, gameTime);
             btnOptions2.Update(mouse, gameTime);
             btnQuit2.Update(mouse, gameTime);
+            btnSave.Update(mouse, gameTime);
+            btnLoad.Update(mouse, gameTime);
             return (CurrentGameState);
         }
 
@@ -73,6 +89,8 @@ namespace Project
             btnPlay2.Draw(spriteBatch);
             btnOptions2.Draw(spriteBatch);
             btnQuit2.Draw(spriteBatch);
+            btnSave.Draw(spriteBatch);
+            btnLoad.Draw(spriteBatch);
         }
 
     }

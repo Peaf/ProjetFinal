@@ -39,6 +39,8 @@ namespace Project
 
             btnPlay3 = new cButton(Content.Load<Texture2D>("Button/PlayButton3"), 100, 75);
             btnPlay3.setPosition(new Vector2(screenWidth / 2 - btnPlay3.size.X / 2, screenHeight / 4));
+
+            
         }
 
         public static Game1.GameState Update(GameTime gameTime)
