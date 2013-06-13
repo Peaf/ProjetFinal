@@ -243,13 +243,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pnj1.png">
-      <Name>pnj1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Song\SongGameOver.mp3">
       <Name>SongGameOver</Name>
       <Importer>Mp3Importer</Importer>
@@ -885,16 +878,6 @@
     </Compile>
     <Compile Include="Tile\Tile164.png">
       <Name>Tile164</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Tile\Tile165.png">
-      <Name>Tile165</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Tile\Tile166.png">
-      <Name>Tile166</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

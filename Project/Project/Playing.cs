@@ -255,13 +255,15 @@ namespace Project
 
                 if (map == map2)
                 {
-
-                    //Pnj
+                    Game1.player.Collision(Game1.healer.taille);
+                    if (nbjoueurs == 2)
+                    {
+                        Game1.player2.Collision(Game1.healer.taille);
+                    }
                     if (!Game1.healer.Collision(Game1.healer))
                     {
                         Game1.healer.Update(gameTime, 0, "map2");
                     }
-
                     if (Game1.healer.Collision(Game1.healer))
                     {
                         Game1.healer.Update(gameTime, 1, "map2");
@@ -333,11 +335,18 @@ namespace Project
 
                     //Enemy
                     if (Game1.enemy1.health > 0)
-                        Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
+                         Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
 
                     if (Game1.enemy2.health > 0)
                         Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
-
+                    if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
+                    {
+                        map = mapShop;
+                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                        Game1.player.persoPosition.X = 710;
+                        if (nbjoueurs == 2)
+                            Game1.player2.persoPosition = Game1.player.persoPosition;
+                    }
                     if (Game1.enemy1.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
@@ -387,7 +396,11 @@ namespace Project
                 }
                 if (map == map8)
                 {
-
+                    Game1.player.Collision(Game1.pnj1.taille);
+                    if (nbjoueurs == 2)
+                    {
+                        Game1.player2.Collision(Game1.pnj1.taille);
+                    }   
                     if (Game1.enemy4.health > 0)
                         Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
 
@@ -418,7 +431,7 @@ namespace Project
                     if (map == map5)
                     {
                         map = map8;
-                       // map = mapShop;
+                       //map = mapShop;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
 
                     }
@@ -450,7 +463,6 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
-
                     }
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
@@ -492,7 +504,8 @@ namespace Project
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
 
                     }
-                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) 
+                        Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
 
                 if (nbjoueurs == 2)
@@ -532,15 +545,12 @@ namespace Project
 
                 //Perso        
                 Game1.player.Update(gameTime, Game1.GameState.Playing);
-                if (nbjoueurs == 2) Game1.player2.Update(gameTime, Game1.GameState.Playing);
-
-                //PNJ
-                Game1.player.Collision(Game1.healer.taille);
-                Game1.player.Collision(Game1.pnj1.taille);
-
-                if (nbjoueurs == 2) Game1.player2.Collision(Game1.healer.taille);
-                if (nbjoueurs == 2) Game1.player2.Collision(Game1.pnj1.taille);
-
+                
+                if (nbjoueurs == 2)
+                {
+                    Game1.player2.Update(gameTime, Game1.GameState.Playing);
+                }
+                   
                 if (Game1.pnj1.Collision(Game1.pnj1))
                 {
                     talking = true;
@@ -689,8 +699,6 @@ namespace Project
                 }
 
             }
-
-
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
             if (nbjoueurs == 2) Game1.player2.Draw(spriteBatch, Game1.GameState.Playing);

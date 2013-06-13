@@ -63,7 +63,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.MainMenu;
+        public GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
@@ -189,14 +189,11 @@ namespace Project
                 case GameState.MainMenu:
 
                     CurrentGameState = Menu.Update(gameTime);
-
                     break;
 
                 case GameState.Playing:
 
                     CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics);
-
-
                     break;
 
                 case GameState.Pause:
