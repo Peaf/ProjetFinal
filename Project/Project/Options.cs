@@ -15,7 +15,7 @@ namespace Project
     static class Options
     {
         static Texture2D optionsImage;
-        static cButton btnVolume0, btnVolume25, btnVolume50, btnVolume75, btnVolume100, btnPlay3;
+        static cButton btnVolume0, btnVolume25, btnVolume50, btnVolume75, btnVolume100, btnBack;
         public static int timerOptions = 0;
 
         public static void LoadContent(ContentManager Content, int screenWidth, int screenHeight)
@@ -37,8 +37,8 @@ namespace Project
             btnVolume100 = new cButton(Content.Load<Texture2D>("Volume/volume100"), 100, 75);
             btnVolume100.setPosition(new Vector2(screenWidth / 8 - btnVolume100.size.X / 2 + 900, screenHeight / 2));
 
-            btnPlay3 = new cButton(Content.Load<Texture2D>("Button/PlayButton3"), 100, 75);
-            btnPlay3.setPosition(new Vector2(screenWidth / 2 - btnPlay3.size.X / 2, screenHeight / 4));
+            btnBack = new cButton(Content.Load<Texture2D>("Button/BackButton"), 100, 75);
+            btnBack.setPosition(new Vector2(screenWidth / 2 - btnBack.size.X / 2, screenHeight / 4));
 
             
         }
@@ -49,15 +49,15 @@ namespace Project
             MouseState mouse = Mouse.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.Options;
             timerOptions++;
-            btnPlay3.isClicked = false;
-            btnPlay3.Update(mouse, gameTime);
+            btnBack.isClicked = false;
+            btnBack.Update(mouse, gameTime);
             if (timerOptions > 5)
             {
-                if (btnPlay3.isClicked)
+                if (btnBack.isClicked)
                 {
                     timerOptions = 0;
                     //Game1.paused = false;
-                    CurrentGameState = Game1.GameState.Playing;
+                    CurrentGameState = Game1.GameState.MainMenu;
                     
                 }
                 if (btnVolume0.isClicked)
@@ -134,7 +134,7 @@ namespace Project
                 btnVolume50.Update(mouse, gameTime);
                 btnVolume75.Update(mouse, gameTime);
                 btnVolume100.Update(mouse, gameTime);
-                btnPlay3.Update(mouse, gameTime);
+                btnBack.Update(mouse, gameTime);
             }
 
             return (CurrentGameState);
@@ -148,7 +148,7 @@ namespace Project
             btnVolume50.Draw(spriteBatch);
             btnVolume75.Draw(spriteBatch);
             btnVolume100.Draw(spriteBatch);
-            btnPlay3.Draw(spriteBatch);
+            btnBack.Draw(spriteBatch);
         }
 
 

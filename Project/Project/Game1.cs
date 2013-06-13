@@ -21,7 +21,7 @@ namespace Project
 
         public static PNJ pnj1, healer;
         public static Enemy enemy, enemy1, enemy2, enemy3, enemy4;
-        Song song1, song2;
+        public static Song song1, song2;
 
         Random rand = new Random();
         Video video;
@@ -63,7 +63,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Playing;
+        public GameState CurrentGameState = GameState.MainMenu;
 
         public Game1()
         {
