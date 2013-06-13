@@ -58,13 +58,12 @@ namespace Project
             Title,
             MainMenu,
             Options,
-            Playing1,
-            Playing2,
+            Playing,
             Fight,
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.Playing1;
+        public GameState CurrentGameState = GameState.MainMenu;
 
         public Game1()
         {
@@ -76,7 +75,7 @@ namespace Project
         {
             Playing.Initialize();
             player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 1500, 50, 0);
-            if(Playing.nbjoueurs ==2) player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 630), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
+            player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
               this.graphics.ApplyChanges();
@@ -193,14 +192,10 @@ namespace Project
 
                     break;
 
-                case GameState.Playing1:
+                case GameState.Playing:
 
-                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics, 1);
+                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics);
 
-                    break;
-                case GameState.Playing2:
-
-                    CurrentGameState = Playing.Update(gameTime, screenWidth, screenHeight, graphics, 2);
 
                     break;
 
@@ -261,21 +256,14 @@ namespace Project
 
                     break;
 
-                case GameState.Playing1:
+                case GameState.Playing:
 
-                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, 1);
-
-                    break;
-                case GameState.Playing2:
-
-                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, 2);
-
+                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
                     break;
 
                 case GameState.Pause:
 
-                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight, Playing.nbjoueurs);
-
+                    Playing.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
                     Pause.Draw(gameTime, spriteBatch, screenWidth, screenHeight);
 
                     break;

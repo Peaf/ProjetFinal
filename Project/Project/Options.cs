@@ -55,10 +55,8 @@ namespace Project
                 {
                     timerOptions = 0;
                     //Game1.paused = false;
-                    if(Playing.nbjoueurs == 1)
-                        CurrentGameState = Game1.GameState.Playing1;
-                    if (Playing.nbjoueurs == 2)
-                        CurrentGameState = Game1.GameState.Playing2;
+                    CurrentGameState = Game1.GameState.Playing;
+                    
                 }
                 if (btnVolume0.isClicked)
                 {

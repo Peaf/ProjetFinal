@@ -148,7 +148,7 @@ namespace Project
                     Game1.playerMenu.persoPosition = new Vector2(788, 230);
                 }
             }
-            if (gameState == Game1.GameState.Playing1 || gameState == Game1.GameState.Playing2)
+            if (gameState == Game1.GameState.Playing || gameState == Game1.GameState.Playing)
             {
                 if (!fight)
                 {
@@ -174,15 +174,17 @@ namespace Project
                             Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                             Game1.player.persoPosition += (new Vector2((-vitesse), 0));
                         }
-
-                        if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                            Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
+                            if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                                Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
+                            }
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q) || (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q))) //|| (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
                     {
                         ligne = 6;
                         timerRun++;
@@ -206,11 +208,13 @@ namespace Project
                         {
                             Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                             Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
-                        }
+                            if (Playing.nbjoueurs == 2)
+                            {/* }
                         if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
-                        {
-                            Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                            Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
+                        {*/
+                                Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                                Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
+                            }
                         }
                     }
 
@@ -237,13 +241,15 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(0, -vitesse);
 
                         }
-                        if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                            Game1.player2.persoPosition += new Vector2(0, -vitesse);
+                            if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                                Game1.player2.persoPosition += new Vector2(0, -vitesse);
 
+                            }
                         }
-
                     }
 
                     else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) ||(pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
@@ -268,13 +274,15 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(0, -2 * vitesse);
 
                         }
-                        if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                            Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
+                            if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                                Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
 
+                            }
                         }
-
                     }
 
                     //Down
@@ -300,13 +308,15 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(0, vitesse);
 
                         }
-                        if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                            Game1.player2.persoPosition += new Vector2(0, vitesse);
+                            if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                                Game1.player2.persoPosition += new Vector2(0, vitesse);
 
+                            }
                         }
-
                     }
 
                     else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.S) || (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
@@ -332,11 +342,14 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(0, 2 * vitesse);
 
                         }
-                        if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
-                            Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
+                            if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
+                                Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
 
+                            }
                         }
 
                     }
@@ -363,13 +376,15 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(vitesse, 0);
 
                         }
-                        if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                            Game1.player2.persoPosition += new Vector2(vitesse, 0);
+                            if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                                Game1.player2.persoPosition += new Vector2(vitesse, 0);
 
+                            }
                         }
-
                     }
 
                     else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.D) || (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
@@ -400,13 +415,15 @@ namespace Project
                             Game1.player.persoPosition += new Vector2(2 * vitesse, 0);
 
                         }
-                        if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                        if (Playing.nbjoueurs == 2)
                         {
-                            Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
-                            Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
+                            if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            {
+                                Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
+                                Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
 
+                            }
                         }
-
                     }
                 }
             }

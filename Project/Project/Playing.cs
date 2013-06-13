@@ -17,21 +17,13 @@ namespace Project
         public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture, cactusTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
-        static int[,] tab_map8;
-        static int[,] tab_map5;
-        static int[,] tab_map4;
-        static int[,] tab_map2;
-        static int[,] tab_map6;
+        static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop;
         public static Map map;
-        public static Map map5, map8, map4, map2, map6;
-        static StreamReader streamMap8;
-        static StreamReader streamMap5;
-        static StreamReader streamMap4;
-        static StreamReader streamMap2;
-        static StreamReader streamMap6;
+        public static Map map5, map8, map4, map2, map6, mapShop;
+        static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce;
         static public bool inventaire;
-        static int turn, lvlBefore, j,cactus;
+        static int turn, lvlBefore, j, cactus;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
         static string attackChoisi;
@@ -41,23 +33,26 @@ namespace Project
         {
             mapNumber = 5;
             timerInventaire = 0;
-
+            nbjoueurs = 1;
             tab_map8 = new int[26, 44];
             tab_map5 = new int[26, 44];
             tab_map4 = new int[26, 44];
             tab_map2 = new int[26, 44];
             tab_map6 = new int[26, 44];
+            tab_mapShop = new int[26, 44];
             map = new Map();
             map5 = new Map();
             map8 = new Map();
             map4 = new Map();
             map2 = new Map();
             map6 = new Map();
+            mapShop = new Map();
             streamMap8 = new StreamReader("map8.txt");
             streamMap5 = new StreamReader("map5.txt");
             streamMap4 = new StreamReader("map4.txt");
             streamMap2 = new StreamReader("map2.txt");
             streamMap6 = new StreamReader("map6.txt");
+            streamShop = new StreamReader("mapShop.txt");
             Isfighting = false;
             talking = false;
             lvlUp = false;
@@ -215,12 +210,29 @@ namespace Project
             map6.Generate(tab_map6, 32);
             streamMap6.Close();
 
+            j = 0;
+            while ((line = streamShop.ReadLine()) != null)
+            {
+                char[] splitchar = { ',' };
+                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < tab_mapShop.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
+                {
+
+                    tab_mapShop[j, i] = int.Parse(tiles[i]);
+                }
+                j++;
+            }
+
+            mapShop.Generate(tab_mapShop, 32);
+            streamShop.Close();
             map = map5;
         }
 
-        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics, int newNbjoueurs)
+        public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
-            nbjoueurs = newNbjoueurs;
+            
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "");
             Item cactusItem = new Item("QuestItem", "cactusItem","", 0, 1, "");
@@ -228,7 +240,7 @@ namespace Project
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             KeyboardState KState = Keyboard.GetState();
-            Game1.GameState CurrentGameState = Game1.GameState.Playing1;
+            Game1.GameState CurrentGameState = Game1.GameState.Playing;
 
             if (!inventaire)
             {
@@ -237,7 +249,7 @@ namespace Project
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                        if (nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
+                        if(nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
                     }
                 }
 
@@ -406,6 +418,7 @@ namespace Project
                     if (map == map5)
                     {
                         map = map8;
+                       // map = mapShop;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
 
                     }
@@ -505,6 +518,7 @@ namespace Project
 
                     }
                 }
+                
 
                 if (Isfighting)
                 {
@@ -517,8 +531,8 @@ namespace Project
                 timerInventaire++;
 
                 //Perso        
-                Game1.player.Update(gameTime, Game1.GameState.Playing1);
-                if (nbjoueurs == 2) Game1.player2.Update(gameTime, Game1.GameState.Playing2);
+                Game1.player.Update(gameTime, Game1.GameState.Playing);
+                if (nbjoueurs == 2) Game1.player2.Update(gameTime, Game1.GameState.Playing);
 
                 //PNJ
                 Game1.player.Collision(Game1.healer.taille);
@@ -627,7 +641,7 @@ namespace Project
             return (CurrentGameState);
         }
 
-        public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight, int nbjoueur)
+        public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
             presentKey = Keyboard.GetState();
             map.Draw(spriteBatch);
@@ -678,9 +692,8 @@ namespace Project
 
 
             //GraphicsDevice.Clear(Color.CornflowerBlue);
-            Game1.player.Draw(spriteBatch, Game1.GameState.Playing1);
-            if (nbjoueur == 2)
-                Game1.player2.Draw(spriteBatch, Game1.GameState.Playing2);
+            Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
+            if (nbjoueurs == 2) Game1.player2.Draw(spriteBatch, Game1.GameState.Playing);
 
             if (map == map4)
             {

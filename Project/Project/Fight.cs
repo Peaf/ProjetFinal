@@ -83,7 +83,7 @@ namespace Project
             Game1.player.fight = true;
             Game1.player.colonne = 2;
             Game1.player.Direction = "right";
-            Game1.player.Update(gameTime, Game1.GameState.Playing1);
+            Game1.player.Update(gameTime, Game1.GameState.Playing);
             healthBoxRectangle = new Rectangle(10, 10, healthBoxTexture.Width, healthBoxTexture.Height);
             healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
             manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
@@ -272,7 +272,7 @@ namespace Project
                         Game1.player.persoRectangle = new Rectangle((int)Game1.previousPosX, (int)Game1.previousPosY, Game1.player.persoRectangle.Width, Game1.player.persoRectangle.Height);
                         Game1.player.fight = false;
                         Game1.player.Gold += Game1.enemy.healthMax / 10;
-                        CurrentGameState = Game1.GameState.Playing1;
+                        CurrentGameState = Game1.GameState.Playing;
                         Isfighting = false;
                         Game1.enemy.enemyPosition.X = -100;
                         Game1.enemy.enemyPosition.Y = -100;
