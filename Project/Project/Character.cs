@@ -12,7 +12,7 @@ namespace Project
     {
         public Texture2D persoTexture;
         public Vector2 persoPosition;
-        Rectangle Rectsprite;
+        public Rectangle Rectsprite;
         public Rectangle persoRectangle;
         public string type, type2;
 
@@ -48,7 +48,10 @@ namespace Project
             GamePadState pad1 = GamePad.GetState(PlayerIndex.Two);
             KeyboardState KState = Keyboard.GetState();
             lvlup = (Experience >= 150 * Lvl);
-
+            if (Playing.nbjoueurs == 2)
+            {
+                vitesse = 1;
+            }
             if (lvlup)
             {
                 ExperienceNext = Experience - (150 * Lvl);
@@ -441,7 +444,8 @@ namespace Project
             else
             {
                 spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
-                if (Playing.nbjoueurs == 2) spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
+                if (Playing.nbjoueurs == 2) 
+                    spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
             }
         }
 
