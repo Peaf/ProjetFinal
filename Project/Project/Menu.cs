@@ -49,12 +49,21 @@ namespace Project
             MouseState mouse = Mouse.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.MainMenu;
             Game1.playerMenu.Update(gameTime, Game1.GameState.MainMenu);
+<<<<<<< HEAD
             if (NewGameButton.isClicked)
             {
                 MediaPlayer.Stop();
                 Playing.nbjoueurs = 1;
                 CurrentGameState = Game1.GameState.Playing;
                 MediaPlayer.Play(Game1.song2);
+=======
+            if (PlayButton.isClicked == true)
+            {                
+              MediaPlayer.Stop();
+              Playing.nbjoueurs = 1;
+              CurrentGameState = Game1.GameState.Playing;
+              MediaPlayer.Play(song2);
+>>>>>>> 554b75c0e0aca83b41e52373258acea180f9144c
             }
 
             if (CoopButton.isClicked)

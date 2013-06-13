@@ -140,11 +140,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tile\Tile1.png">
-      <Name>Tile1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Tile\Tile2.png">
       <Name>Tile2</Name>
       <Importer>TextureImporter</Importer>
@@ -1051,6 +1046,13 @@
     </Compile>
     <Compile Include="Button\SaveButton.png">
       <Name>SaveButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tile\Tile1.png">
+      <Name>Tile1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -232,10 +232,10 @@ namespace Project
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight, GraphicsDeviceManager graphics)
         {
-            
+
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "");
-            Item cactusItem = new Item("QuestItem", "cactusItem","", 0, 1, "");
+            Item cactusItem = new Item("QuestItem", "cactusItem", "", 0, 1, "");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
@@ -249,7 +249,7 @@ namespace Project
                     if ((tile.num >= 7 && tile.num < 20) || tile.num >= 100)
                     {
                         Game1.player.Collision(tile.Rectangle);
-                        if(nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
+                        if (nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
                     }
                 }
 
@@ -325,7 +325,6 @@ namespace Project
                         {
                             Game1.questState = 5;
                         }
-
                     }
 
                 }
@@ -335,14 +334,14 @@ namespace Project
 
                     //Enemy
                     if (Game1.enemy1.health > 0)
-                         Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
+                        Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
 
                     if (Game1.enemy2.health > 0)
                         Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
                     if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
                     {
                         map = mapShop;
-                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8) ;
                         Game1.player.persoPosition.X = 710;
                         if (nbjoueurs == 2)
                             Game1.player2.persoPosition = Game1.player.persoPosition;
@@ -400,7 +399,7 @@ namespace Project
                     if (nbjoueurs == 2)
                     {
                         Game1.player2.Collision(Game1.pnj1.taille);
-                    }   
+                    }
                     if (Game1.enemy4.health > 0)
                         Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
 
@@ -431,7 +430,7 @@ namespace Project
                     if (map == map5)
                     {
                         map = map8;
-                       //map = mapShop;
+                        //map = mapShop;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
 
                     }
@@ -448,9 +447,15 @@ namespace Project
                     if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
 
                 }
-                else if (Game1.player.persoPosition.Y >= screenHeight - Game1.player.persoTexture.Height / 8)
+                else if (Game1.player.persoPosition.Y > screenHeight - Game1.player.persoTexture.Height / 8)
                 {
-                    if (map == map8)
+                    if (map == mapShop)
+                    {
+                        map = map5;
+                        Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 + 40;
+                        Game1.player.persoPosition.X = 390;
+                    }
+                    else if (map == map8)
                     {
                         map = map5;
                         Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
@@ -464,7 +469,8 @@ namespace Project
                     {
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
                     }
-                    if (nbjoueurs == 2) Game1.player2.persoPosition = Game1.player.persoPosition;
+                    if (nbjoueurs == 2) 
+                        Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
                 else if (Game1.player.persoPosition.X <= 0)
                 {
@@ -476,7 +482,7 @@ namespace Project
                     }
                     else if (map == map6)
                     {
-                        map = map5;;
+                        map = map5; ;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                     }
                     else
@@ -504,7 +510,7 @@ namespace Project
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
 
                     }
-                    if (nbjoueurs == 2) 
+                    if (nbjoueurs == 2)
                         Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
 
@@ -531,7 +537,7 @@ namespace Project
 
                     }
                 }
-                
+
 
                 if (Isfighting)
                 {
@@ -545,12 +551,12 @@ namespace Project
 
                 //Perso        
                 Game1.player.Update(gameTime, Game1.GameState.Playing);
-                
+
                 if (nbjoueurs == 2)
                 {
                     Game1.player2.Update(gameTime, Game1.GameState.Playing);
                 }
-                   
+
                 if (Game1.pnj1.Collision(Game1.pnj1))
                 {
                     talking = true;
@@ -901,7 +907,7 @@ namespace Project
                                 break;
 
                             case "cactusItem":
-                                spriteBatch.Draw(cactusTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) +10, cactusTexture.Width, cactusTexture.Height), Color.White);
+                                spriteBatch.Draw(cactusTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) + 10, cactusTexture.Width, cactusTexture.Height), Color.White);
                                 break;
 
                         }
