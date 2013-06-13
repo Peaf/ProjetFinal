@@ -28,7 +28,6 @@ Content\Barres\Mana.xnb
 Content\Barres\HealthEnemy.xnb
 Content\Sprites\Enemy2.xnb
 Content\Sprites\enemy.xnb
-Content\pnj1.xnb
 Content\Menu\GameOver.xnb
 Content\Button\AttackButton.xnb
 Content\Button\SpellButton.xnb
@@ -165,6 +164,11 @@ Content\Tile\Tile191.xnb
 Content\Tile\Tile192.xnb
 Content\Tile\Tile193.xnb
 Content\Tile\Tile40.xnb
+Content\Button\BackButton.xnb
+Content\Button\LoadButton.xnb
+Content\Button\Player1Button.xnb
+Content\Button\Player2Button.xnb
+Content\Button\SaveButton.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma
