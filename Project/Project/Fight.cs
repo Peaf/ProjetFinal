@@ -14,7 +14,7 @@ namespace Project
     {
         static cButton btnAttack1, btnSpell, btnObjects;
         static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, fireTexture, lightTexture;
-        static int turn = -1, disableEnd, degat, degatEnemy, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, timerAnimationDegat = 0, colonneFire = 0, nbreAnimationFire = 0;
+        static int turn = -1, disableEnd, degat, degatEnemy,timerinventaire = 0, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, timerAnimationDegat = 0, colonneFire = 0, nbreAnimationFire = 0;
         static Rectangle healthBoxRectangle, healthBoxRectangle2, healthRectangle, healthRectangle2, manaRectangle, manaRectangle2, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, fireRectangle, lightRectangle, speechBoxRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
@@ -92,7 +92,7 @@ namespace Project
                 healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
                 manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
                 enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health, enemyHealthTexture.Height);
-                int timerinventaire = 16;
+               
                 if (attackChoisi == "")
                 {
                     ligne = 0;
@@ -112,7 +112,7 @@ namespace Project
                 if (!Playing.inventaire)
                 {
                     timerAnimation++;
-
+                    timerinventaire++;
                     if (turn == -1 && Game1.btnStartFight.isClicked)
                     {
                         turn = 0;
@@ -120,12 +120,13 @@ namespace Project
                     }
                     if (turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
                     {
-                        if (Playing.timerInventaire > 15)
+                        if (timerinventaire > 15)
                         {
                             if (btnObjects.isClicked && pastMouse.LeftButton == ButtonState.Released)
                             {
                                 Playing.inventaire = true;
                                 timerinventaire = 0;
+                                btnObjects.isClicked = false;
                             }
                         }
 
@@ -298,13 +299,14 @@ namespace Project
                 }
                 else if (Playing.inventaire)
                 {
-                    timerinventaire = 16;
+                    
+                    timerinventaire++;
                     if (Playing.timerInventaire > 15)
                     {
                         if (Keyboard.GetState().IsKeyDown(Keys.Enter) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         {
                             Playing.inventaire = false;
-                            Playing.timerInventaire = 0;
+                            timerinventaire = 0;
                         }
                     }
                     foreach (Item item in Game1.invent.tablObjects)
@@ -312,7 +314,6 @@ namespace Project
                         if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                         {
                             Game1.invent.useItem(item);
-
                         }
                     }
                     foreach (Item item in Game1.invent.tablEquiped)
@@ -323,7 +324,6 @@ namespace Project
                             {
                                 /* Game1.invent.removeItemE(item);
                                  Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
-
                                 Game1.invent.deUseItem(item);
                             }
                         }
@@ -331,7 +331,6 @@ namespace Project
                         {
                             if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
-
                                 Game1.invent.deUseItem(item);
                             }
                         }
@@ -361,9 +360,47 @@ namespace Project
                 manaRectangle2 = new Rectangle(255, 172, (Game1.player2.mana * 280) / Game1.player2.manaMax, manaTexture.Height);
 
                 enemyHealthRectangle = new Rectangle((1030 - Game1.enemy.health / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health, enemyHealthTexture.Height);
+                if (attackChoisi == "")
+                {
+                    ligne = 0;
+                    if (timerAnimation == 15)
+                    {
+                        timerAnimation = 0;
+                        if (colonne == 3)
+                        {
+                            colonne = 0;
+                        }
+                        else
+                        {
+                            colonne++;
+                        }
+                    }
+                }
+                if (!Playing.inventaire)
+                {
+                    timerAnimation++;
+
+                    if (turn == -1 && Game1.btnStartFight.isClicked)
+                    {
+                        turn = 0;
+                        Game1.enemy.healthMax = Game1.enemy.health;
+                    }
+                    if (turn % 3 == 0 && (Game1.player.health > 0 || Game1.player2.health > 0) && Game1.enemy.health >0 )
+                    {
+                        if (Playing.timerInventaire > 15)
+                        {
+                             if (btnObjects.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                            {
+                                Playing.inventaire = true;
+                                // timerInventaire = 0;
+                            }
+                        }
+                    }
+                    Game1.btnStartFight.Update(mouse, gameTime);
+                }
+
                 return (CurrentGameState);
             }
-
         }
 
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
@@ -399,7 +436,7 @@ namespace Project
 
             if (Playing.nbjoueurs == 2)
             {
-               
+
                 //palyer1
                 spriteBatch.Draw(persoFight, persoFightPosition, persoFightRectangle, Color.White, 0f, origin, 1.0f, SpriteEffects.FlipHorizontally, 0);
                 spriteBatch.Draw(healthBoxTexture, healthBoxRectangle, Color.White);
@@ -413,13 +450,13 @@ namespace Project
                 spriteBatch.Draw(healthBoxTexture, healthBoxRectangle2, Color.White);
                 spriteBatch.Draw(healthTexture, healthRectangle2, Color.White);
                 spriteBatch.Draw(manaTexture, manaRectangle2, Color.White);
-                spriteBatch.DrawString(Game1.spriteFont, Game1.player2.health + "/" + Game1.player2.healthMax, new Vector2(healthTexture.Width / 2 +124, 131), Color.White);
-                spriteBatch.DrawString(Game1.spriteFont, Game1.player2.mana + "/" + Game1.player2.manaMax, new Vector2(manaTexture.Width / 2 +228, 170), Color.White);
+                spriteBatch.DrawString(Game1.spriteFont, Game1.player2.health + "/" + Game1.player2.healthMax, new Vector2(healthTexture.Width / 2 + 124, 131), Color.White);
+                spriteBatch.DrawString(Game1.spriteFont, Game1.player2.mana + "/" + Game1.player2.manaMax, new Vector2(manaTexture.Width / 2 + 228, 170), Color.White);
                 //enemy
                 spriteBatch.Draw(enemyHealthTexture, enemyHealthRectangle, Color.White);
                 spriteBatch.DrawString(Game1.spriteFont, Game1.enemy.health + "/" + Game1.enemy.healthMax, new Vector2(995, screenHeight / 2 + 49), Color.Black);
                 //Speech
-                spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White); 
+                spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                 spriteBatch.Draw(fireTexture, firePosition, fireRectangle, Color.White);
             }
 
