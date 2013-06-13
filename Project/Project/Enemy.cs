@@ -19,12 +19,13 @@ namespace Project
         int screenWidth = 1366, screenHeight = 768;
 
         int vitesse = 1;
-        
+
         public int ligne = 1, colonne = 1, mapnumber = 5, strength;
-       
+
         public string Direction;
         int timer = 0, timerEnemy = 0;
         public int health, healthMax;
+        public bool col;
 
         public Enemy(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Rectangle newsprite, int newHealth, int newStrength)
         {
@@ -46,7 +47,7 @@ namespace Project
             {
                 Direction = "left";
                 timer++;
-
+                col = false;
                 if (timer == 15)
                 {
                     timer = 0;
@@ -61,8 +62,11 @@ namespace Project
                 }
                 else
                 {
-                    enemyPosition += (new Vector2((-vitesse), 0));
-                    enemyRectangle.X -= vitesse;
+                    if (!col)
+                    {
+                        enemyPosition += (new Vector2((-vitesse), 0));
+                        enemyRectangle.X -= vitesse;
+                    }
                 }
             }
 
@@ -70,7 +74,7 @@ namespace Project
             {
                 Direction = "right";
                 timer++;
-
+                col = false;
                 if (timer == 15)
                 {
                     timer = 0;
@@ -90,18 +94,21 @@ namespace Project
                 }
                 else
                 {
-                    enemyPosition += new Vector2(vitesse, 0);
-                    enemyRectangle.X += vitesse;
+                    if (!col)
+                    {
+                        enemyPosition += new Vector2(vitesse, 0);
+                        enemyRectangle.X += vitesse;
+                    }
                 }
 
             }
 
-            else if (enemyPosition.Y - position.Y >0 && enemyPosition.Y - position.Y < 200 && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X <= 100) ||( position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
+            else if (enemyPosition.Y - position.Y > 0 && enemyPosition.Y - position.Y < 200 && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X <= 100) || (position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
             {
 
                 Direction = "up";
                 timer++;
-
+                col = false;
                 if (timer == 15)
                 {
                     timer = 0;
@@ -116,17 +123,19 @@ namespace Project
                 }
                 else
                 {
-                    enemyPosition += new Vector2(0, -vitesse);
-                    enemyRectangle.Y -= vitesse;
+                    if (!col)
+                    {
+                        enemyPosition += new Vector2(0, -vitesse);
+                        enemyRectangle.Y -= vitesse;
+                    }
                 }
 
             }
-           else if (enemyPosition.Y - position.Y <= 0 && enemyPosition.Y - position.Y >= -200  && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X < 100) ||( position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
-         
+            else if (enemyPosition.Y - position.Y <= 0 && enemyPosition.Y - position.Y >= -200 && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X < 100) || (position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
             {
                 Direction = "down";
                 timer++;
-
+                col = false;
                 if (timer == 15)
                 {
                     timer = 0;
@@ -139,11 +148,14 @@ namespace Project
                         colonne++;
                     }
                 }
-                
+
                 else
                 {
-                    enemyPosition += new Vector2(0, vitesse);
-                    enemyRectangle.Y += vitesse;
+                    if (!col)
+                    {
+                        enemyPosition += new Vector2(0, vitesse);
+                        enemyRectangle.Y += vitesse;
+                    }
                 }
 
             }
@@ -154,7 +166,7 @@ namespace Project
                 {
                     Direction = "left";
                     timer++;
-
+                    col = false;
                     if (timer == 15)
                     {
                         timer = 0;
@@ -169,15 +181,18 @@ namespace Project
                     }
                     else
                     {
-                        enemyPosition += (new Vector2((-vitesse), 0));
-                        enemyRectangle.X -= vitesse;
+                        if (!col)
+                        {
+                            enemyPosition += (new Vector2((-vitesse), 0));
+                            enemyRectangle.X -= vitesse;
+                        }
                     }
                 }
                 else if (timerEnemy > 150 && timerEnemy <= 200)
                 {
                     Direction = "down";
                     timer++;
-
+                    col = false;
                     if (timer == 15)
                     {
                         timer = 0;
@@ -192,8 +207,11 @@ namespace Project
                     }
                     else
                     {
-                        enemyPosition += new Vector2(0, vitesse);
-                        enemyRectangle.Y += vitesse;
+                        if (!col)
+                        {
+                            enemyPosition += new Vector2(0, vitesse);
+                            enemyRectangle.Y += vitesse;
+                        }
                     }
 
                 }
@@ -202,7 +220,7 @@ namespace Project
                 {
                     Direction = "right";
                     timer++;
-
+                    col = false;
                     if (timer == 15)
                     {
                         timer = 0;
@@ -217,8 +235,11 @@ namespace Project
                     }
                     else
                     {
-                        enemyPosition += new Vector2(vitesse, 0);
-                        enemyRectangle.X += vitesse;
+                        if (!col)
+                        {
+                            enemyPosition += new Vector2(vitesse, 0);
+                            enemyRectangle.X += vitesse;
+                        }
                     }
                 }
                 else if (timerEnemy > 350 && timerEnemy <= 400)
@@ -226,7 +247,7 @@ namespace Project
 
                     Direction = "up";
                     timer++;
-
+                    col = false;
                     if (timer == 15)
                     {
                         timer = 0;
@@ -239,12 +260,15 @@ namespace Project
                             colonne++;
                         }
                     }
-                   
+
                     else
                     {
-                        enemyPosition += new Vector2(0, -vitesse);
+                        if (!col)
+                        {
+                            enemyPosition += new Vector2(0, -vitesse);
 
-                        enemyRectangle.Y -= vitesse;
+                            enemyRectangle.Y -= vitesse;
+                        }
                     }
 
                 }
@@ -290,29 +314,57 @@ namespace Project
             else return (enemyRectangle.Intersects(Game1.player.persoRectangle));
         }
 
-       /* public void Collision(Rectangle newRectangle)
-        {
-            if (enemyRectangle.TouchTopOf(newRectangle))
-            {
-                enemyPosition.Y = newRectangle.Y - enemyRectangle.Height ;
-            }
+        /* public void Collision(Rectangle newRectangle)
+         {
+             if (enemyRectangle.TouchTopOf(newRectangle))
+             {
+                 enemyPosition.Y = newRectangle.Y - enemyRectangle.Height ;
+             }
 
-            if (enemyRectangle.TouchLeftOf(newRectangle))
-            {
-                enemyPosition.X = newRectangle.X - 4;
-            }
-            if (enemyRectangle.TouchRightOf(newRectangle))
-            {
-                enemyPosition.X = newRectangle.X + 11;
-            }
-            if (enemyRectangle.TouchBottomOf(newRectangle))
-                enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 ;
+             if (enemyRectangle.TouchLeftOf(newRectangle))
+             {
+                 enemyPosition.X = newRectangle.X - 4;
+             }
+             if (enemyRectangle.TouchRightOf(newRectangle))
+             {
+                 enemyPosition.X = newRectangle.X + 11;
+             }
+             if (enemyRectangle.TouchBottomOf(newRectangle))
+                 enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 ;
 
-        }*/
+         }*/
 
         public void Draw(SpriteBatch spritBatch)
         {
             spritBatch.Draw(enemyTexture, enemyPosition, Rectenemy, Color.White);
+        }
+
+        public void Collision(Rectangle newRectangle)
+        {/*
+            if (enemyRectangle.TouchTopOf(newRectangle))
+            {
+                enemyPosition.Y = newRectangle.Y - enemyRectangle.Height - enemyTexture.Height / 8;
+                col = true;
+            }
+            */
+            if (enemyRectangle.TouchLeftOf(newRectangle))
+            {
+                enemyPosition.X = newRectangle.X - enemyRectangle.Width ;
+                enemyRectangle.X=newRectangle.X - enemyRectangle.Width ;
+
+                col = true;
+            }
+          /*  if (enemyRectangle.TouchRightOf(newRectangle))
+            {
+                enemyPosition.X = newRectangle.X + newRectangle.Width + 4; 
+                col = true;
+            }
+            if (enemyRectangle.TouchBottomOf(newRectangle))
+            {
+                enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 - enemyTexture.Height / 8;
+                col = true;
+            }*/
+
         }
     }
 }
