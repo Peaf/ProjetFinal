@@ -15,7 +15,6 @@ Content\Tile\Tile1.xnb
 Content\Tile\Tile2.xnb
 Content\Button\PlayButton2.xnb
 Content\Button\PlayButton3.xnb
-Content\Button\QuitButton2.xnb
 Content\Volume\volume0.xnb
 Content\Volume\volume100.xnb
 Content\Volume\volume25.xnb
@@ -169,6 +168,8 @@ Content\Button\LoadButton.xnb
 Content\Button\Player1Button.xnb
 Content\Button\Player2Button.xnb
 Content\Button\SaveButton.xnb
+Content\Button\CoopButton.xnb
+Content\Button\NewGameButton.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma

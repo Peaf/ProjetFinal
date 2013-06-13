@@ -64,16 +64,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Button\PlayButton.png">
-      <Name>PlayButton</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Button\QuitButton.png">
-      <Name>QuitButton</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Song\Song1.mp3">
       <Name>Song1</Name>
       <Importer>Mp3Importer</Importer>
@@ -133,32 +123,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Button\OptionsButton2.png">
-      <Name>OptionsButton2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Tile\Tile2.png">
       <Name>Tile2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Button\PlayButton2.png">
-      <Name>PlayButton2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Button\PlayButton3.png">
-      <Name>PlayButton3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Button\QuitButton2.png">
-      <Name>QuitButton2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -1034,16 +1000,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Button\Player1Button.png">
-      <Name>Player1Button</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Button\Player2Button.png">
-      <Name>Player2Button</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Button\SaveButton.png">
       <Name>SaveButton</Name>
       <Importer>TextureImporter</Importer>
@@ -1053,6 +1009,23 @@
   <ItemGroup>
     <Compile Include="Tile\Tile1.png">
       <Name>Tile1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Button\CoopButton.png">
+      <Name>CoopButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Button\NewGameButton.png">
+      <Name>NewGameButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Button\QuitButton.png">
+      <Name>QuitButton</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

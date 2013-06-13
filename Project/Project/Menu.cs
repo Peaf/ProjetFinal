@@ -24,10 +24,10 @@ namespace Project
         {
             ImageMenu = Content.Load<Texture2D>("Menu/MainMenu");
 
-            NewGameButton = new cButton(Content.Load<Texture2D>("Button/Player1Button"), 250, 100);
+            NewGameButton = new cButton(Content.Load<Texture2D>("Button/NewGameButton"), 250, 100);
             NewGameButton.setPosition(new Vector2(screenWidth / 2 - NewGameButton.size.X / 2, screenHeight / 2 - 200));
 
-            CoopButton = new cButton(Content.Load<Texture2D>("Button/Player2Button"), 250, 100);
+            CoopButton = new cButton(Content.Load<Texture2D>("Button/CoopButton"), 250, 100);
             CoopButton.setPosition(new Vector2(screenWidth / 2 - CoopButton.size.X / 2, screenHeight / 2 - 100));
 
             LoadButton = new cButton(Content.Load<Texture2D>("Button/LoadButton"), 250, 100);
