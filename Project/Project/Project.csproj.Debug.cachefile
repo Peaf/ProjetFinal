@@ -2,7 +2,6 @@ Content\Menu\MainMenu.xnb
 Content\Map\map5.xnb
 Content\Button\OptionsButton.xnb
 Content\Menu\Paused.xnb
-Content\Button\PlayButton.xnb
 Content\Button\QuitButton.xnb
 Content\Menu\Title.xnb
 Content\Map\map4.xnb
@@ -10,11 +9,8 @@ Content\Map\map8.xnb
 Content\Map\map6.xnb
 Content\Map\map2.xnb
 Content\Menu\Options.xnb
-Content\Button\OptionsButton2.xnb
 Content\Tile\Tile1.xnb
 Content\Tile\Tile2.xnb
-Content\Button\PlayButton2.xnb
-Content\Button\PlayButton3.xnb
 Content\Volume\volume0.xnb
 Content\Volume\volume100.xnb
 Content\Volume\volume25.xnb
@@ -165,8 +161,6 @@ Content\Tile\Tile193.xnb
 Content\Tile\Tile40.xnb
 Content\Button\BackButton.xnb
 Content\Button\LoadButton.xnb
-Content\Button\Player1Button.xnb
-Content\Button\Player2Button.xnb
 Content\Button\SaveButton.xnb
 Content\Button\CoopButton.xnb
 Content\Button\NewGameButton.xnb
