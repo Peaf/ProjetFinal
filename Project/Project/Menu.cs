@@ -45,7 +45,6 @@ namespace Project
               MediaPlayer.Stop();
               Playing.nbjoueurs = 1;
               CurrentGameState = Game1.GameState.Playing;
-              
               MediaPlayer.Play(song2);
             }
 

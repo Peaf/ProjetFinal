@@ -52,12 +52,10 @@ namespace Project
             if (btnPlay2.isClicked)
             {
                 CurrentGameState = Game1.GameState.Playing;
-
                 MediaPlayer.Resume();
             }
             else if (btnOptions2.isClicked)
             {
-
                 CurrentGameState = Game1.GameState.Options;
                 MediaPlayer.Resume();
             }
@@ -73,6 +71,8 @@ namespace Project
             if (btnLoad.isClicked)
             {
                 Load.Update();
+                CurrentGameState = Game1.GameState.Playing;
+                MediaPlayer.Resume();
             }
 
             btnPlay2.Update(mouse, gameTime);
