@@ -122,7 +122,7 @@ namespace Project
 
             //Enemy
             enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50);
-            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50 );
+            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50 );
             enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(1000, 130), new Rectangle(1000, 130, 78, 105), new Rectangle(0, 0, 78, 105), 300, 100);
             enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(850, 150), new Rectangle(850, 150, 78, 105), new Rectangle(0, 0, 78, 105), 100, 20);
 
