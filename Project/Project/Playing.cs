@@ -250,6 +250,10 @@ namespace Project
                     {
                         Game1.player.Collision(tile.Rectangle);
                         if (nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision(tile.Rectangle);
+                        Game1.enemy2.Collision(tile.Rectangle);
+                        Game1.enemy3.Collision(tile.Rectangle);
+                        Game1.enemy4.Collision(tile.Rectangle);
                     }
                 }
 

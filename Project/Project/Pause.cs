@@ -16,14 +16,14 @@ namespace Project
     static class Pause
     {
         static Texture2D pausedTexture;
-        static cButton btnNewGame, btnOptions, btnQuit, btnSave,btnLoad;
+        static cButton btnBack, btnOptions, btnQuit, btnSave,btnLoad;
 
         public static void LoadContent(ContentManager Content, int screenWidth, int screenHeight)
         {
             pausedTexture = Content.Load<Texture2D>("Menu/Paused");
 
-            btnNewGame = new cButton(Content.Load<Texture2D>("Button/BackButton"), 250, 100);
-            btnNewGame.setPosition(new Vector2(screenWidth / 2 - btnNewGame.size.X / 2, screenHeight / 2));
+            btnBack = new cButton(Content.Load<Texture2D>("Button/BackButton"), 250, 100);
+            btnBack.setPosition(new Vector2(screenWidth / 2 - btnBack.size.X / 2, screenHeight / 2));
 
             btnOptions = new cButton(Content.Load<Texture2D>("Button/OptionsButton"), 250, 100);
             btnOptions.setPosition(new Vector2(screenWidth / 2 - btnOptions.size.X / 2, screenHeight / 2 +125));
@@ -44,12 +44,12 @@ namespace Project
             Game1.GameState CurrentGameState = Game1.GameState.Pause;
 
             MediaPlayer.Pause();
-            btnNewGame.isClicked = false;
-            btnNewGame.Update(mouse, gameTime);
+            btnBack.isClicked = false;
+            btnBack.Update(mouse, gameTime);
             btnOptions.isClicked = false;
             btnOptions.Update(mouse, gameTime);
 
-            if (btnNewGame.isClicked)
+            if (btnBack.isClicked)
             {
                 CurrentGameState = Game1.GameState.Playing;
                 MediaPlayer.Resume();
@@ -75,7 +75,7 @@ namespace Project
                 MediaPlayer.Resume();
             }
 
-            btnNewGame.Update(mouse, gameTime);
+            btnBack.Update(mouse, gameTime);
             btnOptions.Update(mouse, gameTime);
             btnQuit.Update(mouse, gameTime);
             btnSave.Update(mouse, gameTime);
@@ -86,7 +86,7 @@ namespace Project
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
             spriteBatch.Draw(pausedTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
-            btnNewGame.Draw(spriteBatch);
+            btnBack.Draw(spriteBatch);
             btnOptions.Draw(spriteBatch);
             btnQuit.Draw(spriteBatch);
             btnSave.Draw(spriteBatch);

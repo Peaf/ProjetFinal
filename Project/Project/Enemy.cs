@@ -340,30 +340,33 @@ namespace Project
         }
 
         public void Collision(Rectangle newRectangle)
-        {/*
+        {
             if (enemyRectangle.TouchTopOf(newRectangle))
             {
-                enemyPosition.Y = newRectangle.Y - enemyRectangle.Height - enemyTexture.Height / 8;
+                enemyPosition.Y = newRectangle.Y - enemyRectangle.Height ;
+                enemyRectangle.Y = newRectangle.Y - enemyRectangle.Height ;
                 col = true;
             }
-            */
+            
             if (enemyRectangle.TouchLeftOf(newRectangle))
             {
-                enemyPosition.X = newRectangle.X - enemyRectangle.Width ;
-                enemyRectangle.X=newRectangle.X - enemyRectangle.Width ;
+                enemyPosition.X = newRectangle.X - enemyRectangle.Width -20;
+                enemyRectangle.X = newRectangle.X - enemyRectangle.Width -5;
 
                 col = true;
             }
-          /*  if (enemyRectangle.TouchRightOf(newRectangle))
+            if (enemyRectangle.TouchRightOf(newRectangle))
             {
-                enemyPosition.X = newRectangle.X + newRectangle.Width + 4; 
+                enemyPosition.X = newRectangle.X + newRectangle.Width -27;
+                enemyRectangle.X = newRectangle.X + enemyRectangle.Width-12 ;
                 col = true;
             }
             if (enemyRectangle.TouchBottomOf(newRectangle))
             {
-                enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 - enemyTexture.Height / 8;
+                enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 ;
+                enemyRectangle.Y = newRectangle.Y + newRectangle.Height;
                 col = true;
-            }*/
+            }
 
         }
     }
