@@ -387,7 +387,7 @@ namespace Project
                         Game1.enemy.healthMax = Game1.enemy.health;
                     }
 
-                    if (turnPlayer && turn % 2 == 0 && (Game1.player.health > 0 || Game1.player2.health > 0) && Game1.enemy.health > 0)
+                    if (turnPlayer && turn % 2 == 0 && Game1.player.health > 0 && Game1.enemy.health > 0)
                     {
                         if (timerinventaire > 15)
                         {
@@ -490,7 +490,7 @@ namespace Project
                             Game1.enemy.health -= degat;
                             Game1.player.mana -= manaPerdu;
                             turnPlayer = false;
-                            if (disablePlayer2)
+                            if (disablePlayer2 || Game1.player2.health <= 0)
                             {
                                 turn++;
                             }
@@ -504,7 +504,7 @@ namespace Project
 
                     }
 
-                    else if (turnPlayer2)
+                    else if (turnPlayer2 && Game1.player2.health > 0)
                     {
                         if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
                         {
@@ -532,23 +532,24 @@ namespace Project
                             attackChoisi = "";
                         }
                     }
-                    else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0) //enemy 
+                    else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.enemy.health > 0) //enemy 
                     {
-                        degatEnemy = rand.Next(100, 120) + Game1.enemy.strength / 2 + 15 * Game1.player.Lvl;
+
                         if (disablePlayer1 && turn > disablePlayer1End)
                         {
                             disablePlayer1 = false;
                         }
                         if (disablePlayer2 && turn > disablePlayer2End)
                         {
-                            disablePlayer2 = false;  
+                            disablePlayer2 = false;
                         }
-                        if (rand.Next(1, 2) == 1) // on attaque le player1
+                        if ((rand.Next(1, 3) == 1 && Game1.player.health > 0) || (Game1.player2.health <= 0))  // on attaque le player1 si on tombe sur lui en random ou si l'autre est dead
                         {
+                            degatEnemy = rand.Next(100, 120) + Game1.enemy.strength / 2 + 15 * Game1.player.Lvl;
                             attaquePlayer1 = true;
                             if (!disablePlayer1)
                             {
-                                disablePlayer1 = (rand.Next(1, 2) == 1);
+                                disablePlayer1 = (rand.Next(1, 80) == 1);
                                 if (disablePlayer1) //si on disable
                                 {
                                     disablePlayer1End = turn + 5;
@@ -556,7 +557,7 @@ namespace Project
                                 else //sinon on fait des degats sur le P1
                                 {
                                     degatEnemy -= Game1.player.Armor;
-                                    Game1.player.health = Game1.player.health  - degatEnemy;
+                                    Game1.player.health = Game1.player.health - degatEnemy;
                                 }
                             }
                             else //sinon on fait des degats sur le P1
@@ -564,13 +565,17 @@ namespace Project
                                 degatEnemy -= Game1.player.Armor;
                                 Game1.player.health = Game1.player.health - degatEnemy;
                             }
-                            if (disablePlayer1)
+                            if (Game1.player.health <= 0)
+                            {
+                                Game1.player.health = 0;
+                            }
+                            if (disablePlayer1 || Game1.player.health <= 0)
                             {
                                 turnPlayer = false;
                                 turnPlayer2 = true;
                                 turn++;
                             }
-                            else if (disablePlayer1 && disablePlayer2)
+                            else if ((disablePlayer1 || Game1.player.health <= 0) && (disablePlayer2 || Game1.player.health <= 0))
                             {
                                 turn += 2;
                             }
@@ -582,10 +587,11 @@ namespace Project
                         }
                         else //on attaque le player2
                         {
+                            degatEnemy = rand.Next(100, 120) + Game1.enemy.strength / 2 + 15 * Game1.player2.Lvl;
                             attaquePlayer1 = false;
                             if (!disablePlayer2)
                             {
-                                disablePlayer2 = (rand.Next(1, 50) == 1);
+                                disablePlayer2 = (rand.Next(1, 8) == 1);
                                 if (disablePlayer2) //si on disable
                                 {
                                     disablePlayer2End = turn + 5;
@@ -601,13 +607,17 @@ namespace Project
                                 degatEnemy -= Game1.player2.Armor;
                                 Game1.player2.health = Game1.player2.health - degatEnemy;
                             }
-                            if (disablePlayer1)
+                            if (Game1.player2.health <= 0)
+                            {
+                                Game1.player2.health = 0;
+                            }
+                            if (disablePlayer1 || Game1.player.health <= 0)
                             {
                                 turnPlayer = false;
                                 turnPlayer2 = true;
                                 turn++;
                             }
-                            else if (disablePlayer1 && disablePlayer2)
+                            else if ((disablePlayer1 || Game1.player.health <= 0) && (disablePlayer2 || Game1.player.health <= 0))
                             {
                                 turn += 2;
                             }
@@ -620,11 +630,12 @@ namespace Project
 
                         timerAnimationDegat = 0;
                     }
-                    if (Game1.player.health <= 0)
+                    if ((Game1.player.health <= 0 && Playing.nbjoueurs == 1) || (Playing.nbjoueurs == 2 && Game1.player.health <= 0 && Game1.player2.health <= 0))
                     {
                         CurrentGameState = Game1.GameState.GameOver;
                         MediaPlayer.Play(songGameOver);
                     }
+
                     if (Game1.enemy.health <= 0)
                     {
                         Game1.enemy.health = 0;
@@ -660,45 +671,45 @@ namespace Project
                     pastKey = presentKey;
                     pastMouse = mouse;
                 }
-                /* if (Playing.inventaire)
-                 {
+                if (Playing.inventaire)
+                {
 
-                     timerinventaire++;
-                     if (Playing.timerInventaire > 15)
-                     {
-                         if (Keyboard.GetState().IsKeyDown(Keys.Enter) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                         {
-                             Playing.inventaire = false;
-                             timerinventaire = 0;
-                         }
-                     }
-                     foreach (Item item in Game1.invent.tablObjects)
-                     {
-                         if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
-                         {
-                             Game1.invent.useItem(item);
-                         }
-                     }
-                     foreach (Item item in Game1.invent.tablEquiped)
-                     {
-                         if (item.type == "Weapon")
-                         {
-                             if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
-                             {
-                                 //Game1.invent.removeItemE(item);
-                                  //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
-                                 Game1.invent.deUseItem(item);
-                             }
-                         }
-                         else
-                         {
-                             if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
-                             {
-                                 Game1.invent.deUseItem(item);
-                             }
-                         }
-                     }
-                 }*/
+                    timerinventaire++;
+                    if (Playing.timerInventaire > 15)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.Enter) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        {
+                            Playing.inventaire = false;
+                            timerinventaire = 0;
+                        }
+                    }
+                    foreach (Item item in Game1.invent.tablObjects)
+                    {
+                        if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        {
+                            Game1.invent.useItem(item);
+                        }
+                    }
+                    foreach (Item item in Game1.invent.tablEquiped)
+                    {
+                        if (item.type == "Weapon")
+                        {
+                            if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            {
+                                //Game1.invent.removeItemE(item);
+                                //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
+                                Game1.invent.deUseItem(item);
+                            }
+                        }
+                        else
+                        {
+                            if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            {
+                                Game1.invent.deUseItem(item);
+                            }
+                        }
+                    }
+                }
                 Game1.pastMouse = mouse;
                 return (CurrentGameState);
             }
@@ -761,13 +772,20 @@ namespace Project
                 spriteBatch.Draw(fireTexture, firePosition, fireRectangle, Color.White);
 
             }
-
+            if (Game1.player.health <= 0)
+            {
+                spriteBatch.DrawString(Game1.spriteFont, "DEAD", new Vector2(100, 390), Color.Red);
+            }
+            if (Game1.player2.health <= 0)
+            {
+                spriteBatch.DrawString(Game1.spriteFont, "DEAD", new Vector2(195, 500), Color.Red);
+            }
             if (turn == -1)
             {
                 spriteBatch.DrawString(Game1.spriteFont, "You're being attacked !!!", new Vector2(10, 700), Color.Black);
                 Game1.btnStartFight.Draw(spriteBatch);
             }
-            if (((turn % 2 == 1) && Game1.player.health > 0 && Game1.enemy.health > 0) || (Playing.nbjoueurs == 2 && turnPlayer2)) // on fait l'animation des degats au début du tour suivant
+            if (((turn % 2 == 1) && Game1.enemy.health > 0) || (Playing.nbjoueurs == 2 && turnPlayer2)) // on fait l'animation des degats au début du tour suivant
             {
                 timerAnimationDegat++;
                 if (disablePlayer1 && Playing.nbjoueurs == 1)
@@ -787,7 +805,6 @@ namespace Project
                     }
                     if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
                     {
-
                         lightRectangle = new Rectangle(76, 0, 38, 65);
                         spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                         spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
@@ -796,17 +813,68 @@ namespace Project
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
                     }
-                    spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
+                    spriteBatch.DrawString(Game1.spriteFont, "Player1 : You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
                 }
-                else if (disablePlayer1 && Playing.nbjoueurs == 2 && turnPlayer2)
+                else if (Game1.player.health <= 0 && turnPlayer2)
                 {
+
+                    if (!attaquePlayer1)
+                    {
+                        if (timerAnimationDegat <= 20)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                        }
+                        if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
+                        {
+                            lightRectangle = new Rectangle(38, 0, 38, 65);
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                        }
+                        if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
+                        {
+                            lightRectangle = new Rectangle(76, 0, 38, 65);
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 500), Color.Black);
+                        }
+                        if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
+                        {
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 480), Color.Gray);
+                        }
+                    }
+
+                }
+                /*else if (Game1.player2.health <= 0 )
+                {
+                    
+                    if (timerAnimationDegat <= 20)
+                    {
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                    }
+                    if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
+                    {
+                        lightRectangle = new Rectangle(38, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                    }
+                    if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
+                    {
+                        lightRectangle = new Rectangle(76, 0, 38, 65);
+                        spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                    }
+                    if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
+                    {
+                        spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
+                    }
+                }*/
+                else if (disablePlayer1 && Playing.nbjoueurs == 2 && turnPlayer2)  //si 2players et player1 disable
+                {
+
                     if (timerAnimationDegat <= 20)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 390), Color.Orange);
                         lightRectangle = new Rectangle(0, 0, 38, 65);
                         if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                           spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                         }
                         else if (!attaquePlayer1)
                         {
@@ -835,26 +903,27 @@ namespace Project
                             spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
                         }
-                        else if(!attaquePlayer1)
+                        else if (!attaquePlayer1)
                         {
                             spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 500), Color.Black);
                         }
-                        
+
                     }
                     if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
                     {
                         if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Gray);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
                         }
-                        else if(!attaquePlayer1)
+                        else if (!attaquePlayer1)
                         {
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 480), Color.Gray);
                         }
                     }
-                    spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
+                    spriteBatch.DrawString(Game1.spriteFont, "Player1 : You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
                 }
+
                 else
                 {
                     if (timerAnimationDegat <= 20)
@@ -874,14 +943,71 @@ namespace Project
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Press Enter to continue", new Vector2(1100, 725), Color.Black);
             }
 
-            if (turn % 2 == 0 && attackChoisi == "" && Game1.player.health > 0 && Game1.enemy.health > 0)
+            if (turn % 2 == 0 && attackChoisi == "" && (Game1.player.health >= 0 || Game1.player2.health >= 0) && Game1.enemy.health > 0)
             {
                 btnAttack1.Draw(spriteBatch);
                 btnObjects.Draw(spriteBatch);
 
                 if (Game1.player.Lvl >= 2)
                     btnSpell.Draw(spriteBatch);
+                else if (Playing.nbjoueurs == 2 && disablePlayer2) //2player et player2 disable
+                {
+                    timerAnimationDegat++;
+                    if (timerAnimationDegat <= 20)
+                    {
+                        spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(195, 480), Color.Orange);
+                        lightRectangle = new Rectangle(0, 0, 38, 65);
+                        if (!attaquePlayer1 && turn != disablePlayer2End - 4)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                        }
+                        else if (attaquePlayer1)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        }
+                    }
 
+                    if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
+                    {
+                        spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(195, 460), Color.OrangeRed);
+                        lightRectangle = new Rectangle(38, 0, 38, 65);
+                        if (!attaquePlayer1 && turn != disablePlayer2End - 4)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                        }
+                        else if (attaquePlayer1)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        }
+                    }
+                    if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
+                    {
+                        lightRectangle = new Rectangle(76, 0, 38, 65);
+                        if (!attaquePlayer1 && turn != disablePlayer2End - 4)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition2, lightRectangle, Color.White);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 500), Color.Black);
+                        }
+                        else if (attaquePlayer1)
+                        {
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                        }
+
+                    }
+                    if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
+                    {
+                        if (!attaquePlayer1 && turn != disablePlayer2End - 4)
+                        {
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(195, 480), Color.Gray);
+                        }
+                        else if (attaquePlayer1)
+                        {
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
+                        }
+                    }
+                    spriteBatch.DrawString(Game1.spriteFont, "Player2 : You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
+                }
                 if (turn != 0 && turnPlayer2 == false && !disablePlayer1 && !disablePlayer2)
                 {
                     if (Playing.nbjoueurs == 1 || attaquePlayer1)
