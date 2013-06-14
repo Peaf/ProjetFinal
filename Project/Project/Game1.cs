@@ -74,7 +74,7 @@ namespace Project
         protected override void Initialize()
         {
             Playing.Initialize();
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 1500, 50, 0);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 50, 50, 0);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
@@ -122,7 +122,7 @@ namespace Project
 
             //Enemy
             enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50);
-            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50 );
+            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50 );
             enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(1000, 130), new Rectangle(1000, 130, 78, 105), new Rectangle(0, 0, 78, 105), 300, 100);
             enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(850, 150), new Rectangle(850, 150, 78, 105), new Rectangle(0, 0, 78, 105), 100, 20);
 

@@ -33,7 +33,7 @@ namespace Project
         {
             mapNumber = 5;
             timerInventaire = 0;
-            nbjoueurs = 1;
+            nbjoueurs = 2;
             tab_map8 = new int[26, 44];
             tab_map5 = new int[26, 44];
             tab_map4 = new int[26, 44];
