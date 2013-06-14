@@ -543,7 +543,7 @@ namespace Project
                         {
                             disablePlayer2 = false;  
                         }
-                        if (rand.Next(1, 3) == 1) // on attaque le player1
+                        if (rand.Next(1, 2) == 1) // on attaque le player1
                         {
                             attaquePlayer1 = true;
                             if (!disablePlayer1)
@@ -569,6 +569,10 @@ namespace Project
                                 turnPlayer = false;
                                 turnPlayer2 = true;
                                 turn++;
+                            }
+                            else if (disablePlayer1 && disablePlayer2)
+                            {
+                                turn += 2;
                             }
                             else
                             {
@@ -602,6 +606,10 @@ namespace Project
                                 turnPlayer = false;
                                 turnPlayer2 = true;
                                 turn++;
+                            }
+                            else if (disablePlayer1 && disablePlayer2)
+                            {
+                                turn += 2;
                             }
                             else
                             {
@@ -790,15 +798,15 @@ namespace Project
                     }
                     spriteBatch.DrawString(Game1.spriteFont, "You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
                 }
-                else if (disablePlayer1 && Playing.nbjoueurs == 2 && !turnPlayer2)
+                else if (disablePlayer1 && Playing.nbjoueurs == 2 && turnPlayer2)
                 {
                     if (timerAnimationDegat <= 20)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 390), Color.Orange);
                         lightRectangle = new Rectangle(0, 0, 38, 65);
-                        if (attaquePlayer1 )
+                        if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                           // spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                           spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                         }
                         else if (!attaquePlayer1)
                         {
@@ -810,9 +818,9 @@ namespace Project
                     {
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 370), Color.OrangeRed);
                         lightRectangle = new Rectangle(38, 0, 38, 65);
-                        if (attaquePlayer1)
+                        if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                            //spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                         }
                         else if (!attaquePlayer1)
                         {
@@ -822,10 +830,10 @@ namespace Project
                     if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
                     {
                         lightRectangle = new Rectangle(76, 0, 38, 65);
-                        if (attaquePlayer1)
+                        if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                           // spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
-                            //spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                            spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
                         }
                         else if(!attaquePlayer1)
                         {
@@ -836,9 +844,9 @@ namespace Project
                     }
                     if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
                     {
-                        if (attaquePlayer1)
+                        if (attaquePlayer1 && turn != disablePlayer1End - 4)
                         {
-                            //spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Gray);
+                            spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Gray);
                         }
                         else if(!attaquePlayer1)
                         {

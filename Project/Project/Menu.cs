@@ -39,9 +39,6 @@ namespace Project
             QuitButton = new cButton(Content.Load<Texture2D>("Button/QuitButton"), 250, 100);
             QuitButton.setPosition(new Vector2(screenWidth / 2 - QuitButton.size.X / 2, screenHeight / 2 +200));
 
-
-
-
         }
 
         public static Game1.GameState Update(GameTime gameTime)
