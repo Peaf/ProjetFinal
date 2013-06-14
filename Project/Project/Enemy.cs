@@ -39,11 +39,11 @@ namespace Project
         }
 
 
-        public void Update(GameTime gametime, Vector2 position)
+        public void Update(GameTime gametime, Vector2 position1, Vector2 position2)
         {
             KeyboardState KState = Keyboard.GetState();
 
-            if (position.X - 45 - enemyPosition.X >= -150 && position.X - enemyPosition.X - 45 < 0 && position.Y - enemyPosition.Y > -100 && position.Y - enemyPosition.Y < 100)
+            if ((position1.X - 45 - enemyPosition.X >= -150 && position1.X - enemyPosition.X - 45 < 0 && position1.Y - enemyPosition.Y > -100 && position1.Y - enemyPosition.Y < 100)||(position2.X - 45 - enemyPosition.X >= -150 && position2.X - enemyPosition.X - 45 < 0 && position2.Y - enemyPosition.Y > -100 && position2.Y - enemyPosition.Y < 100))
             {
                 Direction = "left";
                 timer++;
@@ -70,7 +70,7 @@ namespace Project
                 }
             }
 
-            else if (position.X - 45 - enemyPosition.X <= 150 && position.X - enemyPosition.X - 45 > 0 && position.Y - enemyPosition.Y > -100 && position.Y - enemyPosition.Y < 100)
+            else if ((position1.X - 45 - enemyPosition.X <= 150 && position1.X - enemyPosition.X - 45 > 0 && position1.Y - enemyPosition.Y > -100 && position1.Y - enemyPosition.Y < 100)||(position2.X - 45 - enemyPosition.X <= 150 && position2.X - enemyPosition.X - 45 > 0 && position2.Y - enemyPosition.Y > -100 && position2.Y - enemyPosition.Y < 100))
             {
                 Direction = "right";
                 timer++;
@@ -103,7 +103,7 @@ namespace Project
 
             }
 
-            else if (enemyPosition.Y - position.Y > 0 && enemyPosition.Y - position.Y < 200 && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X <= 100) || (position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
+            else if ((enemyPosition.Y - position1.Y > 0 && enemyPosition.Y - position1.Y < 200 && ((position1.X - enemyPosition.X >= 0 && position1.X - enemyPosition.X <= 100) || (position1.X - enemyPosition.X >= -100 && position1.X - enemyPosition.X <= 0)))||(enemyPosition.Y - position2.Y > 0 && enemyPosition.Y - position2.Y < 200 && ((position2.X - enemyPosition.X >= 0 && position2.X - enemyPosition.X <= 100) || (position2.X - enemyPosition.X >= -100 && position2.X - enemyPosition.X <= 0))))
             {
 
                 Direction = "up";
@@ -131,7 +131,7 @@ namespace Project
                 }
 
             }
-            else if (enemyPosition.Y - position.Y <= 0 && enemyPosition.Y - position.Y >= -200 && ((position.X - enemyPosition.X >= 0 && position.X - enemyPosition.X < 100) || (position.X - enemyPosition.X >= -100 && position.X - enemyPosition.X <= 0)))
+            else if ((enemyPosition.Y - position1.Y <= 0 && enemyPosition.Y - position1.Y >= -200 && ((position1.X - enemyPosition.X >= 0 && position1.X - enemyPosition.X < 100) || (position1.X - enemyPosition.X >= -100 && position1.X - enemyPosition.X <= 0)))||(enemyPosition.Y - position2.Y <= 0 && enemyPosition.Y - position2.Y >= -200 && ((position2.X - enemyPosition.X >= 0 && position2.X - enemyPosition.X < 100) || (position2.X - enemyPosition.X >= -100 && position2.X - enemyPosition.X <= 0))))
             {
                 Direction = "down";
                 timer++;
