@@ -45,10 +45,11 @@ namespace Project
 
             MediaPlayer.Pause();
             btnBack.isClicked = false;
-            btnBack.Update(mouse, gameTime);
+            btnBack.Update( gameTime);
             btnOptions.isClicked = false;
-            btnOptions.Update(mouse, gameTime);
-
+            btnOptions.Update( gameTime);
+            btnLoad.isClicked = false;
+            btnLoad.Update(gameTime);
             if (btnBack.isClicked)
             {
                 CurrentGameState = Game1.GameState.Playing;
@@ -75,11 +76,11 @@ namespace Project
                 MediaPlayer.Resume();
             }
 
-            btnBack.Update(mouse, gameTime);
-            btnOptions.Update(mouse, gameTime);
-            btnQuit.Update(mouse, gameTime);
-            btnSave.Update(mouse, gameTime);
-            btnLoad.Update(mouse, gameTime);
+            btnBack.Update( gameTime);
+            btnOptions.Update( gameTime);
+            btnQuit.Update( gameTime);
+            btnSave.Update( gameTime);
+            btnLoad.Update( gameTime);
             return (CurrentGameState);
         }
 

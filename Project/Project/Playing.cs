@@ -571,7 +571,7 @@ namespace Project
                 }
                 if (talking)
                 {
-                    Game1.btnNext.Update(mouse, gameTime);
+                    Game1.btnNext.Update( gameTime);
                     if (Game1.questState == 1)
                     {
                         Game1.pnj1.Update(gameTime, 1, "map8");

@@ -50,14 +50,17 @@ namespace Project
             Game1.GameState CurrentGameState = Game1.GameState.Options;
             timerOptions++;
             btnBack.isClicked = false;
-            btnBack.Update(mouse, gameTime);
+            btnBack.Update( gameTime);
             if (timerOptions > 5)
             {
                 if (btnBack.isClicked)
                 {
                     timerOptions = 0;
                     //Game1.paused = false;
-                    CurrentGameState = Game1.GameState.MainMenu;
+                    if (Game1.optionBackfromMenu)
+                        CurrentGameState = Game1.GameState.MainMenu;
+                    else
+                        CurrentGameState = Game1.GameState.Playing;
                     
                 }
                 if (btnVolume0.isClicked)
@@ -67,11 +70,11 @@ namespace Project
                     btnVolume50.isClicked = false;
                     btnVolume75.isClicked = false;
                     btnVolume100.isClicked = false;
-                    btnVolume0.Update(mouse, gameTime);
-                    btnVolume25.Update(mouse, gameTime);
-                    btnVolume50.Update(mouse, gameTime);
-                    btnVolume75.Update(mouse, gameTime);
-                    btnVolume100.Update(mouse, gameTime);
+                    btnVolume0.Update( gameTime);
+                    btnVolume25.Update( gameTime);
+                    btnVolume50.Update( gameTime);
+                    btnVolume75.Update( gameTime);
+                    btnVolume100.Update( gameTime);
                 }
 
                 if (btnVolume25.isClicked)
@@ -81,11 +84,11 @@ namespace Project
                     btnVolume50.isClicked = false;
                     btnVolume75.isClicked = false;
                     btnVolume100.isClicked = false;
-                    btnVolume0.Update(mouse, gameTime);
-                    btnVolume25.Update(mouse, gameTime);
-                    btnVolume50.Update(mouse, gameTime);
-                    btnVolume75.Update(mouse, gameTime);
-                    btnVolume100.Update(mouse, gameTime);
+                    btnVolume0.Update( gameTime);
+                    btnVolume25.Update( gameTime);
+                    btnVolume50.Update( gameTime);
+                    btnVolume75.Update( gameTime);
+                    btnVolume100.Update( gameTime);
                 }
 
                 if (btnVolume50.isClicked)
@@ -95,11 +98,11 @@ namespace Project
                     btnVolume25.isClicked = false;
                     btnVolume75.isClicked = false;
                     btnVolume100.isClicked = false;
-                    btnVolume0.Update(mouse, gameTime);
-                    btnVolume25.Update(mouse, gameTime);
-                    btnVolume50.Update(mouse, gameTime);
-                    btnVolume75.Update(mouse, gameTime);
-                    btnVolume100.Update(mouse, gameTime);
+                    btnVolume0.Update(gameTime);
+                    btnVolume25.Update( gameTime);
+                    btnVolume50.Update( gameTime);
+                    btnVolume75.Update( gameTime);
+                    btnVolume100.Update( gameTime);
                 }
                 if (btnVolume75.isClicked)
                 {
@@ -109,11 +112,11 @@ namespace Project
                     btnVolume50.isClicked = false;
 
                     btnVolume100.isClicked = false;
-                    btnVolume0.Update(mouse, gameTime);
-                    btnVolume25.Update(mouse, gameTime);
-                    btnVolume50.Update(mouse, gameTime);
-                    btnVolume75.Update(mouse, gameTime);
-                    btnVolume100.Update(mouse, gameTime);
+                    btnVolume0.Update( gameTime);
+                    btnVolume25.Update( gameTime);
+                    btnVolume50.Update( gameTime);
+                    btnVolume75.Update( gameTime);
+                    btnVolume100.Update( gameTime);
                 }
                 if (btnVolume100.isClicked)
                 {
@@ -122,19 +125,19 @@ namespace Project
                     btnVolume25.isClicked = false;
                     btnVolume50.isClicked = false;
                     btnVolume75.isClicked = false;
-                    btnVolume0.Update(mouse, gameTime);
-                    btnVolume25.Update(mouse, gameTime);
-                    btnVolume50.Update(mouse, gameTime);
-                    btnVolume75.Update(mouse, gameTime);
-                    btnVolume100.Update(mouse, gameTime);
+                    btnVolume0.Update( gameTime);
+                    btnVolume25.Update( gameTime);
+                    btnVolume50.Update( gameTime);
+                    btnVolume75.Update( gameTime);
+                    btnVolume100.Update( gameTime);
                 }
 
-                btnVolume0.Update(mouse, gameTime);
-                btnVolume25.Update(mouse, gameTime);
-                btnVolume50.Update(mouse, gameTime);
-                btnVolume75.Update(mouse, gameTime);
-                btnVolume100.Update(mouse, gameTime);
-                btnBack.Update(mouse, gameTime);
+                btnVolume0.Update(gameTime);
+                btnVolume25.Update( gameTime);
+                btnVolume50.Update( gameTime);
+                btnVolume75.Update( gameTime);
+                btnVolume100.Update( gameTime);
+                btnBack.Update( gameTime);
             }
 
             return (CurrentGameState);

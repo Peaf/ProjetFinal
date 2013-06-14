@@ -43,6 +43,8 @@ namespace Project
 
         public static Game1.GameState Update(GameTime gameTime)
         {
+            OptionsButton.isClicked = false;
+            OptionsButton.Update(gameTime);
             MouseState mouse = Mouse.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.MainMenu;
             Game1.playerMenu.Update(gameTime, Game1.GameState.MainMenu);
@@ -52,6 +54,7 @@ namespace Project
                 Playing.nbjoueurs = 1;
                 CurrentGameState = Game1.GameState.Playing;
                 MediaPlayer.Play(Game1.song2);
+                Game1.optionBackfromMenu = false;
             }
 
             if (CoopButton.isClicked)
@@ -59,6 +62,7 @@ namespace Project
                 Playing.nbjoueurs = 2;
                 CurrentGameState = Game1.GameState.Playing;
                 MediaPlayer.Play(Game1.song2);
+                Game1.optionBackfromMenu = false;
             }
 
             if (LoadButton.isClicked)
@@ -75,11 +79,11 @@ namespace Project
             if (QuitButton.isClicked)
                 Environment.Exit(0);
 
-            OptionsButton.Update(mouse, gameTime);
-            QuitButton.Update(mouse, gameTime);
-            NewGameButton.Update(mouse, gameTime);
-            CoopButton.Update(mouse, gameTime);
-            LoadButton.Update(mouse, gameTime);
+            OptionsButton.Update( gameTime);
+            QuitButton.Update( gameTime);
+            NewGameButton.Update( gameTime);
+            CoopButton.Update( gameTime);
+            LoadButton.Update( gameTime);
             return (CurrentGameState);
         }
 

@@ -15,6 +15,8 @@ namespace Project
         Texture2D texture;
         Vector2 position;
         Rectangle rectangle;
+        
+        MouseState lastMouse; 
 
         Color colour = new Color(255, 255, 255, 255);
 
@@ -30,24 +32,27 @@ namespace Project
 
         public bool isClicked;
 
-        public void Update(MouseState mouse, GameTime gametime)
+        public void Update( GameTime gametime)
         {
+            MouseState currentMouse = Mouse.GetState();
+            
+
             KeyboardState KState = Keyboard.GetState();
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
-            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
+            Rectangle mouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 1, 1);
 
             if (mouseRectangle.Intersects(rectangle) || KState.IsKeyDown(Keys.Down))
             {
                 colour = Color.Lime;
-                if (mouse.LeftButton == ButtonState.Pressed) isClicked = true;
+                if (currentMouse.LeftButton == ButtonState.Pressed && lastMouse.LeftButton == ButtonState.Released) isClicked = true;
 
             }
             else
             {
                 colour = new Color(255, 255, 255, 255);
 
-            }
+            } lastMouse = currentMouse;
         }
         public void setPosition(Vector2 newPosition)
         {
