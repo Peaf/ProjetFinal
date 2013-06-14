@@ -33,7 +33,7 @@ namespace Project
         {
             mapNumber = 5;
             timerInventaire = 0;
-            nbjoueurs = 2;
+            nbjoueurs = 1;
             tab_map8 = new int[26, 44];
             tab_map5 = new int[26, 44];
             tab_map4 = new int[26, 44];
@@ -250,10 +250,10 @@ namespace Project
                     {
                         Game1.player.Collision(tile.Rectangle);
                         if (nbjoueurs == 2) Game1.player2.Collision(tile.Rectangle);
-                        Game1.enemy1.Collision(tile.Rectangle);
-                        Game1.enemy2.Collision(tile.Rectangle);
-                        Game1.enemy3.Collision(tile.Rectangle);
-                        Game1.enemy4.Collision(tile.Rectangle);
+                        Game1.enemy1.Collision1(tile.Rectangle);
+                        Game1.enemy2.Collision1(tile.Rectangle);
+                        Game1.enemy3.Collision2(tile.Rectangle);
+                        Game1.enemy4.Collision2(tile.Rectangle);
                     }
                 }
 

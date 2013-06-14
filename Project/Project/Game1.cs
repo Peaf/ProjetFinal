@@ -123,8 +123,8 @@ namespace Project
             //Enemy
             enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50);
             enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 400), new Rectangle(365, 400, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50 );
-            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(1000, 130), new Rectangle(1000, 130, 78, 105), new Rectangle(0, 0, 78, 105), 300, 100);
-            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(850, 150), new Rectangle(850, 150, 78, 105), new Rectangle(0, 0, 78, 105), 100, 20);
+            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55,90), new Rectangle(0, 0, 78, 105), 300, 100);
+            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(550, 150), new Rectangle(550, 165, 55, 90), new Rectangle(0, 0, 78, 105), 100, 20);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));

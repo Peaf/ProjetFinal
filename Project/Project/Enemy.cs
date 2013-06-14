@@ -339,7 +339,7 @@ namespace Project
             spritBatch.Draw(enemyTexture, enemyPosition, Rectenemy, Color.White);
         }
 
-        public void Collision(Rectangle newRectangle)
+        public void Collision1(Rectangle newRectangle)
         {
             if (enemyRectangle.TouchTopOf(newRectangle))
             {
@@ -365,6 +365,37 @@ namespace Project
             {
                 enemyPosition.Y = newRectangle.Y + newRectangle.Height + 5 ;
                 enemyRectangle.Y = newRectangle.Y + newRectangle.Height;
+                col = true;
+            }
+
+        }
+
+        public void Collision2(Rectangle newRectangle)
+        {
+            if (enemyRectangle.TouchTopOf(newRectangle))
+            {
+                enemyPosition.Y = newRectangle.Y - enemyRectangle.Height-15;
+                enemyRectangle.Y = newRectangle.Y - enemyRectangle.Height;
+                col = true;
+            }
+
+            if (enemyRectangle.TouchLeftOf(newRectangle))
+            {
+                enemyPosition.X = newRectangle.X - enemyRectangle.Width - 5;
+                enemyRectangle.X = newRectangle.X - enemyRectangle.Width - 5;
+
+                col = true;
+            }
+            if (enemyRectangle.TouchRightOf(newRectangle))
+            {
+                enemyPosition.X = newRectangle.X + newRectangle.Width ;
+                enemyRectangle.X = newRectangle.X + newRectangle.Width +5;
+                col = true;
+            }
+            if (enemyRectangle.TouchBottomOf(newRectangle))
+            {
+                enemyPosition.Y = newRectangle.Y + enemyRectangle.Height -70;
+                enemyRectangle.Y = newRectangle.Y + enemyRectangle.Height -55;
                 col = true;
             }
 
