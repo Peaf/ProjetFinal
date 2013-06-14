@@ -15,8 +15,8 @@ namespace Project
         Texture2D texture;
         Vector2 position;
         Rectangle rectangle;
-        
-        MouseState lastMouse; 
+
+        MouseState lastMouse;
 
         Color colour = new Color(255, 255, 255, 255);
 
@@ -32,10 +32,10 @@ namespace Project
 
         public bool isClicked;
 
-        public void Update( GameTime gametime)
+        public void Update(GameTime gametime)
         {
             MouseState currentMouse = Mouse.GetState();
-            
+
 
             KeyboardState KState = Keyboard.GetState();
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
@@ -57,6 +57,26 @@ namespace Project
         public void setPosition(Vector2 newPosition)
         {
             position = newPosition;
+        }
+
+        public int getPositionX()
+        {
+            return (int)position.X;
+        }
+
+        public int getPositionY()
+        {
+            return (int)position.Y;
+        }
+
+        public int getSizeX()
+        {
+            return (int)size.X;
+        }
+
+        public int getSizeY()
+        {
+            return (int)size.Y;
         }
 
         public void Draw(SpriteBatch spriteBatch)

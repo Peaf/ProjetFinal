@@ -135,7 +135,7 @@ namespace Project
                         {
                             btnAttack1.isClicked = false;
                             attackChoisi = "Basic attack";
-                            btnAttack1.Update(mouse, gameTime);
+                            btnAttack1.Update(gameTime);
                             timerAnimation = 0;
                             degat = Game1.player.Degat + rand.Next(0, 30) + Game1.player.Strenght / 2;
                             manaPerdu = 0;
@@ -148,7 +148,7 @@ namespace Project
                             {
                                 btnSpell.isClicked = false;
                                 attackChoisi = "Fire Ball";
-                                btnSpell.Update(mouse, gameTime);
+                                btnSpell.Update(gameTime);
                                 timerAnimation = 0;
                                 degat = rand.Next(80, 120) + Game1.player.Intelligence + Game1.player.Degat;
                                 manaPerdu = 20;
@@ -289,11 +289,11 @@ namespace Project
                         }
                     }
 
-                    Game1.btnStartFight.Update(mouse, gameTime);
-                    btnAttack1.Update(mouse, gameTime);
-                    btnObjects.Update(mouse, gameTime);
-                    btnSpell.Update(mouse, gameTime);
-                    Game1.btnEndFight.Update(mouse, gameTime);
+                    Game1.btnStartFight.Update(gameTime);
+                    btnAttack1.Update(gameTime);
+                    btnObjects.Update(gameTime);
+                    btnSpell.Update(gameTime);
+                    Game1.btnEndFight.Update(gameTime);
                     pastKey = presentKey;
                     pastMouse = mouse;
                     return (CurrentGameState);
@@ -402,7 +402,7 @@ namespace Project
                         {
                             btnAttack1.isClicked = false;
                             attackChoisi = "Basic attack";
-                            btnAttack1.Update(mouse, gameTime);
+                            btnAttack1.Update(gameTime);
                             timerAnimation = 0;
                             degat = Game1.player.Degat + rand.Next(0, 30) + Game1.player.Strenght / 2;
                             manaPerdu = 0;
@@ -415,7 +415,7 @@ namespace Project
                             {
                                 btnSpell.isClicked = false;
                                 attackChoisi = "Fire Ball";
-                                btnSpell.Update(mouse, gameTime);
+                                btnSpell.Update(gameTime);
                                 timerAnimation = 0;
                                 degat = rand.Next(80, 120) + Game1.player.Intelligence + Game1.player.Degat;
                                 manaPerdu = 20;
@@ -510,7 +510,7 @@ namespace Project
                         {
                             btnAttack1.isClicked = false;
                             attackChoisi = "Basic attack";
-                            btnAttack1.Update(mouse, gameTime);
+                            btnAttack1.Update(gameTime);
                             timerAnimation = 0;
                             degat = Game1.player2.Degat + rand.Next(0, 30) + Game1.player2.Strenght / 2;
                             manaPerdu = 0;
@@ -663,11 +663,11 @@ namespace Project
                             attackChoisi = "";
                         }
                     }
-                    Game1.btnStartFight.Update(mouse, gameTime);
-                    btnObjects.Update(mouse, gameTime);
-                    btnSpell.Update(mouse, gameTime);
-                    btnAttack1.Update(mouse, gameTime);
-                    Game1.btnNext.Update(mouse, gameTime);
+                    Game1.btnStartFight.Update(gameTime);
+                    btnObjects.Update(gameTime);
+                    btnSpell.Update(gameTime);
+                    btnAttack1.Update(gameTime);
+                    Game1.btnNext.Update(gameTime);
                     pastKey = presentKey;
                     pastMouse = mouse;
                 }
