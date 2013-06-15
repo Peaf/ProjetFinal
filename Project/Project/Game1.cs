@@ -51,8 +51,8 @@ namespace Project
         int[,] tab_map4 = new int[26, 44];
 
 
-        public static Inventaire invent = new Inventaire();
-
+        public static Inventaire invent1 = new Inventaire();
+        public static Inventaire invent2 = new Inventaire();
         public enum GameState
         {
             Video,
@@ -85,12 +85,13 @@ namespace Project
               this.graphics.ApplyChanges();*/
             screenHeight = 768;
             screenWidth = 1366;
-            invent.Initialize();
-            invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            invent.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            invent.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
-            invent.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
-            invent.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+            invent1.Initialize();
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
+            invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
+            invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
+            invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+            invent2.Initialize();
 
             base.Initialize();
         }

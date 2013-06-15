@@ -310,14 +310,14 @@ namespace Project
                             timerinventaire = 0;
                         }
                     }
-                    foreach (Item item in Game1.invent.tablObjects)
+                    foreach (Item item in Game1.invent1.tablObjects)
                     {
                         if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                         {
-                            Game1.invent.useItem(item);
+                            Game1.invent1.useItem(item);
                         }
                     }
-                    foreach (Item item in Game1.invent.tablEquiped)
+                    foreach (Item item in Game1.invent1.tablEquiped)
                     {
                         if (item.type == "Weapon")
                         {
@@ -325,14 +325,14 @@ namespace Project
                             {
                                 /* Game1.invent.removeItemE(item);
                                  Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
-                                Game1.invent.deUseItem(item);
+                                Game1.invent1.deUseItem(item);
                             }
                         }
                         else
                         {
                             if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
-                                Game1.invent.deUseItem(item);
+                                Game1.invent1.deUseItem(item);
                             }
                         }
                     }
@@ -683,32 +683,65 @@ namespace Project
                             timerinventaire = 0;
                         }
                     }
-                    foreach (Item item in Game1.invent.tablObjects)
+                    if (Playing.nbjoueurs >= 1)
                     {
-                        if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                        foreach (Item item in Game1.invent1.tablObjects)
                         {
-                            Game1.invent.useItem(item);
-                        }
-                    }
-                    foreach (Item item in Game1.invent.tablEquiped)
-                    {
-                        if (item.type == "Weapon")
-                        {
-                            if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
-                                //Game1.invent.removeItemE(item);
-                                //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
-                                Game1.invent.deUseItem(item);
+                                Game1.invent1.useItem(item);
                             }
                         }
-                        else
+                        foreach (Item item in Game1.invent1.tablEquiped)
                         {
-                            if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (item.type == "Weapon")
                             {
-                                Game1.invent.deUseItem(item);
+                                if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    //Game1.invent.removeItemE(item);
+                                    //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
+                                    Game1.invent1.deUseItem(item);
+                                }
+                            }
+                            else
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    Game1.invent1.deUseItem(item);
+                                }
                             }
                         }
                     }
+                    if(Playing.nbjoueurs ==2)
+                    {
+                        foreach (Item item in Game1.invent2.tablObjects)
+                        {
+                            if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            {
+                                Game1.invent2.useItem(item);
+                            }
+                        }
+                        foreach (Item item in Game1.invent2.tablEquiped)
+                        {
+                            if (item.type == "Weapon")
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    //Game1.invent.removeItemE(item);
+                                    //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
+                                    Game1.invent2.deUseItem(item);
+                                }
+                            }
+                            else
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    Game1.invent2.deUseItem(item);
+                                }
+                            }
+                        }
+                    }
+
                 }
                 Game1.pastMouse = mouse;
                 return (CurrentGameState);
@@ -1101,63 +1134,116 @@ namespace Project
 
             if (Playing.inventaire)
             {
-                spriteBatch.Draw(Playing.inventaireTexture, Playing.inventaireRectangle, Color.White);
-                /*if (Game1.bookState == 1)
+                if (Playing.nbjoueurs >= 1)
                 {
-                    spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
-                }*/
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
-                Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
+                    spriteBatch.Draw(Playing.inventaireTexture, Playing.inventaireRectangle, Color.White);
 
-                foreach (Item item in Game1.invent.tablObjects)
-                {
-                    if (item.name != "rien")
+                    /*if (Game1.bookState == 1)
                     {
-                        Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15, 525 + 68 * (item.place / 6)), Color.White);
+                        spriteBatch.Draw(bookTexture, bookRectangle2, Color.White);
+                    }*/
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudius", new Vector2(520, 15), Color.Black);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Lvl, new Vector2(495, 45), Color.White);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Experience + "/" + (Game1.player.Lvl * 100), new Vector2(495, 65), Color.White);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.health + "/" + Game1.player.healthMax, new Vector2(520, 225), Color.Red);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.mana + "/" + Game1.player.manaMax, new Vector2(520, 250), Color.Blue);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Intelligence, new Vector2(545, 270), Color.Black);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Armor, new Vector2(515, 290), Color.Black);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Degat, new Vector2(535, 308), Color.Black);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player.Strenght, new Vector2(525, 325), Color.Black);
+
+                    foreach (Item item in Game1.invent1.tablObjects)
+                    {
+                        if (item.name != "rien")
+                        {
+                            Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15, 525 + 68 * (item.place / 6)), Color.White);
+                            switch (item.name)
+                            {
+                                case "healthPotion":
+                                    spriteBatch.Draw(Playing.healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "manaPotion":
+                                    spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "Sword":
+                                    spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "Armor":
+                                    spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+
+                                    break;
+
+                                case "Book":
+                                    spriteBatch.Draw(Playing.bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                            }
+                        }
+                    }
+                    foreach (Item item in Game1.invent1.tablEquiped)
+                    {
                         switch (item.name)
                         {
-                            case "healthPotion":
-                                spriteBatch.Draw(Playing.healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                                break;
-
-                            case "manaPotion":
-                                spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                                break;
-
                             case "Sword":
-                                spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                spriteBatch.Draw(Playing.swordTexture, new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
                                 break;
 
                             case "Armor":
-                                spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-
+                                spriteBatch.Draw(Playing.armorTexture, new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
                                 break;
-
-                            case "Book":
-                                spriteBatch.Draw(Playing.bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
-                                break;
-
                         }
                     }
                 }
-                foreach (Item item in Game1.invent.tablEquiped)
+                if (Playing.nbjoueurs == 2)
                 {
-                    switch (item.name)
+                    spriteBatch.Draw(Playing.inventaireTexture, Playing.inventaireRectangle2, Color.White);
+                    foreach (Item item in Game1.invent2.tablObjects)
                     {
-                        case "Sword":
-                            spriteBatch.Draw(Playing.swordTexture, new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
-                            break;
+                        if (item.name != "rien")
+                        {
+                            Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15, 525 + 68 * (item.place / 6)), Color.White);
+                            switch (item.name)
+                            {
+                                case "healthPotion":
+                                    spriteBatch.Draw(Playing.healthPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
-                        case "Armor":
-                            spriteBatch.Draw(Playing.armorTexture, new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
-                            break;
+                                case "manaPotion":
+                                    spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "Sword":
+                                    spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "Armor":
+                                    spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+
+                                    break;
+
+                                case "Book":
+                                    spriteBatch.Draw(Playing.bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                            }
+                        }
+                    }
+
+                    foreach (Item item in Game1.invent2.tablEquiped)
+                    {
+                        switch (item.name)
+                        {
+                            case "Sword":
+                                spriteBatch.Draw(Playing.swordTexture, new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
+                                break;
+
+                            case "Armor":
+                                spriteBatch.Draw(Playing.armorTexture, new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
+                                break;
+                        }
                     }
                 }
             }
