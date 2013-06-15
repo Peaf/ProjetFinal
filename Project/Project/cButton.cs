@@ -46,7 +46,7 @@ namespace Project
             {
                 if (colour.A == 255)
                     down = false;
-                if (colour.A == 50)
+                if (colour.A == 150)
                     down = true;
                 if (down)
                     colour.A += 3;
