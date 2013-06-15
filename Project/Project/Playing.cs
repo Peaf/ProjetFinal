@@ -338,10 +338,20 @@ namespace Project
 
                     //Enemy
                     if (Game1.enemy1.health > 0)
-                        Game1.enemy1.Update(gameTime, Game1.player.persoPosition,Game1.player2.persoPosition);
+                    {
+                        if (nbjoueurs == 2)
+                            Game1.enemy1.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                        else
+                            Game1.enemy1.Update(gameTime, Game1.player.persoPosition);
+                    }
 
                     if (Game1.enemy2.health > 0)
-                        Game1.enemy2.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                    {
+                        if (nbjoueurs == 2)
+                            Game1.enemy2.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                        else
+                            Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
+                    }
                     if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
                     {
                         map = mapShop;
@@ -381,7 +391,12 @@ namespace Project
                 if (map == map6)
                 {
                     if (Game1.enemy3.health > 0)
-                        Game1.enemy3.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                    {
+                        if (nbjoueurs == 2)
+                            Game1.enemy3.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                        else
+                            Game1.enemy3.Update(gameTime, Game1.player.persoPosition);
+                    }
                     if (Game1.enemy3.Collision())
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
@@ -405,7 +420,12 @@ namespace Project
                         Game1.player2.Collision(Game1.pnj1.taille);
                     }
                     if (Game1.enemy4.health > 0)
-                        Game1.enemy4.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                    {
+                        if (nbjoueurs == 2)
+                            Game1.enemy4.Update(gameTime, Game1.player.persoPosition, Game1.player2.persoPosition);
+                        else
+                            Game1.enemy4.Update(gameTime, Game1.player.persoPosition);
+                    }
 
                     if (Game1.enemy4.Collision())
                     {
