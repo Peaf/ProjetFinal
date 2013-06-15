@@ -92,6 +92,7 @@ namespace Project
             invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
             invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
             invent2.Initialize();
+            invent2.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
 
             base.Initialize();
         }

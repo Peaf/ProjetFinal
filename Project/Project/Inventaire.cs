@@ -79,24 +79,24 @@ namespace Project
         }
 
 
-        public void useItem(Item item)
+        public void useItem(Item item,Character player)
         {
             switch (item.type)
             {
                 case "Potion":
-                    if (item.effect == "health" && Game1.player.health < Game1.player.healthMax)
-                        Game1.player.health += item.stat;
-                    if (item.effect == "mana" && Game1.player.mana < Game1.player.manaMax)
-                        Game1.player.mana += item.stat;
+                    if (item.effect == "health" && player.health < player.healthMax)
+                        player.health += item.stat;
+                    if (item.effect == "mana" && player.mana < player.manaMax)
+                        player.mana += item.stat;
                     break;
 
                 case "Weapon":
-                    Game1.player.Degat += item.stat;
+                    player.Degat += item.stat;
                         addItemtoequip(item);
                     
                     break;
                 case "Armor":
-                    Game1.player.Armor += item.stat;
+                    player.Armor += item.stat;
                         addItemtoequip(item);
                     break;
             }
@@ -106,16 +106,16 @@ namespace Project
             
 
         }
-        public void deUseItem(Item item)
+        public void deUseItem(Item item,Character player)
         {
             switch (item.type)
             {
                 case "Weapon":
-                    Game1.player.Degat -= item.stat;
+                    player.Degat -= item.stat;
                         addItem(item);
                     break;
                 case "Armor":
-                    Game1.player.Armor -= item.stat;
+                    player.Armor -= item.stat;
                     addItem(item);
                     break;
 

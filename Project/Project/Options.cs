@@ -37,7 +37,7 @@ namespace Project
             btnVolume100 = new cButton(Content.Load<Texture2D>("Volume/volume100"), 100, 75);
             btnVolume100.setPosition(new Vector2(screenWidth / 8 - btnVolume100.size.X / 2 + 900, screenHeight / 2));
 
-            btnBack = new cButton(Content.Load<Texture2D>("Button/BackButton"), 250, 100);
+            btnBack = new cButton(Content.Load<Texture2D>("Button/BackButtonOpt"), 250, 100);
             btnBack.setPosition(new Vector2(screenWidth / 2 - btnBack.size.X / 2, screenHeight / 4));
 
             
