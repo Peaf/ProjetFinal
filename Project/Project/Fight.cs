@@ -1202,7 +1202,7 @@ namespace Project
                 Game1.btnEndFight.Draw(spriteBatch);
                 spriteBatch.DrawString(Game1.spriteFont, "You win !!!", new Vector2(10, 700), Color.Black);
                 Game1.spriteBatch.DrawString(Game1.spriteFont, "Clik to continue", new Vector2(1100, 730), Color.Black);
-
+                Game1.btnEndFight.Update(gameTime);
             }
 
             if (Playing.inventaire)
