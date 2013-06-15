@@ -19,7 +19,7 @@ namespace Project
         public static SpriteBatch spriteBatch;
         public static Character player, player2, playerMenu;
 
-        public static PNJ pnj1, healer;
+        public static PNJ pnj1, healer, pnjShop1, pnjShop2;
         public static Enemy enemy, enemy1, enemy2, enemy3, enemy4;
         public static Song song1, song2;
 
@@ -28,7 +28,7 @@ namespace Project
         VideoPlayer playerVideo;
         Texture2D videoTexture;
         //Pause
-        public static cButton btnNext, btnEndFight, btnStartFight;
+        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons ;
         public static ParticleGenerator snow;
         public static ParticleGenerator1 sand;
 
@@ -64,7 +64,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.MainMenu;
+        public GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
@@ -132,15 +132,25 @@ namespace Project
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));
             healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1250, 550), new Rectangle(1250, 550, 658, 696), new Vector2(1250, 550), new Rectangle(1270, 550, 85, 80));
+            pnjShop1 = new PNJ(Content.Load<Texture2D>("Tile/Tile195"), new Vector2(705,288), new Rectangle(0,0 ,32,32),new Vector2(300,300),new Rectangle(300,300,32,32));
+            pnjShop2 = new PNJ(Content.Load<Texture2D>("Sprites/pnjShop2"), new Vector2(705, 288), new Rectangle(0, 0, 32,46), new Vector2(300, 300), new Rectangle(300, 300, 38, 50));
             //Pause
             Pause.LoadContent(Content, screenWidth, screenHeight);
 
             //Options
-
             Options.LoadContent(Content, screenWidth, screenHeight);
 
             //TexteHealth
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+
+            //btnshop
+            btnArmors = new cButton(Content.Load<Texture2D>("Button/btnArmors"),170,45);
+            btnArmors.setPosition(new Vector2(525,280));
+            btnWeapons = new cButton(Content.Load<Texture2D>("Button/btnWeapons"), 170, 45);
+            btnWeapons.setPosition(new Vector2(620, 230));
+            btnPotions = new cButton(Content.Load<Texture2D>("Button/btnPotions"), 170, 45);
+            btnPotions.setPosition(new Vector2(735, 280));
+
         }
 
 

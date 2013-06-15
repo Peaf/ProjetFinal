@@ -21,11 +21,11 @@ namespace Project
         public static Map map;
         public static Map map5, map8, map4, map2, map6, mapShop;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
-        static bool Isfighting, talking, lvlUp, talkOnce;
+        static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
         static public bool inventaire;
-        static int turn, lvlBefore, j, cactus;
+        static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
-        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle,inventaireRectangle2, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
         static string attackChoisi;
         static KeyboardState presentKey, pastKey;
 
@@ -275,7 +275,6 @@ namespace Project
                         Game1.healer.Update(gameTime, 1, "map2");
                         if (Game1.player.health < Game1.player.healthMax)
                         {
-
                             Game1.player.Gold -= 5;
                         }
                         if (Game1.player.health == Game1.player.healthMax && Game1.questState == 3)
@@ -334,7 +333,31 @@ namespace Project
                     }
 
                 }
+                if (map == mapShop)
+                {
+                    if (whatToBuy == 1)
+                        Game1.pnjShop2.Update(gameTime, 1, "mapShop");
+                    if (whatToBuy == 2)
+                        Game1.pnjShop2.Update(gameTime, 2, "mapShop");
+                    if (whatToBuy == 3)
+                        Game1.pnjShop2.Update(gameTime, 3, "mapShop");
 
+                    talkingShop = Game1.pnjShop1.Collision(Game1.pnjShop1);
+                    if (talkingShop)
+                    {
+                        if (Game1.btnArmors.isClicked)
+                            whatToBuy = 1;
+
+                        if (Game1.btnWeapons.isClicked)
+                            whatToBuy = 2;
+
+                        if (Game1.btnPotions.isClicked)
+                            whatToBuy = 3;
+                        Game1.btnArmors.Update(gameTime);
+                        Game1.btnWeapons.Update(gameTime);
+                        Game1.btnPotions.Update(gameTime);
+                    }
+                }
                 if (map == map5)
                 {
 
@@ -357,7 +380,7 @@ namespace Project
                     if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
                     {
                         map = mapShop;
-                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8) ;
+                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                         Game1.player.persoPosition.X = 710;
                         if (nbjoueurs == 2)
                             Game1.player2.persoPosition = Game1.player.persoPosition;
@@ -386,8 +409,6 @@ namespace Project
                         Game1.enemy = Game1.enemy2;
                         attackChoisi = "";
                     }
-
-
                 }
 
                 if (map == map6)
@@ -411,8 +432,6 @@ namespace Project
                         Game1.enemy = Game1.enemy3;
                         attackChoisi = "";
                     }
-
-
                 }
                 if (map == map8)
                 {
@@ -495,7 +514,7 @@ namespace Project
                     {
                         Game1.player.persoPosition.Y = screenHeight - Game1.player.persoTexture.Height / 8 - 1;
                     }
-                    if (nbjoueurs == 2) 
+                    if (nbjoueurs == 2)
                         Game1.player2.persoPosition = Game1.player.persoPosition;
                 }
                 else if (Game1.player.persoPosition.X <= 0)
@@ -564,7 +583,6 @@ namespace Project
                     }
                 }
 
-
                 if (Isfighting)
                 {
                     CurrentGameState = Game1.GameState.Fight;
@@ -593,7 +611,7 @@ namespace Project
                 }
                 if (talking)
                 {
-                    Game1.btnNext.Update( gameTime);
+                    Game1.btnNext.Update(gameTime);
                     if (Game1.questState == 1)
                     {
                         Game1.pnj1.Update(gameTime, 1, "map8");
@@ -740,6 +758,41 @@ namespace Project
                     lvlBefore = Game1.player.Lvl;
                 }
                 pastKey = presentKey;
+            }
+            if (map == mapShop)
+            {
+                if (whatToBuy == 0)
+                    Game1.pnjShop1.Draw(spriteBatch, 1, "mapShop");
+                else
+                    Game1.pnjShop2.Draw(spriteBatch, 1, "mapShop");
+
+                if (talkingShop)
+                {
+                    if (whatToBuy == 0)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Welcome beautiful warrior to our store. What do you want to buy?", new Vector2(10, 700), Color.Blue);
+                        Game1.btnArmors.Draw(spriteBatch);
+                        Game1.btnWeapons.Draw(spriteBatch);
+                        Game1.btnPotions.Draw(spriteBatch);
+                    }
+                    if (whatToBuy == 1)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
+                    }
+                    if (whatToBuy == 2)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "We have so many weapons you will find one for you no doubt. Follow me", new Vector2(10, 700), Color.Blue);
+                    }
+                    if (whatToBuy == 3)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Potions it is. Ok Follow me", new Vector2(10, 700), Color.Blue);
+                    }
+                }
+
             }
             if (map == map2)
             {
@@ -984,13 +1037,13 @@ namespace Project
                         }
                     }
                 }
-                if(nbjoueurs == 2)
+                if (nbjoueurs == 2)
                 {
                     spriteBatch.Draw(inventaireTexture, inventaireRectangle2, Color.White);
 
-                    Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudia", new Vector2(520+700, 18), Color.Black);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudia", new Vector2(520 + 700, 18), Color.Black);
 
-                    Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : ", new Vector2(445+700, 45), Color.White);
+                    Game1.spriteBatch.DrawString(Game1.spriteFont, "Level : ", new Vector2(445 + 700, 45), Color.White);
                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player2.Lvl, new Vector2(515 + 700, 45), Color.White);
                     Game1.spriteBatch.DrawString(Game1.spriteFont, "Experience : ", new Vector2(445 + 700, 70), Color.White);
                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + Game1.player2.Experience + "/" + (Game1.player2.Lvl * 150), new Vector2(570 + 700, 70), Color.White);
@@ -1013,7 +1066,7 @@ namespace Project
                     {
                         if (item.name != "rien")
                         {
-                            Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15 +700, 525 + 68 * (item.place / 6)), Color.White);
+                            Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 6) * 68 + 15 + 700, 525 + 68 * (item.place / 6)), Color.White);
                             switch (item.name)
                             {
                                 case "healthPotion":
