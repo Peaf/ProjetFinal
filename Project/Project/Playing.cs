@@ -73,7 +73,7 @@ namespace Project
             Game1.btnNext = new cButton(Content.Load<Texture2D>("Button/Next"), 75, 44);
             Game1.btnNext.setPosition(new Vector2(1200, 700));
 
-            Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 75, 44);
+            Game1.btnEndFight = new cButton(Content.Load<Texture2D>("Button/EndFight"), 120, 45);
             Game1.btnEndFight.setPosition(new Vector2(1190, 685));
 
             song3 = Content.Load<Song>("Song/SongFight");
@@ -288,7 +288,6 @@ namespace Project
                             Game1.questState++;
                         }
                         Game1.player.health = Game1.player.healthMax;
-
                     }
                 }
                 if (map == map4)
@@ -341,7 +340,7 @@ namespace Project
                         Game1.pnjShop2.Update(gameTime, 2, "mapShop");
                     if (whatToBuy == 3)
                         Game1.pnjShop2.Update(gameTime, 3, "mapShop");
-
+                   
                     talkingShop = Game1.pnjShop1.Collision(Game1.pnjShop1);
                     if (talkingShop)
                     {
@@ -765,7 +764,7 @@ namespace Project
                     Game1.pnjShop1.Draw(spriteBatch, 1, "mapShop");
                 else
                     Game1.pnjShop2.Draw(spriteBatch, 1, "mapShop");
-
+               
                 if (talkingShop)
                 {
                     if (whatToBuy == 0)
