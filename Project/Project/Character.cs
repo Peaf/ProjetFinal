@@ -45,7 +45,7 @@ namespace Project
 
         public void Update(GameTime gametime, Game1.GameState gameState)
         {
-            GamePadState pad1 = GamePad.GetState(PlayerIndex.Two);
+            GamePadState pad1 = GamePad.GetState(PlayerIndex.One);
             KeyboardState KState = Keyboard.GetState();
             lvlup = (Experience >= 150 * Lvl);
             if (Playing.nbjoueurs == 2)
@@ -101,7 +101,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q))) //|| (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q)) || (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed))
                     {
                         ligne = 6;
                         timerRun++;
