@@ -335,7 +335,18 @@ namespace Project
                 if (map == mapShop)
                 {
                     if (whatToBuy == 1)
+                    {
                         Game1.pnjShop2.Update(gameTime, 1, "mapShop");
+                        if (Game1.pnjShop2.Collision(Game1.pnjShop2))
+                        {
+                            //inventaireShop = true;
+                            Game1.btnBuy.Update(gameTime);
+                            Game1.btnSell.Update(gameTime);
+                            //if(Game1.btnBUY.isClicked)
+
+                        }
+
+                    }
                     if (whatToBuy == 2)
                         Game1.pnjShop2.Update(gameTime, 2, "mapShop");
                     if (whatToBuy == 3)
@@ -764,7 +775,14 @@ namespace Project
                     Game1.pnjShop1.Draw(spriteBatch, 1, "mapShop");
                 else
                     Game1.pnjShop2.Draw(spriteBatch, 1, "mapShop");
-               
+                if (whatToBuy != 0)
+                {
+                    if (Game1.pnjShop2.Collision(Game1.pnjShop2))
+                    {
+                        Game1.btnSell.Draw(spriteBatch);
+                        Game1.btnBuy.Draw(spriteBatch);
+                    }
+                }
                 if (talkingShop)
                 {
                     if (whatToBuy == 0)

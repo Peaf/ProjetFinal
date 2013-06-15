@@ -28,7 +28,7 @@ namespace Project
         VideoPlayer playerVideo;
         Texture2D videoTexture;
         //Pause
-        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons ;
+        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons,btnBuy,btnSell ;
         public static ParticleGenerator snow;
         public static ParticleGenerator1 sand;
 
@@ -53,6 +53,10 @@ namespace Project
 
         public static Inventaire invent1 = new Inventaire();
         public static Inventaire invent2 = new Inventaire();
+        public static Inventaire inventPnjArmor = new Inventaire();
+        public static Inventaire inventPnjWeapon = new Inventaire();
+        public static Inventaire inventPnjPot = new Inventaire();
+
         public enum GameState
         {
             Video,
@@ -86,13 +90,26 @@ namespace Project
             screenHeight = 768;
             screenWidth = 1366;
             invent1.Initialize();
+            invent2.Initialize();
+            inventPnjArmor.Initialize();
+            inventPnjWeapon.Initialize();
+            inventPnjPot.Initialize();
             invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
             invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
             invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
             invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
             invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
-            invent2.Initialize();
+
             invent2.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+
+            inventPnjArmor.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
+
+            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
+            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
+
+
 
             base.Initialize();
         }
@@ -150,6 +167,11 @@ namespace Project
             btnWeapons.setPosition(new Vector2(620, 230));
             btnPotions = new cButton(Content.Load<Texture2D>("Button/btnPotions"), 170, 45);
             btnPotions.setPosition(new Vector2(735, 280));
+
+            btnBuy = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
+            btnBuy.setPosition(new Vector2(10, screenHeight / 2 - 100));
+            btnSell = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
+            btnSell.setPosition(new Vector2(10, screenHeight / 2));
 
         }
 
