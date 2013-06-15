@@ -29,7 +29,7 @@ namespace Project
             size = new Vector2(a, b);
 
         }
-
+        bool down;
         public bool isClicked;
 
         public void Update(GameTime gametime)
@@ -44,13 +44,21 @@ namespace Project
 
             if (mouseRectangle.Intersects(rectangle) || KState.IsKeyDown(Keys.Down))
             {
-                colour = Color.Lime;
+                if (colour.A == 255)
+                    down = false;
+                if (colour.A == 50)
+                    down = true;
+                if (down)
+                    colour.A += 3;
+                else
+                    colour.A -= 3;
                 if (currentMouse.LeftButton == ButtonState.Pressed && lastMouse.LeftButton == ButtonState.Released) isClicked = true;
 
             }
-            else
+            else if (colour.A < 255)
             {
-                colour = new Color(255, 255, 255, 255);
+                colour.A = 255;
+                isClicked = false;
 
             } lastMouse = currentMouse;
         }
