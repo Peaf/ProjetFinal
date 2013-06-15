@@ -65,7 +65,7 @@ namespace Project
                 Lvl += 1;
             }
 
-            if (gameState == Game1.GameState.Playing || gameState == Game1.GameState.Playing)
+            if (gameState == Game1.GameState.Playing )
             {
                 if (!fight)
                 {
@@ -126,11 +126,12 @@ namespace Project
                             Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                             Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
                             if (Playing.nbjoueurs == 2)
-                            {/* }
-                        if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
-                        {*/
-                                Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
-                                Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
+                            {
+                                if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                                {
+                                    Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
+                                    Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
+                                }
                             }
                         }
                     }
@@ -169,7 +170,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) ||(pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) || (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
                     {
                         ligne = 5;
                         timerRun++;
@@ -271,7 +272,7 @@ namespace Project
 
                     }
                     //right
-                    else if ((KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift) ||(pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)))
+                    else if ((KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)))
                     {
                         timer++;
                         ligne = 3;
