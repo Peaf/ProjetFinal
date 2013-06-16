@@ -534,6 +534,8 @@ namespace Project
                             turnPlayer = false;
                             if (disablePlayer2 || Game1.player2.health <= 0)
                                 turn++;
+                            else if (Game1.enemy.health <= 0)
+                                turn++;
                             else
                             {
                                 turnPlayer2 = true;
@@ -544,7 +546,7 @@ namespace Project
 
                     }
 
-                    else if (turnPlayer2 && Game1.player2.health > 0)
+                    else if (turnPlayer2 && Game1.player2.health > 0 && Game1.enemy.health > 0)
                     {
                         if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
                         {
@@ -1051,7 +1053,7 @@ namespace Project
             {
                 btnAttack1.Draw(spriteBatch);
                 btnObjects.Draw(spriteBatch);
-                
+
                 if (Game1.player.Lvl >= 2 && turnPlayer)
                     btnFireBall.Draw(spriteBatch);
                 if (turnPlayer2)
