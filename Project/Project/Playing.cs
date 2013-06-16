@@ -17,12 +17,12 @@ namespace Project
         public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture, cactusTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
-        static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop, tab_ChateauExt, tab_ChateauInt;
+        static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop;
         public static Map map;
-        public static Map map5, map8, map4, map2, map6, mapShop, mapChateauExt, mapChateauInt;
-        static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6, streamMapChateauExt, streamMapChateauInt;
+        public static Map map5, map8, map4, map2, map6, mapShop;
+        static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire, inventaireShop, inventaireSell, returnPnj = false;
+        static public bool inventaire, inventaireShop, inventaireSell, returnPnj;
         public static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
@@ -40,8 +40,6 @@ namespace Project
             tab_map2 = new int[26, 44];
             tab_map6 = new int[26, 44];
             tab_mapShop = new int[26, 44];
-            tab_ChateauExt = new int[26, 44];
-            tab_ChateauInt = new int[26, 44];
             map = new Map();
             map5 = new Map();
             map8 = new Map();
@@ -49,16 +47,12 @@ namespace Project
             map2 = new Map();
             map6 = new Map();
             mapShop = new Map();
-            mapChateauExt = new Map();
-            mapChateauInt = new Map();
             streamMap8 = new StreamReader("map8.txt");
             streamMap5 = new StreamReader("map5.txt");
             streamMap4 = new StreamReader("map4.txt");
             streamMap2 = new StreamReader("map2.txt");
             streamMap6 = new StreamReader("map6.txt");
             streamShop = new StreamReader("mapShop.txt");
-            streamMapChateauInt = new StreamReader("mapChateauInt.txt");
-            streamMapChateauExt = new StreamReader("mapChateauExt.txt");
             Isfighting = false;
             talking = false;
             lvlUp = false;
@@ -241,43 +235,6 @@ namespace Project
 
             mapShop.Generate(tab_mapShop, 32);
             streamShop.Close();
-
-            j = 0;
-            while ((line = streamMapChateauExt.ReadLine()) != null)
-            {
-                char[] splitchar = { ',' };
-                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
-                string[] tiles = line.Split(splitchar);
-
-                for (int i = 0; i < tab_ChateauExt.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
-                {
-
-                    tab_ChateauExt[j, i] = int.Parse(tiles[i]);
-                }
-                j++;
-            }
-
-            mapChateauExt.Generate(tab_ChateauExt, 32);
-            streamMapChateauExt.Close();
-
-            j = 0;
-            while ((line = streamMapChateauInt.ReadLine()) != null)
-            {
-                char[] splitchar = { ',' };
-                line = line.TrimEnd(splitchar); // enleve tout les caracteres "splichar" de la fin
-                string[] tiles = line.Split(splitchar);
-
-                for (int i = 0; i < tab_ChateauInt.GetUpperBound(1); i++) //Upperbound donne le nbres d'elts d'un tab suivant cette dimension 1 par exemple represente lenbre de colonne par ligne
-                {
-
-                    tab_ChateauInt[j, i] = int.Parse(tiles[i]);
-                }
-                j++;
-            }
-
-            mapChateauInt.Generate(tab_ChateauInt, 32);
-            streamMapChateauInt.Close();
-
             map = map5;
         }
 
@@ -550,15 +507,14 @@ namespace Project
                                 if (Game1.btnBuyPot.isClicked)
                                 {
                                     inventaireShop = true;
+
                                 }
+
                                 if (Game1.btnSellPot.isClicked)
                                 {
                                     inventaireSell = true;
                                 }
-                                if (Game1.btnDoneWeapon.isClicked)
-                                {
-                                    returnPnj = true;
-                                }
+                                
                                 Game1.btnBuyPot.Update(gameTime);
                                 Game1.btnSellPot.Update(gameTime);
                                 Game1.btnDonePot.Update(gameTime);
@@ -577,7 +533,8 @@ namespace Project
                                     Game1.inventPnjPot.removeItem(item);
                                     Game1.player.Gold -= item.cost;
                                 }
-                            }
+
+                            } 
                         }
                         if (inventaireSell)
                         {
@@ -734,17 +691,6 @@ namespace Project
                         bookRectangle = new Rectangle(0, 0, 0, 0);
                     }
                 }
-                if (map == mapChateauExt)
-                {
-                   if (Game1.player.persoPosition.X >= 600 && Game1.player.persoPosition.X <= 640 && Game1.player.persoPosition.Y <= 64)
-                    {
-                        map = mapChateauInt;
-                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
-                        Game1.player.persoPosition.X = screenWidth / 2;
-                        if (nbjoueurs == 2)
-                            Game1.player2.persoPosition = Game1.player.persoPosition;
-                    } 
-                }
                 if (Game1.player.persoPosition.Y <= 0)
                 {
                     if (map == map5)
@@ -752,18 +698,13 @@ namespace Project
                         map = map8;
                         //map = mapShop;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
+
                     }
                     else if (map == map2)
                     {
                         map = map5;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                     }
-                    else if (map == map6)
-                    {
-                        map = mapChateauExt;
-                        Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
-                    }
-                    
                     else
                     {
                         Game1.player.persoPosition.Y = 2;
@@ -779,17 +720,6 @@ namespace Project
                         map = map5;
                         Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 + 40;
                         Game1.player.persoPosition.X = 390;
-                    }
-                    else if (map == mapChateauInt)
-                    {
-                        map = mapChateauExt;
-                        Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8;
-                        Game1.player.persoPosition.X = screenWidth / 2 - 70;
-                    }
-                    else if (map  == mapChateauExt)
-                    {
-                        map = map6;
-                        Game1.player.persoPosition.Y = Game1.player.persoTexture.Height / 8 - 40;
                     }
                     else if (map == map8)
                     {
@@ -834,6 +764,7 @@ namespace Project
                     {
                         map = map5;
                         Game1.player.persoPosition.X = 0;
+
                     }
                     else if (map == map5)
                     {
@@ -843,6 +774,7 @@ namespace Project
                     else
                     {
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
+
                     }
                     if (nbjoueurs == 2)
                         Game1.player2.persoPosition = Game1.player.persoPosition;
@@ -866,7 +798,9 @@ namespace Project
                     }
                     else if (Game1.player2.persoPosition.X >= screenWidth - Game1.player2.persoTexture.Width / 4)
                     {
+
                         Game1.player2.persoPosition.X = screenWidth - Game1.player2.persoTexture.Width / 4;
+
                     }
                 }
 
@@ -1100,6 +1034,7 @@ namespace Project
                         Game1.btnWeapons.Draw(spriteBatch);
                         Game1.btnPotions.Draw(spriteBatch);
                     }
+                }
                     if (whatToBuy == 1)
                     {
 
@@ -1116,7 +1051,7 @@ namespace Project
                         spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                         spriteBatch.DrawString(Game1.spriteFont, "Potions it is. Ok Follow me", new Vector2(10, 700), Color.Blue);
                     }
-                }
+                
 
             }
             if (map == map2)
