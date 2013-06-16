@@ -180,37 +180,43 @@ namespace Project
 
                             if (Game1.invent1.tablEquiped[i].name != "rien")
                             {
-                                sw.WriteLine("Equip");
+                                sw.WriteLine("Equip1");
                                 sw.WriteLine(Game1.invent1.tablEquiped[i].name);
                                 line++;
                                 sw.WriteLine(Game1.invent1.tablEquiped[i].total);
                                 line++;
-                                sw.WriteLine("Equip");
-                                sw.WriteLine(Game1.invent2.tablEquiped[i].name);
-                                line++;
-                                sw.WriteLine(Game1.invent2.tablEquiped[i].total);
-                                line++;
+                                if (Game1.invent2.tablEquiped[i].name != "rien")
+                                {
+                                    sw.WriteLine("Equip2");
+                                    sw.WriteLine(Game1.invent2.tablEquiped[i].name);
+                                    line++;
+                                    sw.WriteLine(Game1.invent2.tablEquiped[i].total);
+                                    line++;
+                                }
                             }
                         }
                         for (int i = 0; i < Game1.invent1.tablObjects.Length; i++)
                         {
                             if (Game1.invent1.tablObjects[i].name != "rien")
                             {
-                                sw.WriteLine("Obj");
+                                sw.WriteLine("Obj1");
                                 sw.WriteLine(Game1.invent1.tablObjects[i].name);
                                 line++;
                                 sw.WriteLine(Game1.invent1.tablObjects[i].total);
                                 line++;
-                                sw.WriteLine("Obj");
-                                sw.WriteLine(Game1.invent2.tablObjects[i].name);
-                                line++;
-                                sw.WriteLine(Game1.invent2.tablObjects[i].total);
-                                line++;
+                                if (Game1.invent2.tablObjects[i].name != "rien")
+                                {
+                                    sw.WriteLine("Obj2");
+                                    sw.WriteLine(Game1.invent2.tablObjects[i].name);
+                                    line++;
+                                    sw.WriteLine(Game1.invent2.tablObjects[i].total);
+                                    line++;
+                                }
                             }
                         }
-                        break;
-
+                        break; 
                 }
+                sw.WriteLine("Stop");
                 sw.Close();
 
             }
