@@ -523,6 +523,7 @@ namespace Project
                                     Game1.inventPnjPot.removeItem(item);
                                     Game1.player.Gold -= item.cost;
                                 }
+                                
                             }
                         }
                         if (inventaireSell)

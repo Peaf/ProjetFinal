@@ -28,7 +28,7 @@ namespace Project
         public bool Collision(PNJ pnj)
         {
             if (Playing.nbjoueurs == 2)
-                return ((Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50&& Game1.player.persoPosition.X < pnj.pnjPosition.X + 50) || (Game1.player2.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player2.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player2.persoPosition.Y < pnj.pnjPosition.Y + 50&&Game1.player2.persoPosition.X < pnj.pnjPosition.X + 50));
+                return ((Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50 && Game1.player.persoPosition.X < pnj.pnjPosition.X + 50) || (Game1.player2.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player2.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player2.persoPosition.Y < pnj.pnjPosition.Y + 50 && Game1.player2.persoPosition.X < pnj.pnjPosition.X + 50));
             else return (Game1.player.persoPosition.X > pnj.pnjPosition.X - 50 && Game1.player.persoPosition.Y > pnj.pnjPosition.Y - 50 && Game1.player.persoPosition.Y < pnj.pnjPosition.Y + 50 && Game1.player.persoPosition.X < pnj.pnjPosition.X + 50);
         }
 
@@ -48,7 +48,7 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    if (timerPnj2>0 && timerPnj2 < 120) // haut
+                    if (timerPnj2 > 0 && timerPnj2 < 120) // haut
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
@@ -78,17 +78,17 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    if ( timerPnj2 > 0 &&timerPnj2 < 100 || (timerPnj2>=230 && timerPnj2 <= 660))
+                    if (timerPnj2 > 0 && timerPnj2 < 100 || (timerPnj2 >= 230 && timerPnj2 <= 660))
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
                     }
-                    else if(timerPnj2>= 100 && timerPnj2 < 230)
+                    else if (timerPnj2 >= 100 && timerPnj2 < 230)
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if(timerPnj2 >= 660 && timerPnj2 < 770)
+                    else if (timerPnj2 >= 660 && timerPnj2 < 770)
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
@@ -112,7 +112,7 @@ namespace Project
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if ((timerPnj2 >= 30 && timerPnj2 < 100) ||(timerPnj2 >= 380 && timerPnj2 < 600))
+                    else if ((timerPnj2 >= 30 && timerPnj2 < 100) || (timerPnj2 >= 380 && timerPnj2 < 600))
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
@@ -138,27 +138,27 @@ namespace Project
                 if (state == 5)
                 {
                     timerAnimation++;
-                   
+
                     if (timerPnj2 == -1)
                     {
                         timerPnj2 = 1;
                     }
-                    if (timerPnj2 < 350 || (timerPnj2 >= 920 && timerPnj2 < 950))
+                    if (timerPnj2 > 0 && timerPnj2 < 350 || (timerPnj2 >= 920 && timerPnj2 < 950))
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
                     }
-                    else if ((timerPnj2 >= 350 && timerPnj2< 570) || (timerPnj2>= 850 && timerPnj2 <920))
+                    else if (timerPnj2 >= 350 && timerPnj2 < 570 || (timerPnj2 >= 850 && timerPnj2 < 920))
                     {
                         directionPnj2 = "left";
                         timerPnj2++;
                     }
-                    else if((timerPnj2 >= 570 && timerPnj2 <700) || (timerPnj2 <= 720 && timerPnj2 > 850))
+                    else if (timerPnj2 >= 570 && timerAnimation < 700 || (timerPnj2 >= 720 && timerPnj2 < 850))
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if(timerPnj2 >= 700 && timerPnj2 < 720)
+                    else if (timerPnj2 >= 700 && timerPnj2 < 720)
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
@@ -173,31 +173,69 @@ namespace Project
                 if (state == 3)
                 {
                     timerAnimation++;
-                    timerPnj2++;
-                    if (timerPnj2 < 30 ) // haut
+
+                    if (timerPnj2 < 30) // haut
                     {
                         directionPnj2 = "up";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 30 && timerPnj2 < 100) || (timerPnj2 >= 380 && timerPnj2 < 580))
                     {
                         directionPnj2 = "right";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 100 && timerPnj2 < 230) || (timerPnj2 >= 250 && timerPnj2 < 380) || (timerPnj2 >= 580 & timerPnj2 < 635))
                     {
                         directionPnj2 = "down";
+                        timerPnj2++;
                     }
                     else if (timerPnj2 >= 230 && timerPnj2 < 250)
                     {
                         directionPnj2 = "left";
+                        timerPnj2++;
                     }
                     else
                     {
                         ligne = 1;
+                        timerPnj2 = -1;
                         directionPnj2 = "stop";
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                     }
                 }
-
+                if (state == 6)
+                {
+                    timerAnimation++;
+                    if (timerPnj2 == -1)
+                    {
+                        timerPnj2 = 1;
+                    }
+                    else if (timerPnj2 > 0 && timerPnj2 < 55 || timerPnj2 >= 255 && timerPnj2 < 385 || timerPnj2 >= 405 && timerPnj2 < 535)
+                    {
+                        directionPnj2 = "up";
+                        timerPnj2++;
+                    }
+                    else if (timerPnj2 >= 605 && timerPnj2 < 635)
+                    {
+                        directionPnj2 = "down";
+                        timerPnj2++;
+                    }
+                    else if (timerPnj2 >= 55 && timerPnj2 < 255 || timerPnj2 >= 535 && timerPnj2 < 605)
+                    {
+                        directionPnj2 = "left";
+                        timerPnj2++;
+                    }
+                    else if (timerPnj2 >= 485 && timerPnj2 < 505)
+                    {
+                        directionPnj2 = "right";
+                        timerPnj2++;
+                    }
+                    else
+                    {
+                        directionPnj2 = "stop";
+                        Playing.whatToBuy = 0;
+                        timerPnj2 = 0;
+                    }
+                }
                 switch (directionPnj2)
                 {
                     case "up":
