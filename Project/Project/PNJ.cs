@@ -13,7 +13,7 @@ namespace Project
         public Vector2 pnjPosition, origine;
         public Texture2D pnjTexture;
         public Rectangle pnjRectangle, taille;
-        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 1;
+        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0;
         string directionPnj2 = "";
 
         public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine, Rectangle newtaille)
@@ -107,7 +107,7 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    if (timerPnj2 < 30 || (timerPnj2 >= 600 && timerPnj2 < 950)) // haut
+                    if (timerPnj2>0 && timerPnj2 < 30 || (timerPnj2 >= 600 && timerPnj2 < 950)) // haut
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
@@ -143,22 +143,22 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    if (timerPnj2 > 0 && timerPnj2 < 350 || (timerPnj2 >= 920 && timerPnj2 < 950))
+                    if (timerPnj2 > 0 && timerPnj2 < 350 || (timerPnj2 >= 925 && timerPnj2 < 945))
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 350 && timerPnj2 < 570 || (timerPnj2 >= 850 && timerPnj2 < 920))
+                    else if (timerPnj2 >= 350 && timerPnj2 < 570 || (timerPnj2 >= 850 && timerPnj2 < 925))
                     {
                         directionPnj2 = "left";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 570 && timerAnimation < 700 || (timerPnj2 >= 720 && timerPnj2 < 850))
+                    else if ((timerPnj2 >= 570 && timerPnj2 < 700) || (timerPnj2 >= 730 && timerPnj2 < 850))
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 700 && timerPnj2 < 720)
+                    else if (timerPnj2 >= 700 && timerPnj2 < 730)
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
@@ -173,8 +173,11 @@ namespace Project
                 if (state == 3)
                 {
                     timerAnimation++;
-
-                    if (timerPnj2 < 30) // haut
+                    if (timerPnj2 == 0)
+                    {
+                        timerPnj2 = 1;
+                    }
+                    if ( timerPnj2 > 0 &&timerPnj2 < 30) // haut
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
@@ -209,22 +212,22 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    else if (timerPnj2 > 0 && timerPnj2 < 55 || timerPnj2 >= 255 && timerPnj2 < 385 || timerPnj2 >= 405 && timerPnj2 < 535)
+                    else if (timerPnj2 > 0 && timerPnj2 < 55 || timerPnj2 >= 255 && timerPnj2 < 385 || timerPnj2 >= 415 && timerPnj2 < 545)
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 605 && timerPnj2 < 635)
+                    else if (timerPnj2 >= 618 && timerPnj2 < 630)
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 55 && timerPnj2 < 255 || timerPnj2 >= 535 && timerPnj2 < 605)
+                    else if (timerPnj2 >= 55 && timerPnj2 < 255 || timerPnj2 >= 545 && timerPnj2 < 618)
                     {
                         directionPnj2 = "left";
                         timerPnj2++;
                     }
-                    else if (timerPnj2 >= 485 && timerPnj2 < 505)
+                    else if (timerPnj2 >= 385 && timerPnj2 < 415)
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
