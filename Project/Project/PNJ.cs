@@ -64,6 +64,27 @@ namespace Project
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                     }
                 }
+                if (state == 4)
+                {
+                    timerAnimation++;
+                    timerPnj2++;
+                    if (timerPnj2 < 100 || (timerPnj2>= 230 && timerPnj2 <= 660))
+                    {
+                        directionPnj2 = "right";
+                    }
+                    else if(timerPnj2>= 100 && timerPnj2 < 230)
+                    {
+                        directionPnj2 = "up";
+                    }
+                    else if(timerPnj2 >= 660 && timerPnj2 < 780)
+                    {
+                        directionPnj2 = "down";
+                    }
+                    else
+                    {
+                        directionPnj2 = "stop";
+                    }
+                }
                 if (state == 2) // direction Weapons
                 {
                     timerAnimation++;
@@ -89,6 +110,27 @@ namespace Project
                         ligne = 2;
                         directionPnj2 = "stop";
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
+                    }
+                }
+                if (state == 5)
+                {
+                    timerAnimation++;
+                    timerPnj2++;
+                    if (timerPnj2 < 350 || (timerPnj2 >= 920 && timerPnj2 < 950))
+                    {
+                        directionPnj2 = "down"; 
+                    }
+                    else if ((timerPnj2 >= 350 && timerPnj2< 570) || (timerPnj2>= 850 && timerPnj2 <920))
+                    {
+                        directionPnj2 = "left";
+                    }
+                    else if((timerPnj2 >= 570 && timerPnj2 <700) || (timerPnj2 <= 720 && timerPnj2 > 850))
+                    {
+                        directionPnj2 = "up";
+                    }
+                    else if(timerPnj2 >= 700 && timerPnj2 < 720)
+                    {
+                        directionPnj2 = "right";
                     }
                 }
                 if (state == 3)

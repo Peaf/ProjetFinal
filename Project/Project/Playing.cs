@@ -351,15 +351,12 @@ namespace Project
                                 if (Game1.btnBuyArmor.isClicked)
                                 {
                                     inventaireShop = true;
-
                                 }
 
                                 if (Game1.btnSellArmor.isClicked)
                                 {
                                     inventaireSell = true;
                                 }
-
-
                             }
                         }
 
@@ -490,8 +487,6 @@ namespace Project
                                 {
                                     inventaireSell = true;
                                 }
-
-
                             }
                         }
 
@@ -506,7 +501,6 @@ namespace Project
                                     Game1.invent1.addItem(item);
                                     Game1.inventPnjPot.removeItem(item);
                                     Game1.player.Gold -= item.cost;
-
                                 }
                             }
                         }
