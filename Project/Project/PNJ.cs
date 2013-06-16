@@ -78,7 +78,7 @@ namespace Project
                     {
                         timerPnj2 = 1;
                     }
-                    if ( timerPnj2 > 0 &&timerPnj2 < 100 || (timerPnj2>=230 && timerPnj2 <= 650))
+                    if ( timerPnj2 > 0 &&timerPnj2 < 100 || (timerPnj2>=230 && timerPnj2 <= 660))
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
@@ -88,7 +88,7 @@ namespace Project
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if(timerPnj2 >= 650 && timerPnj2 < 760)
+                    else if(timerPnj2 >= 660 && timerPnj2 < 770)
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
