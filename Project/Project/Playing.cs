@@ -454,7 +454,7 @@ namespace Project
                         else
                             Game1.pnjShop2.Update(gameTime, 5, "mapShop");
 
-                        if (Game1.pnjShop2.Collision(Game1.pnjShop2))
+                        if (Game1.pnjShop2.Collision(Game1.pnjShop2) && PNJ.arrived)
                         {
                             if (!inventaireShop && !inventaireSell)
                             {
@@ -554,7 +554,7 @@ namespace Project
                         else
                             Game1.pnjShop2.Update(gameTime, 6, "mapShop");
 
-                        if (Game1.pnjShop2.Collision(Game1.pnjShop2))
+                        if (Game1.pnjShop2.Collision(Game1.pnjShop2) && PNJ.arrived)
                         {
                             if (!inventaireShop && !inventaireSell)
                             {

@@ -57,6 +57,7 @@ namespace Project
             }
             else if (btnOptions.isClicked)
             {
+                Game1.optionBackfromMenu = false;
                 CurrentGameState = Game1.GameState.Options;
                 MediaPlayer.Resume();
             }
