@@ -183,13 +183,13 @@ namespace Project
             btnSellPot = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
             btnSellPot.setPosition(new Vector2(screenWidth - 430, screenHeight - 60));
 
-            btnDoneArmor = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
+            btnDoneArmor = new cButton(Content.Load<Texture2D>("Button/Done"), 120, 45);
             btnDoneArmor.setPosition(new Vector2(60, screenHeight / 2 - 80));
 
-            btnDoneWeapon = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
+            btnDoneWeapon = new cButton(Content.Load<Texture2D>("Button/Done"), 120, 45);
             btnDoneWeapon.setPosition(new Vector2(60, screenHeight / 2 - 80));
 
-            btnDonePot = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
+            btnDonePot = new cButton(Content.Load<Texture2D>("Button/Done"), 120, 45);
             btnDonePot.setPosition(new Vector2(60, screenHeight / 2 - 80));
 
         }

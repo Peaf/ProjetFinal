@@ -22,7 +22,7 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire, inventaireShop, inventaireSell;
+        static public bool inventaire, inventaireShop, inventaireSell, returnPnj;
         static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
@@ -60,6 +60,7 @@ namespace Project
             inventaire = false;
             inventaireShop = false;
             inventaireSell = false;
+            returnPnj = false;
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -361,12 +362,20 @@ namespace Project
 
                                 if (Game1.btnDoneArmor.isClicked)
                                 {
-                                    Game1.pnjShop2.Update(gameTime, 4, "mapShop");
+                                    returnPnj = true;
                                 }
 
-
                             }
+
+
                         }
+                        if (returnPnj)
+                        {
+                            Game1.pnjShop2.Update(gameTime, 4, "mapShop");
+                            whatToBuy = 0;
+
+                        }
+
 
                         if (inventaireShop)
                         {
@@ -974,6 +983,7 @@ namespace Project
                     {
                         Game1.btnSellArmor.Draw(spriteBatch);
                         Game1.btnBuyArmor.Draw(spriteBatch);
+                        Game1.btnDoneArmor.Draw(spriteBatch);
                     }
                 }
                 if (whatToBuy == 2)
