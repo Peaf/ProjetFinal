@@ -23,7 +23,7 @@ namespace Project
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
         static public bool inventaire, inventaireShop, inventaireSell, returnPnj;
-        static int turn, lvlBefore, j, cactus, whatToBuy = 0;
+        public static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
         static string attackChoisi;
@@ -342,41 +342,37 @@ namespace Project
                 {
                     if (whatToBuy == 1)
                     {
-                        Game1.pnjShop2.Update(gameTime, 1, "mapShop");
+                        if (Game1.btnDoneArmor.isClicked)
+                        {
+                            returnPnj = true;
+                        }
+                        if (!returnPnj)
+                            Game1.pnjShop2.Update(gameTime, 1, "mapShop");
+                        else
+                            Game1.pnjShop2.Update(gameTime, 4, "mapShop");
+
                         if (Game1.pnjShop2.Collision(Game1.pnjShop2))
                         {
+                            
                             if (!inventaireShop && !inventaireSell)
                             {
-                                Game1.btnBuyArmor.Update(gameTime);
-                                Game1.btnSellArmor.Update(gameTime);
-                                Game1.btnDoneArmor.Update(gameTime);
                                 if (Game1.btnBuyArmor.isClicked)
                                 {
                                     inventaireShop = true;
                                 }
-
                                 if (Game1.btnSellArmor.isClicked)
                                 {
                                     inventaireSell = true;
                                 }
-
                                 if (Game1.btnDoneArmor.isClicked)
                                 {
                                     returnPnj = true;
                                 }
-
+                                Game1.btnBuyArmor.Update(gameTime);
+                                Game1.btnSellArmor.Update(gameTime);
+                                Game1.btnDoneArmor.Update(gameTime);
                             }
-
-
                         }
-                        if (returnPnj)
-                        {
-                            Game1.pnjShop2.Update(gameTime, 4, "mapShop");
-                            whatToBuy = 0;
-
-                        }
-
-
                         if (inventaireShop)
                         {
                             if (KState.IsKeyDown(Keys.J))
@@ -388,7 +384,6 @@ namespace Project
                                     Game1.invent1.addItem(item);
                                     Game1.inventPnjArmor.removeItem(item);
                                     Game1.player.Gold -= item.cost;
-
                                 }
                             }
                         }
@@ -432,7 +427,6 @@ namespace Project
                                 if (Game1.btnBuyWeapon.isClicked)
                                 {
                                     inventaireShop = true;
-
                                 }
 
                                 if (Game1.btnSellWeapon.isClicked)

@@ -13,7 +13,7 @@ namespace Project
         public Vector2 pnjPosition, origine;
         public Texture2D pnjTexture;
         public Rectangle pnjRectangle, taille;
-        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0;
+        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 1;
         string directionPnj2 = "";
 
         public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine, Rectangle newtaille)
@@ -44,21 +44,25 @@ namespace Project
                 if (state == 1) // il marche vers les armures
                 {
                     timerAnimation++;
-                    timerPnj2++;
-                    if (timerPnj2 < 120) // haut
+                    
+                    if (timerPnj2>0 && timerPnj2 < 120) // haut
                     {
                         directionPnj2 = "up";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 120 && timerPnj2 < 550) || (timerPnj2 >= 680 & timerPnj2 < 780)) // gauche
                     {
                         directionPnj2 = "left";
+                        timerPnj2++;
                     }
                     else if (timerPnj2 >= 550 && timerPnj2 < 680) //bas
                     {
                         directionPnj2 = "down";
+                        timerPnj2++;
                     }
                     else
                     {
+                        timerPnj2 = 0;
                         directionPnj2 = "stop";
                         ligne = 2;
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
@@ -67,22 +71,26 @@ namespace Project
                 if (state == 4)
                 {
                     timerAnimation++;
-                    timerPnj2++;
-                    if (timerPnj2 < 100 || (timerPnj2>= 230 && timerPnj2 <= 660))
+                    
+                    if (timerPnj2 < 100 || (timerPnj2>= 680 && timerPnj2 <= 780))
                     {
                         directionPnj2 = "right";
+                        timerPnj2++;
                     }
-                    else if(timerPnj2>= 100 && timerPnj2 < 230)
+                    else if(timerPnj2>= 100 && timerPnj2 < 680)
                     {
                         directionPnj2 = "up";
+                        timerPnj2++;
                     }
                     else if(timerPnj2 >= 660 && timerPnj2 < 780)
                     {
                         directionPnj2 = "down";
+                        timerPnj2++;
                     }
                     else
                     {
                         directionPnj2 = "stop";
+                        Playing.whatToBuy = 0;
                     }
                 }
                 if (state == 2) // direction Weapons
@@ -236,7 +244,8 @@ namespace Project
                         break;
 
                     case "stop":
-
+                        timerAnimation = 0;
+                        pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                         break;
 
                 }
