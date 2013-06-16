@@ -1007,8 +1007,13 @@ namespace Project
                     }
                     if (whatToBuy == 1)
                     {
-                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                        spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
+                        for (int i = 0; i <1500; i++)
+                        {
+
+
+                            spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                            spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
+                        }
                     }
                     if (whatToBuy == 2)
                     {

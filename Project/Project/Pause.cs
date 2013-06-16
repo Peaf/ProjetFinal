@@ -75,7 +75,7 @@ namespace Project
                 CurrentGameState = Game1.GameState.Playing;
                 MediaPlayer.Resume();
             }
-
+           
             btnBack.Update( gameTime);
             btnOptions.Update( gameTime);
             btnQuit.Update( gameTime);

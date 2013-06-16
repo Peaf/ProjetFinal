@@ -68,7 +68,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.MainMenu;
+        public GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
@@ -79,7 +79,7 @@ namespace Project
         protected override void Initialize()
         {
             Playing.Initialize();
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 800, 10, 50, 50, 0);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 50, 50, 0);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
@@ -174,14 +174,14 @@ namespace Project
             btnSellArmor.setPosition(new Vector2(10, screenHeight / 2-35));
 
             btnBuyWeapon = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
-            btnBuyWeapon.setPosition(new Vector2(screenWidth-300, 15));
+            btnBuyWeapon.setPosition(new Vector2(screenWidth-370, 95));
             btnSellWeapon = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSellWeapon.setPosition(new Vector2(screenWidth-150, 15));
+            btnSellWeapon.setPosition(new Vector2(screenWidth-370, 180));
 
             btnBuyPot = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
-            btnBuyPot.setPosition(new Vector2(10, screenHeight / 2 - 125));
+            btnBuyPot.setPosition(new Vector2(screenWidth - 430, screenHeight - 155));
             btnSellPot = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSellPot.setPosition(new Vector2(10, screenHeight / 2 - 35));
+            btnSellPot.setPosition(new Vector2(screenWidth - 430, screenHeight - 60));
 
         }
 
