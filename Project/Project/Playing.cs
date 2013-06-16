@@ -421,19 +421,17 @@ namespace Project
                         }
                         if (!returnPnj)
                             Game1.pnjShop2.Update(gameTime, 2, "mapShop");
+                        else
+                            Game1.pnjShop2.Update(gameTime, 5, "mapShop");
 
                         if (Game1.pnjShop2.Collision(Game1.pnjShop2))
                         {
                             if (!inventaireShop && !inventaireSell)
                             {
-                                Game1.btnBuyWeapon.Update(gameTime);
-                                Game1.btnSellWeapon.Update(gameTime);
-                                Game1.btnDoneWeapon.Update(gameTime);
                                 if (Game1.btnBuyWeapon.isClicked)
                                 {
                                     inventaireShop = true;
                                 }
-
                                 if (Game1.btnSellWeapon.isClicked)
                                 {
                                     inventaireSell = true;
@@ -442,6 +440,9 @@ namespace Project
                                 {
                                     Game1.pnjShop2.Update(gameTime, 5, "mapShop");
                                 }
+                                Game1.btnBuyWeapon.Update(gameTime);
+                                Game1.btnSellWeapon.Update(gameTime);
+                                Game1.btnDoneWeapon.Update(gameTime);
 
                             }
                         }
@@ -489,15 +490,20 @@ namespace Project
                     }
                     if (whatToBuy == 3)
                     {
-                        Game1.pnjShop2.Update(gameTime, 3, "mapShop");
+                        if (Game1.btnDonePot.isClicked)
+                        {
+                            returnPnj = true;
+                        }
+                        if (!returnPnj)
+                            Game1.pnjShop2.Update(gameTime, 3, "mapShop");
+                        else
+                            Game1.pnjShop2.Update(gameTime, 6, "mapShop");
 
                         if (Game1.pnjShop2.Collision(Game1.pnjShop2))
                         {
                             if (!inventaireShop && !inventaireSell)
                             {
-                                Game1.btnBuyPot.Update(gameTime);
-                                Game1.btnSellPot.Update(gameTime);
-                                Game1.btnDonePot.Update(gameTime);
+
                                 if (Game1.btnBuyPot.isClicked)
                                 {
                                     inventaireShop = true;
@@ -508,6 +514,9 @@ namespace Project
                                 {
                                     inventaireSell = true;
                                 }
+                                Game1.btnBuyPot.Update(gameTime);
+                                Game1.btnSellPot.Update(gameTime);
+                                Game1.btnDonePot.Update(gameTime);
                             }
                         }
 
@@ -523,7 +532,11 @@ namespace Project
                                     Game1.inventPnjPot.removeItem(item);
                                     Game1.player.Gold -= item.cost;
                                 }
-                                
+
+
+                            } if (Game1.btnDoneWeapon.isClicked)
+                            {
+                                Game1.pnjShop2.Update(gameTime, 6, "mapShop");
                             }
                         }
                         if (inventaireSell)
