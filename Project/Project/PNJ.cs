@@ -15,6 +15,7 @@ namespace Project
         public Rectangle pnjRectangle, taille;
         int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0;
         string directionPnj2 = "";
+        public static bool arrived;
 
         public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine, Rectangle newtaille)
         {
@@ -70,9 +71,12 @@ namespace Project
                         ligne = 2;
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                     }
+                    if (timerPnj2 >= 780)
+                        arrived = true;
                 }
                 if (state == 4)
                 {
+                    arrived = false;
                     timerAnimation++;
                     if (timerPnj2 == -1)
                     {
@@ -135,9 +139,12 @@ namespace Project
                         directionPnj2 = "stop";
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                     }
+                    if (timerPnj2 >= 950)
+                        arrived = true;
                 }
                 if (state == 5)
                 {
+                    arrived = true;
                     timerAnimation++;
 
                     if (timerPnj2 == -1)
@@ -206,9 +213,12 @@ namespace Project
                         directionPnj2 = "stop";
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
                     }
+                    if (timerPnj2 >= 635)
+                        arrived = true;
                 }
                 if (state == 6)
                 {
+                    arrived = false;
                     timerAnimation++;
                     if (timerPnj2 == -1)
                     {

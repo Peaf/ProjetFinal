@@ -358,7 +358,7 @@ namespace Project
                         else
                             Game1.pnjShop2.Update(gameTime, 4, "mapShop");
 
-                        if (Game1.pnjShop2.Collision(Game1.pnjShop2))
+                        if (Game1.pnjShop2.Collision(Game1.pnjShop2) && PNJ.arrived)
                         {
 
                             if (!inventaireShop && !inventaireSell)
@@ -1134,23 +1134,25 @@ namespace Project
                         Game1.btnPotions.Draw(spriteBatch);
                     }
                 }
-                if (whatToBuy == 1)
+                if (!PNJ.arrived)
                 {
+                    if (whatToBuy == 1)
+                    {
 
-                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
+                    }
+                    if (whatToBuy == 2)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "We have so many weapons you will find one for you no doubt. Follow me", new Vector2(10, 700), Color.Blue);
+                    }
+                    if (whatToBuy == 3)
+                    {
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Potions it is. Ok Follow me", new Vector2(10, 700), Color.Blue);
+                    }
                 }
-                if (whatToBuy == 2)
-                {
-                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "We have so many weapons you will find one for you no doubt. Follow me", new Vector2(10, 700), Color.Blue);
-                }
-                if (whatToBuy == 3)
-                {
-                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Potions it is. Ok Follow me", new Vector2(10, 700), Color.Blue);
-                }
-
             }
             if (map == map2)
             {
