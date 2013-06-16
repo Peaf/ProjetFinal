@@ -44,7 +44,10 @@ namespace Project
                 if (state == 1) // il marche vers les armures
                 {
                     timerAnimation++;
-                    
+                    if (timerPnj2 == 0)
+                    {
+                        timerPnj2 = 1;
+                    }
                     if (timerPnj2>0 && timerPnj2 < 120) // haut
                     {
                         directionPnj2 = "up";
@@ -62,7 +65,7 @@ namespace Project
                     }
                     else
                     {
-                        timerPnj2 = 0;
+                        timerPnj2 = -1;
                         directionPnj2 = "stop";
                         ligne = 2;
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
@@ -71,18 +74,21 @@ namespace Project
                 if (state == 4)
                 {
                     timerAnimation++;
-                    
-                    if (timerPnj2 < 100 || (timerPnj2>= 680 && timerPnj2 <= 780))
+                    if (timerPnj2 == -1)
+                    {
+                        timerPnj2 = 1;
+                    }
+                    if ( timerPnj2 > 0 &&timerPnj2 < 100 || (timerPnj2>=230 && timerPnj2 <= 650))
                     {
                         directionPnj2 = "right";
                         timerPnj2++;
                     }
-                    else if(timerPnj2>= 100 && timerPnj2 < 680)
+                    else if(timerPnj2>= 100 && timerPnj2 < 230)
                     {
                         directionPnj2 = "up";
                         timerPnj2++;
                     }
-                    else if(timerPnj2 >= 660 && timerPnj2 < 780)
+                    else if(timerPnj2 >= 650 && timerPnj2 < 760)
                     {
                         directionPnj2 = "down";
                         timerPnj2++;
@@ -91,30 +97,39 @@ namespace Project
                     {
                         directionPnj2 = "stop";
                         Playing.whatToBuy = 0;
+                        timerPnj2 = 0;
                     }
                 }
                 if (state == 2) // direction Weapons
                 {
                     timerAnimation++;
-                    timerPnj2++;
+                    if (timerPnj2 == 0)
+                    {
+                        timerPnj2 = 1;
+                    }
                     if (timerPnj2 < 30 || (timerPnj2 >= 600 && timerPnj2 < 950)) // haut
                     {
                         directionPnj2 = "up";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 30 && timerPnj2 < 100) ||(timerPnj2 >= 380 && timerPnj2 < 600))
                     {
                         directionPnj2 = "right";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 100 && timerPnj2 < 230) || (timerPnj2 >= 250 && timerPnj2 < 380))
                     {
                         directionPnj2 = "down";
+                        timerPnj2++;
                     }
                     else if (timerPnj2 >= 230 && timerPnj2 < 250)
                     {
                         directionPnj2 = "left";
+                        timerPnj2++;
                     }
                     else
                     {
+                        timerPnj2 = -1;
                         ligne = 2;
                         directionPnj2 = "stop";
                         pnjRectangle = new Rectangle(32 * colonne, ligne * 48, 32, 48);
@@ -123,22 +138,36 @@ namespace Project
                 if (state == 5)
                 {
                     timerAnimation++;
-                    timerPnj2++;
+                   
+                    if (timerPnj2 == -1)
+                    {
+                        timerPnj2 = 1;
+                    }
                     if (timerPnj2 < 350 || (timerPnj2 >= 920 && timerPnj2 < 950))
                     {
-                        directionPnj2 = "down"; 
+                        directionPnj2 = "down";
+                        timerPnj2++;
                     }
                     else if ((timerPnj2 >= 350 && timerPnj2< 570) || (timerPnj2>= 850 && timerPnj2 <920))
                     {
                         directionPnj2 = "left";
+                        timerPnj2++;
                     }
                     else if((timerPnj2 >= 570 && timerPnj2 <700) || (timerPnj2 <= 720 && timerPnj2 > 850))
                     {
                         directionPnj2 = "up";
+                        timerPnj2++;
                     }
                     else if(timerPnj2 >= 700 && timerPnj2 < 720)
                     {
                         directionPnj2 = "right";
+                        timerPnj2++;
+                    }
+                    else
+                    {
+                        directionPnj2 = "stop";
+                        Playing.whatToBuy = 0;
+                        timerPnj2 = 0;
                     }
                 }
                 if (state == 3)
