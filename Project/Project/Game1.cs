@@ -28,7 +28,7 @@ namespace Project
         VideoPlayer playerVideo;
         Texture2D videoTexture;
         //Pause
-        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons,btnBuyArmor,btnSellArmor, btnBuyWeapon, btnSellWeapon,btnBuyPot, btnSellPot,btnDoneArmor,btnDoneWeapon,btnDonePot ;
+        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons, btnBuyArmor, btnSellArmor, btnBuyWeapon, btnSellWeapon, btnBuyPot, btnSellPot, btnDoneArmor, btnDoneWeapon, btnDonePot;
         public static ParticleGenerator snow;
         public static ParticleGenerator1 sand;
 
@@ -79,7 +79,7 @@ namespace Project
         protected override void Initialize()
         {
             Playing.Initialize();
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 50, 50, 0);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 50, 50, 0);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
@@ -94,20 +94,28 @@ namespace Project
             inventPnjArmor.Initialize();
             inventPnjWeapon.Initialize();
             inventPnjPot.Initialize();
-            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"une pot"));
-            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"une pot"));
-            invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "",15,""));
-            invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped",30,"arme"));
-           // invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50));
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot"));
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot"));
+            invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, ""));
+            invent1.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
+            invent1.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "arme"));
+            invent1.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "arme"));
+            invent1.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "arme"));
+            invent1.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "arme"));
 
-            invent2.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50,"armure"));
+            invent1.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, ""));
+            invent1.addItem(new Item("Armor", "Armor2", "dmg", 50, 1, "notequiped", 80, "arme"));
+            invent1.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, ""));
+            invent1.addItem(new Item("Armor", "Armor4", "dmg", 200, 1, "notequiped", 300, "arme"));
 
-            inventPnjArmor.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50,"armure"));
+            invent2.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
 
-            inventPnjWeapon.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped",30,"arme"));
+            inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
 
-            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"pot"));
-            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "",15,"pot"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
+
+            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "pot"));
+            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "pot"));
 
 
 
@@ -142,15 +150,15 @@ namespace Project
 
             //Enemy
             enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50);
-            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 500), new Rectangle(365, 500, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50 );
-            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55,90), new Rectangle(0, 0, 78, 105), 300, 100);
+            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 500), new Rectangle(365, 500, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50);
+            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55, 90), new Rectangle(0, 0, 78, 105), 300, 100);
             enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(550, 150), new Rectangle(550, 165, 55, 90), new Rectangle(0, 0, 78, 105), 100, 20);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));
             healer = new PNJ(Content.Load<Texture2D>("Sprites/Healer"), new Vector2(1250, 550), new Rectangle(1250, 550, 658, 696), new Vector2(1250, 550), new Rectangle(1270, 550, 85, 80));
-            pnjShop1 = new PNJ(Content.Load<Texture2D>("Tile/Tile195"), new Vector2(705,288), new Rectangle(0,0 ,32,32),new Vector2(300,300),new Rectangle(300,300,32,32));
-            pnjShop2 = new PNJ(Content.Load<Texture2D>("Sprites/pnjShop2"), new Vector2(705, 288), new Rectangle(0, 0, 32,46), new Vector2(300, 300), new Rectangle(300, 300, 38, 50));
+            pnjShop1 = new PNJ(Content.Load<Texture2D>("Tile/Tile195"), new Vector2(705, 288), new Rectangle(0, 0, 32, 32), new Vector2(300, 300), new Rectangle(300, 300, 32, 32));
+            pnjShop2 = new PNJ(Content.Load<Texture2D>("Sprites/pnjShop2"), new Vector2(705, 288), new Rectangle(0, 0, 32, 46), new Vector2(300, 300), new Rectangle(300, 300, 38, 50));
             //Pause
             Pause.LoadContent(Content, screenWidth, screenHeight);
 
@@ -161,8 +169,8 @@ namespace Project
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
 
             //btnshop
-            btnArmors = new cButton(Content.Load<Texture2D>("Button/btnArmors"),170,45);
-            btnArmors.setPosition(new Vector2(525,280));
+            btnArmors = new cButton(Content.Load<Texture2D>("Button/btnArmors"), 170, 45);
+            btnArmors.setPosition(new Vector2(525, 280));
             btnWeapons = new cButton(Content.Load<Texture2D>("Button/btnWeapons"), 170, 45);
             btnWeapons.setPosition(new Vector2(620, 230));
             btnPotions = new cButton(Content.Load<Texture2D>("Button/btnPotions"), 170, 45);
@@ -171,12 +179,12 @@ namespace Project
             btnBuyArmor = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
             btnBuyArmor.setPosition(new Vector2(10, screenHeight / 2 - 125));
             btnSellArmor = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSellArmor.setPosition(new Vector2(10, screenHeight / 2-35));
+            btnSellArmor.setPosition(new Vector2(10, screenHeight / 2 - 35));
 
             btnBuyWeapon = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
-            btnBuyWeapon.setPosition(new Vector2(screenWidth-370, 95));
+            btnBuyWeapon.setPosition(new Vector2(screenWidth - 370, 95));
             btnSellWeapon = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSellWeapon.setPosition(new Vector2(screenWidth-370, 180));
+            btnSellWeapon.setPosition(new Vector2(screenWidth - 370, 180));
 
             btnBuyPot = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
             btnBuyPot.setPosition(new Vector2(screenWidth - 430, screenHeight - 155));
@@ -187,11 +195,11 @@ namespace Project
             btnDoneArmor.setPosition(new Vector2(60, screenHeight / 2 - 80));
 
             btnDoneWeapon = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
-            btnDoneWeapon.setPosition(new Vector2(screenWidth - 350,135));
+            btnDoneWeapon.setPosition(new Vector2(screenWidth - 350, 135));
 
             btnDonePot = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
             btnDonePot.setPosition(new Vector2(screenWidth - 430, screenHeight - 110));
-            
+
         }
 
 

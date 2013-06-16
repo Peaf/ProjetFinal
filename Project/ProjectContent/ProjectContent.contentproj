@@ -365,8 +365,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sword.png">
-      <Name>Sword</Name>
+    <Compile Include="Sword1.png">
+      <Name>Sword1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -379,8 +379,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Armor.png">
-      <Name>Armor</Name>
+    <Compile Include="Armor1.png">
+      <Name>Armor1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -1774,6 +1774,51 @@
     </Compile>
     <Compile Include="Tile\Tile77.png">
       <Name>Tile77</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Armor2.png">
+      <Name>Armor2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Armor3.png">
+      <Name>Armor3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Armor4.png">
+      <Name>Armor4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sword2.png">
+      <Name>Sword2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sword3.png">
+      <Name>Sword3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sword4.png">
+      <Name>Sword4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sword5.png">
+      <Name>Sword5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

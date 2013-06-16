@@ -332,7 +332,7 @@ namespace Project
                     {
                         if (item.type == "Weapon")
                         {
-                            if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
                                 /* Game1.invent.removeItemE(item);
                                  Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
@@ -342,7 +342,7 @@ namespace Project
                         }
                         else
                         {
-                            if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
 
                                 Game1.invent1.deUseItem(item, Game1.player);
@@ -361,7 +361,7 @@ namespace Project
                     {
                         if (item.type == "Weapon")
                         {
-                            if (mouseRectangle.Intersects(new Rectangle(30 + 700, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (mouseRectangle.Intersects(new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
                                 /* Game1.invent.removeItemE(item);
                                  Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));*/
@@ -371,7 +371,7 @@ namespace Project
                         }
                         else
                         {
-                            if (mouseRectangle.Intersects(new Rectangle(120 + 700, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                            if (mouseRectangle.Intersects(new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                             {
 
                                 Game1.invent2.deUseItem(item, Game1.player2);
@@ -790,7 +790,7 @@ namespace Project
                         {
                             if (item.type == "Weapon")
                             {
-                                if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                if (mouseRectangle.Intersects(new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                                 {
                                     //Game1.invent.removeItemE(item);
                                     //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
@@ -799,7 +799,7 @@ namespace Project
                             }
                             else
                             {
-                                if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                if (mouseRectangle.Intersects(new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                                 {
                                     Game1.invent1.deUseItem(item, Game1.player);
                                 }
@@ -819,7 +819,7 @@ namespace Project
                         {
                             if (item.type == "Weapon")
                             {
-                                if (mouseRectangle.Intersects(new Rectangle(30 + 700, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                if (mouseRectangle.Intersects(new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                                 {
                                     //Game1.invent.removeItemE(item);
                                     //Game1.invent.addItem((new Item("Weapon","Sword","dmg", 30, 1,"notequiped")));
@@ -828,7 +828,7 @@ namespace Project
                             }
                             else
                             {
-                                if (mouseRectangle.Intersects(new Rectangle(120 + 700, 125, Playing.armorTexture.Width, Playing.armorTexture.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                if (mouseRectangle.Intersects(new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                                 {
                                     Game1.invent2.deUseItem(item, Game1.player2);
                                 }
@@ -1253,11 +1253,11 @@ namespace Project
                                     break;
 
                                 case "Sword":
-                                    spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    spriteBatch.Draw(Playing.swordTexture1, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Armor":
-                                    spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    spriteBatch.Draw(Playing.armorTexture1, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
 
                                     break;
 
@@ -1273,11 +1273,11 @@ namespace Project
                         switch (item.name)
                         {
                             case "Sword":
-                                spriteBatch.Draw(Playing.swordTexture, new Rectangle(30, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
+                                spriteBatch.Draw(Playing.swordTexture1, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
                                 break;
 
                             case "Armor":
-                                spriteBatch.Draw(Playing.armorTexture, new Rectangle(120, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
+                                spriteBatch.Draw(Playing.armorTexture1, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
                                 break;
                         }
                     }
@@ -1323,11 +1323,11 @@ namespace Project
                                     break;
 
                                 case "Sword":
-                                    spriteBatch.Draw(Playing.swordTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    spriteBatch.Draw(Playing.swordTexture1, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Armor":
-                                    spriteBatch.Draw(Playing.armorTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    spriteBatch.Draw(Playing.armorTexture1, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
 
                                     break;
 
@@ -1347,11 +1347,11 @@ namespace Project
                         switch (item.name)
                         {
                             case "Sword":
-                                spriteBatch.Draw(Playing.swordTexture, new Rectangle(30 + 700, 320, Playing.swordTexture.Width / 7, Playing.swordTexture.Height / 7), Color.White);
+                                spriteBatch.Draw(Playing.swordTexture1, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
                                 break;
 
                             case "Armor":
-                                spriteBatch.Draw(Playing.armorTexture, new Rectangle(120 + 700, 125, Playing.armorTexture.Width, Playing.armorTexture.Height), Color.White);
+                                spriteBatch.Draw(Playing.armorTexture1, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
                                 break;
                         }
                     }
