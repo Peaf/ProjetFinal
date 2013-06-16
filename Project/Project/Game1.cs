@@ -20,13 +20,14 @@ namespace Project
         public static Character player, player2, playerMenu;
 
         public static PNJ pnj1, healer, pnjShop1, pnjShop2;
-        public static Enemy enemy, enemy1, enemy2, enemy3, enemy4;
+        public static Enemy enemy, enemy1, enemy2, enemy3, enemy4,Boss;
         public static Song song1, song2;
 
         Random rand = new Random();
         Video video;
         VideoPlayer playerVideo;
         Texture2D videoTexture;
+        public static Texture2D bossTexture;
         //Pause
         public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons, btnBuyArmor, btnSellArmor, btnBuyWeapon, btnSellWeapon, btnBuyPot, btnSellPot, btnDoneArmor, btnDoneWeapon, btnDonePot;
         public static ParticleGenerator snow;
@@ -117,7 +118,8 @@ namespace Project
             inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "pot"));
             inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "pot"));
 
-
+            bossTexture = Content.Load<Texture2D>("Sprites/Boss");
+            Boss = new Enemy(bossTexture, new Vector2(300, 300), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
 
             base.Initialize();
         }
@@ -192,13 +194,13 @@ namespace Project
             btnSellPot.setPosition(new Vector2(screenWidth - 430, screenHeight - 60));
 
             btnDoneArmor = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
-            btnDoneArmor.setPosition(new Vector2(60, screenHeight / 2 - 80));
+            btnDoneArmor.setPosition(new Vector2(120, screenHeight / 2 - 80));
 
             btnDoneWeapon = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
-            btnDoneWeapon.setPosition(new Vector2(screenWidth - 350, 135));
+            btnDoneWeapon.setPosition(new Vector2(screenWidth - 250, 137));
 
             btnDonePot = new cButton(Content.Load<Texture2D>("Button/Done"), 170, 45);
-            btnDonePot.setPosition(new Vector2(screenWidth - 430, screenHeight - 110));
+            btnDonePot.setPosition(new Vector2(screenWidth/2  +80, screenHeight - 110));
 
         }
 
