@@ -22,7 +22,7 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire,inventaireShop;
+        static public bool inventaire,inventaireShop,inventaireSell;
         static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2,inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
@@ -59,6 +59,7 @@ namespace Project
             talkOnce = false;
             inventaire = false;
             inventaireShop = false;
+            inventaireSell = false;
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -343,7 +344,7 @@ namespace Project
                         Game1.pnjShop2.Update(gameTime, 1, "mapShop");
                         if (Game1.pnjShop2.Collision(Game1.pnjShop2))
                         {
-                            if (!inventaireShop)
+                            if (!inventaireShop && !inventaireSell)
                             {
                                 Game1.btnBuy.Update(gameTime);
                                 Game1.btnSell.Update(gameTime);
@@ -352,8 +353,11 @@ namespace Project
                                     inventaireShop = true;
 
                                 }
-                                
-                                //if(Game1.btnSell.isClicked)
+
+                                if (Game1.btnSell.isClicked)
+                                {
+                                    inventaireSell = true;
+                                }
 
 
                             }
@@ -364,11 +368,36 @@ namespace Project
                                 inventaireShop = false;
                             foreach (Item item in Game1.inventPnjArmor.tablObjects)
                             {
-                                if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                if (mouseRectangle.Intersects(new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 +263, screenHeight / 2 - inventaireShopTexture.Height / 2 +15+ 60 * (item.place/ 5), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                                 {
                                     Game1.invent1.addItem(item);
                                     Game1.inventPnjArmor.removeItem(item);
                                     Game1.player.Gold -= item.cost;
+
+                                }
+                            }
+                        }
+                        if (inventaireSell)
+                        {
+                            if (KState.IsKeyDown(Keys.J))
+                                inventaireSell = false;
+                            foreach (Item item in Game1.invent1.tablObjects)
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    Game1.invent1.removeItem(item);
+                                    Game1.inventPnjArmor.addItem(item);
+                                    Game1.player.Gold += item.cost;
+
+                                }
+                            }
+                            foreach (Item item in Game1.invent2.tablObjects)
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25+700, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    Game1.invent2.removeItem(item);
+                                    Game1.inventPnjArmor.addItem(item);
+                                    Game1.player2.Gold += item.cost;
 
                                 }
                             }
@@ -816,6 +845,11 @@ namespace Project
                 {
                     spriteBatch.Draw(inventaireShopTexture, inventaireShopRectangle, Color.White);
                 }
+                if (inventaireSell)
+                {
+                    spriteBatch.Draw(inventaireTexture, inventaireRectangle, Color.White);
+                }
+
                 if (talkingShop)
                 {
                     if (whatToBuy == 0)
@@ -1006,7 +1040,7 @@ namespace Project
                 }
 
             } 
-            if (inventaire)
+            if (inventaire || inventaireSell)
             {
                 if (nbjoueurs >= 1)
                 {
@@ -1184,8 +1218,7 @@ namespace Project
                 Game1.spriteBatch.DrawString(Game1.spriteFont, Game1.player.Gold+"", new Vector2(580, 532), Color.Yellow);
       
             }
-            //if(Game1.btnSell.isClicked)
-               // Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudia", new Vector2(520 + 700, 18), Color.Black);
+           
         }
     }
 }
