@@ -165,8 +165,6 @@ Content\Button\btnPotions.xnb
 Content\Button\btnWeapons.xnb
 Content\heal.xnb
 Content\Button\btnHeal.xnb
-Content\Button\Buy.xnb
-Content\Button\Sell.xnb
 Content\Song\Song1.xnb
 Content\Song\Song2.xnb
 Content\Song\song3.xnb
@@ -175,6 +173,9 @@ Content\Song\SongFight.xnb
 Content\Song\Victory.xnb
 Content\SpriteFont1.xnb
 Content\Intro.xnb
+Content\Button\Buy.xnb
+Content\Button\Sell.xnb
+Content\Menu\inventaireShop.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma

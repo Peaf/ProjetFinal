@@ -20,8 +20,8 @@ namespace Project
         {
             for (int i = 0; i < tablObjects.Length; i++)
             {
-                tablObjects[i] = new Item("", "rien", "", 0, 1, "");
-                tablEquiped[i] = new Item("", "rien", "", 0, 1, "equiped");
+                tablObjects[i] = new Item("", "rien", "", 0, 1, "",0,"");
+                tablEquiped[i] = new Item("", "rien", "", 0, 1, "equiped",0,"");
                 tablObjects[i].place = i;
                 tablEquiped[i].place = i;
             }
@@ -135,7 +135,7 @@ namespace Project
             if (i < tablObjects.Length)
             {
                 toRemove.isEquiped = "equiped";
-                tablObjects[i] = new Item("", "rien", "", 0, 1, "equiped");
+                tablObjects[i] = new Item("", "rien", "", 0, 1, "equiped",0,"");
             }
         }
 
@@ -149,7 +149,7 @@ namespace Project
             if (i < tablEquiped.Length)
             {
                 toRemove.isEquiped = "notequiped";
-                tablEquiped[i] = new Item("", "rien", "", 0, 1, "notequiped");
+                tablEquiped[i] = new Item("", "rien", "", 0, 1, "notequiped",0,"");
             }
         }
     }

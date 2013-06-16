@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture, cactusTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture,inventaireShopTexture, healthPotionTexture, manaPotionTexture, swordTexture, armorTexture, QuestBookTexture, cactusTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
         static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop;
@@ -22,13 +22,13 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire;
+        static public bool inventaire,inventaireShop;
         static int turn, lvlBefore, j, cactus, whatToBuy = 0;
         static Song song3;
-        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2,inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
         static string attackChoisi;
         static KeyboardState presentKey, pastKey;
-
+        
         public static void Initialize()
         {
             mapNumber = 5;
@@ -58,6 +58,7 @@ namespace Project
             lvlUp = false;
             talkOnce = false;
             inventaire = false;
+            inventaireShop = false;
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -81,8 +82,11 @@ namespace Project
             //inventaire
             inventaireTexture = Content.Load<Texture2D>("Menu/inventaire");
             inventaireRectangle = new Rectangle(0, 0, inventaireTexture.Width, Game1.screenHeight);
-
             inventaireRectangle2 = new Rectangle(inventaireTexture.Width, 0, inventaireTexture.Width, Game1.screenHeight);
+
+            //inventaireShop
+            inventaireShopTexture = Content.Load<Texture2D>("Menu/inventaireShop");
+            inventaireShopRectangle = new Rectangle(screenWidth/2 - inventaireShopTexture.Width / 2, screenHeight/2 - inventaireShopTexture.Height / 2, inventaireShopTexture.Width, inventaireShopTexture.Height);
 
             //speech 
             speechBoxTexture = Content.Load<Texture2D>("SpeechBox");
@@ -236,8 +240,8 @@ namespace Project
         {
 
             //Item
-            Item book = new Item("QuestItem", "Book", "", 0, 1, "");
-            Item cactusItem = new Item("QuestItem", "cactusItem", "", 0, 1, "");
+            Item book = new Item("QuestItem", "Book", "", 0, 1, "",0,"un livre");
+            Item cactusItem = new Item("QuestItem", "cactusItem", "", 0, 1, "",0,"cactus");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
@@ -339,13 +343,36 @@ namespace Project
                         Game1.pnjShop2.Update(gameTime, 1, "mapShop");
                         if (Game1.pnjShop2.Collision(Game1.pnjShop2))
                         {
-                            //inventaireShop = true;
-                            Game1.btnBuy.Update(gameTime);
-                            Game1.btnSell.Update(gameTime);
-                            //if(Game1.btnBUY.isClicked)
+                            if (!inventaireShop)
+                            {
+                                Game1.btnBuy.Update(gameTime);
+                                Game1.btnSell.Update(gameTime);
+                                if (Game1.btnBuy.isClicked)
+                                {
+                                    inventaireShop = true;
 
+                                }
+                                
+                                //if(Game1.btnSell.isClicked)
+
+
+                            }
                         }
+                        if (inventaireShop)
+                        {
+                            if (KState.IsKeyDown(Keys.J))
+                                inventaireShop = false;
+                            foreach (Item item in Game1.inventPnjArmor.tablObjects)
+                            {
+                                if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
+                                {
+                                    Game1.invent1.addItem(item);
+                                    Game1.inventPnjArmor.removeItem(item);
+                                    Game1.player.Gold -= item.cost;
 
+                                }
+                            }
+                        }
                     }
                     if (whatToBuy == 2)
                         Game1.pnjShop2.Update(gameTime, 2, "mapShop");
@@ -742,6 +769,8 @@ namespace Project
 
         public static void Draw(GameTime gameTime, SpriteBatch spriteBatch, int screenWidth, int screenHeight)
         {
+            MouseState mouse= Mouse.GetState();
+            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
             presentKey = Keyboard.GetState();
             map.Draw(spriteBatch);
             if (map == map5)
@@ -782,6 +811,10 @@ namespace Project
                         Game1.btnSell.Draw(spriteBatch);
                         Game1.btnBuy.Draw(spriteBatch);
                     }
+                }
+                if (inventaireShop)
+                {
+                    spriteBatch.Draw(inventaireShopTexture, inventaireShopRectangle, Color.White);
                 }
                 if (talkingShop)
                 {
@@ -972,7 +1005,7 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "Go back to Ahra", new Vector2(95, 200), Color.Red);
                 }
 
-            }
+            } 
             if (inventaire)
             {
                 if (nbjoueurs >= 1)
@@ -1129,6 +1162,30 @@ namespace Project
                     }
                 }
             }
+            if (inventaireShop)
+            {
+                foreach (Item item in Game1.inventPnjArmor.tablObjects)
+                {
+                    if (item.name != "rien")
+                    {
+                        Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
+                        switch (item.name)
+                        {
+
+                            case "Armor":
+                                spriteBatch.Draw(armorTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 +263, screenHeight / 2 - inventaireShopTexture.Height / 2 +15+ 60 * (item.place/ 5), 39, 64), Color.White);
+                                break;
+
+                        }
+                        if(mouseRectangle.Intersects(new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 +263, screenHeight / 2 - inventaireShopTexture.Height / 2 +15+ 60 * (item.place/ 5), 39, 64)))
+                        spriteBatch.DrawString(Game1.spriteFont, item.info, new Vector2(430, 170), Color.White);
+                    }
+                }
+                Game1.spriteBatch.DrawString(Game1.spriteFont, Game1.player.Gold+"", new Vector2(580, 532), Color.Yellow);
+      
+            }
+            //if(Game1.btnSell.isClicked)
+               // Game1.spriteBatch.DrawString(Game1.spriteFont, "Claudia", new Vector2(520 + 700, 18), Color.Black);
         }
     }
 }

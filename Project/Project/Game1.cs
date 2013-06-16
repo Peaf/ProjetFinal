@@ -68,7 +68,7 @@ namespace Project
             GameOver,
             Pause
         }
-        public GameState CurrentGameState = GameState.MainMenu;
+        public GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
@@ -94,20 +94,20 @@ namespace Project
             inventPnjArmor.Initialize();
             inventPnjWeapon.Initialize();
             inventPnjPot.Initialize();
-            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
-            invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
-            invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"une pot"));
+            invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"une pot"));
+            invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "",15,""));
+            invent1.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped",30,"arme"));
+           // invent1.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50));
 
-            invent2.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+            invent2.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50,"armure"));
 
-            inventPnjArmor.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped"));
+            inventPnjArmor.addItem(new Item("Armor", "Armor", "", 30, 1, "notequiped",50,"armure"));
 
-            inventPnjWeapon.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword", "dmg", 30, 1, "notequiped",30,"arme"));
 
-            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, ""));
-            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, ""));
+            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "",10,"pot"));
+            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "",15,"pot"));
 
 
 
@@ -169,9 +169,9 @@ namespace Project
             btnPotions.setPosition(new Vector2(735, 280));
 
             btnBuy = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
-            btnBuy.setPosition(new Vector2(10, screenHeight / 2 - 100));
+            btnBuy.setPosition(new Vector2(10, screenHeight / 2 - 125));
             btnSell = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSell.setPosition(new Vector2(10, screenHeight / 2));
+            btnSell.setPosition(new Vector2(10, screenHeight / 2-35));
 
         }
 
