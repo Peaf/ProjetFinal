@@ -98,6 +98,7 @@ namespace Project
                         directionPnj2 = "stop";
                         Playing.whatToBuy = 0;
                         timerPnj2 = 0;
+                        Playing.returnPnj = false;
                     }
                 }
                 if (state == 2) // direction Weapons
@@ -168,6 +169,7 @@ namespace Project
                         directionPnj2 = "stop";
                         Playing.whatToBuy = 0;
                         timerPnj2 = 0;
+                        Playing.returnPnj = false;
                     }
                 }
                 if (state == 3)
@@ -237,6 +239,7 @@ namespace Project
                         directionPnj2 = "stop";
                         Playing.whatToBuy = 0;
                         timerPnj2 = 0;
+                        Playing.returnPnj = false;
                     }
                 }
                 switch (directionPnj2)
