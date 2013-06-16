@@ -14,18 +14,25 @@ namespace Project
 {
     public class Save
     {
-       
+        static int line;
+        public static int Line
+        {
+            get { return line; }
+        }
         public static void Update()
         {
-         
+
             FileStream stream;
             StreamWriter sw;
+            line = 0;
 
             try
             {
-                stream = new FileStream("save2.txt",FileMode.Create);
+                stream = new FileStream("save2.txt", FileMode.Create);
                 sw = new StreamWriter(stream);
+                sw.WriteLine(Playing.nbjoueurs);
                 sw.WriteLine(Game1.questState);
+                line++;
                 if (Playing.map == Playing.map2)
                     sw.WriteLine(2);
                 else if (Playing.map == Playing.map4)
@@ -36,26 +43,176 @@ namespace Project
                     sw.WriteLine(6);
                 else if (Playing.map == Playing.map8)
                     sw.WriteLine(8);
-                sw.WriteLine(Playing.map);
-                sw.WriteLine(Game1.player.persoPosition.X);
-                sw.WriteLine(Game1.player.persoPosition.Y);
-                sw.WriteLine(Game1.player.persoRectangle.X);
-                sw.WriteLine(Game1.player.persoRectangle.Y);
-                sw.WriteLine(Game1.player.persoRectangle.Width);
-                sw.WriteLine(Game1.player.persoRectangle.Height);
-                sw.WriteLine(Game1.player.health);
-                sw.WriteLine(Game1.player.mana);
-                sw.WriteLine(Game1.player.manaMax);
-                sw.WriteLine(Game1.player.healthMax);
-                sw.WriteLine(Game1.player.Experience);
-                sw.WriteLine(Game1.player.Strenght);
-                sw.WriteLine(Game1.player.Intelligence);
-                sw.WriteLine(Game1.player.Degat);
-                sw.WriteLine(Game1.player.Armor);
-                sw.WriteLine(Game1.player.Gold);
-                sw.WriteLine(Game1.player.Lvl);
+                line++;
+                switch (Playing.nbjoueurs)
+                {
+                    case 1:
+                        sw.WriteLine(Game1.player.persoPosition.X);
+                        line++;
+                        sw.WriteLine(Game1.player.persoPosition.Y);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.X);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Y);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Width);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Height);
+                        line++;
+                        sw.WriteLine(Game1.player.health);
+                        line++;
+                        sw.WriteLine(Game1.player.mana);
+                        line++;
+                        sw.WriteLine(Game1.player.manaMax);
+                        line++;
+                        sw.WriteLine(Game1.player.healthMax);
+                        line++;
+                        sw.WriteLine(Game1.player.Experience);
+                        line++;
+                        sw.WriteLine(Game1.player.Strenght);
+                        line++;
+                        sw.WriteLine(Game1.player.Intelligence);
+                        line++;
+                        sw.WriteLine(Game1.player.Degat);
+                        line++;
+                        sw.WriteLine(Game1.player.Armor);
+                        line++;
+                        sw.WriteLine(Game1.player.Gold);
+                        line++;
+                        sw.WriteLine(Game1.player.Lvl);
+                        line++;
+                        for (int i = 0; i < Game1.invent1.tablEquiped.Length; i++)
+                        {
+
+                            if (Game1.invent1.tablEquiped[i].name != "rien")
+                            {
+                                sw.WriteLine("Equip");
+                                sw.WriteLine(Game1.invent1.tablEquiped[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent1.tablEquiped[i].total);
+                                line++;
+                            }
+                        }
+                        for (int i = 0; i < Game1.invent1.tablObjects.Length; i++)
+                        {
+                            if (Game1.invent1.tablObjects[i].name != "rien")
+                            {
+                                sw.WriteLine("Obj");
+                                sw.WriteLine(Game1.invent1.tablObjects[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent1.tablObjects[i].total);
+                                line++;
+                            }
+                        }
+                        break;
+
+                    case 2:
+                        sw.WriteLine(Game1.player.persoPosition.X);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoPosition.X);
+                        line++;
+                        sw.WriteLine(Game1.player.persoPosition.Y);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoPosition.Y);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.X);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoRectangle.X);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Y);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoRectangle.Y);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Width);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoRectangle.Width);
+                        line++;
+                        sw.WriteLine(Game1.player.persoRectangle.Height);
+                        line++;
+                        sw.WriteLine(Game1.player2.persoRectangle.Height);
+                        line++;
+                        sw.WriteLine(Game1.player.health);
+                        line++;
+                        sw.WriteLine(Game1.player2.health);
+                        line++;
+                        sw.WriteLine(Game1.player.mana);
+                        line++;
+                        sw.WriteLine(Game1.player2.mana);
+                        line++;
+                        sw.WriteLine(Game1.player.manaMax);
+                        line++;
+                        sw.WriteLine(Game1.player2.manaMax);
+                        line++;
+                        sw.WriteLine(Game1.player.healthMax);
+                        line++;
+                        sw.WriteLine(Game1.player2.healthMax);
+                        line++;
+                        sw.WriteLine(Game1.player.Experience);
+                        line++;
+                        sw.WriteLine(Game1.player2.Experience);
+                        line++;
+                        sw.WriteLine(Game1.player.Strenght);
+                        line++;
+                        sw.WriteLine(Game1.player2.Strenght);
+                        line++;
+                        sw.WriteLine(Game1.player.Intelligence);
+                        line++;
+                        sw.WriteLine(Game1.player2.Intelligence);
+                        line++;
+                        sw.WriteLine(Game1.player.Degat);
+                        line++;
+                        sw.WriteLine(Game1.player2.Degat);
+                        line++;
+                        sw.WriteLine(Game1.player.Armor);
+                        line++;
+                        sw.WriteLine(Game1.player2.Armor);
+                        line++;
+                        sw.WriteLine(Game1.player.Gold);
+                        line++;
+                        sw.WriteLine(Game1.player2.Gold);
+                        line++;
+                        sw.WriteLine(Game1.player.Lvl);
+                        line++;
+                        sw.WriteLine(Game1.player2.Lvl);
+                        line++;
+                        for (int i = 0; i < Game1.invent1.tablEquiped.Length; i++)
+                        {
+
+                            if (Game1.invent1.tablEquiped[i].name != "rien")
+                            {
+                                sw.WriteLine("Equip");
+                                sw.WriteLine(Game1.invent1.tablEquiped[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent1.tablEquiped[i].total);
+                                line++;
+                                sw.WriteLine("Equip");
+                                sw.WriteLine(Game1.invent2.tablEquiped[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent2.tablEquiped[i].total);
+                                line++;
+                            }
+                        }
+                        for (int i = 0; i < Game1.invent1.tablObjects.Length; i++)
+                        {
+                            if (Game1.invent1.tablObjects[i].name != "rien")
+                            {
+                                sw.WriteLine("Obj");
+                                sw.WriteLine(Game1.invent1.tablObjects[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent1.tablObjects[i].total);
+                                line++;
+                                sw.WriteLine("Obj");
+                                sw.WriteLine(Game1.invent2.tablObjects[i].name);
+                                line++;
+                                sw.WriteLine(Game1.invent2.tablObjects[i].total);
+                                line++;
+                            }
+                        }
+                        break;
+
+                }
                 sw.Close();
-                
+
             }
             catch (Exception e)
             {

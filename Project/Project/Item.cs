@@ -30,5 +30,10 @@ namespace Project
             /*  this.cost = _cost;
              this.description = _description;*/
         }
+        public Item(string _name, int _total)
+        {
+            this.name = _name;
+            this.total = _total;
+        }
     }
 }
