@@ -28,7 +28,7 @@ namespace Project
         VideoPlayer playerVideo;
         Texture2D videoTexture;
         //Pause
-        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons,btnBuy,btnSell ;
+        public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons,btnBuyArmor,btnSellArmor, btnBuyWeapon, btnSellWeapon,btnBuyPot, btnSellPot ;
         public static ParticleGenerator snow;
         public static ParticleGenerator1 sand;
 
@@ -168,10 +168,20 @@ namespace Project
             btnPotions = new cButton(Content.Load<Texture2D>("Button/btnPotions"), 170, 45);
             btnPotions.setPosition(new Vector2(735, 280));
 
-            btnBuy = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
-            btnBuy.setPosition(new Vector2(10, screenHeight / 2 - 125));
-            btnSell = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
-            btnSell.setPosition(new Vector2(10, screenHeight / 2-35));
+            btnBuyArmor = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
+            btnBuyArmor.setPosition(new Vector2(10, screenHeight / 2 - 125));
+            btnSellArmor = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
+            btnSellArmor.setPosition(new Vector2(10, screenHeight / 2-35));
+
+            btnBuyWeapon = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
+            btnBuyWeapon.setPosition(new Vector2(screenWidth-300, 15));
+            btnSellWeapon = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
+            btnSellWeapon.setPosition(new Vector2(screenWidth-150, 15));
+
+            btnBuyPot = new cButton(Content.Load<Texture2D>("Button/Buy"), 170, 45);
+            btnBuyPot.setPosition(new Vector2(10, screenHeight / 2 - 125));
+            btnSellPot = new cButton(Content.Load<Texture2D>("Button/Sell"), 170, 45);
+            btnSellPot.setPosition(new Vector2(10, screenHeight / 2 - 35));
 
         }
 
