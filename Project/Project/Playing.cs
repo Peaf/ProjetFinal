@@ -348,6 +348,7 @@ namespace Project
                             {
                                 Game1.btnBuyArmor.Update(gameTime);
                                 Game1.btnSellArmor.Update(gameTime);
+                                Game1.btnDoneArmor.Update(gameTime);
                                 if (Game1.btnBuyArmor.isClicked)
                                 {
                                     inventaireShop = true;
@@ -357,6 +358,13 @@ namespace Project
                                 {
                                     inventaireSell = true;
                                 }
+
+                                if (Game1.btnDoneArmor.isClicked)
+                                {
+                                    Game1.pnjShop2.Update(gameTime, 4, "mapShop");
+                                }
+
+
                             }
                         }
 
@@ -411,6 +419,7 @@ namespace Project
                             {
                                 Game1.btnBuyWeapon.Update(gameTime);
                                 Game1.btnSellWeapon.Update(gameTime);
+                                Game1.btnDoneWeapon.Update(gameTime);
                                 if (Game1.btnBuyWeapon.isClicked)
                                 {
                                     inventaireShop = true;
@@ -421,7 +430,10 @@ namespace Project
                                 {
                                     inventaireSell = true;
                                 }
-
+                                if (Game1.btnDoneWeapon.isClicked)
+                                {
+                                    Game1.pnjShop2.Update(gameTime, 5, "mapShop");
+                                }
 
                             }
                         }
@@ -1001,13 +1013,9 @@ namespace Project
                     }
                     if (whatToBuy == 1)
                     {
-                        for (int i = 0; i <1500; i++)
-                        {
 
-
-                            spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                            spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
-                        }
+                        spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                        spriteBatch.DrawString(Game1.spriteFont, "Ok you want an new Armor. Follow me", new Vector2(10, 700), Color.Blue);
                     }
                     if (whatToBuy == 2)
                     {
