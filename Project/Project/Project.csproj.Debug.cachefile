@@ -92,10 +92,8 @@ Content\manaPotion.xnb
 Content\sand.xnb
 Content\SpeechBox.xnb
 Content\Tile\Tile122.xnb
-Content\Tile\Tile123.xnb
 Content\Tile\Tile124.xnb
 Content\Tile\Tile125.xnb
-Content\Tile\Tile126.xnb
 Content\Tile\Tile127.xnb
 Content\Tile\Tile128.xnb
 Content\Tile\Tile129.xnb
@@ -304,6 +302,8 @@ Content\Tile\Tile71.xnb
 Content\Tile\Tile75.xnb
 Content\Tile\Tile347.xnb
 Content\Tile\Tile58.xnb
+Content\Tile\Tile76.xnb
+Content\Tile\Tile77.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma
