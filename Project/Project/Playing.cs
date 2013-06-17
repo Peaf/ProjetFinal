@@ -33,7 +33,7 @@ namespace Project
         {
             mapNumber = 5;
             timerInventaire = 0;
-            nbjoueurs = 2;
+            nbjoueurs = 1;
             tab_map8 = new int[26, 44];
             tab_map5 = new int[26, 44];
             tab_map4 = new int[26, 44];
@@ -859,6 +859,10 @@ namespace Project
                     if (Game1.player.persoPosition.X >= 600 && Game1.player.persoPosition.X <= 640 && Game1.player.persoPosition.Y <= 64)
                     {
                         map = mapChateauInt;
+                        if (Game1.questState == 7)
+                        {
+                            Game1.questState = 8;
+                        }
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                         Game1.player.persoPosition.X = screenWidth / 2;
                         if (nbjoueurs == 2)
@@ -873,7 +877,6 @@ namespace Project
                         map = map8;
                         //map = mapShop;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
-
                     }
                     else if (map == map2)
                     {
@@ -885,8 +888,6 @@ namespace Project
                         map = mapChateauExt;
                         Game1.player.persoPosition.Y = (screenHeight - Game1.player.persoTexture.Height / 8);
                     }
-
-
                     else
                     {
                         Game1.player.persoPosition.Y = 2;
@@ -1302,6 +1303,7 @@ namespace Project
                 Game1.snow.Draw(spriteBatch);
                 if (Game1.questState != 2 && !talking)
                 {
+                    //Game1.pnj1.Draw(spriteBatch, 0, "map8");
                     Game1.pnj1.Draw(spriteBatch, 0, "map8");
                 }
                 if (Game1.questState == 2)
@@ -1351,15 +1353,21 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "+ 25 Gold", new Vector2(1100, 725), Color.Gold);
                 }
 
-                if (Game1.questState == 6 && talking)
+                /*if (Game1.questState == 6 && talking)
                 {
                     Game1.pnj1.Draw(spriteBatch, 2, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Claudius I'm really proud of you. Can you do one last thing for me and you will be a true hero", new Vector2(10, 700), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "Claudius: Sure", new Vector2(10, 725), Color.Black);
+                }*/
 
+                if (Game1.questState == 7 && talking)
+                {
+                    Game1.pnj1.Draw(spriteBatch, 7, "map8");
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Claudius I'm really proud of you. Can you do one last thing for me and you will be a true hero", new Vector2(10, 700), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Claudius: Sure", new Vector2(10, 725), Color.Black);
                 }
-
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
             }
@@ -1441,7 +1449,7 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Go back to Ahra", new Vector2(95, 200), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Find the myterious castle", new Vector2(95, 230), Color.Green);
-                    spriteBatch.DrawString(Game1.spriteFont, "Search information about Abab Looc (asign maybe?)", new Vector2(95, 260), Color.Red);
+                    spriteBatch.DrawString(Game1.spriteFont, "Search information about Abab Looc (a sign maybe?)", new Vector2(95, 260), Color.Red);
                 }
                 if (Game1.questState == 9)
                 {
