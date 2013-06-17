@@ -620,8 +620,8 @@ namespace Project
                     }
 
                     else if (turnPlayer2 && Game1.player2.health > 0 && Game1.enemy.health > 0)
-                    {
-                        if (btnAttack1.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                    {GamePadState pad1 = GamePad.GetState(PlayerIndex.One);
+                        if (pad1.DPad.Left == ButtonState.Pressed)
                         {
                             btnAttack1.isClicked = false;
                             attackChoisi = "Basic attack";
