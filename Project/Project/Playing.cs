@@ -22,7 +22,7 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire, inventaireShop, inventaireSell, returnPnj;
+        static public bool inventaire, inventaireShop, inventaireSell, returnPnj,stopBoss,dash;
         public static int turn, lvlBefore, j, cactus, whatToBuy = 0,timerBoss,coloneBoss;
         static Song song3;
         public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
@@ -61,6 +61,8 @@ namespace Project
             inventaireShop = false;
             inventaireSell = false;
             returnPnj = false;
+            stopBoss = false;
+            dash = false;
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -679,17 +681,39 @@ namespace Project
                     if (Game1.Boss.health > 0)
                     {
                         timerBoss++;
-                        if (timerBoss % 11 == 0)
+                        dash = ((Game1.Boss.enemyPosition.X < Game1.player.persoPosition.X) && (Game1.Boss.enemyPosition.X > Game1.player.persoPosition.X - 600) && (Game1.Boss.enemyPosition.Y < Game1.player.persoPosition.Y + 50) && (Game1.Boss.enemyPosition.Y > Game1.player.persoPosition.Y - 50) && !stopBoss);
+                        if (dash && !stopBoss)
                         {
-                            if (coloneBoss == 10)
+                            Game1.Boss.enemyPosition += new Vector2(2, 0);
+
+                            if (timerBoss % 11 == 0)
                             {
-                                coloneBoss = 0;
+                                if (coloneBoss == 10)
+                                {
+                                    stopBoss = true;
+                                }
+                                else
+                                {
+                                    coloneBoss++;
+                                }
+                                Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 182, 0, 182, 152);
                             }
-                            else
+
+                        }
+                        else
+                        {
+                            if (timerBoss % 11 == 0)
                             {
-                                coloneBoss++;
+                                if (coloneBoss == 10)
+                                {
+                                    coloneBoss = 0;
+                                }
+                                else
+                                {
+                                    coloneBoss++;
+                                }
+                                Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 90, 0, 90, 116);
                             }
-                            Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 90, 0, 90, 116);
                         }
 
                     }
@@ -1060,8 +1084,15 @@ namespace Project
                     Game1.enemy1.Draw(spriteBatch);
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Draw(spriteBatch);
+                if (dash)
+                {
+                    spriteBatch.Draw(Game1.bossTexture2, Game1.Boss.enemyPosition, Game1.Boss.Rectenemy, Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(Game1.bossTexture, Game1.Boss.enemyPosition, Game1.Boss.Rectenemy, Color.White);
+                }
 
-                spriteBatch.Draw(Game1.bossTexture, new Vector2(300, 300), Game1.Boss.Rectenemy, Color.White);
             }
 
             if (lvlUp)

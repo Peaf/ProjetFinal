@@ -27,7 +27,7 @@ namespace Project
         Video video;
         VideoPlayer playerVideo;
         Texture2D videoTexture;
-        public static Texture2D bossTexture;
+        public static Texture2D bossTexture,bossTexture2;
         //Pause
         public static cButton btnNext, btnEndFight, btnStartFight, btnArmors, btnPotions, btnWeapons, btnBuyArmor, btnSellArmor, btnBuyWeapon, btnSellWeapon, btnBuyPot, btnSellPot, btnDoneArmor, btnDoneWeapon, btnDonePot;
         public static ParticleGenerator snow;
@@ -119,6 +119,7 @@ namespace Project
             inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "pot"));
 
             bossTexture = Content.Load<Texture2D>("Sprites/Boss");
+            bossTexture2 = Content.Load<Texture2D>("Sprites/Boss2");
             Boss = new Enemy(bossTexture, new Vector2(300, 300), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
 
             base.Initialize();
