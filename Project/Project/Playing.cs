@@ -1282,8 +1282,7 @@ namespace Project
 
             }
             //GraphicsDevice.Clear(Color.CornflowerBlue);
-            Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
-            if (nbjoueurs == 2) Game1.player2.Draw(spriteBatch, Game1.GameState.Playing);
+            
 
             if (map == map4)
             {
@@ -1373,6 +1372,10 @@ namespace Project
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
             }
+            //0000000000
+            Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
+            if (nbjoueurs == 2) Game1.player2.Draw(spriteBatch, Game1.GameState.Playing);
+            //0000000000000
             if (map == mapChateauInt)
             {
                 if (Game1.player.persoPosition.X > 640 && Game1.player.persoPosition.X < 700 && Game1.player.persoPosition.Y > 150 && Game1.player.persoPosition.Y < 210)

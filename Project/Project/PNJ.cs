@@ -388,7 +388,7 @@ namespace Project
                         {
                             colonne++;
                         }
-                        timerAnimation = 0;
+                        timerAnimation ++;
                         pnjRectangle = new Rectangle(colonne * 85, 0, 85, 80);
                     }
                 }
