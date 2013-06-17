@@ -1745,23 +1745,23 @@ namespace Project
                             {
 
                                 case "Armor1":
-                                    spriteBatch.Draw(armorTexture1, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(armorTexture1, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor2":
-                                    spriteBatch.Draw(armorTexture2, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(armorTexture2, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor3":
-                                    spriteBatch.Draw(armorTexture3, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(armorTexture3, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor4":
-                                    spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Dress":
-                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "healthPotion":
@@ -1812,27 +1812,27 @@ namespace Project
                             {
 
                                 case "Sword1":
-                                    spriteBatch.Draw(swordTexture1, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(swordTexture1, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Sword2":
-                                    spriteBatch.Draw(swordTexture2, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(swordTexture2, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Sword3":
-                                    spriteBatch.Draw(swordTexture3, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(swordTexture3, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Sword4":
-                                    spriteBatch.Draw(swordTexture4, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(swordTexture4, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Sword5":
-                                    spriteBatch.Draw(swordTexture5, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(swordTexture5, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Wand":
-                                    spriteBatch.Draw(wandTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    spriteBatch.Draw(wandTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 25 + 60 * (item.place / 5), 39, 45), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
 
