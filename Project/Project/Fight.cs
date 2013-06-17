@@ -1418,17 +1418,48 @@ namespace Project
                                     spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
-                                case "Sword":
+                                case "Sword1":
                                     spriteBatch.Draw(Playing.swordTexture1, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
+                                case "Sword2":
+                                    spriteBatch.Draw(Playing.swordTexture2, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword3":
+                                    spriteBatch.Draw(Playing.swordTexture3, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword4":
+                                    spriteBatch.Draw(Playing.swordTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword5":
+                                    spriteBatch.Draw(Playing.swordTexture5, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Wand":
+                                    spriteBatch.Draw(Playing.wandTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
-                                case "Armor":
+                                case "Armor1":
                                     spriteBatch.Draw(Playing.armorTexture1, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Armor2":
+                                    spriteBatch.Draw(Playing.armorTexture2, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Armor3":
+                                    spriteBatch.Draw(Playing.armorTexture3, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Armor4":
+                                    spriteBatch.Draw(Playing.armorTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
+                                case "Dress":
+                                    spriteBatch.Draw(Playing.dressTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Book":
                                     spriteBatch.Draw(Playing.bookTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "cactusItem":
+                                    spriteBatch.Draw(Playing.cactusTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) + 10, Playing.cactusTexture.Width, Playing.cactusTexture.Height), Color.White);
                                     break;
 
                             }
@@ -1438,12 +1469,39 @@ namespace Project
                     {
                         switch (item.name)
                         {
-                            case "Sword":
+                            case "Sword1":
                                 spriteBatch.Draw(Playing.swordTexture1, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
                                 break;
+                            case "Sword2":
+                                spriteBatch.Draw(Playing.swordTexture2, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword3":
+                                spriteBatch.Draw(Playing.swordTexture3, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword4":
+                                spriteBatch.Draw(Playing.swordTexture4, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword5":
+                                spriteBatch.Draw(Playing.swordTexture5, new Rectangle(30, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Wand":
+                                spriteBatch.Draw(Playing.wandTexture, new Rectangle(36, 320, Playing.swordTexture1.Width / 7 - 12, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
 
-                            case "Armor":
+                            case "Armor1":
                                 spriteBatch.Draw(Playing.armorTexture1, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor2":
+                                spriteBatch.Draw(Playing.armorTexture2, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor3":
+                                spriteBatch.Draw(Playing.armorTexture3, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor4":
+                                spriteBatch.Draw(Playing.armorTexture4, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Dress":
+                                spriteBatch.Draw(Playing.dressTexture, new Rectangle(120, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
                                 break;
                         }
                     }
@@ -1488,13 +1546,41 @@ namespace Project
                                     spriteBatch.Draw(Playing.manaPotionTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
-                                case "Sword":
+                                case "Sword1":
                                     spriteBatch.Draw(Playing.swordTexture1, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
+                                case "Sword2":
+                                    spriteBatch.Draw(Playing.swordTexture2, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword3":
+                                    spriteBatch.Draw(Playing.swordTexture3, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword4":
+                                    spriteBatch.Draw(Playing.swordTexture4, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Sword5":
+                                    spriteBatch.Draw(Playing.swordTexture5, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Wand":
+                                    spriteBatch.Draw(Playing.wandTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
-                                case "Armor":
+                                case "Armor1":
                                     spriteBatch.Draw(Playing.armorTexture1, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
 
+                                    break;
+                                case "Armor2":
+                                    spriteBatch.Draw(Playing.armorTexture2, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Armor3":
+                                    spriteBatch.Draw(Playing.armorTexture3, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+
+                                    break;
+                                case "Armor4":
+                                    spriteBatch.Draw(Playing.armorTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Dress":
+                                    spriteBatch.Draw(Playing.dressTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Book":
@@ -1505,6 +1591,7 @@ namespace Project
                                     spriteBatch.Draw(Playing.cactusTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6) + 10, Playing.cactusTexture.Width, Playing.cactusTexture.Height), Color.White);
                                     break;
 
+
                             }
                         }
                     }
@@ -1512,12 +1599,39 @@ namespace Project
                     {
                         switch (item.name)
                         {
-                            case "Sword":
+                            case "Sword1":
                                 spriteBatch.Draw(Playing.swordTexture1, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
                                 break;
+                            case "Sword2":
+                                spriteBatch.Draw(Playing.swordTexture2, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword3":
+                                spriteBatch.Draw(Playing.swordTexture3, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword4":
+                                spriteBatch.Draw(Playing.swordTexture4, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Sword5":
+                                spriteBatch.Draw(Playing.swordTexture5, new Rectangle(30 + 700, 320, Playing.swordTexture1.Width / 7, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
+                            case "Wand":
+                                spriteBatch.Draw(Playing.wandTexture, new Rectangle(36 + 700, 320, Playing.swordTexture1.Width / 7 - 12, Playing.swordTexture1.Height / 7), Color.White);
+                                break;
 
-                            case "Armor":
+                            case "Armor1":
                                 spriteBatch.Draw(Playing.armorTexture1, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor2":
+                                spriteBatch.Draw(Playing.armorTexture2, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor3":
+                                spriteBatch.Draw(Playing.armorTexture3, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Armor4":
+                                spriteBatch.Draw(Playing.armorTexture4, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
+                                break;
+                            case "Dress":
+                                spriteBatch.Draw(Playing.dressTexture, new Rectangle(120 + 700, 125, Playing.armorTexture1.Width, Playing.armorTexture1.Height), Color.White);
                                 break;
                         }
                     }
