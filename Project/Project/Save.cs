@@ -43,6 +43,12 @@ namespace Project
                     sw.WriteLine(6);
                 else if (Playing.map == Playing.map8)
                     sw.WriteLine(8);
+                else if (Playing.map == Playing.mapShop)
+                    sw.WriteLine(9);
+                else if (Playing.map == Playing.mapChateauExt)
+                    sw.WriteLine(10);
+                else if (Playing.map == Playing.mapChateauInt)
+                    sw.WriteLine(11);
                 line++;
                 switch (Playing.nbjoueurs)
                 {

@@ -47,6 +47,15 @@ namespace Project
                     case 8:
                         Playing.map = Playing.map8;
                         break;
+                    case 9:
+                        Playing.map = Playing.mapShop;
+                        break;
+                    case 10:
+                        Playing.map = Playing.mapChateauExt;
+                        break;
+                    case 11:
+                        Playing.map = Playing.mapChateauInt;
+                        break;
                 }
                 switch (Playing.nbjoueurs)
                 {
