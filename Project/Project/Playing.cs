@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, wandTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, dressTexture, QuestBookTexture, cactusTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, wandTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, dressTexture, QuestBookTexture, cactusTexture, GardesStopTexture, GardeOkTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
         static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop, tab_ChateauExt, tab_ChateauInt;
@@ -22,10 +22,10 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop, mapChateauExt, mapChateauInt;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6, streamMapChateauExt, streamMapChateauInt;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire, inventaireShop, inventaireSell, returnPnj, stopBoss, dash;
+        static public bool inventaire, inventaireShop, inventaireSell, returnPnj, stopBoss,signFound;
         public static int turn, lvlBefore, j, cactus, whatToBuy = 0, timerBoss, coloneBoss;
         static Song song3;
-        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5,GardesStopRectangle,GardesOkRectangle;
         static string attackChoisi;
         static KeyboardState presentKey, pastKey;
 
@@ -68,7 +68,7 @@ namespace Project
             inventaireSell = false;
             returnPnj = false;
             stopBoss = false;
-            dash = false;
+            
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -143,6 +143,11 @@ namespace Project
             //Moteur à particules
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
             Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 50); // verifier le 2 nd arg
+
+            GardeOkTexture = Content.Load<Texture2D>("GardesOk");
+            GardesOkRectangle = new Rectangle(0, 0, 127, 92);
+            GardesStopTexture = Content.Load<Texture2D>("GardesStop");
+            GardesStopRectangle = new Rectangle(0, 0, 94, 76);
 
 
             while ((line = streamMap8.ReadLine()) != null)
@@ -725,45 +730,7 @@ namespace Project
                         else
                             Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
                     }
-                    if (Game1.Boss.health > 0)
-                    {
-                        timerBoss++;
-                        dash = ((Game1.Boss.enemyPosition.X < Game1.player.persoPosition.X) && (Game1.Boss.enemyPosition.X > Game1.player.persoPosition.X - 600) && (Game1.Boss.enemyPosition.Y < Game1.player.persoPosition.Y + 50) && (Game1.Boss.enemyPosition.Y > Game1.player.persoPosition.Y - 150) && !stopBoss);
-                        if (dash && !stopBoss)
-                        {
-                            Game1.Boss.enemyPosition += new Vector2(2, 0);
-
-                            if (timerBoss % 11 == 0)
-                            {
-                                if (coloneBoss == 10)
-                                {
-                                    stopBoss = true;
-                                }
-                                else
-                                {
-                                    coloneBoss++;
-                                }
-                                Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 182, 0, 182, 152);
-                            }
-
-                        }
-                        else
-                        {
-                            if (timerBoss % 11 == 0)
-                            {
-                                if (coloneBoss == 10)
-                                {
-                                    coloneBoss = 0;
-                                }
-                                else
-                                {
-                                    coloneBoss++;
-                                }
-                                Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 90, 0, 90, 116);
-                            }
-                        }
-
-                    }
+                    
                     if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
                     {
                         map = mapShop;
@@ -870,6 +837,45 @@ namespace Project
                         Game1.player.persoPosition.X = screenWidth / 2;
                         if (nbjoueurs == 2)
                             Game1.player2.persoPosition = Game1.player.persoPosition;
+                    }
+                }
+                if (map == mapChateauInt)
+                {
+                    if (Game1.player.persoPosition.X > 640 && Game1.player.persoPosition.X < 700 && Game1.player.persoPosition.Y > 150 && Game1.player.persoPosition.Y < 210 && Game1.questState ==8 )
+                    {
+                        signFound = true;
+                    }
+                    if (signFound)
+                    {
+                        Game1.questState = 9;
+                        if (Game1.Boss.health > 0)
+                        {
+                            timerBoss++;
+                            if (timerBoss % 11 == 0)
+                            {
+                                if (coloneBoss == 10)
+                                    coloneBoss = 0;
+                                else
+                                    coloneBoss++;
+                                Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 90, 0, 90, 116);
+                            }
+                        }
+                    }
+                    if (Game1.player.persoPosition.X > 860 && Game1.player.persoPosition.Y > 250 && Game1.player.persoPosition.Y < 380 && Game1.Boss.health > 0)
+                    {
+                        Game1.previousPosX = Game1.player.persoPosition.X;
+                        Game1.previousPosY = Game1.player.persoPosition.Y;
+                        turn = -1;
+                        Game1.btnEndFight.isClicked = false;
+                        Game1.btnStartFight.isClicked = false;
+                        Isfighting = true;
+                        MediaPlayer.Play(song3);
+                        Game1.enemy = Game1.Boss;
+                        attackChoisi = "";
+                    }
+                    if (Game1.Boss.health <= 0)
+                    {
+                        Game1.questState = 10;
                     }
                 }
 
@@ -1162,14 +1168,7 @@ namespace Project
                     Game1.enemy1.Draw(spriteBatch);
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Draw(spriteBatch);
-                if (dash)
-                {
-                    spriteBatch.Draw(Game1.bossTexture2, Game1.Boss.enemyPosition, Game1.Boss.Rectenemy, Color.White);
-                }
-                else
-                {
-                    spriteBatch.Draw(Game1.bossTexture, Game1.Boss.enemyPosition + new Vector2(80, 20), Game1.Boss.Rectenemy, Color.White);
-                }
+                
 
             }
 
@@ -1345,7 +1344,7 @@ namespace Project
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 700), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "Claudius: You underestimate my power", new Vector2(10, 725), Color.Black);
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Find the castle of Abab Looc and defeat him", new Vector2(10, 750), Color.Blue);
+                   
                 }
                 if (talking && Game1.questState == 3)
                 {
@@ -1374,7 +1373,36 @@ namespace Project
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
             }
+            if (map == mapChateauInt)
+            {
+                if (Game1.player.persoPosition.X > 640 && Game1.player.persoPosition.X < 700 && Game1.player.persoPosition.Y > 150 && Game1.player.persoPosition.Y < 210)
+                {
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, " Go back you're not welcome here", new Vector2(10, 700), Color.Red);
+                }
+                if (signFound)
+                {
+                    spriteBatch.Draw(Game1.bossTexture, Game1.Boss.enemyPosition + new Vector2(80, 20), Game1.Boss.Rectenemy, Color.White, 0f, new Vector2(30, 0), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                }
+            }
 
+            if (map == mapChateauExt)
+            {
+                if (Game1.questState == 9)
+                {
+                    spriteBatch.Draw(GardesStopTexture, new Vector2(580, 150), GardesStopRectangle, Color.White);
+                    spriteBatch.Draw(GardesStopTexture, new Vector2(580, 250), GardesStopRectangle, Color.White);
+                    spriteBatch.Draw(GardesStopTexture, new Vector2(580, 350), GardesStopRectangle, Color.White);
+                    spriteBatch.Draw(GardesStopTexture, new Vector2(580, 450), GardesStopRectangle, Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(GardeOkTexture, new Vector2(562, 150), GardesOkRectangle, Color.White);
+                    spriteBatch.Draw(GardeOkTexture, new Vector2(562, 250), GardesOkRectangle, Color.White);
+                    spriteBatch.Draw(GardeOkTexture, new Vector2(562, 350), GardesOkRectangle, Color.White);
+                    spriteBatch.Draw(GardeOkTexture, new Vector2(562, 450), GardesOkRectangle, Color.White);
+                }
+            }
             if (presentKey.IsKeyDown(Keys.L))
             {
                 spriteBatch.Draw(QuestBookTexture, new Rectangle(0, 0, QuestBookTexture.Width, QuestBookTexture.Height), Color.White);
@@ -1463,8 +1491,21 @@ namespace Project
                     spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Go back to Ahra", new Vector2(95, 200), Color.Green);
                     spriteBatch.DrawString(Game1.spriteFont, "Find the myterious castle", new Vector2(95, 230), Color.Green);
-                    spriteBatch.DrawString(Game1.spriteFont, "Search information about Abab Looc (asign maybe?)", new Vector2(95, 260), Color.Green);
-                    spriteBatch.DrawString(Game1.spriteFont, "Kill Abab Looc and bring back the Lys Collar to Arha", new Vector2(95, 260), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Search information about Abab Looc (a sign maybe?)", new Vector2(95, 260), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill Abab Looc", new Vector2(95, 290), Color.Red);
+                }
+                if (Game1.questState == 10)
+                {
+                    spriteBatch.DrawString(Game1.spriteFont, "Find Arha's book in the East part of the map", new Vector2(95, 50), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the book back to Arha", new Vector2(95, 80), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill the enemies in the south", new Vector2(95, 110), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the healer", new Vector2(95, 140), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find 5 cactus in the desert and bring them back to Zuras", new Vector2(95, 170), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Go back to Ahra", new Vector2(95, 200), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the myterious castle", new Vector2(95, 230), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Search information about Abab Looc (a sign maybe?)", new Vector2(95, 260), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Kill Abab Looc", new Vector2(95, 290), Color.Green);
+                    spriteBatch.DrawString(Game1.spriteFont, "Bring the neckless of Lys back to Arha", new Vector2(95, 320), Color.Red);
                 }
 
             }

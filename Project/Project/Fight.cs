@@ -13,16 +13,16 @@ namespace Project
     static class Fight
     {
         static cButton btnAttack1, btnFireBall, btnObjects, btnHeal;
-        static Texture2D speechBoxTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, fireTexture, lightTexture, healPlayer2Texture;
-        static int turn = -1, ligneHeal, disablePlayer1End, disablePlayer2End, degat, degatEnemy, timerinventaire = 0, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, timerAnimationDegat = 0, colonneFire = 0, nbreAnimationFire = 0, heal, colonneHeal = 0, nbreAnimationHeal;
-        static Rectangle healthBoxRectangle, healthBoxRectangle2, healthRectangle, healthRectangle2, manaRectangle, manaRectangle2, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, fireRectangle, lightRectangle, speechBoxRectangle, healRectangle;
+        static Texture2D speechBoxTexture, bossFightTexture, healthBoxTexture, manaTexture, enemyHealthTexture, fightBackTexture, healthTexture, persoFight, fireTexture, lightTexture, healPlayer2Texture;
+        static int turn = -1, timerBoss, ligneHeal, disablePlayer1End, disablePlayer2End, degat, degatEnemy, timerinventaire = 0, manaPerdu, timerAnimation = 0, colonne = 0, ligne = 0, timerAnimationDegat = 0, colonneFire = 0, nbreAnimationFire = 0, heal, colonneHeal = 0, nbreAnimationHeal;
+        static Rectangle healthBoxRectangle, bossFightRectangle, healthBoxRectangle2, healthRectangle, healthRectangle2, manaRectangle, manaRectangle2, enemyHealthRectangle, fightBackRectangle, persoFightRectangle, fireRectangle, lightRectangle, speechBoxRectangle, healRectangle;
         static MouseState pastMouse;
         static string attackChoisi = "";
         static Random rand = new Random();
         static KeyboardState presentKey, pastKey;
         static Song songGameOver, songVictory, song2;
-        static bool Isfighting = false, stop = false, disablePlayer1 = false, disablePlayer2, turnPlayer2 = false, turnPlayer = true, turnEnemy = false, attaquePlayer1 = false;
-        static Vector2 persoFightPosition, firePosition, lightPosition, origin, lightPosition2, healPosition, healPosition2;
+        static bool Isfighting = false, stopBoss, stop = false, disablePlayer1 = false, disablePlayer2, turnPlayer2 = false, turnPlayer = true, turnEnemy = false, attaquePlayer1 = false;
+        static Vector2 persoFightPosition, firePosition, lightPosition, origin, lightPosition2, healPosition, healPosition2, bossFightPosition;
 
 
 
@@ -80,6 +80,9 @@ namespace Project
             healPosition2 = new Vector2(120, 560);
             healPosition = new Vector2(50, 450);
 
+            bossFightTexture = Content.Load<Texture2D>("Sprites/Drake3");
+            bossFightRectangle = new Rectangle(0, 0, 225, 166);
+            bossFightPosition = new Vector2(0, 0);
         }
 
         public static Game1.GameState Update(GameTime gameTime, int screenWidth, int screenHeight)
@@ -239,36 +242,106 @@ namespace Project
 
                     else if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && turn % 2 == 1 && Game1.player.health > 0 && Game1.enemy.health > 0) //enemy 
                     {
-                        degatEnemy = rand.Next(100, 120) + Game1.enemy.strength / 2 + 15 * Game1.player.Lvl;
-                        if (disablePlayer1)
+                        if (Playing.map == Playing.mapChateauInt)
                         {
-                            Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
-                            if (turn > disablePlayer1End)
+                            degatEnemy = rand.Next(170, 220) + Game1.enemy.strength / 2 + 15 * Game1.player.Lvl;
+                            if (disablePlayer1)
                             {
-                                disablePlayer1 = false;
-                                turn++;
+                                Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
+                                if (turn > disablePlayer1End)
+                                {
+                                    disablePlayer1 = false;
+                                    turn++;
+                                }
+                                else
+                                {
+                                    timerBoss++;
+                                    if (!stopBoss && timerBoss % 5 == 0)
+                                    {
+                                        if (colonne == 6)
+                                        {
+                                            colonne = 0;
+                                            stopBoss = true;
+                                            timerBoss = 0;
+                                        }
+                                        else
+                                        {
+                                            colonne++;
+                                        }
+                                    }
+
+                                    bossFightRectangle = new Rectangle(colonne * 255, 0, 225, 166);
+                                    turn += 2;
+                                }
                             }
                             else
                             {
-                                turn += 2;
+                                disablePlayer1 = (rand.Next(1, 5) == 1); // on peut disable que si le player ne l'est pas deja
+                                if (disablePlayer1)
+                                {
+                                    disablePlayer1End = turn + 5;
+                                    turn += 2;
+                                }
+                                else
+                                {
+                                    timerBoss++;
+                                    if (!stopBoss && timerBoss % 10 == 0)
+                                    {
+                                        if (colonne == 6)
+                                        {
+                                            colonne = 0;
+                                            stopBoss = true;
+                                            timerBoss = 0;
+                                        }
+                                        else
+                                        {
+                                            colonne++;
+                                        }
+                                    }
+
+                                    bossFightRectangle = new Rectangle(colonne * 225, 0, 225, 166);
+                                    Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
+                                    turn++;
+                                }
+
                             }
+
+                            timerAnimationDegat = 0;
                         }
                         else
                         {
-                            disablePlayer1 = (rand.Next(1, 5) == 1); // on peut disable que si le player ne l'est pas deja
+                            degatEnemy = rand.Next(100, 120) + Game1.enemy.strength / 2 + 15 * Game1.player.Lvl;
                             if (disablePlayer1)
                             {
-                                disablePlayer1End = turn + 5;
-                                turn += 2;
+                                Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
+                                if (turn > disablePlayer1End)
+                                {
+                                    disablePlayer1 = false;
+                                    turn++;
+                                }
+                                else
+                                {
+                                    turn += 2;
+                                }
                             }
                             else
                             {
-                                Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
-                                turn++;
-                            }
+                                disablePlayer1 = (rand.Next(1, 5) == 1); // on peut disable que si le player ne l'est pas deja
+                                if (disablePlayer1)
+                                {
+                                    disablePlayer1End = turn + 5;
+                                    turn += 2;
+                                }
+                                else
+                                {
+                                    Game1.player.health = Game1.player.health + Game1.player.Armor - degatEnemy;
+                                    turn++;
+                                }
 
+                            }
+                            timerAnimationDegat = 0;
                         }
-                        timerAnimationDegat = 0;
+
 
                     }
                     if (Game1.player.health <= 0)
@@ -591,9 +664,9 @@ namespace Project
                                     healRectangle = new Rectangle(colonneHeal * 192, ligneHeal * 165, 192, 165);
                                 }
                             }
-                            
+
                         }
-                        
+
                         if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter) && (attackChoisi == "Basic attack" || attackChoisi == "Fire Ball" || attackChoisi == "Heal"))
                         {
                             if (attackChoisi == "Basic attack")
@@ -835,7 +908,6 @@ namespace Project
                             }
                         }
                     }
-
                 }
                 Game1.pastMouse = mouse;
                 return (CurrentGameState);
@@ -858,7 +930,11 @@ namespace Project
             {
                 spriteBatch.Draw(Game1.enemy.enemyTexture, new Vector2(970, screenHeight / 2 + 120), new Rectangle(2 * Game1.enemy.Rectenemy.Width, 1 * Game1.enemy.Rectenemy.Height, Game1.enemy.Rectenemy.Width, Game1.enemy.Rectenemy.Height), Color.White);
             }
-
+            if (Playing.map == Playing.mapChateauInt)
+            {
+                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                lightPosition = new Vector2(-200, -200); // mouhahaha code de porc ultime
+            }
             if (Playing.nbjoueurs == 1)
             {
                 spriteBatch.Draw(healthBoxTexture, healthBoxRectangle, Color.White);
@@ -924,6 +1000,11 @@ namespace Project
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 390), Color.Orange);
                         lightRectangle = new Rectangle(0, 0, 38, 65);
                         spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(1 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
 
                     if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
@@ -931,16 +1012,55 @@ namespace Project
                         spriteBatch.DrawString(Game1.spriteFont, "disable", new Vector2(100, 370), Color.OrangeRed);
                         lightRectangle = new Rectangle(38, 0, 38, 65);
                         spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(2 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
                     if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
                     {
                         lightRectangle = new Rectangle(76, 0, 38, 65);
                         spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                         spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(3 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
                     if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
                     {
                         spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(4 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
+                    }
+                    if (timerAnimationDegat >= 80 && timerAnimationDegat < 100)
+                    {
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(5 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
+                    }
+                    if (timerAnimationDegat >= 100 && timerAnimationDegat < 120)
+                    {
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(6 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
+                    }
+                    if (timerAnimationDegat >= 120 && timerAnimationDegat < 140)
+                    {
+                        if (Playing.map == Playing.mapChateauInt)
+                        {
+                            bossFightRectangle = new Rectangle(0 * 225, 0, 225, 166);
+                            spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                        }
                     }
                     spriteBatch.DrawString(Game1.spriteFont, "Player1 : You're disable you can't attack for now", new Vector2(500, 700), Color.Black);
                 }
@@ -1127,21 +1247,67 @@ namespace Project
                         {
                             lightRectangle = new Rectangle(0, 0, 38, 65);
                             spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(1 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
+
                         }
                         if (timerAnimationDegat >= 20 && timerAnimationDegat < 40)
                         {
                             lightRectangle = new Rectangle(38, 0, 38, 65);
                             spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(2 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
                         }
                         if (timerAnimationDegat >= 40 && timerAnimationDegat < 60)
                         {
                             lightRectangle = new Rectangle(76, 0, 38, 65);
                             spriteBatch.Draw(lightTexture, lightPosition, lightRectangle, Color.White);
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 390), Color.Black);
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(3 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
                         }
                         if (timerAnimationDegat >= 60 && timerAnimationDegat < 80)
                         {
                             spriteBatch.DrawString(Game1.spriteFont, degatEnemy + "", new Vector2(110, 370), Color.Gray);
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(4 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                        if (timerAnimationDegat >= 80 && timerAnimationDegat < 100)
+                        {
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(5 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                        if (timerAnimationDegat >= 100 && timerAnimationDegat < 120)
+                        {
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(6 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
+                        }
+                        if (timerAnimationDegat >= 120 && timerAnimationDegat < 140)
+                        {
+                            if (Playing.map == Playing.mapChateauInt)
+                            {
+                                bossFightRectangle = new Rectangle(0 * 225, 0, 225, 166);
+                                spriteBatch.Draw(bossFightTexture, bossFightPosition, bossFightRectangle, Color.White, 0f, new Vector2(-900, -screenHeight / 2 - 20), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                            }
                         }
                     }
                     else //animation sur le player2
