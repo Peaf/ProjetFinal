@@ -98,25 +98,30 @@ namespace Project
             invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot"));
             invent1.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot"));
             invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, ""));
-            invent1.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
-            invent1.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "arme"));
-            invent1.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "arme"));
-            invent1.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "arme"));
-            invent1.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "arme"));
+            invent1.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "Claudius's weapon\n +30dmg"));
+            invent1.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "Claudiu's armor \n +30armor"));
+            invent1.addItem(new Item("Weapon", "Wand", "dmg", 10, 1, "notequiped", 120, "Wand of the wind\n +10dmg/+70intel"));
 
-            invent1.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, ""));
-            invent1.addItem(new Item("Armor", "Armor2", "dmg", 50, 1, "notequiped", 80, "arme"));
-            invent1.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, ""));
-            invent1.addItem(new Item("Armor", "Armor4", "dmg", 200, 1, "notequiped", 300, "arme"));
 
-            invent2.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
 
-            inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
 
-            inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
+            invent2.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
 
-            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "pot"));
-            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "pot"));
+            
+            inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
+            inventPnjArmor.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, "Chestplate of Violent\n Detonation \n +100armor"));
+            inventPnjArmor.addItem(new Item("Armor", "Armor4", "", 200, 1, "notequiped", 300, "Overloaded \n Bladebreaker \n Cuirass\n +200armor"));
+            inventPnjArmor.addItem(new Item("Armor", "Dress", "", 30, 1, "notequiped", 70, "Dragon's dress\n +20armor/+50intel"));
+
+           inventPnjWeapon.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "LongSword \n +50dmg"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "Kirak, the DragonSlayer\n +100dmg"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "Soulblade of the\n Breaking Storm\n +200dmg"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "Do-tharak,\n the Swordbreaker\n +300dmg"));
+            inventPnjWeapon.addItem(new Item("Weapon", "Wand", "dmg", 10, 1, "notequiped", 120, "Wand of the wind\n +10dmg/+70intel"));
+
+
+            inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "a small healing potion \n +50health "));
+            inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "a small potion of mana \n +20mana"));
 
           
             base.Initialize();

@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, QuestBookTexture, cactusTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, wandTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, dressTexture, QuestBookTexture, cactusTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
         static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop, tab_ChateauExt, tab_ChateauInt;
@@ -128,12 +128,14 @@ namespace Project
             swordTexture3 = Content.Load<Texture2D>("Sword3");
             swordTexture4 = Content.Load<Texture2D>("Sword4");
             swordTexture5 = Content.Load<Texture2D>("Sword5");
+            wandTexture = Content.Load<Texture2D>("Wand");
 
             //Armor
             armorTexture1 = Content.Load<Texture2D>("Armor1");
             armorTexture2 = Content.Load<Texture2D>("Armor2");
             armorTexture3 = Content.Load<Texture2D>("Armor3");
             armorTexture4 = Content.Load<Texture2D>("Armor4");
+            dressTexture = Content.Load<Texture2D>("Dress");
 
             //QuestBook
             QuestBookTexture = Content.Load<Texture2D>("QuestBook");
@@ -346,6 +348,7 @@ namespace Project
                             Game1.player.Gold += 30;
                             Game1.player.Experience += 70;
                             Game1.questState++;
+                            Game1.invent1.removeItem(cactusItem);
                         }
                         Game1.player.health = Game1.player.healthMax;
                     }
@@ -1527,6 +1530,9 @@ namespace Project
                                 case "Sword5":
                                     spriteBatch.Draw(swordTexture5, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
+                                case "Wand":
+                                    spriteBatch.Draw(wandTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
                                 case "Armor1":
                                     spriteBatch.Draw(armorTexture1, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
@@ -1539,6 +1545,10 @@ namespace Project
                                     break;
                                 case "Armor4":
                                     spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+
+                                case "Dress":
+                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Book":
@@ -1571,6 +1581,9 @@ namespace Project
                             case "Sword5":
                                 spriteBatch.Draw(swordTexture5, new Rectangle(30, 320, swordTexture1.Width / 7, swordTexture1.Height / 7), Color.White);
                                 break;
+                            case "Wand":
+                                spriteBatch.Draw(wandTexture, new Rectangle(36, 320, swordTexture1.Width / 7 - 12, swordTexture1.Height / 7), Color.White);
+                                break;
 
                             case "Armor1":
                                 spriteBatch.Draw(armorTexture1, new Rectangle(120, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
@@ -1583,6 +1596,9 @@ namespace Project
                                 break;
                             case "Armor4":
                                 spriteBatch.Draw(armorTexture4, new Rectangle(120, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
+                                break;
+                            case "Dress":
+                                spriteBatch.Draw(dressTexture, new Rectangle(120, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
                                 break;
                         }
                     }
@@ -1642,6 +1658,9 @@ namespace Project
                                 case "Sword5":
                                     spriteBatch.Draw(swordTexture5, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
+                                case "Wand":
+                                    spriteBatch.Draw(wandTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
 
                                 case "Armor1":
                                     spriteBatch.Draw(armorTexture1, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
@@ -1656,6 +1675,9 @@ namespace Project
                                     break;
                                 case "Armor4":
                                     spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    break;
+                                case "Dress":
+                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Book":
@@ -1688,6 +1710,9 @@ namespace Project
                             case "Sword5":
                                 spriteBatch.Draw(swordTexture5, new Rectangle(30 + 700, 320, swordTexture1.Width / 7, swordTexture1.Height / 7), Color.White);
                                 break;
+                            case "Wand":
+                                spriteBatch.Draw(wandTexture, new Rectangle(36 + 700, 320, swordTexture1.Width / 7 -12, swordTexture1.Height / 7), Color.White);
+                                break;
 
                             case "Armor1":
                                 spriteBatch.Draw(armorTexture1, new Rectangle(120 + 700, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
@@ -1701,6 +1726,9 @@ namespace Project
                             case "Armor4":
                                 spriteBatch.Draw(armorTexture4, new Rectangle(120 + 700, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
                                 break;
+                            case "Dress":
+                                spriteBatch.Draw(dressTexture, new Rectangle(120 + 700, 125, armorTexture1.Width, armorTexture1.Height), Color.White);
+                                break;
                         }
                     }
                 }
@@ -1713,44 +1741,52 @@ namespace Project
                     {
                         if (item.name != "rien")
                         {
-                            Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                             switch (item.name)
                             {
 
                                 case "Armor1":
                                     spriteBatch.Draw(armorTexture1, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor2":
                                     spriteBatch.Draw(armorTexture2, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor3":
                                     spriteBatch.Draw(armorTexture3, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor4":
                                     spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
+                                    break;
+                                case "Dress":
+                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "healthPotion":
-                                    Game1.inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot de soin"));
+                                    Game1.inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "a small healing potion \n +50health "));
                                     break;
 
                                 case "manaPotion":
                                     Game1.inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "une pot de mana"));
                                     break;
 
+
                                 case "Sword1":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "Claudius's weapon\n +30dmg"));
                                     break;
                                 case "Sword2":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "LongSword \n +50dmg"));
                                     break;
                                 case "Sword3":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "Kirak, the DragonSlayer\n +100dmg"));
                                     break;
                                 case "Sword4":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "Soulblade of the\n Breaking Storm\n +200dmg"));
                                     break;
                                 case "Sword5":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "Do-tharak,\n the Swordbreaker\n +300dmg"));
                                     break;
 
 
@@ -1758,7 +1794,7 @@ namespace Project
                             if (mouseRectangle.Intersects(new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64)))
                             {
                                 spriteBatch.DrawString(Game1.spriteFont, item.info, new Vector2(430, 170), Color.White);
-                                spriteBatch.DrawString(Game1.spriteFont, "prix : " + item.cost, new Vector2(490, 560), Color.Yellow);
+                                spriteBatch.DrawString(Game1.spriteFont, "price : " + item.cost, new Vector2(490, 560), Color.Yellow);
                             }
                         }
                     }
@@ -1795,19 +1831,27 @@ namespace Project
                                     spriteBatch.Draw(swordTexture5, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
+                                case "Wand":
+                                    spriteBatch.Draw(wandTexture, new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64), Color.White);
+                                    Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
+                                    break;
 
                                 case "Armor1":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "Claudiu's armor \n +30armor"));
                                     break;
                                 case "Armor2":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
                                     break;
                                 case "Armor3":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, "Chestplate of Violent\n Detonation \n +100armor"));
                                     break;
                                 case "Armor4":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor4", "", 200, 1, "notequiped", 300, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor4", "", 200, 1, "notequiped", 300, "Overloaded \n Bladebreaker \n Cuirass\n +200armor"));
                                     break;
+                                case "Dress":
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Dress", "", 30, 1, "notequiped", 70, "Dragon's dress\n +20armor/+50intel"));
+                                    break;
+
                                 case "healthPotion":
                                     Game1.inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "une pot de soin"));
                                     break;
@@ -1820,7 +1864,7 @@ namespace Project
                             if (mouseRectangle.Intersects(new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64)))
                             {
                                 spriteBatch.DrawString(Game1.spriteFont, item.info, new Vector2(430, 170), Color.White);
-                                spriteBatch.DrawString(Game1.spriteFont, "prix : " + item.cost, new Vector2(490, 560), Color.Yellow);
+                                spriteBatch.DrawString(Game1.spriteFont, "price : " + item.cost, new Vector2(490, 560), Color.Yellow);
 
                             }
                         }
@@ -1847,38 +1891,44 @@ namespace Project
                                     Game1.spriteBatch.DrawString(Game1.spriteFont, "" + item.total, new Vector2((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 261, screenHeight / 2 - inventaireShopTexture.Height / 2 + 50 + 60 * (item.place / 5)), Color.White);
                                     break;
                                 case "Armor1":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "Claudiu's armor \n +30armor"));
                                     break;
                                 case "Armor2":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
                                     break;
                                 case "Armor3":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor3", "", 100, 1, "notequiped", 150, "Chestplate of Violent\n Detonation \n +100armor"));
                                     break;
                                 case "Armor4":
-                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor4", "", 200, 1, "notequiped", 300, "armure"));
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Armor4", "", 200, 1, "notequiped", 300, "Overloaded \n Bladebreaker \n Cuirass\n +200armor"));
+                                    break;
+                                case "Dress":
+                                    Game1.inventPnjArmor.addItem(new Item("Armor", "Dress", "", 30, 1, "notequiped", 70, "Dragon's dress\n +20armor/+50intel"));
                                     break;
                                 case "Sword1":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "Claudius's weapon\n +30dmg"));
                                     break;
                                 case "Sword2":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword2", "dmg", 50, 1, "notequiped", 80, "LongSword \n +50dmg"));
                                     break;
                                 case "Sword3":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword3", "dmg", 100, 1, "notequiped", 150, "Kirak, the DragonSlayer\n +100dmg"));
                                     break;
                                 case "Sword4":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword4", "dmg", 200, 1, "notequiped", 300, "Soulblade of the\n Breaking Storm\n +200dmg"));
                                     break;
                                 case "Sword5":
-                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "arme"));
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Sword5", "dmg", 300, 1, "notequiped", 500, "Do-tharak,\n the Swordbreaker\n +300dmg"));
+                                    break;
+                                case "Wand":
+                                    Game1.inventPnjWeapon.addItem(new Item("Weapon", "Wand", "dmg", 10, 1, "notequiped", 120, "Wand of the wind\n +10dmg/+70intel"));
                                     break;
 
                             }
                             if (mouseRectangle.Intersects(new Rectangle((item.place % 5) * 59 + screenWidth / 2 - inventaireShopTexture.Width / 2 + 263, screenHeight / 2 - inventaireShopTexture.Height / 2 + 15 + 60 * (item.place / 5), 39, 64)))
                             {
                                 spriteBatch.DrawString(Game1.spriteFont, item.info, new Vector2(430, 170), Color.White);
-                                spriteBatch.DrawString(Game1.spriteFont, "prix : " + item.cost, new Vector2(490, 560), Color.Yellow);
+                                spriteBatch.DrawString(Game1.spriteFont, "price : " + item.cost, new Vector2(490, 560), Color.Yellow);
                             }
 
                         }

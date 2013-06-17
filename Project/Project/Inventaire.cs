@@ -92,11 +92,15 @@ namespace Project
 
                 case "Weapon":
                     player.Degat += item.stat;
+                    if (item.name == "Wand")
+                        player.Intelligence += 70;
                         addItemtoequip(item);
                     
                     break;
                 case "Armor":
                     player.Armor += item.stat;
+                    if (item.name == "Dress")
+                        player.Intelligence += 50;
                         addItemtoequip(item);
                     break;
             }
@@ -112,10 +116,14 @@ namespace Project
             {
                 case "Weapon":
                     player.Degat -= item.stat;
+                    if (item.name == "Wand")
+                        player.Intelligence -= 70;
                         addItem(item);
                     break;
                 case "Armor":
                     player.Armor -= item.stat;
+                    if (item.name == "Dress")
+                        player.Intelligence -= 50;
                     addItem(item);
                     break;
 
