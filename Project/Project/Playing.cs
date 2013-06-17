@@ -861,7 +861,7 @@ namespace Project
                             }
                         }
                     }
-                    if (Game1.player.persoPosition.X > 860 && Game1.player.persoPosition.Y > 250 && Game1.player.persoPosition.Y < 380 && Game1.Boss.health > 0)
+                    if (Game1.player.persoPosition.X > 950 && Game1.player.persoPosition.Y > 250 && Game1.player.persoPosition.Y < 380 && Game1.Boss.health > 0)
                     {
                         Game1.previousPosX = Game1.player.persoPosition.X;
                         Game1.previousPosY = Game1.player.persoPosition.Y;
