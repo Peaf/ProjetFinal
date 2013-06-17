@@ -621,6 +621,15 @@ namespace Project
 
                     else if (turnPlayer2 && Game1.player2.health > 0 && Game1.enemy.health > 0)
                     {GamePadState pad1 = GamePad.GetState(PlayerIndex.One);
+                    if (timerinventaire > 15)
+                    {
+                        if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.A == ButtonState.Pressed)
+                        {
+                            Playing.inventaire = true;
+                            timerinventaire = 0;
+                            btnObjects.isClicked = false;
+                        }
+                    }
                         if (pad1.DPad.Left == ButtonState.Pressed&& pad1.Buttons.A == ButtonState.Pressed)
                         {
                             btnAttack1.isClicked = false;
@@ -632,7 +641,7 @@ namespace Project
                             stop = false;
                             colonne = 0;
                         }
-                        else if (btnHeal.isClicked && pastMouse.LeftButton == ButtonState.Released)
+                        else if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.A == ButtonState.Pressed)
                         {
                             btnHeal.isClicked = false;
                             attackChoisi = "Heal";
