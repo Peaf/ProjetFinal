@@ -118,10 +118,7 @@ namespace Project
             inventPnjPot.addItem(new Item("Potion", "healthPotion", "health", 50, 1, "", 10, "pot"));
             inventPnjPot.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, "pot"));
 
-            bossTexture = Content.Load<Texture2D>("Sprites/Boss");
-            bossTexture2 = Content.Load<Texture2D>("Sprites/Boss2");
-            Boss = new Enemy(bossTexture, new Vector2(300, 300), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
-
+          
             base.Initialize();
         }
 
@@ -156,6 +153,11 @@ namespace Project
             enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 500), new Rectangle(365, 500, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50);
             enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55, 90), new Rectangle(0, 0, 78, 105), 300, 100);
             enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(550, 150), new Rectangle(550, 165, 55, 90), new Rectangle(0, 0, 78, 105), 100, 20);
+
+
+            bossTexture = Content.Load<Texture2D>("Sprites/Boss");
+            bossTexture2 = Content.Load<Texture2D>("Sprites/Boss2");
+            Boss = new Enemy(bossTexture, new Vector2(600, 200), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));
