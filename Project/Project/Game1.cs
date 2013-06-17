@@ -162,7 +162,7 @@ namespace Project
 
             bossTexture = Content.Load<Texture2D>("Sprites/Boss");
             bossTexture2 = Content.Load<Texture2D>("Sprites/Boss2");
-            Boss = new Enemy(bossTexture, new Vector2(600, 200), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
+            Boss = new Enemy(bossTexture, new Vector2(940, 220), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));
