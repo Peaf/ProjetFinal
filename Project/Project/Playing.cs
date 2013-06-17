@@ -14,7 +14,7 @@ namespace Project
 {
     static class Playing
     {
-        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, wandTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, dressTexture, QuestBookTexture, cactusTexture, GardesStopTexture, GardeOkTexture;
+        public static Texture2D maison, speechBoxTexture, speechBoxTexture2, bookTexture, inventaireTexture, inventaireShopTexture, healthPotionTexture, manaPotionTexture, wandTexture, swordTexture1, swordTexture2, swordTexture3, swordTexture4, swordTexture5, armorTexture1, armorTexture2, armorTexture3, armorTexture4, dressTexture, QuestBookTexture, cactusTexture, GardesStopTexture, GardeOkTexture, NecklaceTexture;
         public static int mapNumber, timerInventaire, nbjoueurs;
         static string line;
         static int[,] tab_map8, tab_map5, tab_map4, tab_map2, tab_map6, tab_mapShop, tab_ChateauExt, tab_ChateauInt;
@@ -22,10 +22,10 @@ namespace Project
         public static Map map5, map8, map4, map2, map6, mapShop, mapChateauExt, mapChateauInt;
         static StreamReader streamMap8, streamShop, streamMap5, streamMap4, streamMap2, streamMap6, streamMapChateauExt, streamMapChateauInt;
         static bool Isfighting, talking, lvlUp, talkOnce, talkingShop;
-        static public bool inventaire, inventaireShop, inventaireSell, returnPnj, stopBoss,signFound;
+        static public bool inventaire, inventaireShop, inventaireSell, returnPnj, stopBoss, signFound,once;
         public static int turn, lvlBefore, j, cactus, whatToBuy = 0, timerBoss, coloneBoss;
         static Song song3;
-        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5,GardesStopRectangle,GardesOkRectangle;
+        public static Rectangle speechBoxRectangle, speechBoxRectangle2, bookRectangle, inventaireRectangle, inventaireRectangle2, inventaireShopRectangle, cactusRectangle, cactusRectangle2, cactusRectangle3, cactusRectangle4, cactusRectangle5, GardesStopRectangle, GardesOkRectangle, NecklaceRectangle;
         static string attackChoisi;
         static KeyboardState presentKey, pastKey;
 
@@ -68,7 +68,8 @@ namespace Project
             inventaireSell = false;
             returnPnj = false;
             stopBoss = false;
-            
+            once = true;
+
             turn = -1;
             lvlBefore = 1;
             j = 0;
@@ -144,10 +145,14 @@ namespace Project
             Game1.snow = new ParticleGenerator(Content.Load<Texture2D>("snow"), screenWidth, 50); // verifier le 2 nd arg
             Game1.sand = new ParticleGenerator1(Content.Load<Texture2D>("sand"), screenWidth, 50); // verifier le 2 nd arg
 
+            //Gardes
             GardeOkTexture = Content.Load<Texture2D>("GardesOk");
             GardesOkRectangle = new Rectangle(0, 0, 127, 92);
             GardesStopTexture = Content.Load<Texture2D>("GardesStop");
             GardesStopRectangle = new Rectangle(0, 0, 94, 76);
+
+            //Necklace
+            NecklaceTexture = Content.Load<Texture2D>("Necklace");
 
 
             while ((line = streamMap8.ReadLine()) != null)
@@ -305,6 +310,7 @@ namespace Project
             //Item
             Item book = new Item("QuestItem", "Book", "", 0, 1, "", 0, "un livre");
             Item cactusItem = new Item("QuestItem", "cactusItem", "", 0, 1, "", 0, "cactus");
+            Item Necklace = new Item("QuestItem", "Necklace", "", 0, 1, "", 0, "necklace with the form of a dragon");
             Isfighting = false;
             MouseState mouse = Mouse.GetState();
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
@@ -730,7 +736,7 @@ namespace Project
                         else
                             Game1.enemy2.Update(gameTime, Game1.player.persoPosition);
                     }
-                    
+
                     if (Game1.player.persoPosition.X >= 380 && Game1.player.persoPosition.X <= 420 && Game1.player.persoPosition.Y <= 105)
                     {
                         map = mapShop;
@@ -823,9 +829,15 @@ namespace Project
                         Game1.invent1.addItem(book);
                         bookRectangle = new Rectangle(0, 0, 0, 0);
                     }
+                    if (talking && Game1.questState == 10)
+                    {
+                        CurrentGameState = Game1.GameState.Credits;
+                    }
                 }
+
                 if (map == mapChateauExt)
                 {
+
                     if (Game1.player.persoPosition.X >= 600 && Game1.player.persoPosition.X <= 640 && Game1.player.persoPosition.Y <= 64)
                     {
                         map = mapChateauInt;
@@ -837,13 +849,22 @@ namespace Project
                         Game1.player.persoPosition.X = screenWidth / 2;
                         if (nbjoueurs == 2)
                             Game1.player2.persoPosition = Game1.player.persoPosition;
-                    }
+                        
+                        }
+                    if(Game1.questState == 9)
+                    Game1.player.Collision(new Rectangle(580, 170, GardesStopRectangle.Width,GardesStopRectangle.Height));
+                    
                 }
                 if (map == mapChateauInt)
                 {
-                    if (Game1.player.persoPosition.X > 640 && Game1.player.persoPosition.X < 700 && Game1.player.persoPosition.Y > 150 && Game1.player.persoPosition.Y < 210 && Game1.questState ==8 )
+                    if (Game1.player.persoPosition.X > 640 && Game1.player.persoPosition.X < 700 && Game1.player.persoPosition.Y > 150 && Game1.player.persoPosition.Y < 210 && Game1.questState == 8)
                     {
                         signFound = true;
+                    }
+                    if (Game1.questState == 10 && once)
+                    {
+                        Game1.invent1.addItem(Necklace);
+                        once = false;
                     }
                     if (signFound)
                     {
@@ -860,6 +881,7 @@ namespace Project
                                 Game1.Boss.Rectenemy = new Rectangle(coloneBoss * 90, 0, 90, 116);
                             }
                         }
+                       
                     }
                     if (Game1.player.persoPosition.X > 950 && Game1.player.persoPosition.Y > 250 && Game1.player.persoPosition.Y < 380 && Game1.Boss.health > 0)
                     {
@@ -876,6 +898,7 @@ namespace Project
                     if (Game1.Boss.health <= 0)
                     {
                         Game1.questState = 10;
+                        
                     }
                 }
 
@@ -1168,7 +1191,7 @@ namespace Project
                     Game1.enemy1.Draw(spriteBatch);
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Draw(spriteBatch);
-                
+
 
             }
 
@@ -1282,7 +1305,7 @@ namespace Project
 
             }
             //GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
 
             if (map == map4)
             {
@@ -1343,7 +1366,7 @@ namespace Project
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
                     spriteBatch.DrawString(Game1.spriteFont, "Arha: Can you kill these ennemies for me? I hope they are not too strong for you", new Vector2(10, 700), Color.Blue);
                     spriteBatch.DrawString(Game1.spriteFont, "Claudius: You underestimate my power", new Vector2(10, 725), Color.Black);
-                   
+
                 }
                 if (talking && Game1.questState == 3)
                 {
@@ -1371,6 +1394,8 @@ namespace Project
                 }
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
+
+
             }
             //0000000000
             Game1.player.Draw(spriteBatch, Game1.GameState.Playing);
@@ -1385,7 +1410,13 @@ namespace Project
                 }
                 if (signFound)
                 {
+                    if(Game1.Boss.health>0)
                     spriteBatch.Draw(Game1.bossTexture, Game1.Boss.enemyPosition + new Vector2(80, 20), Game1.Boss.Rectenemy, Color.White, 0f, new Vector2(30, 0), 1.0f, SpriteEffects.FlipHorizontally, 0);
+                }
+                if (Game1.questState == 10)
+                {
+                    spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
+                    spriteBatch.DrawString(Game1.spriteFont, " You found a necklace on the dragon!", new Vector2(10, 700), Color.Red);
                 }
             }
 
@@ -1603,6 +1634,9 @@ namespace Project
                                     spriteBatch.Draw(cactusTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) + 10, cactusTexture.Width, cactusTexture.Height), Color.White);
                                     break;
 
+                                case "Necklace":
+                                    spriteBatch.Draw(NecklaceTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6) + 10, cactusTexture.Width, cactusTexture.Height), Color.White);
+                                    break;
                             }
                         }
                     }
@@ -1755,7 +1789,7 @@ namespace Project
                                 spriteBatch.Draw(swordTexture5, new Rectangle(30 + 700, 320, swordTexture1.Width / 7, swordTexture1.Height / 7), Color.White);
                                 break;
                             case "Wand":
-                                spriteBatch.Draw(wandTexture, new Rectangle(36 + 700, 320, swordTexture1.Width / 7 -12, swordTexture1.Height / 7), Color.White);
+                                spriteBatch.Draw(wandTexture, new Rectangle(36 + 700, 320, swordTexture1.Width / 7 - 12, swordTexture1.Height / 7), Color.White);
                                 break;
 
                             case "Armor1":

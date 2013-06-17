@@ -67,7 +67,8 @@ namespace Project
             Playing,
             Fight,
             GameOver,
-            Pause
+            Pause,
+            Credits
         }
         public GameState CurrentGameState = GameState.MainMenu;
 
@@ -80,7 +81,7 @@ namespace Project
         protected override void Initialize()
         {
             Playing.Initialize();
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 50, 50, 1000);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 9000, 50, 1000);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
@@ -102,8 +103,7 @@ namespace Project
             invent1.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "Claudiu's armor \n +30armor"));
             invent1.addItem(new Item("Weapon", "Wand", "dmg", 10, 1, "notequiped", 120, "Wand of the wind\n +10dmg/+70intel"));
 
-
-
+         
 
             invent2.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
 
@@ -293,6 +293,12 @@ namespace Project
                     }
 
                     break;
+
+                case GameState.Credits:
+
+                    playerVideo.Play(video);
+
+                    break;
             }
 
             pastKey = presentKey;
@@ -352,6 +358,10 @@ namespace Project
                     spriteBatch.Draw(Content.Load<Texture2D>("Menu/GameOver"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
                     break;
 
+                case GameState.Credits:
+                    Texture2D creditTexture = playerVideo.GetTexture();
+                   spriteBatch.Draw(creditTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    break;
             }
 
             spriteBatch.End();
