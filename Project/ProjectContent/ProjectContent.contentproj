@@ -1838,6 +1838,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dress.png">
+      <Name>Dress</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Wand.png">
       <Name>Wand</Name>
       <Importer>TextureImporter</Importer>
@@ -1859,13 +1866,6 @@
     </Compile>
     <Compile Include="GardesStop.png">
       <Name>GardesStop</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Dress.png">
-      <Name>Dress</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
