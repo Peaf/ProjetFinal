@@ -23,7 +23,7 @@ namespace Project
             pausedTexture = Content.Load<Texture2D>("Menu/Paused");
 
             btnBack = new cButton(Content.Load<Texture2D>("Button/BackButton"), 250, 100);
-            btnBack.setPosition(new Vector2(screenWidth / 2 - btnBack.size.X / 2, screenHeight / 2));
+            btnBack.setPosition(new Vector2(screenWidth / 2 - btnBack.size.X / 2, screenHeight / 2 -250));
 
             btnOptions = new cButton(Content.Load<Texture2D>("Button/OptionsButton"), 250, 100);
             btnOptions.setPosition(new Vector2(screenWidth / 2 - btnOptions.size.X / 2, screenHeight / 2 +125));
@@ -32,10 +32,10 @@ namespace Project
             btnQuit.setPosition(new Vector2(screenWidth / 2 - btnQuit.size.X / 2, screenHeight / 2 + 250));
 
             btnSave = new cButton(Content.Load<Texture2D>("Button/SaveButton"), 250, 100);
-            btnSave.setPosition(new Vector2(screenWidth / 2 - btnSave.size.X / 2, screenHeight / 2 -250));
+            btnSave.setPosition(new Vector2(screenWidth / 2 - btnSave.size.X / 2, screenHeight / 2 -125));
 
             btnLoad = new cButton(Content.Load<Texture2D>("Button/LoadButton"), 250, 100);
-            btnLoad.setPosition(new Vector2(screenWidth / 2 - btnLoad.size.X / 2, screenHeight / 2 - 125));
+            btnLoad.setPosition(new Vector2(screenWidth / 2 - btnLoad.size.X / 2, screenHeight / 2));
         }
 
         public static Game1.GameState Update(GameTime gameTime)
