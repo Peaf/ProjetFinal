@@ -16,6 +16,7 @@ namespace Project
         int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0, colonneHealer = 0;
         string directionPnj2 = "";
         public static bool arrived;
+        int animHeal = 0;
 
         public PNJ(Texture2D newTexture, Vector2 newPosition, Rectangle newRectangle, Vector2 newOrigine, Rectangle newtaille)
         {
@@ -378,8 +379,9 @@ namespace Project
                 if (state == 1)
                 {
                     timerAnimation++;
-                    if (timerAnimation == 15)
+                    if (timerAnimation == 15 && animHeal < 5)
                     {
+                        animHeal++;
                         if (colonneHealer == 5)
                         {
                             colonneHealer = 0;
@@ -388,7 +390,7 @@ namespace Project
                         {
                             colonneHealer++;
                         }
-                        timerAnimation ++;
+                        timerAnimation= 0;
                         pnjRectangle = new Rectangle(colonneHealer * 85, 0, 85, 80);
                     }
                 }
