@@ -977,7 +977,7 @@ namespace Project
                     }
                     else if (map == map6)
                     {
-                        map = map5; ;
+                        map = map5;
                         Game1.player.persoPosition.X = screenWidth - Game1.player.persoTexture.Width / 4;
                     }
                     else
@@ -1025,9 +1025,7 @@ namespace Project
                     }
                     else if (Game1.player2.persoPosition.X >= screenWidth - Game1.player2.persoTexture.Width / 4)
                     {
-
                         Game1.player2.persoPosition.X = screenWidth - Game1.player2.persoTexture.Width / 4;
-
                     }
                 }
 
@@ -1095,8 +1093,6 @@ namespace Project
                         return(CurrentGameState = Game1.GameState.Credits);
                     }
                 }
-
-
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     CurrentGameState = Game1.GameState.Pause;
@@ -1127,7 +1123,6 @@ namespace Project
                     if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                     {
                         Game1.invent1.useItem(item, Game1.player);
-
                     }
                 }
                 foreach (Item item in Game1.invent1.tablEquiped)
@@ -1198,7 +1193,6 @@ namespace Project
                     Game1.enemy1.Draw(spriteBatch);
                 if (Game1.enemy2.health > 0)
                     Game1.enemy2.Draw(spriteBatch);
-
 
             }
 

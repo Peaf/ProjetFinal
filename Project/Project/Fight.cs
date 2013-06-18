@@ -382,8 +382,6 @@ namespace Project
                 }
                 if (Playing.inventaire)
                 {
-
-
                     Playing.timerInventaire++;
                     if (Playing.timerInventaire > 15)
                     {
@@ -398,7 +396,6 @@ namespace Project
                         if (mouseRectangle.Intersects(new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64)) && (mouse.LeftButton == ButtonState.Pressed) && Game1.pastMouse.LeftButton == ButtonState.Released)
                         {
                             Game1.invent1.useItem(item, Game1.player);
-
                         }
                     }
                     foreach (Item item in Game1.invent1.tablEquiped)
