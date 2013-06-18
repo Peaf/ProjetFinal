@@ -24,8 +24,8 @@ namespace Project
         public static Song song1, song2;
 
         Random rand = new Random();
-        Video video;
-        VideoPlayer playerVideo;
+        Video video, credits;
+        VideoPlayer playerVideo, playerVideo2;
         Texture2D videoTexture;
         public static Texture2D bossTexture,bossTexture2;
         //Pause
@@ -81,7 +81,7 @@ namespace Project
         protected override void Initialize()
         {
             Playing.Initialize();
-            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 9000, 50, 1000);
+            player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 50, 50, 0);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
             playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
             /*  this.graphics.IsFullScreen = true;
@@ -143,6 +143,9 @@ namespace Project
             //Video
             video = Content.Load<Video>("Intro");
             playerVideo = new VideoPlayer();
+
+            credits = Content.Load<Video>("Credits");
+            playerVideo2 = new VideoPlayer();
 
             //Menu
             Menu.LoadContent(Content, screenWidth, screenHeight);
@@ -295,9 +298,8 @@ namespace Project
                     break;
 
                 case GameState.Credits:
-
-                    playerVideo.Play(video);
-
+                       CurrentGameState = GameState.Video;
+                       playerVideo.Play(credits);
                     break;
             }
 
@@ -357,11 +359,12 @@ namespace Project
 
                     spriteBatch.Draw(Content.Load<Texture2D>("Menu/GameOver"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
                     break;
-
                 case GameState.Credits:
-                    Texture2D creditTexture = playerVideo.GetTexture();
-                   spriteBatch.Draw(creditTexture, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Menu/Buuuuuullshit"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
                     break;
+
+
+               
             }
 
             spriteBatch.End();

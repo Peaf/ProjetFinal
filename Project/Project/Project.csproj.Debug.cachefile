@@ -319,6 +319,8 @@ Content\Sprites\Drake3.xnb
 Content\Wand.xnb
 Content\Dress.xnb
 Content\Necklace.xnb
+Content\Credits.xnb
+Content\Menu\Buuuuuullshit.xnb
 Content\Song\Song1.wma
 Content\Song\Song2.wma
 Content\Song\song3.wma
@@ -326,6 +328,7 @@ Content\Song\SongGameOver.wma
 Content\Song\SongFight.wma
 Content\Song\Victory.wma
 Content\Intro.wmv
+Content\Credits.wmv
 Content\map5.txt
 Content\map8.txt
 Content\map4.txt

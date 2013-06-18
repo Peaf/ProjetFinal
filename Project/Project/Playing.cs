@@ -901,7 +901,6 @@ namespace Project
                     if (Game1.Boss.health <= 0)
                     {
                         Game1.questState = 10;
-                        
                     }
                 }
 
@@ -1090,6 +1089,11 @@ namespace Project
                     }
                     if (!Game1.pnj1.Collision(Game1.pnj1))
                         talking = false;
+                    if (Game1.questState == 10)
+                    {
+                        MediaPlayer.Stop();
+                        return(CurrentGameState = Game1.GameState.Credits);
+                    }
                 }
 
 
