@@ -62,8 +62,7 @@ namespace Project
                 MediaPlayer.Resume();
             }
             if (btnQuit.isClicked)
-            {
-                
+            {   
                 Environment.Exit(0);
             }
             if(btnSave.isClicked)

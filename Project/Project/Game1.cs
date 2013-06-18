@@ -17,7 +17,7 @@ namespace Project
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        public static Character player, player2, playerMenu;
+        public static Character player, player2;
 
         public static PNJ pnj1, healer, pnjShop1, pnjShop2;
         public static Enemy enemy, enemy1, enemy2, enemy3, enemy4,Boss;
@@ -70,7 +70,7 @@ namespace Project
             Pause,
             Credits
         }
-        public GameState CurrentGameState = GameState.MainMenu;
+        public GameState CurrentGameState = GameState.Title;
 
         public Game1()
         {
@@ -83,7 +83,8 @@ namespace Project
             Playing.Initialize();
             player = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(388, 130), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0,50, 10, 50, 50, 0);
             player2 = new Character(Content.Load<Texture2D>("Sprites/Player2"), new Vector2(388, 230), new Rectangle(196, 507, 32, 65), new Rectangle(0, 0, 32, 65), 400, 300, 0, 10, 50, 10, 20, 0);
-            playerMenu = new Character(Content.Load<Texture2D>("Sprites/Player"), new Vector2(788, 230), new Rectangle(260 - 30, 438, 30, 59), new Rectangle(0, 0, 30, 59), 500, 200, 0, 50, 10, 15, 50, 0);
+           
+
             /*  this.graphics.IsFullScreen = true;
               this.graphics.ApplyChanges();
            
@@ -101,11 +102,10 @@ namespace Project
             invent1.addItem(new Item("Potion", "manaPotion", "mana", 20, 1, "", 15, ""));
             invent1.addItem(new Item("Weapon", "Sword1", "dmg", 30, 1, "notequiped", 30, "Claudius's weapon\n +30dmg"));
             invent1.addItem(new Item("Armor", "Armor1", "", 30, 1, "notequiped", 50, "Claudiu's armor \n +30armor"));
-            invent1.addItem(new Item("Weapon", "Wand", "dmg", 10, 1, "notequiped", 120, "Wand of the wind\n +10dmg/+70intel"));
-
+           
          
 
-            invent2.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
+            invent2.addItem(new Item("Armor", "Dress", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
 
             
             inventPnjArmor.addItem(new Item("Armor", "Armor2", "", 50, 1, "notequiped", 80, "Leather cuirass \n +50armor"));
@@ -157,15 +157,15 @@ namespace Project
             Fight.LoadContent(Content, spriteBatch, screenWidth, screenHeight);
 
             //Enemy
-            enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 200, 50);
-            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(350, 500), new Rectangle(365, 500, 50, 62), new Rectangle(0, 0, 111, 62), 800, 50);
-            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55, 90), new Rectangle(0, 0, 78, 105), 300, 100);
-            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(550, 150), new Rectangle(550, 165, 55, 90), new Rectangle(0, 0, 78, 105), 100,20);
+            enemy1 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(800, 600), new Rectangle(815, 600, 50, 62), new Rectangle(0, 0, 111, 62), 400, 50);
+            enemy2 = new Enemy(Content.Load<Texture2D>("Sprites/enemy"), new Vector2(550, 400), new Rectangle(565, 400, 50, 62), new Rectangle(0, 0, 111, 62), 400, 50);
+            enemy3 = new Enemy(Content.Load<Texture2D>("Sprites/enemy3"), new Vector2(500, 570), new Rectangle(515, 585, 55, 90), new Rectangle(0, 0, 78, 105), 500, 100);
+            enemy4 = new Enemy(Content.Load<Texture2D>("Sprites/enemy4"), new Vector2(550, 150), new Rectangle(550, 200, 55, 90), new Rectangle(0, 0, 78, 105), 200,20);
 
 
             bossTexture = Content.Load<Texture2D>("Sprites/Boss");
             bossTexture2 = Content.Load<Texture2D>("Sprites/Boss2");
-            Boss = new Enemy(bossTexture, new Vector2(940, 220), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1000, 150);
+            Boss = new Enemy(bossTexture, new Vector2(940, 220), new Rectangle(0, 0, 82, 116), new Rectangle(0, 0, 82, 116), 1500, 150);
 
             //PNJ
             pnj1 = new PNJ(Content.Load<Texture2D>("Sprites/PnjAnimation"), new Vector2(1110, 290), new Rectangle(1110, 290, 276, 378), new Vector2(1110, 290), new Rectangle(1100, 290, 69, 150));

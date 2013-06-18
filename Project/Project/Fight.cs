@@ -104,7 +104,7 @@ namespace Project
                 healthBoxRectangle = new Rectangle(10, 10, healthBoxTexture.Width, healthBoxTexture.Height);
                 healthRectangle = new Rectangle(16, 14, (Game1.player.health * 379) / Game1.player.healthMax, 35);
                 manaRectangle = new Rectangle(115, 62, (Game1.player.mana * 280) / Game1.player.manaMax, manaTexture.Height);
-                enemyHealthRectangle = new Rectangle((1030 - 250/ 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60),250, enemyHealthTexture.Height);
+                enemyHealthRectangle = new Rectangle((1030 - (Game1.enemy.health * 250 / Game1.enemy.healthMax) / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health * 250 / Game1.enemy.healthMax, enemyHealthTexture.Height);
 
                 if (attackChoisi == "")
                 {
@@ -472,7 +472,8 @@ namespace Project
                 healthRectangle2 = new Rectangle(156, 124, (Game1.player2.health * 379) / Game1.player2.healthMax, 35);
                 manaRectangle2 = new Rectangle(255, 172, (Game1.player2.mana * 280) / Game1.player2.manaMax, manaTexture.Height);
 
-                enemyHealthRectangle = new Rectangle((1030 -250/ 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), 250, enemyHealthTexture.Height);
+                enemyHealthRectangle = new Rectangle((1030 - (Game1.enemy.health * 250 / Game1.enemy.healthMax) / 2), (screenHeight / 2 - enemyHealthTexture.Height / 2 + 60), Game1.enemy.health * 250 / Game1.enemy.healthMax, enemyHealthTexture.Height);
+
                 if (attackChoisi == "")
                 {
                     ligne = 0;

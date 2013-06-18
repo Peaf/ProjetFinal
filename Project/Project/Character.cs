@@ -65,12 +65,12 @@ namespace Project
                 Lvl += 1;
             }
 
-            if (gameState == Game1.GameState.Playing )
+            if (gameState == Game1.GameState.Playing)
             {
                 if (!fight)
                 {
                     //Left
-                    if ((KState.IsKeyDown(Keys.Q)&& KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Left == ButtonState.Pressed && pad1.Triggers.Right == 0)))
+                    if ((KState.IsKeyDown(Keys.Q) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Left == ButtonState.Pressed &&  KState.IsKeyUp(Keys.LeftShift))))
                     {
                         ligne = 1;
                         timer++;
@@ -93,7 +93,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Left == ButtonState.Pressed && pad1.Triggers.Right == 0)
+                            if (pad1.DPad.Left == ButtonState.Pressed &&  KState.IsKeyUp(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                                 Game1.player2.persoPosition += (new Vector2((-vitesse), 0));
@@ -101,7 +101,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q)) || (pad1.DPad.Left == ButtonState.Pressed && pad1.Triggers.Right > 0))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Q) || (pad1.DPad.Left == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift))))
                     {
                         ligne = 6;
                         timerRun++;
@@ -125,19 +125,20 @@ namespace Project
                         {
                             Game1.player.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                             Game1.player.persoPosition += (new Vector2((-2 * vitesse), 0));
-                            if (Playing.nbjoueurs == 2)
+                        }
+                        if (Playing.nbjoueurs == 2)
                             {
-                                if (pad1.DPad.Left == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                                if (pad1.DPad.Left == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift))
                                 {
                                     Game1.player2.Rectsprite = new Rectangle((colonne) * 32, (ligne) * 63, 30, 63);
                                     Game1.player2.persoPosition += (new Vector2((-2 * vitesse), 0));
                                 }
                             }
-                        }
+                        
                     }
 
                     //Up
-                    else if ((KState.IsKeyDown(Keys.Z) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)))
+                    else if ((KState.IsKeyDown(Keys.Z) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Up == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift))))
                     {
                         ligne = 2;
                         timer++;
@@ -161,7 +162,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            if (pad1.DPad.Up == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                                 Game1.player2.persoPosition += new Vector2(0, -vitesse);
@@ -170,7 +171,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) || (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.Z) || (pad1.DPad.Up == ButtonState.Pressed &&KState.IsKeyDown(Keys.LeftShift))))
                     {
                         ligne = 5;
                         timerRun++;
@@ -194,7 +195,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Up == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            if (pad1.DPad.Up == ButtonState.Pressed&& KState.IsKeyDown(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                                 Game1.player2.persoPosition += new Vector2(0, -2 * vitesse);
@@ -204,7 +205,7 @@ namespace Project
                     }
 
                     //Down
-                    else if ((KState.IsKeyDown(Keys.S) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)))
+                    else if (KState.IsKeyDown(Keys.S) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Down == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift)))
                     {
                         timer++;
                         ligne = 0;
@@ -228,7 +229,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            if (pad1.DPad.Down == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
                                 Game1.player2.persoPosition += new Vector2(0, vitesse);
@@ -237,7 +238,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.S) || (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.S) || (pad1.DPad.Down == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift))))
                     {
                         timerRun++;
                         ligne = 4;
@@ -262,7 +263,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Down == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            if (pad1.DPad.Down == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 62);
                                 Game1.player2.persoPosition += new Vector2(0, 2 * vitesse);
@@ -272,7 +273,7 @@ namespace Project
 
                     }
                     //right
-                    else if ((KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)))
+                    else if ((KState.IsKeyDown(Keys.D) && KState.IsKeyUp(Keys.LeftShift) || (pad1.DPad.Right == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift))))
                     {
                         timer++;
                         ligne = 3;
@@ -296,7 +297,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Released)
+                            if (pad1.DPad.Right == ButtonState.Pressed && KState.IsKeyUp(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                                 Game1.player2.persoPosition += new Vector2(vitesse, 0);
@@ -305,7 +306,7 @@ namespace Project
                         }
                     }
 
-                    else if (KState.IsKeyDown(Keys.LeftShift) && (KState.IsKeyDown(Keys.D) || (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)))
+                    else if ((KState.IsKeyDown(Keys.LeftShift) && KState.IsKeyDown(Keys.D)) || (pad1.DPad.Right == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift)))
                     {
                         timerRun++;
                         ligne = 7;
@@ -335,7 +336,7 @@ namespace Project
                         }
                         if (Playing.nbjoueurs == 2)
                         {
-                            if (pad1.DPad.Right == ButtonState.Pressed && pad1.Buttons.RightShoulder == ButtonState.Pressed)
+                            if (pad1.DPad.Right == ButtonState.Pressed && KState.IsKeyDown(Keys.LeftShift))
                             {
                                 Game1.player2.Rectsprite = new Rectangle(colonne * 32, ligne * 63, 30, 63);
                                 Game1.player2.persoPosition += new Vector2(2 * vitesse, 0);
@@ -352,16 +353,11 @@ namespace Project
 
         public void Draw(SpriteBatch spritBatch, Game1.GameState gameState)
         {
-            if (gameState == Game1.GameState.MainMenu)
-            {
-                spritBatch.Draw(Game1.playerMenu.persoTexture, Game1.playerMenu.persoPosition, Game1.playerMenu.Rectsprite, Color.White);
-            }
-            else
-            {
-                spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
-                if (Playing.nbjoueurs == 2) 
-                    spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
-            }
+
+            spritBatch.Draw(Game1.player.persoTexture, Game1.player.persoPosition, Game1.player.Rectsprite, Color.White);
+            if (Playing.nbjoueurs == 2)
+                spritBatch.Draw(Game1.player2.persoTexture, Game1.player2.persoPosition, Game1.player2.Rectsprite, Color.White);
+
         }
 
         public void Collision(Rectangle newRectangle)

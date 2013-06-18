@@ -47,7 +47,7 @@ namespace Project
             OptionsButton.Update(gameTime);
             MouseState mouse = Mouse.GetState();
             Game1.GameState CurrentGameState = Game1.GameState.MainMenu;
-            Game1.playerMenu.Update(gameTime, Game1.GameState.MainMenu);
+          
             if (NewGameButton.isClicked)
             {
                 MediaPlayer.Stop();
@@ -95,7 +95,7 @@ namespace Project
             QuitButton.Draw(spriteBatch);
             CoopButton.Draw(spriteBatch);
             LoadButton.Draw(spriteBatch);
-            Game1.playerMenu.Draw(spriteBatch, Game1.GameState.MainMenu);
+           
         }
     }
 }

@@ -356,11 +356,14 @@ namespace Project
                         }
                         if (Game1.questState == 5)
                         {
-                            if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
+                            if (presentKey.IsKeyDown(Keys.Enter) )
                             {
-                                Game1.questState = 6;
-                                Game1.player.Gold += 30;
-                                Game1.player.Experience += 70;
+                                if (Game1.questState != 6)
+                                {
+                                    Game1.player.Gold += 30;
+                                    Game1.player.Experience += 70;
+                                }
+                                 Game1.questState = 6;
                                 Game1.invent1.removeItem(cactusItem);
                             }
                         }
@@ -1292,9 +1295,9 @@ namespace Project
                 if (Game1.questState == 4 && Game1.healer.Collision(Game1.healer))
                 {
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Zuras: Here you go little warrior. Can I Ask you something? I need plants to heal people.", new Vector2(10, 700), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "Zuras : But now I'm old and it's so far away. Can you go in the desert and pick 5 cactus for me? ", new Vector2(10, 725), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "Claudius : Sure. I'm on my way ", new Vector2(10, 750), Color.Black);
+                    spriteBatch.DrawString(Game1.spriteFont, "Zuras: Here you go little warrior. Can I Ask you something? I need plants to heal people.", new Vector2(10, 690), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Zuras : But now I'm old and it's so far away. Can you go in the desert and pick 5 cactus for me? ", new Vector2(10, 715), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Claudius : Sure. I'm on my way ", new Vector2(10, 740), Color.Black);
                 }
                 if (Game1.questState == 5 && Game1.healer.Collision(Game1.healer))
                 {
@@ -1390,8 +1393,9 @@ namespace Project
                 {
                     Game1.pnj1.Draw(spriteBatch, 7, "map8");
                     spriteBatch.Draw(speechBoxTexture, speechBoxRectangle, Color.White);
-                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Claudius I'm really proud of you. Can you do one last thing for me and you will be a true hero", new Vector2(10, 700), Color.Blue);
-                    spriteBatch.DrawString(Game1.spriteFont, "Claudius: Sure", new Vector2(10, 725), Color.Black);
+                    spriteBatch.DrawString(Game1.spriteFont, "Arha: Claudius I'm really proud of you. Can you do one last thing for me and you will be a true hero. ", new Vector2(10, 690), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Find the castle and kill Abab Looc", new Vector2(10, 715), Color.Blue);
+                    spriteBatch.DrawString(Game1.spriteFont, "Claudius: Sure", new Vector2(10, 740), Color.Black);
                 }
                 if (Game1.enemy4.health > 0)
                     Game1.enemy4.Draw(spriteBatch);
@@ -1756,7 +1760,7 @@ namespace Project
                                     spriteBatch.Draw(armorTexture4, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
                                 case "Dress":
-                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 6) * 68 + 25, 482 + 68 * (item.place / 6), 39, 64), Color.White);
+                                    spriteBatch.Draw(dressTexture, new Rectangle((item.place % 6) * 68 + 25 + 700, 482 + 68 * (item.place / 6), 39, 64), Color.White);
                                     break;
 
                                 case "Book":
