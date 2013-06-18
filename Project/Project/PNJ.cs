@@ -13,7 +13,7 @@ namespace Project
         public Vector2 pnjPosition, origine;
         public Texture2D pnjTexture;
         public Rectangle pnjRectangle, taille;
-        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0;
+        int ligne = 0, colonne = 0, timerAnimation = 0, timerPnj2 = 0, colonneHealer = 0;
         string directionPnj2 = "";
         public static bool arrived;
 
@@ -380,16 +380,16 @@ namespace Project
                     timerAnimation++;
                     if (timerAnimation == 15)
                     {
-                        if (colonne == 5)
+                        if (colonneHealer == 5)
                         {
-                            colonne = 0;
+                            colonneHealer = 0;
                         }
                         else
                         {
-                            colonne++;
+                            colonneHealer++;
                         }
                         timerAnimation ++;
-                        pnjRectangle = new Rectangle(colonne * 85, 0, 85, 80);
+                        pnjRectangle = new Rectangle(colonneHealer * 85, 0, 85, 80);
                     }
                 }
             }

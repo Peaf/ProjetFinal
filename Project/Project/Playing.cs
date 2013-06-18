@@ -356,10 +356,13 @@ namespace Project
                         }
                         if (Game1.questState == 5)
                         {
-                            Game1.player.Gold += 30;
-                            Game1.player.Experience += 70;
-                            Game1.questState++;
-                            Game1.invent1.removeItem(cactusItem);
+                            if (presentKey.IsKeyDown(Keys.Enter) && pastKey.IsKeyUp(Keys.Enter))
+                            {
+                                Game1.questState = 6;
+                                Game1.player.Gold += 30;
+                                Game1.player.Experience += 70;
+                                Game1.invent1.removeItem(cactusItem);
+                            }
                         }
                         Game1.player.health = Game1.player.healthMax;
                     }
